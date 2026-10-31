@@ -106,6 +106,7 @@ import { ProblemRow } from "@/components/shared/problem-row";
 import { RevisionRow } from "@/components/shared/revision-row";
 import { ActivityRow } from "@/components/shared/activity-row";
 import { StatusBadge } from "@/components/shared/status";
+import { KeyboardKey } from "@/components/shared/keyboard-key";
 import { Metric } from "@/components/shared/metric";
 import { MetricStrip } from "@/components/shared/metric-strip";
 import { EmptyState } from "@/components/shared/empty-state";
@@ -581,17 +582,97 @@ export function PreviewRenderer({ slug }: PreviewRendererProps) {
     );
   }
 
-  if (slug === "icons") {
-    const code = `// icons foundation token`;
+  if (slug === "iconography" || slug === "icons") {
+    const code = `<div className="flex items-center gap-6">
+  {/* 14px Compact / Badge */}
+  <Icon icon={SparklesIcon} size={14} />
+
+  {/* 16px Input / Button */}
+  <Icon icon={Search01Icon} size={16} />
+
+  {/* 18px Default Navigation */}
+  <Icon icon={Layers01Icon} size={18} />
+
+  {/* 20px Header / Accent */}
+  <Icon icon={Timer02Icon} size={20} className="text-[#ff0000]" />
+
+  {/* 24px Hero / Empty State */}
+  <Icon icon={Fire02Icon} size={24} className="text-[#ff0000]" />
+</div>`;
     return (
-      <ComponentPreview code={code} title="Iconography Tokens">
-        <div className="p-6 rounded-[var(--radius-sm)] border border-[rgba(255,255,255,0.12)] bg-[#030303] text-center space-y-2">
-          <div className="text-sm font-semibold text-white capitalize">
-            Iconography Scale
+      <ComponentPreview code={code} title="Iconography System (Hugeicons)">
+        <div className="w-full max-w-2xl space-y-6">
+          <div className="space-y-3">
+            <div className="text-[10px] font-mono uppercase tracking-wider text-[var(--text-tertiary)]">
+              Standardized Size Scale (1.5px Stroke Width)
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
+              <div className="p-3.5 rounded-[var(--radius-sm)] border border-[rgba(255,255,255,0.08)] bg-[#030303] flex flex-col items-center justify-center gap-2">
+                <div className="h-8 flex items-center justify-center">
+                  <Icon icon={SparklesIcon} size={14} className="text-white" />
+                </div>
+                <div className="text-[11px] font-mono text-white font-bold">14px</div>
+                <div className="text-[9px] font-mono text-[var(--text-tertiary)] text-center">
+                  Badges &amp; Tags
+                </div>
+              </div>
+
+              <div className="p-3.5 rounded-[var(--radius-sm)] border border-[rgba(255,255,255,0.08)] bg-[#030303] flex flex-col items-center justify-center gap-2">
+                <div className="h-8 flex items-center justify-center">
+                  <Icon icon={Search01Icon} size={16} className="text-white" />
+                </div>
+                <div className="text-[11px] font-mono text-white font-bold">16px</div>
+                <div className="text-[9px] font-mono text-[var(--text-tertiary)] text-center">
+                  Inputs &amp; Buttons
+                </div>
+              </div>
+
+              <div className="p-3.5 rounded-[var(--radius-sm)] border border-[rgba(255,255,255,0.08)] bg-[#030303] flex flex-col items-center justify-center gap-2">
+                <div className="h-8 flex items-center justify-center">
+                  <Icon icon={Layers01Icon} size={18} className="text-white" />
+                </div>
+                <div className="text-[11px] font-mono text-white font-bold">18px</div>
+                <div className="text-[9px] font-mono text-[var(--text-tertiary)] text-center">
+                  Default Nav
+                </div>
+              </div>
+
+              <div className="p-3.5 rounded-[var(--radius-sm)] border border-[rgba(255,255,255,0.08)] bg-[#030303] flex flex-col items-center justify-center gap-2">
+                <div className="h-8 flex items-center justify-center">
+                  <Icon icon={Timer02Icon} size={20} className="text-[#ff0000]" />
+                </div>
+                <div className="text-[11px] font-mono text-[#ff0000] font-bold">20px</div>
+                <div className="text-[9px] font-mono text-[var(--text-tertiary)] text-center">
+                  Headers &amp; Modals
+                </div>
+              </div>
+
+              <div className="p-3.5 rounded-[var(--radius-sm)] border border-[rgba(255,255,255,0.08)] bg-[#030303] flex flex-col items-center justify-center gap-2">
+                <div className="h-8 flex items-center justify-center">
+                  <Icon icon={Fire02Icon} size={24} className="text-[#ff0000]" />
+                </div>
+                <div className="text-[11px] font-mono text-[#ff0000] font-bold">24px</div>
+                <div className="text-[9px] font-mono text-[var(--text-tertiary)] text-center">
+                  Hero &amp; Empty
+                </div>
+              </div>
+            </div>
           </div>
-          <p className="text-xs text-[var(--text-secondary)]">
-            Canonical tokens calibrated for strict Pure Black and Pure Red visual rhythm.
-          </p>
+
+          <div className="p-3 rounded-[var(--radius-xs)] border border-[rgba(255,255,255,0.08)] bg-[#030303] text-[11px] font-mono text-[var(--text-secondary)] space-y-1">
+            <div className="text-white font-semibold">Hugeicons Standard:</div>
+            <div>
+              • Strict single library:{" "}
+              <code className="text-white">@hugeicons/core-free-icons</code> via{" "}
+              <code className="text-white">components/ui/icon.tsx</code>
+            </div>
+            <div>• Uniform 1.5 stroke width across all glyphs</div>
+            <div>
+              • Pure Red (#FF0000) applied only to active streaks, timer urgency, and
+              revision flags
+            </div>
+          </div>
         </div>
       </ComponentPreview>
     );
@@ -1222,21 +1303,71 @@ export function PreviewRenderer({ slug }: PreviewRendererProps) {
     );
   }
 
-  // Patterns
-  if (slug === "status-badge") {
-    const code = `<div className="flex gap-2">
-  <StatusBadge status="needs_revision" />
-  <StatusBadge status="solved" />
-  <StatusBadge status="learning" />
+  // Status Indicator / Status Badge (Amendment Section 17)
+  if (slug === "status" || slug === "status-badge") {
+    const code = `<div className="space-y-4">
+  {/* Standard Size (12px font) */}
+  <div className="flex flex-wrap gap-2.5">
+    <StatusBadge status="not_started" />
+    <StatusBadge status="learning" />
+    <StatusBadge status="solved" />
+    <StatusBadge status="needs_revision" />
+    <StatusBadge status="mastered" />
+  </div>
+
+  {/* Compact Size (10px font) */}
+  <div className="flex flex-wrap gap-2">
+    <StatusBadge status="not_started" size="sm" />
+    <StatusBadge status="learning" size="sm" />
+    <StatusBadge status="solved" size="sm" />
+    <StatusBadge status="needs_revision" size="sm" />
+    <StatusBadge status="mastered" size="sm" />
+  </div>
 </div>`;
     return (
-      <ComponentPreview code={code} title="Status Indicators">
-        <div className="flex flex-wrap items-center gap-3">
-          <StatusBadge status="needs_revision" />
-          <StatusBadge status="solved" />
-          <StatusBadge status="learning" />
-          <StatusBadge status="not_started" />
-          <StatusBadge status="mastered" />
+      <ComponentPreview code={code} title="Status Indicator & Badge">
+        <div className="w-full max-w-xl space-y-6">
+          <div className="space-y-2.5">
+            <div className="text-[10px] font-mono uppercase tracking-wider text-[var(--text-tertiary)]">
+              Default Size (Tables, Lists &amp; Headers)
+            </div>
+            <div className="flex flex-wrap items-center gap-2.5">
+              <StatusBadge status="not_started" />
+              <StatusBadge status="learning" />
+              <StatusBadge status="solved" />
+              <StatusBadge status="needs_revision" />
+              <StatusBadge status="mastered" />
+            </div>
+          </div>
+
+          <div className="space-y-2.5">
+            <div className="text-[10px] font-mono uppercase tracking-wider text-[var(--text-tertiary)]">
+              Compact Size (Dense Grids &amp; Keycaps)
+            </div>
+            <div className="flex flex-wrap items-center gap-2">
+              <StatusBadge status="not_started" size="sm" />
+              <StatusBadge status="learning" size="sm" />
+              <StatusBadge status="solved" size="sm" />
+              <StatusBadge status="needs_revision" size="sm" />
+              <StatusBadge status="mastered" size="sm" />
+            </div>
+          </div>
+
+          <div className="p-3 rounded-[var(--radius-xs)] border border-[rgba(255,255,255,0.08)] bg-[#030303] text-[11px] font-mono text-[var(--text-secondary)] space-y-1">
+            <div className="text-white font-semibold">Amendment Section 17 Standard:</div>
+            <div>
+              • Pure Monochrome for neutral states (
+              <code className="text-white">not_started</code>,{" "}
+              <code className="text-white">learning</code>,{" "}
+              <code className="text-white">solved</code>,{" "}
+              <code className="text-white">mastered</code>)
+            </div>
+            <div>
+              • Pure Red (#FF0000) dedicated exclusively to{" "}
+              <code className="text-[#ff0000] font-bold">needs_revision</code> with subtle
+              pulse glow
+            </div>
+          </div>
         </div>
       </ComponentPreview>
     );
@@ -1402,6 +1533,79 @@ export function PreviewRenderer({ slug }: PreviewRendererProps) {
             description="Revised on TakeUForward"
             timestamp="2h ago"
           />
+        </div>
+      </ComponentPreview>
+    );
+  }
+
+  if (slug === "keyboard-key") {
+    const code = `<div className="flex flex-wrap items-center gap-4">
+  {/* Command Palette */}
+  <div className="flex items-center gap-1">
+    <KeyboardKey>⌘</KeyboardKey>
+    <KeyboardKey>K</KeyboardKey>
+  </div>
+
+  {/* Close Dialog */}
+  <KeyboardKey>Esc</KeyboardKey>
+
+  {/* Submit Answer */}
+  <KeyboardKey>↵ Enter</KeyboardKey>
+
+  {/* Quick Navigation */}
+  <div className="flex items-center gap-1">
+    <KeyboardKey>Ctrl</KeyboardKey>
+    <KeyboardKey>P</KeyboardKey>
+  </div>
+</div>`;
+    return (
+      <ComponentPreview code={code} title="Keyboard Keycap">
+        <div className="w-full max-w-lg space-y-6">
+          <div className="space-y-2.5">
+            <div className="text-[10px] font-mono uppercase tracking-wider text-[var(--text-tertiary)]">
+              Common Shortcut Sequences
+            </div>
+            <div className="flex flex-wrap items-center gap-4">
+              <div className="flex items-center gap-1.5 p-2 rounded-[var(--radius-sm)] border border-[rgba(255,255,255,0.08)] bg-[#030303]">
+                <span className="text-xs text-[var(--text-secondary)] mr-1">
+                  Command Menu:
+                </span>
+                <KeyboardKey>⌘</KeyboardKey>
+                <KeyboardKey>K</KeyboardKey>
+              </div>
+
+              <div className="flex items-center gap-1.5 p-2 rounded-[var(--radius-sm)] border border-[rgba(255,255,255,0.08)] bg-[#030303]">
+                <span className="text-xs text-[var(--text-secondary)] mr-1">Cancel:</span>
+                <KeyboardKey>Esc</KeyboardKey>
+              </div>
+
+              <div className="flex items-center gap-1.5 p-2 rounded-[var(--radius-sm)] border border-[rgba(255,255,255,0.08)] bg-[#030303]">
+                <span className="text-xs text-[var(--text-secondary)] mr-1">
+                  Confirm:
+                </span>
+                <KeyboardKey>↵ Enter</KeyboardKey>
+              </div>
+
+              <div className="flex items-center gap-1.5 p-2 rounded-[var(--radius-sm)] border border-[rgba(255,255,255,0.08)] bg-[#030303]">
+                <span className="text-xs text-[var(--text-secondary)] mr-1">Switch:</span>
+                <KeyboardKey>Ctrl</KeyboardKey>
+                <KeyboardKey>P</KeyboardKey>
+              </div>
+            </div>
+          </div>
+
+          <div className="p-3 rounded-[var(--radius-xs)] border border-[rgba(255,255,255,0.08)] bg-[#030303] text-[11px] font-mono text-[var(--text-secondary)] space-y-1">
+            <div className="text-white font-semibold">Physical Keycap Architecture:</div>
+            <div>
+              • Rendered via semantic <code className="text-white">&lt;kbd&gt;</code>{" "}
+              element
+            </div>
+            <div>
+              • Bevel shadow with{" "}
+              <code className="text-white">inset 0 1px 0 rgba(255,255,255,0.08)</code>
+            </div>
+            <div>• Strict Geist Mono font with tabular numeric sizing</div>
+          </div>
         </div>
       </ComponentPreview>
     );
