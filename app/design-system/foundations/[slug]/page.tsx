@@ -12,6 +12,9 @@ import { DesignSystemPrevNext } from "@/components/design-system/shared/prev-nex
 import { DesignSystemContextRail } from "@/components/design-system/shell/context-rail";
 import { PreviewRenderer } from "@/components/design-system/preview/preview-renderer";
 import { PromptSection } from "@/components/design-system/prompt/prompt-section";
+import { DocPageSkeleton } from "@/components/design-system/shared/doc-skeleton";
+
+export const instant = false;
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -36,7 +39,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default async function FoundationDocPage({ params }: PageProps) {
+async function FoundationDocContent({ params }: PageProps) {
   const { slug } = await params;
   const item = getItemBySlug(slug);
 
@@ -107,5 +110,13 @@ export default async function FoundationDocPage({ params }: PageProps) {
         <DesignSystemContextRail item={item} />
       </div>
     </div>
+  );
+}
+
+export default function FoundationDocPage({ params }: PageProps) {
+  return (
+    <React.Suspense fallback={<DocPageSkeleton />}>
+      <FoundationDocContent params={params} />
+    </React.Suspense>
   );
 }
