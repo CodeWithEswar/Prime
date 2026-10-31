@@ -64,16 +64,16 @@ export function ComponentPreview({
       )}
     >
       {/* Top Toolbar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 px-3.5 py-2.5 border-b border-[rgba(255,255,255,0.08)] bg-[#030303]">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 px-3.5 py-2.5 border-b border-[rgba(255,255,255,0.08)] bg-[#030303]">
         {/* Left: Mode Switcher (Preview vs Code) & Title */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5 min-w-0">
           {code && (
-            <div className="flex items-center rounded-[var(--radius-xs)] border border-[rgba(255,255,255,0.10)] bg-[#000000] p-0.5 text-xs font-mono">
+            <div className="h-8 inline-flex items-center rounded-[var(--radius-xs)] border border-[rgba(255,255,255,0.10)] bg-[#000000] p-0.5 text-xs font-mono shrink-0">
               <button
                 type="button"
                 onClick={() => setActiveTab("preview")}
                 className={cn(
-                  "relative flex items-center gap-1.5 px-2.5 py-1 rounded-[2px] transition-colors cursor-pointer",
+                  "relative h-full inline-flex items-center justify-center gap-1.5 px-2.5 rounded-[2px] transition-colors cursor-pointer select-none",
                   activeTab === "preview"
                     ? "text-white font-semibold"
                     : "text-white/45 hover:text-white"
@@ -87,7 +87,7 @@ export function ComponentPreview({
                     transition={motionSpring.control}
                   />
                 )}
-                <Icon icon={EyeIcon} size={13} className="relative z-10" />
+                <Icon icon={EyeIcon} size={13} className="relative z-10 shrink-0" />
                 <span className="relative z-10 font-medium">Preview</span>
               </button>
 
@@ -95,7 +95,7 @@ export function ComponentPreview({
                 type="button"
                 onClick={() => setActiveTab("code")}
                 className={cn(
-                  "relative flex items-center gap-1.5 px-2.5 py-1 rounded-[2px] transition-colors cursor-pointer",
+                  "relative h-full inline-flex items-center justify-center gap-1.5 px-2.5 rounded-[2px] transition-colors cursor-pointer select-none",
                   activeTab === "code"
                     ? "text-white font-semibold"
                     : "text-white/45 hover:text-white"
@@ -109,19 +109,19 @@ export function ComponentPreview({
                     transition={motionSpring.control}
                   />
                 )}
-                <Icon icon={CodeIcon} size={13} className="relative z-10" />
+                <Icon icon={CodeIcon} size={13} className="relative z-10 shrink-0" />
                 <span className="relative z-10 font-medium">Code</span>
               </button>
             </div>
           )}
 
           {title && (
-            <div className="flex items-center gap-2 pl-1">
-              <span className="text-xs font-semibold text-white tracking-wide">
+            <div className="flex items-center gap-2 min-w-0 pl-1">
+              <span className="text-xs font-semibold text-white tracking-wide truncate">
                 {title}
               </span>
               {description && (
-                <span className="text-xs text-[var(--text-tertiary)] hidden md:inline">
+                <span className="text-xs text-[var(--text-tertiary)] hidden xl:inline truncate">
                   — {description}
                 </span>
               )}
@@ -131,106 +131,108 @@ export function ComponentPreview({
 
         {/* Right: Viewport Controls, Background Swatch & Replay Button */}
         {activeTab === "preview" ? (
-          <div className="flex items-center gap-2.5 ml-auto">
-            {/* Viewport Width Switcher with Device Icons */}
-            <div className="flex items-center rounded-[var(--radius-xs)] border border-[rgba(255,255,255,0.10)] bg-[#000000] p-0.5">
-              {[
-                {
-                  key: "desktop",
-                  icon: LaptopMinimalIcon,
-                  label: "Desktop",
-                  width: "100%",
-                },
-                { key: "tablet", icon: Tablet01Icon, label: "Tablet", width: "768px" },
-                {
-                  key: "mobile",
-                  icon: SmartPhone01Icon,
-                  label: "Mobile",
-                  width: "375px",
-                },
-              ].map((vp) => (
-                <button
-                  key={vp.key}
-                  type="button"
-                  onClick={() => setViewport(vp.key as "desktop" | "tablet" | "mobile")}
-                  title={`${vp.label} (${vp.width})`}
-                  className={cn(
-                    "relative flex items-center gap-1.5 px-2 py-1 rounded-[2px] text-[11px] font-mono transition-colors cursor-pointer",
-                    viewport === vp.key
-                      ? "text-white font-semibold"
-                      : "text-white/40 hover:text-white"
-                  )}
-                  aria-label={`${vp.label} viewport`}
-                >
-                  {viewport === vp.key && (
-                    <motion.span
-                      layoutId="preview-vp-pill"
-                      className="absolute inset-0 bg-[#0a0a0a] border border-[rgba(255,255,255,0.14)] rounded-[2px]"
-                      transition={motionSpring.control}
-                    />
-                  )}
-                  <Icon icon={vp.icon} size={13} className="relative z-10" />
-                  <span className="relative z-10 hidden sm:inline font-mono text-[10px]">
-                    {vp.width}
-                  </span>
-                </button>
-              ))}
-            </div>
+          <div className="flex items-center justify-between sm:justify-end gap-2 w-full sm:w-auto pt-2 border-t border-[rgba(255,255,255,0.06)] sm:border-t-0 sm:pt-0 shrink-0">
+            <div className="flex items-center gap-2">
+              {/* Viewport Width Switcher with Device Icons */}
+              <div className="h-8 inline-flex items-center rounded-[var(--radius-xs)] border border-[rgba(255,255,255,0.10)] bg-[#000000] p-0.5 shrink-0">
+                {[
+                  {
+                    key: "desktop",
+                    icon: LaptopMinimalIcon,
+                    label: "Desktop",
+                    width: "100%",
+                  },
+                  { key: "tablet", icon: Tablet01Icon, label: "Tablet", width: "768px" },
+                  {
+                    key: "mobile",
+                    icon: SmartPhone01Icon,
+                    label: "Mobile",
+                    width: "375px",
+                  },
+                ].map((vp) => (
+                  <button
+                    key={vp.key}
+                    type="button"
+                    onClick={() => setViewport(vp.key as "desktop" | "tablet" | "mobile")}
+                    title={`${vp.label} (${vp.width})`}
+                    className={cn(
+                      "relative h-full inline-flex items-center justify-center px-2 sm:px-2.5 rounded-[2px] text-[11px] font-mono transition-colors cursor-pointer select-none",
+                      viewport === vp.key
+                        ? "text-white font-semibold"
+                        : "text-white/40 hover:text-white"
+                    )}
+                    aria-label={`${vp.label} viewport`}
+                  >
+                    {viewport === vp.key && (
+                      <motion.span
+                        layoutId="preview-vp-pill"
+                        className="absolute inset-0 bg-[#0a0a0a] border border-[rgba(255,255,255,0.14)] rounded-[2px]"
+                        transition={motionSpring.control}
+                      />
+                    )}
+                    <Icon icon={vp.icon} size={13} className="relative z-10 shrink-0" />
+                    <span className="relative z-10 hidden xl:inline font-mono text-[10px] ml-1.5">
+                      {vp.width}
+                    </span>
+                  </button>
+                ))}
+              </div>
 
-            {/* Background Surface Swatch Switcher */}
-            <div className="flex items-center rounded-[var(--radius-xs)] border border-[rgba(255,255,255,0.10)] bg-[#000000] p-0.5">
-              {[
-                {
-                  key: "canvas",
-                  label: "Canvas",
-                  color: "#000000",
-                  border: "rgba(255,255,255,0.25)",
-                },
-                {
-                  key: "surface",
-                  label: "Surface",
-                  color: "#030303",
-                  border: "rgba(255,255,255,0.18)",
-                },
-                {
-                  key: "raised",
-                  label: "Raised",
-                  color: "#060606",
-                  border: "rgba(255,255,255,0.18)",
-                },
-              ].map((mode) => (
-                <button
-                  key={mode.key}
-                  type="button"
-                  onClick={() => setBgMode(mode.key as "canvas" | "surface" | "raised")}
-                  title={`Background: ${mode.label}`}
-                  className={cn(
-                    "relative flex items-center gap-1.5 px-2 py-1 rounded-[2px] text-[11px] font-mono transition-colors cursor-pointer",
-                    bgMode === mode.key
-                      ? "text-white font-semibold"
-                      : "text-white/40 hover:text-white"
-                  )}
-                  aria-label={`${mode.label} background surface`}
-                >
-                  {bgMode === mode.key && (
-                    <motion.span
-                      layoutId="preview-bg-pill"
-                      className="absolute inset-0 bg-[#0a0a0a] border border-[rgba(255,255,255,0.14)] rounded-[2px]"
-                      transition={motionSpring.control}
+              {/* Background Surface Swatch Switcher */}
+              <div className="h-8 inline-flex items-center rounded-[var(--radius-xs)] border border-[rgba(255,255,255,0.10)] bg-[#000000] p-0.5 shrink-0">
+                {[
+                  {
+                    key: "canvas",
+                    label: "Canvas",
+                    color: "#000000",
+                    border: "rgba(255,255,255,0.25)",
+                  },
+                  {
+                    key: "surface",
+                    label: "Surface",
+                    color: "#030303",
+                    border: "rgba(255,255,255,0.18)",
+                  },
+                  {
+                    key: "raised",
+                    label: "Raised",
+                    color: "#060606",
+                    border: "rgba(255,255,255,0.18)",
+                  },
+                ].map((mode) => (
+                  <button
+                    key={mode.key}
+                    type="button"
+                    onClick={() => setBgMode(mode.key as "canvas" | "surface" | "raised")}
+                    title={`Background: ${mode.label}`}
+                    className={cn(
+                      "relative h-full inline-flex items-center justify-center px-2 sm:px-2.5 rounded-[2px] text-[11px] font-mono transition-colors cursor-pointer select-none",
+                      bgMode === mode.key
+                        ? "text-white font-semibold"
+                        : "text-white/40 hover:text-white"
+                    )}
+                    aria-label={`${mode.label} background surface`}
+                  >
+                    {bgMode === mode.key && (
+                      <motion.span
+                        layoutId="preview-bg-pill"
+                        className="absolute inset-0 bg-[#0a0a0a] border border-[rgba(255,255,255,0.14)] rounded-[2px]"
+                        transition={motionSpring.control}
+                      />
+                    )}
+                    <span
+                      className="relative z-10 h-2.5 w-2.5 rounded-full shrink-0"
+                      style={{
+                        backgroundColor: mode.color,
+                        border: `1px solid ${mode.border}`,
+                      }}
                     />
-                  )}
-                  <span
-                    className="relative z-10 h-2 w-2 rounded-full shrink-0"
-                    style={{
-                      backgroundColor: mode.color,
-                      border: `1px solid ${mode.border}`,
-                    }}
-                  />
-                  <span className="relative z-10 font-mono text-[10px] hidden md:inline">
-                    {mode.label}
-                  </span>
-                </button>
-              ))}
+                    <span className="relative z-10 font-mono text-[10px] hidden xl:inline ml-1.5">
+                      {mode.label}
+                    </span>
+                  </button>
+                ))}
+              </div>
             </div>
 
             {/* Replay Animation Action Button */}
@@ -238,15 +240,15 @@ export function ComponentPreview({
               type="button"
               onClick={handleReplay}
               title="Reset & Replay animations"
-              className="flex items-center justify-center p-1.5 rounded-[var(--radius-xs)] border border-[rgba(255,255,255,0.10)] bg-[#000000] text-white/50 hover:text-white hover:border-white/25 hover:bg-[#090909] transition-all cursor-pointer active:scale-95"
+              className="h-8 w-8 inline-flex items-center justify-center rounded-[var(--radius-xs)] border border-[rgba(255,255,255,0.10)] bg-[#000000] text-white/50 hover:text-white hover:border-white/25 hover:bg-[#090909] transition-all cursor-pointer active:scale-95 shrink-0"
               aria-label="Replay animations"
             >
-              <Icon icon={Refresh01Icon} size={13} />
+              <Icon icon={Refresh01Icon} size={13} className="shrink-0" />
             </button>
           </div>
         ) : (
           /* Code View Header info */
-          <div className="flex items-center gap-2 ml-auto">
+          <div className="h-8 flex items-center gap-2 ml-auto">
             <span className="font-mono text-[10px] text-white/40 tracking-wider hidden sm:inline">
               INTERACTIVE CODE INSPECTOR
             </span>
@@ -264,7 +266,7 @@ export function ComponentPreview({
             exit={{ opacity: 0 }}
             transition={{ duration: motionDuration.fast, ease: motionEase.enter }}
             className={cn(
-              "p-8 sm:p-12 min-h-[280px] flex items-center justify-center transition-colors relative overflow-x-auto",
+              "p-4 sm:p-8 md:p-12 min-h-[220px] sm:min-h-[280px] flex items-center justify-center transition-colors relative overflow-x-auto",
               bgClasses
             )}
             style={{
