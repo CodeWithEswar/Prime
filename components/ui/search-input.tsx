@@ -22,7 +22,7 @@ export const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
     return (
       <div
         className={cn(
-          "relative flex items-center w-full group rounded-[var(--radius-sm)] border border-[var(--border)] bg-[var(--prime-canvas)] transition-all duration-120 focus-within:border-[var(--accent)] focus-within:ring-1 focus-within:ring-[var(--accent)]/50",
+          "relative flex items-center w-full group rounded-[var(--radius-sm)] border border-[rgba(255,255,255,0.10)] bg-[var(--prime-canvas)] transition-all duration-100 focus-within:border-[rgba(255,0,0,0.65)] focus-within:shadow-[0_0_0_1px_#000000,0_0_0_3px_rgba(255,0,0,0.72)]",
           size === "sm" ? "h-8" : "h-9",
           className
         )}
@@ -35,14 +35,14 @@ export const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
           type="search"
           value={value}
           onChange={onChange}
-          className="flex-1 bg-transparent py-1 text-sm text-[var(--foreground)] placeholder:text-[var(--text-disabled)] outline-none min-w-0 pr-2"
+          className="flex-1 bg-transparent py-1 text-sm text-white placeholder:text-[rgba(255,255,255,0.35)] outline-none min-w-0 pr-2"
           {...props}
         />
         {hasValue && onClear ? (
           <button
             type="button"
             onClick={onClear}
-            className="mr-2 p-0.5 rounded text-[var(--text-tertiary)] hover:text-[var(--foreground)] hover:bg-[var(--surface-hover)] transition-colors"
+            className="mr-2 p-0.5 rounded text-[var(--text-tertiary)] hover:text-white hover:bg-[var(--surface-hover)] transition-colors"
             aria-label="Clear search"
           >
             <Icon icon={Cancel01Icon} size={14} />

@@ -11,8 +11,8 @@ export interface EmptyStateProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 /**
- * PRIME Zero-Data Empty State Primitive
- * Clean, restrained empty state with pure black surface alignment.
+ * PRIME Zero-Data Empty State Primitive (Amendment Section 32)
+ * Pure black canvas with dashed white-alpha border and quiet informational tone.
  */
 export function EmptyState({
   icon = BookOpen01Icon,
@@ -25,7 +25,7 @@ export function EmptyState({
   return (
     <div
       className={cn(
-        "flex flex-col items-center justify-center p-8 text-center rounded-[var(--radius-md)] border border-dashed border-[var(--border-strong)] bg-[var(--surface-base)]",
+        "flex flex-col items-center justify-center p-8 text-center rounded-[var(--radius-md)] border border-dashed border-[rgba(255,255,255,0.14)] bg-[var(--prime-canvas)]",
         className
       )}
       {...props}

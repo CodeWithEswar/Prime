@@ -1,175 +1,218 @@
-# PRIME — Design System & Visual Foundation
+# PRIME — Phase 1 Design System (Pure Black × Pure Red)
 
-> Visual Direction: **Dark editorial productivity × developer tooling × solid neumorphic physical controls × pure black & pure red performance accent.**
+> Visual Signature: **PURE BLACK × PURE RED × WHITE**  
+> Direction: **Dark editorial productivity × developer tooling × solid neumorphic physical controls × pure red performance accent.**
 
-PRIME is an engineered interview-preparation operating system. It must not look or feel like a generic stock shadcn dashboard, nor should it drift into Zinc or blue-gray palettes.
+PRIME is an engineered personal interview-preparation operating system. It does not use Zinc, Slate, neutral-gray, charcoal, washed black, burgundy, muted red, coral red, pink-red, or blue-black as its primary visual identity.
+
+The core rule of PRIME:
+
+- **Black creates space.**
+- **White carries information.**
+- **Red directs attention.**
 
 ---
 
-## 1. Pure Black-First Surface Philosophy
+## 1. Core Brand Colors
 
-Black comes first — **not Zinc first**. Visual hierarchy is established via subtle surface elevation and thin borders, not large glowing gradients or floating glass containers.
+Canonical brand primitives defined in `:root`:
 
-### Surface Hierarchy
+```css
+:root {
+  /* Brand */
+  --prime-black: #000000;
+  --prime-red: #ff0000;
+  --prime-white: #ffffff;
 
-```text
---prime-canvas:       #000000   (Pure True Black Void)
---prime-surface-1:    #070708   (Level 1: Base Grouping Surface)
---prime-surface-2:    #0c0c0d   (Level 2: Raised Cards & Panels)
---prime-surface-3:    #111113   (Level 3: Elevated Popovers & Menus)
---prime-surface-4:    #161619   (Level 4: Modal & Sheet Overlays)
---prime-surface-hover: #1a1a1e  (Interactive Hover Feedback)
---prime-surface-active: #202024 (Interactive Pressed State)
+  /* Canvas */
+  --prime-canvas: #000000;
+
+  /* Black surfaces (narrow black range: #000000 - #0D0D0D) */
+  --prime-surface: #000000;
+  --prime-surface-raised: #030303;
+  --prime-surface-elevated: #060606;
+  --prime-surface-interactive: #090909;
+  --prime-surface-hover: #0d0d0d;
+
+  /* Borders (white-alpha edges) */
+  --prime-border-subtle: rgba(255, 255, 255, 0.07);
+  --prime-border-default: rgba(255, 255, 255, 0.12);
+  --prime-border-strong: rgba(255, 255, 255, 0.2);
+
+  /* Text (white and white-alpha) */
+  --prime-text-primary: #ffffff;
+  --prime-text-secondary: rgba(255, 255, 255, 0.68);
+  --prime-text-tertiary: rgba(255, 255, 255, 0.46);
+  --prime-text-disabled: rgba(255, 255, 255, 0.28);
+
+  /* Pure red accent */
+  --prime-accent: #ff0000;
+  --prime-accent-hover: #ff1a1a;
+  --prime-accent-active: #e60000;
+
+  /* Red transparency */
+  --prime-accent-soft: rgba(255, 0, 0, 0.12);
+  --prime-accent-muted: rgba(255, 0, 0, 0.07);
+  --prime-accent-border: rgba(255, 0, 0, 0.35);
+
+  /* Focus */
+  --prime-focus: #ff0000;
+}
 ```
 
-### Borders
+---
+
+## 2. Critical Black Rule & Surface Depth
+
+Do **NOT** solve hierarchy by progressively turning everything gray (`#09090B`, `#18181B`, `#27272A`, `#3F3F46`). This produces a stock Zinc/shadcn appearance.
+
+Instead, PRIME begins at `#000000` and remains extremely close to black:
 
 ```text
---prime-border-subtle:   #141416
---prime-border-default:  #222225
---prime-border-strong:   #333337
+Canvas:        #000000
+Base surface:  #000000
+Raised:        #030303
+Elevated:      #060606
+Interactive:   #090909
+Hover:         #0D0D0D
+```
+
+Depth is created primarily through:
+
+- **Borders:** Thin white-alpha edges (`rgba(255, 255, 255, 0.07)`, `0.12`, `0.20`)
+- **Inner highlights:** `inset 0 1px 0 rgba(255, 255, 255, 0.025)`
+- **Shadows:** Deep dark drop shadows (`0 1px 2px rgba(0, 0, 0, 0.8)`)
+- **Spacing, typography, and overlays**
+
+Do NOT brighten the entire card simply to make it visible.
+
+---
+
+## 3. Pure Red Philosophy & Usage
+
+The canonical PRIME accent is **`#FF0000`** exclusively (not `#E5484D`, `#DC2626`, or `#EF4444`).
+
+Target visual distribution:
+
+- **90%** black / white / neutral transparency
+- **5–8%** PRIME red
+- **2–5%** semantic exceptions
+
+### Where Red Appears:
+
+- Primary CTA action buttons
+- Active navigation indicator (`▌ Today`)
+- Current preparation focus
+- Selected calendar cell fill
+- Revision due / overdue state
+- Focus rings
+- Progress highlight bar
+- PRIME brand mark
+
+### Red Glow Restriction:
+
+**DO NOT use red glow as the normal design language.** Avoid `box-shadow: 0 0 40px red`. If an accent halo is needed, keep it restrained (`0 0 12px rgba(255, 0, 0, 0.08)`) and only for highly specific active states.
+
+---
+
+## 4. Solid Neumorphic Controls
+
+### Primary Solid Neumorphic Control
+
+Machined and tactile pure red button:
+
+```css
+background:
+  linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.14) 0%,
+    rgba(255, 255, 255, 0.03) 18%,
+    rgba(0, 0, 0, 0.05) 100%
+  ),
+  #ff0000;
+border: 1px solid rgba(255, 255, 255, 0.16);
+box-shadow:
+  inset 0 1px 0 rgba(255, 255, 255, 0.2),
+  inset 0 -2px 0 rgba(0, 0, 0, 0.25),
+  0 1px 1px rgba(0, 0, 0, 0.9),
+  0 5px 12px rgba(0, 0, 0, 0.45);
+```
+
+- **Hover:** Slight brightness increase to `#FF1A1A` without shifting to pink.
+- **Active / Pressed:** Physical compression via `transform: translateY(1px)`, darker red `#E60000`, depressed inner shadow.
+
+### Black Neumorphic Secondary Control
+
+Tactile black-on-black physical depth:
+
+```css
+background: #050505;
+border: 1px solid rgba(255, 255, 255, 0.11);
+box-shadow:
+  inset 0 1px 0 rgba(255, 255, 255, 0.045),
+  inset 0 -1px 0 rgba(0, 0, 0, 0.85),
+  0 2px 5px rgba(0, 0, 0, 0.65);
+```
+
+- **Hover:** `#090909`
+- **Pressed:** `#020202`
+
+---
+
+## 5. Status & Difficulty Language
+
+### Status Language (Monochrome with Red Signal)
+
+```text
+○ Not Started:     rgba(255, 255, 255, 0.40)
+◐ Learning:        rgba(255, 255, 255, 0.80)
+✓ Solved:          #ffffff
+↻ Needs Revision:  #ff0000 (Pure Red pulsing dot)
+◆ Mastered:        #ffffff
+```
+
+This ensures **Needs Revision** immediately commands attention across any view.
+
+### Difficulty Hierarchy (Strictly Monochromatic)
+
+Do **NOT** automatically color code Easy (green), Medium (yellow), Hard (red). PRIME remains monochromatic:
+
+- **Easy:** Regular text weight, subtle border (`rgba(255, 255, 255, 0.07)`)
+- **Medium:** Medium text weight, default border (`rgba(255, 255, 255, 0.12)`)
+- **Hard:** Semi-bold text weight, strong border (`rgba(255, 255, 255, 0.20)`)
+
+Pure red is not used for "Hard" because red already carries PRIME's active/revision language.
+
+---
+
+## 6. Focus Ring Specification
+
+Keyboard focus rings use Pure Red without blooming glow:
+
+```css
+outline: none;
+box-shadow:
+  0 0 0 1px #000000,
+  0 0 0 3px rgba(255, 0, 0, 0.72);
 ```
 
 ---
 
-## 2. Pure Performance Red Accent
+## 7. Interactive Workbench Route
 
-Pure Red (`#FF0000`) in PRIME denotes precision, focus, and urgent preparation action:
-
-- `--prime-red`: `#ff0000` (Core performance accent)
-- `--prime-red-hover`: `#ff2626`
-- `--prime-red-active`: `#d60000`
-- `--prime-red-soft`: `rgba(255, 0, 0, 0.12)`
-- `--prime-red-subtle`: `rgba(255, 0, 0, 0.06)`
-- `--prime-red-border`: `rgba(255, 0, 0, 0.32)`
-
-Pure Red is used with discipline (5–10% visual surface) for:
-
-- Primary CTA buttons
-- Active tab indicators and nav bars
-- Due Today / Needs Revision urgency badges
-- Keyboard focus rings (`ring-2 ring-[var(--accent)]/50`)
-
-Muted semantic feedback colors (success green `#30a46c`, warning amber `#f5a524`, info blue `#3b82f6`) are strictly secondary and never compete with Pure Red.
-
----
-
-## 3. Solid Neumorphic Hardware Controls
-
-PRIME primary buttons feel like solid, tactile physical hardware controls sitting slightly above the black interface:
-
-### Primary Neumorphic Control Structure
-
-- Gradient-backed Pure Red body (`linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0) 100%), #ff0000`)
-- Upper inner highlight (`inset 0 1px 0 rgba(255, 255, 255, 0.28)`)
-- Dark lower edge bevel (`inset 0 -1px 0 rgba(0, 0, 0, 0.45)`)
-- External layered drop shadow (`0 1px 2px rgba(0, 0, 0, 0.7), 0 4px 14px rgba(255, 0, 0, 0.25)`)
-- Tactile press compression: `transform: translateY(1px)` with internal shadow depression.
-
----
-
-## 4. Typography Rules
-
-- **Geist Sans**: Primary interface font for display titles, headings, navigation, and descriptions.
-- **Geist Mono**: Strictly reserved for technical metadata, timers, problem numbers (`#001`), durations, and numeric metrics with tabular figure support (`font-feature-settings: "tnum" on, "lnum" on`).
-- Avoid turning the entire interface into monospace text.
-
----
-
-## 5. Radius System
-
-Compact, restrained, and developer-oriented (4px–12px):
-
-- `--radius-xs`: `4px` — Badges, keycaps, small checkboxes
-- `--radius-sm`: `6px` — Buttons, inputs, chips, task rows
-- `--radius-md`: `8px` — Cards, panels, calendars
-- `--radius-lg`: `10px` — Dialogs, modal sheets
-- `--radius-xl`: `12px` — Standalone containers
-
-Avoid oversized bubbly radii (`rounded-2xl`, `rounded-3xl`, `rounded-full` on cards).
-
----
-
-## 6. Icons — Hugeicons Exclusively
-
-PRIME exclusively utilizes `@hugeicons/react` and `@hugeicons/core-free-icons` via `components/ui/icon.tsx`.
-
-- **NEVER** import from Lucide, Heroicons, FontAwesome, Tabler, or Phosphor.
-- If any component introduces another icon package, swap the icon for its Hugeicons equivalent.
-
----
-
-## 7. Motion & Physics
-
-Motion communicates mechanical state, not decorative flourish.
-
-- **Instant**: `80ms` (toggles, micro-ticks)
-- **Fast**: `120ms` (button presses, small state changes)
-- **Normal**: `180ms` (menus, popovers, badges)
-- **Deliberate**: `240ms` (dialogs, sheets, page transitions)
-- **Springs**: Tight (`stiffness: 450, damping: 32`), balanced (`stiffness: 350, damping: 28`)
-- **Accessibility**: Full compliance with `prefers-reduced-motion: reduce`.
-
----
-
-## 8. Component Inventory
-
-### UI Primitives (`components/ui/`)
-
-- `Button`: Primary neumorphic, secondary, outline, ghost, destructive, link; loading state; `asChild` support.
-- `Input`: Pure black canvas background, sharp border, pure red focus ring.
-- `SearchInput`: Integrated search icon, clear button, and `⌘K` keyboard shortcut badge.
-- `Textarea`: Matching black canvas styling with multiline support.
-- `Checkbox`: Pure red active checked state with crisp SVG checkmark.
-- `RadioGroup`: Pure red center dot indicator.
-- `Switch`: Precision hardware switch with pure red active fill.
-- `Select`: Radix Select on elevated `#111113` surface with tick indicators.
-- `Tabs`: Line tabs with pure red active glow bar + Segmented tabs.
-- `Progress`: Linear progress, segmented progress, and labeled progress bars.
-- `Tooltip`: Elevated surface tooltips with fast duration.
-- `DropdownMenu`: Elevated surface with separators, shortcuts, and destructive styling.
-- `Popover`: Contextual card popover.
-- `Dialog`: Modal dialog with `#161619` overlay surface and tactile close.
-- `AlertDialog`: Destructive confirm vs cancel dialog.
-- `Sheet`: Responsive right-docked drawer with slide-in animation.
-- `Command`: `cmdk` command palette with search and keyboard navigation.
-- `Calendar`: Monthly interactive calendar with Today (pure red ring), Selected (pure red solid), and streak dots.
-- `Avatar`: User avatar with fallback initials.
-- `Sonner`: Toaster notification system styled for pure black surface.
-
-### Shared Domain Primitives (`components/shared/`)
-
-- `PageHeader`: High-clarity editorial header with title, description, badge, actions.
-- `SectionHeader`: Section heading separating visual modules.
-- `StatusBadge`: Preparation status lifecycle (`not_started`, `learning`, `solved`, `needs_revision` in pure red, `mastered`).
-- `Metric`: Tabular mono value with label, units, and trend indicators.
-- `MetricStrip`: Single-line minimal-chrome KPI strip.
-- `TaskRow`: Actionable task item (default, active, completed, disabled).
-- `ProblemRow`: DSA problem row with difficulty badge, topic, external platform link.
-- `RevisionRow`: Spaced repetition item with interval badge and Due Today pure red urgency.
-- `ActivityRow`: Chronological activity feed row with mono timestamp and icons.
-- `KeyboardKey`: Tactile physical keycap badge (`⌘`, `K`, `Esc`, `Enter`).
-- `EmptyState`: Zero-data placeholder with Hugeicons icon and CTA.
-- `ErrorState`: Inline or card error notification with retry button.
-- `NavItem`: Navigation item with thin pure red active indicator bar.
-
----
-
-## 9. Interactive Workbench Route
-
-The complete design system can be inspected and verified live at:
+The complete design language is live and verifiable at:
 
 ```text
 /design-system
 ```
 
-With 8 comprehensive sections:
+With 8 section anchors:
 
-1. Foundations (Colors, Surfaces nested demo against pure black, Typography scale, Spacing & Radius, Elevation & Shadows, Motion)
-2. Controls & Forms (Buttons, Inputs, Search with `⌘K`, Textarea, Checkbox, Radio, Switch, Select)
-3. Navigation & Structure (Line Tabs, Segmented Tabs, Nav Items)
-4. Status, Badges & Metrics (Status Lifecycle, Difficulty Badges, Metric Cards, Metric Strip, Keycaps)
-5. Data Display Patterns (Tasks, Problems, Revision rows, Activity feed, Tables, Progress bars)
-6. Calendar Primitive (Interactive monthly calendar)
-7. Overlays & Feedback (Dialog, Alert Dialog, Sheet, Popover, Dropdown, Command, Empty State, Error State, Skeletons, Toasts)
-8. Responsive & Accessibility (Breakpoints, Pure red focus rings, Reduced-motion)
+1. **Foundations**: Pure Black `#000000`, narrow surface hierarchy (`#000000` to `#0D0D0D`), white-alpha borders, typography scale, layered elevation shadows.
+2. **Controls & Forms**: Pure red solid neumorphic primary, black secondary (`#050505`), inputs, search input with ⌘K, switch, radio, select.
+3. **Navigation & Structure**: Line tabs with glowing red underline, segmented tabs, sidebar nav items with `▌` left red indicator.
+4. **Status, Badges & Metrics**: Monochromatic status lifecycle, monochromatic difficulty badges, metric cards, metric strip, keycaps.
+5. **Data Display Patterns**: Task rows, problem rows (with LeetCode/TUF/GFG links), revision review queue, activity feed, tables, progress bars.
+6. **Calendar Primitive**: Month calendar with Today (red outline), Selected (pure red solid fill), completed days (white dot), revision due (red dot).
+7. **Overlays & Feedback**: Dialog modal (`#030303`), Alert Dialog, Sheet drawer, Popover, Dropdown Menu, Command Palette (`⌘K`), Empty states, Error states, Skeletons, Toasts.
+8. **Responsive & Accessibility**: Focus ring guidelines, reduced-motion compliance, mobile responsive layout.

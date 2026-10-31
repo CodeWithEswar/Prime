@@ -11,43 +11,48 @@ export interface StatusBadgeProps extends React.HTMLAttributes<HTMLSpanElement> 
 
 const statusConfig: Record<
   PreparationStatus,
-  { label: string; dotClass: string; containerClass: string }
+  { label: string; symbol: string; dotClass: string; containerClass: string }
 > = {
   not_started: {
     label: "Not Started",
-    dotClass: "bg-[var(--text-disabled)]",
+    symbol: "○",
+    dotClass: "bg-[rgba(255,255,255,0.40)]",
     containerClass:
-      "bg-[var(--surface-raised)] text-[var(--text-tertiary)] border-[var(--border-subtle)]",
+      "bg-[var(--surface-base)] text-[rgba(255,255,255,0.40)] border-[var(--border-subtle)]",
   },
   learning: {
     label: "Learning",
-    dotClass: "bg-[var(--info-foreground)] shadow-[0_0_6px_rgba(59,130,246,0.6)]",
+    symbol: "◐",
+    dotClass: "bg-[rgba(255,255,255,0.80)]",
     containerClass:
-      "bg-[var(--info-soft)] text-[var(--info-foreground)] border-[var(--info-border)]",
+      "bg-[var(--surface-raised)] text-[rgba(255,255,255,0.80)] border-[var(--border-default)]",
   },
   solved: {
     label: "Solved",
-    dotClass: "bg-[var(--success-foreground)] shadow-[0_0_6px_rgba(48,164,108,0.6)]",
+    symbol: "✓",
+    dotClass: "bg-[#ffffff]",
     containerClass:
-      "bg-[var(--success-soft)] text-[var(--success-foreground)] border-[var(--success-border)]",
+      "bg-[var(--surface-raised)] text-white border-[var(--border-strong)] font-medium",
   },
   needs_revision: {
     label: "Needs Revision",
-    dotClass: "bg-[var(--accent)] shadow-[0_0_8px_rgba(255,0,0,0.8)] animate-pulse",
+    symbol: "↻",
+    dotClass: "bg-[var(--accent)] shadow-[0_0_8px_rgba(255,0,0,0.6)] animate-pulse",
     containerClass:
       "bg-[var(--accent-soft)] text-[var(--accent)] border-[var(--accent-border)] font-semibold",
   },
   mastered: {
     label: "Mastered",
-    dotClass: "bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.7)]",
+    symbol: "◆",
+    dotClass: "bg-[#ffffff]",
     containerClass:
-      "bg-emerald-950/30 text-emerald-300 border-emerald-800/40 font-semibold",
+      "bg-[var(--surface-elevated)] text-white border-[var(--border-strong)] font-semibold",
   },
 };
 
 /**
- * PRIME Status Badge Primitive
- * Explicit visual preparation state indicator with pure red revision trigger.
+ * PRIME Status Badge Primitive (Amendment Section 17)
+ * Strictly monochrome with Pure Red dedicated exclusively to Needs Revision.
  */
 export function StatusBadge({
   status,

@@ -13,8 +13,8 @@ export interface RevisionRowProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 /**
- * PRIME Spaced Repetition Revision Row Primitive
- * Direct actionable item with Pure Red urgency signaling.
+ * PRIME Spaced Repetition Revision Row Primitive (Amendment Section 6 & 17)
+ * High-information item where Pure Red explicitly directs attention to Due Today items.
  */
 export function RevisionRow({
   topic,
@@ -25,15 +25,15 @@ export function RevisionRow({
   className,
   ...props
 }: RevisionRowProps) {
+  const isActionRequired = status === "due_today" || status === "overdue";
+
   return (
     <div
       className={cn(
-        "flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 rounded-[var(--radius-sm)] border bg-[var(--surface-base)] transition-all duration-120",
-        status === "due_today" &&
-          "border-[var(--accent-border)] bg-[var(--accent-subtle)] shadow-[0_0_12px_rgba(255,0,0,0.08)]",
-        status === "overdue" && "border-red-900/60 bg-red-950/20",
-        status === "upcoming" &&
-          "border-[var(--border-subtle)] hover:border-[var(--border-default)]",
+        "flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 rounded-[var(--radius-sm)] border transition-all duration-100",
+        isActionRequired
+          ? "border-[var(--prime-accent-border)] bg-[rgba(255,0,0,0.04)] shadow-elevation-1"
+          : "border-[var(--border-subtle)] bg-[var(--prime-canvas)] hover:border-[var(--border-default)] hover:bg-[var(--surface-hover)]",
         className
       )}
       {...props}
@@ -42,11 +42,9 @@ export function RevisionRow({
         <span
           className={cn(
             "flex h-8 w-8 shrink-0 items-center justify-center rounded-[var(--radius-xs)] font-mono text-xs font-semibold border",
-            status === "due_today"
-              ? "bg-[var(--accent)] text-white border-[var(--accent)] shadow-[0_0_8px_rgba(255,0,0,0.4)]"
-              : status === "overdue"
-                ? "bg-red-950/50 text-red-400 border-red-800/60"
-                : "bg-[var(--surface-raised)] text-[var(--text-secondary)] border-[var(--border-subtle)]"
+            isActionRequired
+              ? "bg-[var(--accent)] text-white border-[var(--accent)]"
+              : "bg-[var(--surface-raised)] text-[var(--text-secondary)] border-[var(--border-subtle)]"
           )}
         >
           {interval}
@@ -57,10 +55,7 @@ export function RevisionRow({
           <div className="flex items-center gap-1.5 mt-0.5 text-xs text-[var(--text-tertiary)] font-mono">
             <Icon icon={Clock01Icon} size={12} />
             <span
-              className={cn(
-                status === "due_today" && "text-[var(--accent)] font-semibold",
-                status === "overdue" && "text-red-400 font-semibold"
-              )}
+              className={cn(isActionRequired && "text-[var(--accent)] font-semibold")}
             >
               {dueDate}
             </span>
@@ -71,7 +66,7 @@ export function RevisionRow({
       <div className="flex items-center gap-2 shrink-0">
         <Button
           size="sm"
-          variant={status === "due_today" ? "primary" : "secondary"}
+          variant={isActionRequired ? "primary" : "secondary"}
           onClick={onReview}
         >
           Review Now

@@ -14,8 +14,8 @@ export interface MetricProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 /**
- * PRIME Metric Display Primitive
- * High-density tabular metric with Geist Mono precision.
+ * PRIME Metric Display Primitive (Amendment Section 7 & 8)
+ * Monochromatic high-contrast figures with Pure Red reserved for critical highlight.
  */
 export function Metric({
   label,
@@ -30,24 +30,24 @@ export function Metric({
   return (
     <div
       className={cn(
-        "p-4 rounded-[var(--radius-md)] border bg-[var(--surface-base)] shadow-elevation-1 transition-colors",
+        "p-4 rounded-[var(--radius-md)] border bg-[var(--prime-canvas)] shadow-elevation-1 transition-colors",
         highlight
-          ? "border-[var(--accent-border)] bg-[var(--surface-raised)]"
+          ? "border-[var(--prime-accent-border)] bg-[rgba(255,0,0,0.04)]"
           : "border-[var(--border-default)]",
         className
       )}
       {...props}
     >
       <div className="flex items-center justify-between gap-2">
-        <span className="text-xs font-medium text-[var(--text-secondary)] uppercase tracking-wider">
+        <span className="text-xs font-medium text-[var(--text-secondary)] uppercase tracking-wider font-mono">
           {label}
         </span>
         {trend && (
           <span
             className={cn(
               "font-mono text-xs font-semibold",
-              trend.direction === "up" && "text-[var(--success-foreground)]",
-              trend.direction === "down" && "text-red-400",
+              trend.direction === "up" && "text-white opacity-80",
+              trend.direction === "down" && "text-[var(--accent)] font-bold",
               trend.direction === "neutral" && "text-[var(--text-tertiary)]"
             )}
           >

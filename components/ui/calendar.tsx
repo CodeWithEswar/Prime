@@ -10,16 +10,20 @@ export interface CalendarProps {
   selected?: Date;
   onSelect?: (date: Date) => void;
   completedDates?: Date[];
-  streakDates?: Date[];
+  revisionDates?: Date[];
   disabledDates?: Date[];
 }
 
+/**
+ * PRIME Calendar Primitive (Amendment Section 19)
+ * Pure black canvas with restrained pure red cues (today outline, selected fill, revision dot).
+ */
 export function Calendar({
   className,
   selected,
   onSelect,
   completedDates = [],
-  streakDates = [],
+  revisionDates = [],
   disabledDates = [],
 }: CalendarProps) {
   const [currentMonth, setCurrentMonth] = React.useState<Date>(
@@ -65,7 +69,7 @@ export function Calendar({
   return (
     <div
       className={cn(
-        "p-4 rounded-[var(--radius-md)] border border-[var(--border-default)] bg-[var(--surface-base)] select-none w-full max-w-sm",
+        "p-4 rounded-[var(--radius-md)] border border-[var(--border-default)] bg-[var(--surface-base)] select-none w-full max-w-sm shadow-elevation-1",
         className
       )}
     >
@@ -122,7 +126,7 @@ export function Calendar({
           const isSelected = selected && isSameDay(date, selected);
           const isToday = isSameDay(date, today);
           const isCompleted = completedDates.some((d) => isSameDay(d, date));
-          const isStreak = streakDates.some((d) => isSameDay(d, date));
+          const isRevision = revisionDates.some((d) => isSameDay(d, date));
           const isDisabled = disabledDates.some((d) => isSameDay(d, date));
 
           return (
@@ -134,9 +138,9 @@ export function Calendar({
               className={cn(
                 "relative h-8 w-8 mx-auto flex items-center justify-center rounded-[var(--radius-xs)] text-xs font-mono transition-all duration-100 cursor-pointer disabled:pointer-events-none disabled:opacity-20",
                 isSelected
-                  ? "bg-[var(--accent)] text-white font-semibold shadow-[0_0_8px_rgba(255,0,0,0.5)]"
+                  ? "bg-[var(--accent)] text-white font-semibold"
                   : isToday
-                    ? "border border-[var(--accent)] text-white font-medium bg-[var(--accent-subtle)]"
+                    ? "border border-[var(--accent)] text-white font-medium"
                     : "text-[var(--text-secondary)] hover:bg-[var(--surface-hover)] hover:text-white",
                 isDisabled && "cursor-not-allowed"
               )}
@@ -147,10 +151,10 @@ export function Calendar({
               {!isSelected && (
                 <div className="absolute bottom-1 left-0 right-0 flex justify-center gap-0.5">
                   {isCompleted && (
-                    <span className="h-1 w-1 rounded-full bg-[var(--success)] shadow-[0_0_3px_rgba(48,164,108,0.8)]" />
+                    <span className="h-1 w-1 rounded-full bg-white opacity-80" />
                   )}
-                  {isStreak && (
-                    <span className="h-1 w-1 rounded-full bg-[var(--accent)] shadow-[0_0_3px_rgba(255,0,0,0.8)]" />
+                  {isRevision && (
+                    <span className="h-1 w-1 rounded-full bg-[var(--accent)]" />
                   )}
                 </div>
               )}
