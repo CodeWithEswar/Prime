@@ -355,20 +355,21 @@ export function PreviewRenderer({ slug }: PreviewRendererProps) {
   box-shadow: 0 0 0 1px #000000, 0 0 0 3px rgba(255, 0, 0, 0.72);
 }
 
-/* 3. Universal Custom Scrollbars (No OS Chrome) */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.16) transparent;
-}
+/* 3. Universal Custom Scrollbars (Chromium, Safari & WebKit) */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
-  background-color: rgba(255, 255, 255, 0.16);
+  background-color: rgba(255, 255, 255, 0.18);
   border-radius: 9999px;
 }
-::-webkit-scrollbar-thumb:hover { background-color: rgba(255, 255, 255, 0.32); }
+::-webkit-scrollbar-thumb:hover { background-color: rgba(255, 255, 255, 0.35); }
 ::-webkit-scrollbar-thumb:active { background-color: #ff0000; }
-::-webkit-scrollbar-button { display: none !important; }`;
+::-webkit-scrollbar-button { display: none !important; }
+
+/* 4. Firefox Fallback */
+@supports not selector(::-webkit-scrollbar) {
+  * { scrollbar-width: thin; scrollbar-color: rgba(255, 255, 255, 0.2) transparent; }
+}`;
 
     return (
       <ComponentPreview code={code} title="Borders, Focus Rings & Custom Scrollbars">
