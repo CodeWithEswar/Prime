@@ -41,11 +41,11 @@ export function ProblemRow({
       )}
       {...props}
     >
-      <div className="flex items-center gap-3 min-w-0">
-        <span className="font-mono text-xs text-[var(--text-tertiary)] w-8 shrink-0">
+      <div className="flex items-start sm:items-center gap-3 min-w-0 flex-1">
+        <span className="font-mono text-xs text-[var(--text-tertiary)] min-w-[32px] shrink-0 mt-0.5 sm:mt-0">
           #{id}
         </span>
-        <div className="min-w-0">
+        <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2 flex-wrap">
             <a
               href={platformUrl}
@@ -53,7 +53,7 @@ export function ProblemRow({
               rel="noreferrer"
               className="text-sm font-medium text-white hover:text-[var(--accent)] transition-colors flex items-center gap-1 group/link"
             >
-              <span className="truncate">{title}</span>
+              <span className="break-words sm:truncate">{title}</span>
               <Icon
                 icon={ArrowUpRight01Icon}
                 size={13}
@@ -61,7 +61,7 @@ export function ProblemRow({
               />
             </a>
           </div>
-          <div className="flex items-center gap-2 mt-1">
+          <div className="flex items-center gap-2 mt-1 flex-wrap">
             <Badge variant={difficulty} className="text-[10px] py-0 px-1.5 uppercase">
               {difficulty}
             </Badge>
@@ -72,7 +72,7 @@ export function ProblemRow({
         </div>
       </div>
 
-      <div className="flex items-center justify-between sm:justify-end gap-3 shrink-0 pt-1 sm:pt-0">
+      <div className="flex items-center justify-end sm:justify-end gap-3 shrink-0 pt-1 sm:pt-0">
         <StatusBadge status={status} size="sm" />
       </div>
     </div>
