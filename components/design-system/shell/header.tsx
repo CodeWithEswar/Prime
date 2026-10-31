@@ -77,7 +77,7 @@ export function DesignSystemHeader({ onToggleMobileNav, isMobileNavOpen }: Heade
             </Link>
           </div>
 
-          {/* Quick Search Trigger & Identity Badge */}
+          {/* Quick Search Trigger */}
           <div className="flex items-center gap-3">
             <Button
               variant="outline"
@@ -91,11 +91,6 @@ export function DesignSystemHeader({ onToggleMobileNav, isMobileNavOpen }: Heade
               </div>
               <KeyboardKey>⌘K</KeyboardKey>
             </Button>
-
-            <span className="hidden xl:inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[var(--radius-xs)] bg-[var(--prime-accent-soft)] border border-[var(--prime-accent-border)] font-mono text-[11px] text-[#ff0000] font-semibold">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#ff0000]" />
-              PURE BLACK × PURE RED × WHITE
-            </span>
           </div>
         </div>
       </header>
