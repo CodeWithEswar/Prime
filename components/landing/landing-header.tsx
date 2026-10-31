@@ -35,7 +35,7 @@ export function LandingHeader() {
         </nav>
         <div className="header-actions">
           <Button asChild size="sm">
-            <a href="#experience">Explore PRIME</a>
+            <a href="#roadmap">Explore PRIME</a>
           </Button>
           <button
             className="menu-toggle"
