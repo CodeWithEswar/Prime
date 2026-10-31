@@ -28,6 +28,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Checkbox } from "@/components/ui/checkbox";
 import { fadeInVariants, slideUpVariants } from "@/lib/motion";
+import { PrimeLogo } from "@/components/branding";
 
 export default function FoundationPreviewPage() {
   const [checked, setChecked] = React.useState(true);
@@ -41,21 +42,18 @@ export default function FoundationPreviewPage() {
         variants={fadeInVariants}
       >
         {/* Foundation Header */}
-        <div className="border-b border-[var(--border)] pb-6 space-y-2">
-          <div className="flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-[var(--accent)] animate-pulse" />
-            <span className="font-mono text-xs uppercase tracking-wider text-[var(--accent)]">
-              PRIME • Phase 0
-            </span>
+        <div className="border-b border-[var(--border)] pb-6 space-y-5">
+          <PrimeLogo size="lg" withExpansion withTagline href="/design-system" />
+          <div className="space-y-1.5 pt-2">
+            <h1 className="text-2xl md:text-3xl font-bold tracking-tight">
+              Engineering Foundation &amp; Design System Verification
+            </h1>
+            <p className="text-sm text-[var(--foreground-muted)] max-w-2xl">
+              This internal preview surface validates semantic design tokens, solid
+              neumorphic controls, surface elevation hierarchy, brand identity, and motion
+              timings. Zero product feature modules are active.
+            </p>
           </div>
-          <h1 className="text-2xl md:text-3xl font-bold tracking-tight">
-            Engineering Foundation Verification
-          </h1>
-          <p className="text-sm text-[var(--foreground-muted)] max-w-2xl">
-            This internal preview surface validates semantic design tokens, solid
-            neumorphic controls, surface elevation hierarchy, Hugeicons, and motion
-            timings. Zero product feature modules are active in Phase 0.
-          </p>
         </div>
 
         {/* Section 1: Surface Elevation Philosophy */}

@@ -115,6 +115,7 @@ import { SectionHeader } from "@/components/shared/section-header";
 import { NavItem } from "@/components/shared/nav-item";
 import { ComponentPreview } from "./component-preview";
 import { MotionPlayground } from "./motion-playground";
+import { BrandingPlayground } from "./branding-playground";
 
 export interface PreviewRendererProps {
   slug: string;
@@ -316,6 +317,28 @@ export function PreviewRenderer({ slug }: PreviewRendererProps) {
     return (
       <ComponentPreview code={code} title="PRIME Centralized Motion System">
         <MotionPlayground />
+      </ComponentPreview>
+    );
+  }
+
+  if (slug === "branding") {
+    const code = `import { PrimeLogo, PrimeMark, PrimeWordmark } from "@/components/branding";
+
+// 1. Primary Header Lockup (Pure Red mark + Pure White wordmark)
+<PrimeLogo size="sm" href="/" />
+
+// 2. Full Brand Showcase with expansion & tagline
+<PrimeLogo size="lg" withExpansion withTagline />
+
+// 3. Standalone Vector Mark
+<PrimeMark size={24} variant="brand" />
+
+// 4. Standalone Tracked Wordmark
+<PrimeWordmark size="md" variant="brand" withTagline />`;
+
+    return (
+      <ComponentPreview code={code} title="PRIME Brand Identity & Assets">
+        <BrandingPlayground />
       </ComponentPreview>
     );
   }

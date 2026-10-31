@@ -22,6 +22,7 @@ import {
   CommandItem,
 } from "@/components/ui/command";
 import { getAllRegistryItems } from "@/lib/design-system/registry";
+import { PrimeLogo } from "@/components/branding";
 
 export interface HeaderProps {
   onToggleMobileNav?: () => void;
@@ -66,11 +67,8 @@ export function DesignSystemHeader({ onToggleMobileNav, isMobileNavOpen }: Heade
             </button>
 
             <Link href="/design-system" className="flex items-center gap-2.5 group">
-              <div className="flex h-7 w-7 items-center justify-center rounded-[var(--radius-xs)] bg-[#ff0000] text-white font-bold text-xs tracking-wider shadow-[0_0_8px_rgba(255,0,0,0.5)]">
-                PR
-              </div>
+              <PrimeLogo size="sm" />
               <div className="flex items-center gap-2">
-                <span className="font-bold text-sm tracking-wider text-white">PRIME</span>
                 <span className="text-[rgba(255,255,255,0.28)] font-mono text-xs">/</span>
                 <span className="text-xs font-mono text-[var(--text-secondary)] group-hover:text-white transition-colors">
                   DESIGN SYSTEM

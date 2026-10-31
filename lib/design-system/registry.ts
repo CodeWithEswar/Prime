@@ -2,7 +2,7 @@ import type { Category, RegistryItem, Subcategory } from "./types";
 
 export const REGISTRY_ITEMS: readonly RegistryItem[] = [
   // =========================================================================
-  // FOUNDATIONS (8 Items)
+  // FOUNDATIONS (9 Items)
   // =========================================================================
   {
     slug: "colors",
@@ -155,6 +155,42 @@ Never introduce arbitrary uncoordinated animation constants or bouncy toy spring
 Never import from Lucide, Heroicons, FontAwesome, or Tabler.
 Standard sizes: 14 (compact/badges), 16 (inputs/buttons), 18 (default nav), 20 (headers), 24 (empty states).
 Stroke width: 1.5. Always pair icon-only buttons with an accessible aria-label.`,
+  },
+  {
+    slug: "branding",
+    name: "Brand Identity",
+    category: "foundations",
+    subcategory: "Tokens",
+    description:
+      "The complete PRIME visual identity system: progression ribbons, structured roadmap steps, hidden 'P' counter, peak upward arrow, pure-black canvas, pure-red accent, and responsive SVG/raster assets.",
+    status: "stable",
+    primitive: "SVG & PNG Asset Engine",
+    clientComponent: true,
+    sections: ["preview", "description", "variants", "usage", "prompt"],
+    dodont: [
+      {
+        do: "Use PrimeLogo and PrimeMark from '@/components/branding' across all surfaces",
+        doDescription:
+          "Maintains accurate geometry, accessible labels, responsive SVG rendering, and zero layout shift.",
+        dont: "Create temporary text placeholders, custom geometric approximations, or raster-only logos in React code",
+        dontDescription:
+          "Always consume the canonical vector components or public/brand SVGs.",
+      },
+      {
+        do: "Maintain the Pure Black (#000000) and Pure Red (#FF0000) brand color primitives",
+        doDescription:
+          "Ensures sharp contrast and visual signature across dark canvas, favicons, app icons, and social media cards.",
+        dont: "Apply drop shadows, color gradients, or rounded bevel filters directly inside the mark vector",
+        dontDescription: "The mark is a solid, razor-sharp geometric progression symbol.",
+      },
+    ],
+    aiPrompt: `PRIME Brand Identity & Assets Specification:
+Identity: PURE BLACK (#000000) × PURE RED (#FF0000) × WHITE (#FFFFFF).
+Components in '@/components/branding':
+- PrimeMark: Vector symbol (24x24) with lower progression ribbon (M3 23V14L10.5 9.2H13.5V12.8L7.5 15.2V22L3 23Z) and upper peak ribbon (M16.5 1L9 7H16.5V14.2L10.5 16.6V20.4L21 15V4.5L16.5 1Z).
+- PrimeWordmark: Tracked uppercase 'PRIME' with optional expansion and tagline ('Plan. Practice. Revise. Master.' with red periods).
+- PrimeLogo: Full lockup supporting sizes (sm, md, lg, xl), orientations (horizontal, stacked), and variants (brand, light, white, black, red, current).
+Never introduce arbitrary SVG paths, generic SaaS logos, or charcoal-washed palettes.`,
   },
 
   // =========================================================================
