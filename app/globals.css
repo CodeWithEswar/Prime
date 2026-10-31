@@ -6,64 +6,174 @@
     sans-serif;
   --font-mono: var(--font-geist-mono), monospace;
 
+  /* PRIME Pure Black & Pure Red Primitive Mapping */
+  --color-canvas: var(--prime-canvas);
+  --color-surface-base: var(--prime-surface-1);
+  --color-surface-raised: var(--prime-surface-2);
+  --color-surface-elevated: var(--prime-surface-3);
+  --color-surface-overlay: var(--prime-surface-4);
+  --color-surface-hover: var(--prime-surface-hover);
+  --color-surface-active: var(--prime-surface-active);
+
   --color-background: var(--background);
-  --color-surface: var(--surface);
-  --color-surface-raised: var(--surface-raised);
-  --color-surface-elevated: var(--surface-elevated);
-  --color-surface-hover: var(--surface-hover);
-
-  --color-border: var(--border);
-  --color-border-subtle: var(--border-subtle);
-  --color-border-strong: var(--border-strong);
-
   --color-foreground: var(--foreground);
-  --color-foreground-secondary: var(--foreground-secondary);
-  --color-foreground-muted: var(--foreground-muted);
-  --color-foreground-disabled: var(--foreground-disabled);
+
+  --color-border-subtle: var(--border-subtle);
+  --color-border-default: var(--border-default);
+  --color-border-strong: var(--border-strong);
+  --color-border: var(--border);
+
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+  --color-text-disabled: var(--text-disabled);
+
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-active: var(--primary-active);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-hover: var(--secondary-hover);
+  --color-secondary-foreground: var(--secondary-foreground);
 
   --color-accent: var(--accent);
-  --color-accent-hover: var(--accent-hover);
-  --color-accent-active: var(--accent-active);
-  --color-accent-muted: var(--accent-muted);
+  --color-accent-soft: var(--accent-soft);
   --color-accent-subtle: var(--accent-subtle);
   --color-accent-border: var(--accent-border);
+  --color-accent-foreground: var(--accent-foreground);
 
-  --radius-xs: 0.25rem;
-  --radius-sm: 0.375rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.625rem;
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-success-border: var(--success-border);
+
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-warning-border: var(--warning-border);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-soft: var(--destructive-soft);
+  --color-destructive-border: var(--destructive-border);
+
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+  --color-info-border: var(--info-border);
+
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 12px;
 }
 
 :root {
-  /* PRIME Canonical Dark-First & Black-First Foundation */
-  --background: #070707;
-  --surface: #0b0b0c;
-  --surface-raised: #101011;
-  --surface-elevated: #141415;
-  --surface-hover: #181819;
+  /* =========================================================================
+   * 1. PRIME Primitive Palette (Pure Black #000000 & Pure Red #FF0000)
+   * ========================================================================= */
+  --prime-canvas: #000000; /* Pure True Void Black */
 
-  --border: #242426;
-  --border-subtle: #19191b;
-  --border-strong: #303033;
+  --prime-surface-1: #070708; /* Level 1: Base grouping surface */
+  --prime-surface-2: #0c0c0d; /* Level 2: Raised card surface */
+  --prime-surface-3: #111113; /* Level 3: Elevated popover / menu surface */
+  --prime-surface-4: #161619; /* Level 4: Modal overlay surface */
+  --prime-surface-hover: #1a1a1e;
+  --prime-surface-active: #202024;
 
-  --foreground: #f7f7f7;
-  --foreground-secondary: #a1a1aa;
-  --foreground-muted: #71717a;
-  --foreground-disabled: #52525b;
+  --prime-border-subtle: #141416;
+  --prime-border-default: #222225;
+  --prime-border-strong: #333337;
 
-  --accent: #e5484d;
-  --accent-hover: #f05257;
-  --accent-active: #d93d42;
+  --prime-text-primary: #ffffff;
+  --prime-text-secondary: #a3a3a8;
+  --prime-text-tertiary: #717178;
+  --prime-text-disabled: #4a4a50;
 
-  --accent-muted: rgba(229, 72, 77, 0.12);
-  --accent-subtle: rgba(229, 72, 77, 0.07);
-  --accent-border: rgba(229, 72, 77, 0.28);
+  /* Pure Performance Red */
+  --prime-red: #ff0000;
+  --prime-red-hover: #ff2626;
+  --prime-red-active: #d60000;
 
-  --radius-xs: 0.25rem;
-  --radius-sm: 0.375rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.625rem;
-  --radius: 0.5rem;
+  --prime-red-soft: rgba(255, 0, 0, 0.12);
+  --prime-red-subtle: rgba(255, 0, 0, 0.06);
+  --prime-red-border: rgba(255, 0, 0, 0.32);
+
+  /* =========================================================================
+   * 2. Semantic Token Layer
+   * ========================================================================= */
+  --background: var(--prime-canvas);
+  --foreground: var(--prime-text-primary);
+
+  --surface-base: var(--prime-surface-1);
+  --surface-raised: var(--prime-surface-2);
+  --surface-elevated: var(--prime-surface-3);
+  --surface-overlay: var(--prime-surface-4);
+  --surface-hover: var(--prime-surface-hover);
+  --surface-active: var(--prime-surface-active);
+
+  --surface: var(--prime-surface-1);
+
+  --border-subtle: var(--prime-border-subtle);
+  --border-default: var(--prime-border-default);
+  --border-strong: var(--prime-border-strong);
+  --border: var(--prime-border-default);
+
+  --text-primary: var(--prime-text-primary);
+  --text-secondary: var(--prime-text-secondary);
+  --text-tertiary: var(--prime-text-tertiary);
+  --text-disabled: var(--prime-text-disabled);
+
+  --primary: var(--prime-red);
+  --primary-hover: var(--prime-red-hover);
+  --primary-active: var(--prime-red-active);
+  --primary-foreground: #ffffff;
+
+  --secondary: var(--prime-surface-2);
+  --secondary-hover: var(--prime-surface-hover);
+  --secondary-foreground: var(--prime-text-primary);
+
+  --accent: var(--prime-red);
+  --accent-hover: var(--prime-red-hover);
+  --accent-active: var(--prime-red-active);
+  --accent-soft: var(--prime-red-soft);
+  --accent-subtle: var(--prime-red-subtle);
+  --accent-border: var(--prime-red-border);
+  --accent-foreground: #ffffff;
+
+  --accent-muted: var(--prime-red-soft);
+
+  --muted: var(--prime-surface-2);
+  --muted-foreground: var(--prime-text-secondary);
+
+  /* Muted semantic feedback (never competes with pure red) */
+  --success: #30a46c;
+  --success-soft: rgba(48, 164, 108, 0.12);
+  --success-border: rgba(48, 164, 108, 0.28);
+  --success-foreground: #45c486;
+
+  --warning: #f5a524;
+  --warning-soft: rgba(245, 165, 36, 0.12);
+  --warning-border: rgba(245, 165, 36, 0.28);
+  --warning-foreground: #ffbe4d;
+
+  --destructive: #ff0000;
+  --destructive-soft: rgba(255, 0, 0, 0.15);
+  --destructive-border: rgba(255, 0, 0, 0.35);
+  --destructive-foreground: #ff6666;
+
+  --info: #3b82f6;
+  --info-soft: rgba(59, 130, 246, 0.12);
+  --info-border: rgba(59, 130, 246, 0.28);
+  --info-foreground: #60a5fa;
+
+  --focus-ring: var(--prime-red);
+
+  /* Radius System (Restrained: 4px - 12px) */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 12px;
+  --radius: 8px;
 }
 
 /* Base Body Setup */
@@ -77,7 +187,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Monospace Utility */
+/* Tabular Monospace Utility (Prevents layout shift for timers and numbers) */
 .font-mono-numbers {
   font-family: var(--font-mono);
   font-feature-settings:
@@ -85,68 +195,110 @@ body {
     "lnum" on;
 }
 
-/* Custom Selection */
+/* Custom Selection in Pure Red Accent Soft */
 ::selection {
-  background: var(--accent-muted);
-  color: var(--foreground);
+  background: var(--accent-soft);
+  color: #ffffff;
 }
 
-/* Neumorphic Precision Hardware Controls */
-.btn-neumorphic-primary {
-  background: var(--accent);
-  color: #ffffff;
+/* =========================================================================
+ * 3. Elevation & Layered Shadows (Pure Black-First Depth)
+ * ========================================================================= */
+.shadow-elevation-1 {
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    0 1px 0 rgba(255, 255, 255, 0.03) inset,
+    0 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.shadow-elevation-2 {
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 2px 8px rgba(0, 0, 0, 0.75),
+    0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.shadow-elevation-3 {
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.05) inset,
+    0 4px 16px rgba(0, 0, 0, 0.8),
+    0 16px 40px rgba(0, 0, 0, 0.65);
+}
+
+.shadow-elevation-4 {
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 8px 32px rgba(0, 0, 0, 0.9),
+    0 24px 64px rgba(0, 0, 0, 0.85);
+}
+
+/* =========================================================================
+ * 4. Solid Precision Neumorphic Controls (Instrument Panel Feel)
+ * ========================================================================= */
+.btn-neumorphic-primary {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0) 100%),
+    var(--prime-red);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
     inset 0 -1px 0 rgba(0, 0, 0, 0.45),
-    0 2px 4px rgba(0, 0, 0, 0.4),
-    0 1px 2px rgba(229, 72, 77, 0.15);
+    0 1px 2px rgba(0, 0, 0, 0.7),
+    0 4px 14px rgba(255, 0, 0, 0.25);
   transition: all 120ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-neumorphic-primary:hover {
-  background: var(--accent-hover);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 100%),
+    var(--prime-red-hover);
+  border-color: rgba(255, 255, 255, 0.22);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
     inset 0 -1px 0 rgba(0, 0, 0, 0.5),
-    0 3px 6px rgba(0, 0, 0, 0.45),
-    0 1px 3px rgba(229, 72, 77, 0.25);
+    0 2px 4px rgba(0, 0, 0, 0.8),
+    0 6px 18px rgba(255, 0, 0, 0.35);
 }
 
 .btn-neumorphic-primary:active {
-  background: var(--accent-active);
-  transform: translateY(0.5px);
+  background: var(--prime-red-active);
+  transform: translateY(1px);
   box-shadow:
-    inset 0 2px 4px rgba(0, 0, 0, 0.55),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.08);
+    inset 0 2px 4px rgba(0, 0, 0, 0.7),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .btn-neumorphic-secondary {
-  background: var(--surface-raised);
-  color: var(--foreground);
-  border: 1px solid var(--border);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 100%),
+    var(--prime-surface-2);
+  color: var(--prime-text-primary);
+  border: 1px solid var(--prime-border-default);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.07),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.5),
-    0 1px 2px rgba(0, 0, 0, 0.35);
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.7),
+    0 1px 2px rgba(0, 0, 0, 0.6);
   transition: all 120ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-neumorphic-secondary:hover {
-  background: var(--surface-hover);
-  border-color: var(--border-strong);
-  color: var(--foreground);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 100%),
+    var(--prime-surface-hover);
+  border-color: var(--prime-border-strong);
+  color: #ffffff;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.1),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.55),
-    0 2px 4px rgba(0, 0, 0, 0.4);
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.75),
+    0 2px 5px rgba(0, 0, 0, 0.7);
 }
 
 .btn-neumorphic-secondary:active {
-  background: var(--surface);
-  transform: translateY(0.5px);
+  background: var(--prime-surface-active);
+  transform: translateY(1px);
   box-shadow:
-    inset 0 2px 3px rgba(0, 0, 0, 0.6),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.04);
+    inset 0 2px 3px rgba(0, 0, 0, 0.8),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.02);
 }
 
 /* Reduced Motion Compliance */

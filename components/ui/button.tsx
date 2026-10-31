@@ -1,13 +1,14 @@
 import * as React from "react";
+import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-colors cursor-pointer disabled:pointer-events-none disabled:opacity-40 disabled:cursor-not-allowed select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]/40 focus-visible:ring-offset-1 focus-visible:ring-offset-[var(--background)]",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all duration-150 cursor-pointer disabled:pointer-events-none disabled:opacity-40 disabled:cursor-not-allowed select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]/50 focus-visible:ring-offset-1 focus-visible:ring-offset-[var(--background)]",
   {
     variants: {
       variant: {
-        // PRIME Precision Hardware Control - Solid Neumorphic Primary
+        // PRIME Precision Hardware Control - Solid Neumorphic Primary (Pure Red #FF0000)
         primary:
           "btn-neumorphic-primary rounded-[var(--radius-sm)] font-semibold text-white",
         // Solid Elevated Secondary Surface Control
@@ -17,10 +18,10 @@ const buttonVariants = cva(
           "border border-[var(--border)] bg-transparent text-[var(--foreground)] hover:bg-[var(--surface-hover)] hover:border-[var(--border-strong)] rounded-[var(--radius-sm)] active:translate-y-[0.5px]",
         // Restrained Ghost
         ghost:
-          "text-[var(--foreground-secondary)] hover:text-[var(--foreground)] hover:bg-[var(--surface-hover)] rounded-[var(--radius-sm)]",
+          "text-[var(--text-secondary)] hover:text-[var(--foreground)] hover:bg-[var(--surface-hover)] rounded-[var(--radius-sm)]",
         // Destructive Precision Control
         destructive:
-          "bg-red-950/40 text-red-400 border border-red-900/50 hover:bg-red-900/30 active:bg-red-950/60 rounded-[var(--radius-sm)] shadow-[0_1px_2px_rgba(0,0,0,0.5)]",
+          "bg-[var(--destructive-soft)] text-red-400 border border-[var(--destructive-border)] hover:bg-[var(--destructive-border)]/30 active:bg-[var(--destructive-soft)]/80 rounded-[var(--radius-sm)] shadow-[0_1px_2px_rgba(0,0,0,0.5)]",
         // Subtle Link Variant
         link: "text-[var(--accent)] underline-offset-4 hover:underline p-0 h-auto font-normal",
       },
@@ -44,16 +45,56 @@ export interface ButtonProps
     React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
+  loading?: boolean;
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, ...props }, ref) => {
+  (
+    {
+      className,
+      variant,
+      size,
+      asChild = false,
+      loading = false,
+      disabled,
+      children,
+      ...props
+    },
+    ref
+  ) => {
+    const Comp = asChild ? Slot : "button";
     return (
-      <button
+      <Comp
         ref={ref}
+        disabled={disabled || loading}
         className={cn(buttonVariants({ variant, size, className }))}
         {...props}
-      />
+      >
+        {loading && (
+          <svg
+            className="animate-spin -ml-1 mr-1 h-3.5 w-3.5 text-current shrink-0"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <circle
+              className="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              strokeWidth="4"
+            />
+            <path
+              className="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+            />
+          </svg>
+        )}
+        {children}
+      </Comp>
     );
   }
 );
