@@ -114,6 +114,7 @@ import { PageHeader } from "@/components/shared/page-header";
 import { SectionHeader } from "@/components/shared/section-header";
 import { NavItem } from "@/components/shared/nav-item";
 import { ComponentPreview } from "./component-preview";
+import { MotionPlayground } from "./motion-playground";
 
 export interface PreviewRendererProps {
   slug: string;
@@ -288,12 +289,38 @@ export function PreviewRenderer({ slug }: PreviewRendererProps) {
     );
   }
 
-  if (
-    slug === "elevation" ||
-    slug === "borders" ||
-    slug === "motion" ||
-    slug === "icons"
-  ) {
+  if (slug === "motion") {
+    const code = `import { motionDuration, motionEase, motionSpring } from "@/lib/motion";
+
+// 1. Dialog entrance & exit
+<motion.div
+  initial={{ opacity: 0, scale: 0.98, y: 8 }}
+  animate={{ opacity: 1, scale: 1, y: 0 }}
+  exit={{ opacity: 0, scale: 0.985, y: 4 }}
+  transition={{ duration: motionDuration.moderate, ease: motionEase.emphasized }}
+/>
+
+// 2. Shared Tab indicator gliding
+<motion.span
+  layoutId="prime-ds-active-tab"
+  transition={motionSpring.control}
+/>
+
+// 3. Directional Sheet panel entrance
+<motion.div
+  initial={{ x: "100%" }}
+  animate={{ x: 0 }}
+  exit={{ x: "100%" }}
+  transition={motionSpring.panel}
+/>`;
+    return (
+      <ComponentPreview code={code} title="PRIME Centralized Motion System">
+        <MotionPlayground />
+      </ComponentPreview>
+    );
+  }
+
+  if (slug === "elevation" || slug === "borders" || slug === "icons") {
     const code = `// ${slug} foundation token`;
     return (
       <ComponentPreview code={code} title={`${slug.toUpperCase()} Tokens`}>

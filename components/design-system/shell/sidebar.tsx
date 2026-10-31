@@ -3,10 +3,12 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowDown01Icon, ArrowRight01Icon } from "@hugeicons/core-free-icons";
+import { ArrowDown01Icon } from "@hugeicons/core-free-icons";
 import { Icon } from "@/components/ui/icon";
 import { cn } from "@/lib/utils";
 import { getGroupedNavigation } from "@/lib/design-system/registry";
+import { motion, AnimatePresence } from "motion/react";
+import { motionDuration, motionEase, motionSpring } from "@/lib/motion";
 
 export interface SidebarProps {
   className?: string;
@@ -45,7 +47,11 @@ export function DesignSystemSidebar({ className, onItemClick }: SidebarProps) {
           )}
         >
           {pathname === "/design-system" && (
-            <span className="absolute left-0 top-1 bottom-1 w-0.5 rounded-full bg-[#ff0000]" />
+            <motion.span
+              layoutId="prime-ds-nav-indicator"
+              className="absolute left-0 top-1 bottom-1 w-0.5 rounded-full bg-[#ff0000]"
+              transition={motionSpring.control}
+            />
           )}
           <span>System Overview</span>
           <span className="font-mono text-[10px] text-[var(--text-disabled)]">
@@ -73,52 +79,75 @@ export function DesignSystemSidebar({ className, onItemClick }: SidebarProps) {
                     <button
                       type="button"
                       onClick={() => toggleSubcategory(groupKey)}
-                      className="flex items-center justify-between w-full px-2 py-1 text-[11px] font-semibold text-[rgba(255,255,255,0.60)] hover:text-white transition-colors"
+                      className="flex items-center justify-between w-full px-2 py-1 text-[11px] font-semibold text-[rgba(255,255,255,0.60)] hover:text-white transition-colors cursor-pointer"
                     >
                       <span>{sub.title}</span>
                       <div className="flex items-center gap-1 text-[10px] font-mono text-[var(--text-disabled)]">
                         <span>{sub.items.length}</span>
-                        <Icon
-                          icon={isCollapsed ? ArrowRight01Icon : ArrowDown01Icon}
-                          size={12}
-                          className="opacity-50"
-                        />
+                        <motion.span
+                          animate={{ rotate: isCollapsed ? -90 : 0 }}
+                          transition={{
+                            duration: motionDuration.fast,
+                            ease: motionEase.standard,
+                          }}
+                          className="inline-flex items-center"
+                        >
+                          <Icon icon={ArrowDown01Icon} size={12} className="opacity-50" />
+                        </motion.span>
                       </div>
                     </button>
 
-                    {/* Subcategory Items */}
-                    {!isCollapsed && (
-                      <div className="space-y-0.5 pl-1 border-l border-[rgba(255,255,255,0.06)] ml-2">
-                        {sub.items.map((item) => {
-                          const href = `/design-system/${item.category}/${item.slug}`;
-                          const isActive = pathname === href;
+                    {/* Subcategory Items with AnimatePresence */}
+                    <AnimatePresence initial={false}>
+                      {!isCollapsed && (
+                        <motion.div
+                          key={`sub-${groupKey}`}
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{
+                            duration: motionDuration.fast,
+                            ease: motionEase.enter,
+                          }}
+                          className="overflow-hidden"
+                        >
+                          <div className="space-y-0.5 pl-1 border-l border-[rgba(255,255,255,0.06)] ml-2 py-0.5">
+                            {sub.items.map((item) => {
+                              const href = `/design-system/${item.category}/${item.slug}`;
+                              const isActive = pathname === href;
 
-                          return (
-                            <Link
-                              key={item.slug}
-                              href={href}
-                              onClick={onItemClick}
-                              className={cn(
-                                "group relative flex items-center justify-between px-2.5 py-1.5 rounded-[var(--radius-xs)] transition-colors",
-                                isActive
-                                  ? "bg-[rgba(255,255,255,0.04)] text-white font-semibold"
-                                  : "text-[rgba(255,255,255,0.60)] hover:bg-[var(--surface-hover)] hover:text-white"
-                              )}
-                            >
-                              {isActive && (
-                                <span className="absolute -left-[5px] top-1 bottom-1 w-0.5 rounded-full bg-[#ff0000]" />
-                              )}
-                              <span className="truncate">{item.name}</span>
-                              {item.primitive && (
-                                <span className="text-[9px] font-mono text-[var(--text-disabled)] opacity-0 group-hover:opacity-100 transition-opacity">
-                                  {item.status === "stable" ? "" : item.status}
-                                </span>
-                              )}
-                            </Link>
-                          );
-                        })}
-                      </div>
-                    )}
+                              return (
+                                <Link
+                                  key={item.slug}
+                                  href={href}
+                                  onClick={onItemClick}
+                                  className={cn(
+                                    "group relative flex items-center justify-between px-2.5 py-1.5 rounded-[var(--radius-xs)] transition-colors",
+                                    isActive
+                                      ? "bg-[rgba(255,255,255,0.04)] text-white font-semibold"
+                                      : "text-[rgba(255,255,255,0.60)] hover:bg-[var(--surface-hover)] hover:text-white"
+                                  )}
+                                >
+                                  {isActive && (
+                                    <motion.span
+                                      layoutId="prime-ds-nav-indicator"
+                                      className="absolute -left-[5px] top-1 bottom-1 w-0.5 rounded-full bg-[#ff0000]"
+                                      transition={motionSpring.control}
+                                    />
+                                  )}
+                                  <span className="truncate">{item.name}</span>
+                                  {item.primitive && (
+                                    <span className="text-[9px] font-mono text-[var(--text-disabled)] opacity-0 group-hover:opacity-100 transition-opacity">
+                                      {item.status === "stable" ? "" : item.status}
+                                    </span>
+                                  )}
+                                </Link>
+                              );
+                            })}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
                 );
               })}

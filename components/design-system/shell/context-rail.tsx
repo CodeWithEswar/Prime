@@ -3,6 +3,8 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import type { RegistryItem } from "@/lib/design-system/types";
+import { motion } from "motion/react";
+import { motionSpring } from "@/lib/motion";
 
 export interface ContextRailProps {
   item?: RegistryItem;
@@ -66,12 +68,19 @@ export function DesignSystemContextRail({ item, sections }: ContextRailProps) {
                   key={secId}
                   href={`#${secId}`}
                   className={cn(
-                    "block py-1 px-1.5 rounded-[var(--radius-xs)] font-medium transition-colors",
+                    "relative block py-1 px-1.5 rounded-[var(--radius-xs)] font-medium transition-colors",
                     isActive
-                      ? "text-white font-semibold relative after:absolute after:-left-[9px] after:top-1.5 after:bottom-1.5 after:w-0.5 after:bg-[#ff0000] after:rounded-full"
+                      ? "text-white font-semibold"
                       : "text-[var(--text-secondary)] hover:text-white"
                   )}
                 >
+                  {isActive && (
+                    <motion.span
+                      layoutId="prime-ds-toc-indicator"
+                      className="absolute -left-[9px] top-1.5 bottom-1.5 w-0.5 bg-[#ff0000] rounded-full"
+                      transition={motionSpring.control}
+                    />
+                  )}
                   {formatSectionLabel(secId)}
                 </a>
               );

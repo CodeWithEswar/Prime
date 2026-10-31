@@ -3,11 +3,13 @@
 import * as React from "react";
 import * as TabsPrimitive from "@radix-ui/react-tabs";
 import { cva, type VariantProps } from "class-variance-authority";
+import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
+import { motionDuration, motionEase, motionSpring } from "@/lib/motion";
 
 export const Tabs = TabsPrimitive.Root;
 
-const tabsListVariants = cva("inline-flex items-center justify-center", {
+const tabsListVariants = cva("inline-flex items-center justify-center relative", {
   variants: {
     variant: {
       line: "border-b border-[var(--border-subtle)] w-full justify-start gap-6 bg-transparent p-0 rounded-none",
@@ -23,45 +25,110 @@ const tabsListVariants = cva("inline-flex items-center justify-center", {
 export interface TabsListProps
   extends
     React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>,
-    VariantProps<typeof tabsListVariants> {}
+    VariantProps<typeof tabsListVariants> {
+  layoutId?: string;
+}
 
-const TabsVariantContext = React.createContext<"line" | "segmented">("line");
+interface TabsContextValue {
+  variant: "line" | "segmented";
+  layoutId: string;
+}
+
+const TabsVariantContext = React.createContext<TabsContextValue>({
+  variant: "line",
+  layoutId: "prime-ds-active-tab",
+});
 
 export const TabsList = React.forwardRef<
   React.ComponentRef<typeof TabsPrimitive.List>,
   TabsListProps
->(({ className, variant = "line", children, ...props }, ref) => (
-  <TabsVariantContext.Provider value={variant || "line"}>
-    <TabsPrimitive.List
-      ref={ref}
-      className={cn(tabsListVariants({ variant, className }))}
-      {...props}
-    >
-      {children}
-    </TabsPrimitive.List>
-  </TabsVariantContext.Provider>
-));
+>(
+  (
+    { className, variant = "line", layoutId = "prime-ds-active-tab", children, ...props },
+    ref
+  ) => {
+    const contextValue = React.useMemo(
+      () => ({
+        variant: variant || "line",
+        layoutId,
+      }),
+      [variant, layoutId]
+    );
+
+    return (
+      <TabsVariantContext.Provider value={contextValue}>
+        <TabsPrimitive.List
+          ref={ref}
+          className={cn(tabsListVariants({ variant, className }))}
+          {...props}
+        >
+          {children}
+        </TabsPrimitive.List>
+      </TabsVariantContext.Provider>
+    );
+  }
+);
 TabsList.displayName = TabsPrimitive.List.displayName;
 
 export const TabsTrigger = React.forwardRef<
   React.ComponentRef<typeof TabsPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>
->(({ className, ...props }, ref) => {
-  const variant = React.useContext(TabsVariantContext);
+>(({ className, children, ...props }, ref) => {
+  const { variant, layoutId } = React.useContext(TabsVariantContext);
+  const [isActive, setIsActive] = React.useState(false);
+  const triggerRef = React.useRef<HTMLButtonElement | null>(null);
+
+  // Monitor Radix data-state attribute
+  React.useEffect(() => {
+    const el = triggerRef.current;
+    if (!el) return;
+
+    const observer = new MutationObserver(() => {
+      setIsActive(el.getAttribute("data-state") === "active");
+    });
+
+    setIsActive(el.getAttribute("data-state") === "active");
+    observer.observe(el, { attributes: true, attributeFilter: ["data-state"] });
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <TabsPrimitive.Trigger
-      ref={ref}
+      ref={(node) => {
+        triggerRef.current = node;
+        if (typeof ref === "function") ref(node);
+        else if (ref) ref.current = node;
+      }}
       className={cn(
-        "inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all duration-120 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]/50 disabled:pointer-events-none disabled:opacity-40 cursor-pointer",
+        "relative inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-colors duration-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]/50 disabled:pointer-events-none disabled:opacity-40 cursor-pointer select-none",
         variant === "line" &&
-          "relative pb-3 pt-2 text-[var(--text-secondary)] hover:text-white data-[state=active]:text-white after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-transparent data-[state=active]:after:bg-[var(--accent)] data-[state=active]:after:shadow-[0_0_8px_rgba(255,0,0,0.6)]",
+          "pb-3 pt-2 text-[var(--text-secondary)] hover:text-white data-[state=active]:text-white",
         variant === "segmented" &&
-          "px-3 py-1.5 rounded-[var(--radius-xs)] text-xs text-[var(--text-secondary)] hover:text-white data-[state=active]:bg-[var(--surface-elevated)] data-[state=active]:text-white data-[state=active]:shadow-elevation-1 data-[state=active]:border data-[state=active]:border-[var(--border-default)]",
+          "px-3 py-1.5 rounded-[var(--radius-xs)] text-xs text-[var(--text-secondary)] hover:text-white data-[state=active]:text-white z-10",
         className
       )}
       {...props}
-    />
+    >
+      <span className="relative z-10">{children}</span>
+
+      {/* Shared Gliding Active Indicator */}
+      {isActive && variant === "line" && (
+        <motion.span
+          layoutId={`${layoutId}-line`}
+          className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#ff0000] shadow-[0_0_8px_rgba(255,0,0,0.6)]"
+          transition={motionSpring.control}
+        />
+      )}
+
+      {isActive && variant === "segmented" && (
+        <motion.span
+          layoutId={`${layoutId}-segmented`}
+          className="absolute inset-0 rounded-[var(--radius-xs)] bg-[var(--surface-elevated)] border border-[var(--border-default)] shadow-elevation-1"
+          transition={motionSpring.control}
+        />
+      )}
+    </TabsPrimitive.Trigger>
   );
 });
 TabsTrigger.displayName = TabsPrimitive.Trigger.displayName;
@@ -69,7 +136,7 @@ TabsTrigger.displayName = TabsPrimitive.Trigger.displayName;
 export const TabsContent = React.forwardRef<
   React.ComponentRef<typeof TabsPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof TabsPrimitive.Content>
->(({ className, ...props }, ref) => (
+>(({ className, children, ...props }, ref) => (
   <TabsPrimitive.Content
     ref={ref}
     className={cn(
@@ -77,6 +144,15 @@ export const TabsContent = React.forwardRef<
       className
     )}
     {...props}
-  />
+  >
+    <motion.div
+      initial={{ opacity: 0, y: 3 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -2 }}
+      transition={{ duration: motionDuration.fast, ease: motionEase.enter }}
+    >
+      {children}
+    </motion.div>
+  </TabsPrimitive.Content>
 ));
 TabsContent.displayName = TabsPrimitive.Content.displayName;
