@@ -295,6 +295,66 @@ body {
     inset 0 -1px 0 rgba(255, 255, 255, 0.02);
 }
 
+/* =========================================================================
+ * 5. PRIME Custom Scrollbar Architecture (WebKit & Firefox)
+ * ========================================================================= */
+.prime-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+  scrollbar-gutter: stable;
+}
+
+.prime-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.prime-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.prime-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  border: 2px solid #000000;
+}
+
+.prime-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.24);
+}
+
+.prime-scrollbar::-webkit-scrollbar-thumb:active {
+  background: #ff0000;
+}
+
+/* Thin variant for sidebars and compact panels */
+.prime-scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.14) transparent;
+}
+
+.prime-scrollbar-thin::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.prime-scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.prime-scrollbar-thin::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+}
+
+.prime-scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.prime-scrollbar-thin::-webkit-scrollbar-thumb:active {
+  background: #ff0000;
+}
+
 /* Reduced Motion Compliance */
 @media (prefers-reduced-motion: reduce) {
   *,
