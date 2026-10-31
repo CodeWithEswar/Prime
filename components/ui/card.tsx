@@ -2,23 +2,30 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
-  elevation?: "surface" | "raised" | "elevated";
+  elevation?: "base" | "surface" | "raised" | "elevated";
+  interactive?: boolean;
 }
 
 export const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ className, elevation = "surface", ...props }, ref) => {
+  ({ className, elevation = "raised", interactive = false, ...props }, ref) => {
     const elevationClasses = {
-      surface: "bg-[var(--surface)] border-[var(--border-subtle)]",
-      raised: "bg-[var(--surface-raised)] border-[var(--border)]",
-      elevated: "bg-[var(--surface-elevated)] border-[var(--border-strong)]",
+      base: "bg-[var(--surface-base)] border-[var(--border-subtle)] shadow-elevation-1",
+      surface:
+        "bg-[var(--surface-base)] border-[var(--border-subtle)] shadow-elevation-1",
+      raised:
+        "bg-[var(--surface-raised)] border-[var(--border-default)] shadow-elevation-2",
+      elevated:
+        "bg-[var(--surface-elevated)] border-[var(--border-strong)] shadow-elevation-3",
     };
 
     return (
       <div
         ref={ref}
         className={cn(
-          "rounded-[var(--radius-md)] border text-[var(--foreground)] shadow-[0_1px_3px_rgba(0,0,0,0.4)]",
+          "rounded-[var(--radius-md)] border text-[var(--foreground)] transition-all duration-150",
           elevationClasses[elevation],
+          interactive &&
+            "hover:border-[var(--border-strong)] hover:bg-[var(--surface-hover)] cursor-pointer active:translate-y-[0.5px]",
           className
         )}
         {...props}
@@ -43,7 +50,7 @@ export const CardTitle = React.forwardRef<
   <h3
     ref={ref}
     className={cn(
-      "text-base font-semibold leading-none tracking-tight text-[var(--foreground)]",
+      "text-base font-semibold leading-none tracking-tight text-white",
       className
     )}
     {...props}
@@ -57,7 +64,7 @@ export const CardDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn("text-xs text-[var(--foreground-muted)]", className)}
+    className={cn("text-xs text-[var(--text-secondary)]", className)}
     {...props}
   />
 ));
