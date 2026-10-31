@@ -5,7 +5,7 @@ export const Table = React.forwardRef<
   HTMLTableElement,
   React.HTMLAttributes<HTMLTableElement>
 >(({ className, ...props }, ref) => (
-  <div className="relative w-full overflow-auto bg-[var(--prime-canvas)]">
+  <div className="relative w-full overflow-auto prime-scrollbar bg-[var(--prime-canvas)]">
     <table
       ref={ref}
       className={cn("w-full caption-bottom text-sm bg-[var(--prime-canvas)]", className)}

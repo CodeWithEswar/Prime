@@ -343,12 +343,251 @@ export function PreviewRenderer({ slug }: PreviewRendererProps) {
     );
   }
 
-  if (slug === "elevation" || slug === "borders" || slug === "icons") {
-    const code = `// ${slug} foundation token`;
+  if (slug === "borders") {
+    const code = `/* 1. White-Alpha Border Tokens */
+--prime-border-subtle:  rgba(255, 255, 255, 0.07);
+--prime-border-default: rgba(255, 255, 255, 0.12);
+--prime-border-strong:  rgba(255, 255, 255, 0.20);
+
+/* 2. Focus Ring Specification */
+.focus-ring-prime:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 1px #000000, 0 0 0 3px rgba(255, 0, 0, 0.72);
+}
+
+/* 3. Universal Custom Scrollbars (No OS Chrome) */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.16) transparent;
+}
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.16);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover { background-color: rgba(255, 255, 255, 0.32); }
+::-webkit-scrollbar-thumb:active { background-color: #ff0000; }
+::-webkit-scrollbar-button { display: none !important; }`;
+
     return (
-      <ComponentPreview code={code} title={`${slug.toUpperCase()} Tokens`}>
+      <ComponentPreview code={code} title="Borders, Focus Rings & Custom Scrollbars">
+        <div className="w-full space-y-8">
+          {/* Border Layers */}
+          <div className="space-y-3">
+            <div className="text-xs font-mono uppercase text-[var(--text-tertiary)]">
+              White-Alpha Border Scales
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="p-4 rounded-[var(--radius-sm)] border border-[rgba(255,255,255,0.07)] bg-[#000000]">
+                <div className="text-xs font-semibold text-white">Subtle (7% Alpha)</div>
+                <div className="text-[11px] font-mono text-[var(--text-tertiary)] mt-1">
+                  rgba(255, 255, 255, 0.07)
+                </div>
+                <div className="text-[11px] text-[var(--text-secondary)] mt-2">
+                  Inner divider lines and structural cells
+                </div>
+              </div>
+
+              <div className="p-4 rounded-[var(--radius-sm)] border border-[rgba(255,255,255,0.12)] bg-[#030303]">
+                <div className="text-xs font-semibold text-white">
+                  Default (12% Alpha)
+                </div>
+                <div className="text-[11px] font-mono text-[var(--text-tertiary)] mt-1">
+                  rgba(255, 255, 255, 0.12)
+                </div>
+                <div className="text-[11px] text-[var(--text-secondary)] mt-2">
+                  Cards, buttons, inputs, dialog containers
+                </div>
+              </div>
+
+              <div className="p-4 rounded-[var(--radius-sm)] border border-[rgba(255,255,255,0.20)] bg-[#060606]">
+                <div className="text-xs font-semibold text-white">Strong (20% Alpha)</div>
+                <div className="text-[11px] font-mono text-[var(--text-tertiary)] mt-1">
+                  rgba(255, 255, 255, 0.20)
+                </div>
+                <div className="text-[11px] text-[var(--text-secondary)] mt-2">
+                  Popovers, active controls, elevated modals
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Interactive Custom Scrollbars Demonstration */}
+          <div className="space-y-3">
+            <div className="flex items-center justify-between">
+              <div className="text-xs font-mono uppercase text-[var(--text-tertiary)]">
+                Custom Scrollbar Architecture (Zero OS Chrome)
+              </div>
+              <div className="text-[11px] font-mono text-[#ff0000] flex items-center gap-1.5">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#ff0000] animate-pulse" />
+                Pure Red Active State On Drag
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {/* Variant 1: Standard 6px */}
+              <div className="rounded-[var(--radius-sm)] border border-[rgba(255,255,255,0.12)] bg-[#000000] p-3 space-y-2">
+                <div className="flex items-center justify-between text-xs font-medium text-white pb-1 border-b border-[rgba(255,255,255,0.06)]">
+                  <span>Standard (.prime-scrollbar)</span>
+                  <span className="font-mono text-[10px] text-white/50">6px Desktop</span>
+                </div>
+                <div className="h-44 overflow-y-auto prime-scrollbar pr-2 space-y-1.5 text-xs">
+                  {[
+                    "01. Dynamic Programming Fundamentals",
+                    "02. Graph Search: BFS & DFS",
+                    "03. Topological Sort (Kahn's)",
+                    "04. Dijkstra's Shortest Path",
+                    "05. Binary Search Over Answer Space",
+                    "06. Monotonic Stack & Queue",
+                    "07. Sliding Window Maximum",
+                    "08. Two Pointers & Cycle Finding",
+                    "09. Trie Prefix Tree Optimization",
+                    "10. Disjoint Set Union (Union-Find)",
+                    "11. Interval Scheduling & Overlaps",
+                    "12. Segment Trees & Range Queries",
+                  ].map((topic, i) => (
+                    <div
+                      key={i}
+                      className="p-1.5 rounded-[var(--radius-xs)] bg-[#030303] border border-[rgba(255,255,255,0.05)] text-[11px] text-white/80 hover:text-white hover:border-[rgba(255,255,255,0.15)] transition-colors"
+                    >
+                      {topic}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Variant 2: Thin 4px */}
+              <div className="rounded-[var(--radius-sm)] border border-[rgba(255,255,255,0.12)] bg-[#000000] p-3 space-y-2">
+                <div className="flex items-center justify-between text-xs font-medium text-white pb-1 border-b border-[rgba(255,255,255,0.06)]">
+                  <span>Thin Rail (.prime-scrollbar-thin)</span>
+                  <span className="font-mono text-[10px] text-white/50">4px Sidebar</span>
+                </div>
+                <div className="h-44 overflow-y-auto prime-scrollbar-thin pr-1.5 space-y-1.5 text-xs">
+                  {[
+                    "LeetCode #42: Trapping Rain Water",
+                    "LeetCode #200: Number of Islands",
+                    "LeetCode #76: Min Window Substring",
+                    "LeetCode #146: LRU Cache Architecture",
+                    "LeetCode #295: Find Median from Stream",
+                    "LeetCode #84: Largest Rect in Histogram",
+                    "LeetCode #124: Binary Tree Max Path",
+                    "LeetCode #300: Longest Increasing Subseq",
+                    "LeetCode #23: Merge k Sorted Lists",
+                    "LeetCode #207: Course Schedule I & II",
+                  ].map((problem, i) => (
+                    <div
+                      key={i}
+                      className="p-1.5 rounded-[var(--radius-xs)] bg-[#050505] border border-[rgba(255,255,255,0.06)] text-[11px] text-white/70 hover:text-white transition-colors"
+                    >
+                      {problem}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Variant 3: Red Accent Scrollbar */}
+              <div className="rounded-[var(--radius-sm)] border border-[rgba(255,255,255,0.12)] bg-[#000000] p-3 space-y-2">
+                <div className="flex items-center justify-between text-xs font-medium text-white pb-1 border-b border-[rgba(255,255,255,0.06)]">
+                  <span>Red Accent (.prime-scrollbar-red)</span>
+                  <span className="font-mono text-[10px] text-[#ff0000]">
+                    Brand Signature
+                  </span>
+                </div>
+                <div className="h-44 overflow-y-auto prime-scrollbar-red pr-2 space-y-1.5 text-xs">
+                  {[
+                    "Mock Interview 01 — System Design (Passed)",
+                    "Mock Interview 02 — DSA Hard (Passed)",
+                    "Mock Interview 03 — Concurrency (Active)",
+                    "Revision Round 1 — Dynamic Prog (Due)",
+                    "Revision Round 2 — Graph BFS/DFS (Done)",
+                    "Speed Run — 45m Monotonic Stack (Pending)",
+                    "Diagnostic Test — Weakness Review (Scheduled)",
+                  ].map((item, i) => (
+                    <div
+                      key={i}
+                      className="p-1.5 rounded-[var(--radius-xs)] bg-[#090000]/40 border border-[#ff0000]/20 text-[11px] text-white/80 hover:border-[#ff0000]/40 transition-colors"
+                    >
+                      {item}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ComponentPreview>
+    );
+  }
+
+  if (slug === "elevation") {
+    const code = `/* PRIME Elevation Shadows (Inset Highlights + Deep Drops) */
+.shadow-elevation-1 {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.025), 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+.shadow-elevation-2 {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 2px 5px rgba(0, 0, 0, 0.85), 0 6px 16px rgba(0, 0, 0, 0.6);
+}
+.shadow-elevation-3 {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 4px 12px rgba(0, 0, 0, 0.9), 0 12px 32px rgba(0, 0, 0, 0.75);
+}
+.shadow-elevation-4 {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 8px 24px rgba(0, 0, 0, 0.95), 0 20px 48px rgba(0, 0, 0, 0.9);
+}`;
+
+    return (
+      <ComponentPreview code={code} title="Elevation & Depth Scales">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
+          {[
+            {
+              level: "Elevation 1",
+              cls: "shadow-elevation-1",
+              bg: "bg-[#000000]",
+              use: "Default cards & list items",
+            },
+            {
+              level: "Elevation 2",
+              cls: "shadow-elevation-2",
+              bg: "bg-[#030303]",
+              use: "Hovered cards & dropdowns",
+            },
+            {
+              level: "Elevation 3",
+              cls: "shadow-elevation-3",
+              bg: "bg-[#060606]",
+              use: "Popovers & command palettes",
+            },
+            {
+              level: "Elevation 4",
+              cls: "shadow-elevation-4",
+              bg: "bg-[#090909]",
+              use: "Modals & elevated sheets",
+            },
+          ].map((e) => (
+            <div
+              key={e.level}
+              className={`p-5 rounded-[var(--radius-sm)] border border-[rgba(255,255,255,0.12)] ${e.bg} ${e.cls} space-y-2`}
+            >
+              <div className="text-xs font-bold text-white">{e.level}</div>
+              <div className="text-[11px] font-mono text-[var(--text-tertiary)]">
+                {e.cls}
+              </div>
+              <div className="text-[11px] text-[var(--text-secondary)]">{e.use}</div>
+            </div>
+          ))}
+        </div>
+      </ComponentPreview>
+    );
+  }
+
+  if (slug === "icons") {
+    const code = `// icons foundation token`;
+    return (
+      <ComponentPreview code={code} title="Iconography Tokens">
         <div className="p-6 rounded-[var(--radius-sm)] border border-[rgba(255,255,255,0.12)] bg-[#030303] text-center space-y-2">
-          <div className="text-sm font-semibold text-white capitalize">{slug} Scale</div>
+          <div className="text-sm font-semibold text-white capitalize">
+            Iconography Scale
+          </div>
           <p className="text-xs text-[var(--text-secondary)]">
             Canonical tokens calibrated for strict Pure Black and Pure Red visual rhythm.
           </p>
