@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 
@@ -36,7 +37,7 @@ export const metadata: Metadata = {
 function StartButton({ children = "Start Preparing" }: { children?: React.ReactNode }) {
   return (
     <Button asChild size="default">
-      <a href="#roadmap">{children}</a>
+      <Link href="/login">{children}</Link>
     </Button>
   );
 }
@@ -92,7 +93,7 @@ export default function LandingPage() {
         <section id="roadmap" className="landing-section story-section">
           <div className="landing-container story-grid">
             <Reveal className="story-copy">
-              <p className="section-index">01 / STRUCTURED ROADMAP</p>
+              <p className="section-index">01 / ROADMAP</p>
               <h2>
                 KNOW WHAT
                 <br />
@@ -127,7 +128,7 @@ export default function LandingPage() {
               <DailyPlanPreview />
             </Reveal>
             <Reveal className="story-copy">
-              <p className="section-index">02 / DAILY PLANNING</p>
+              <p className="section-index">02 / DAILY PLAN</p>
               <h2>
                 TURN THE ROADMAP
                 <br />
@@ -149,7 +150,7 @@ export default function LandingPage() {
           <div className="landing-container">
             <Reveal>
               <div className="practice-heading">
-                <p className="section-index">03 / DELIBERATE PRACTICE</p>
+                <p className="section-index">03 / PRACTICE</p>
                 <h2>
                   SOLVING IS ONLY
                   <br />
@@ -170,7 +171,7 @@ export default function LandingPage() {
           <StoryGeometry variant="revision" />
           <div className="landing-container story-grid">
             <Reveal className="story-copy">
-              <p className="section-index">04 / REVISION &amp; RETENTION</p>
+              <p className="section-index">04 / REVISION</p>
               <h2>
                 REVIEW BEFORE
                 <br />
@@ -194,7 +195,7 @@ export default function LandingPage() {
           <div className="landing-container">
             <MasteryDiagnostic>
               <Reveal className="story-copy">
-                <p className="section-index">05 / WEAKNESS &amp; MASTERY</p>
+                <p className="section-index">05 / MASTERY</p>
                 <h2>
                   DONE IS A CHECK.
                   <br />
@@ -232,7 +233,7 @@ export default function LandingPage() {
                 <br />
                 Understand your preparation more clearly.
               </p>
-              <StartButton>Try the preparation preview</StartButton>
+              <StartButton>Start your preparation</StartButton>
             </Reveal>
           </div>
         </section>

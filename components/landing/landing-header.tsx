@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
 import { usePrimeReducedMotion } from "@/lib/motion";
 import { motion, useScroll, useTransform } from "motion/react";
 import { PrimeLogo } from "@/components/branding";
@@ -34,8 +35,16 @@ export function LandingHeader() {
           ))}
         </nav>
         <div className="header-actions">
+          <Button
+            asChild
+            variant="ghost"
+            size="sm"
+            className="hidden sm:inline-flex text-[#aaa] hover:text-white"
+          >
+            <Link href="/login">Sign in</Link>
+          </Button>
           <Button asChild size="sm">
-            <a href="#roadmap">Explore PRIME</a>
+            <Link href="/login">Explore PRIME</Link>
           </Button>
           <button
             className="menu-toggle"
@@ -59,6 +68,9 @@ export function LandingHeader() {
             {label}
           </a>
         ))}
+        <Link href="/login" onClick={() => setOpen(false)} className="mobile-sign-in">
+          Sign in
+        </Link>
       </nav>
     </motion.header>
   );

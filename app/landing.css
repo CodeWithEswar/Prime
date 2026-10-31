@@ -94,6 +94,13 @@ html:has(.prime-landing) {
 .mobile-nav a {
   padding: 12px;
 }
+.mobile-nav .mobile-sign-in {
+  margin-top: 8px;
+  padding-top: 14px;
+  border-top: 1px solid #222;
+  color: var(--accent);
+  font-weight: 500;
+}
 .landing-hero {
   min-height: min(1000px, 100svh);
   position: relative;
