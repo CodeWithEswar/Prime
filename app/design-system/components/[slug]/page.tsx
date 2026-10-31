@@ -15,6 +15,9 @@ import { AnatomySection } from "@/components/design-system/anatomy/anatomy-secti
 import { ApiTable } from "@/components/design-system/api-table/api-table";
 import { DoDontSection } from "@/components/design-system/dodont/dodont-section";
 import { PromptSection } from "@/components/design-system/prompt/prompt-section";
+import { DocPageSkeleton } from "@/components/design-system/shared/doc-skeleton";
+
+export const instant = false;
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -39,7 +42,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default async function ComponentDocPage({ params }: PageProps) {
+async function ComponentDocContent({ params }: PageProps) {
   const { slug } = await params;
   const item = getItemBySlug(slug);
 
@@ -163,5 +166,13 @@ export default async function ComponentDocPage({ params }: PageProps) {
         <DesignSystemContextRail item={item} />
       </div>
     </div>
+  );
+}
+
+export default function ComponentDocPage({ params }: PageProps) {
+  return (
+    <React.Suspense fallback={<DocPageSkeleton />}>
+      <ComponentDocContent params={params} />
+    </React.Suspense>
   );
 }

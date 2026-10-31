@@ -14,6 +14,9 @@ import { PreviewRenderer } from "@/components/design-system/preview/preview-rend
 import { ApiTable } from "@/components/design-system/api-table/api-table";
 import { DoDontSection } from "@/components/design-system/dodont/dodont-section";
 import { PromptSection } from "@/components/design-system/prompt/prompt-section";
+import { DocPageSkeleton } from "@/components/design-system/shared/doc-skeleton";
+
+export const instant = false;
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -38,7 +41,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default async function PatternDocPage({ params }: PageProps) {
+async function PatternDocContent({ params }: PageProps) {
   const { slug } = await params;
   const item = getItemBySlug(slug);
 
@@ -119,5 +122,13 @@ export default async function PatternDocPage({ params }: PageProps) {
         <DesignSystemContextRail item={item} />
       </div>
     </div>
+  );
+}
+
+export default function PatternDocPage({ params }: PageProps) {
+  return (
+    <React.Suspense fallback={<DocPageSkeleton />}>
+      <PatternDocContent params={params} />
+    </React.Suspense>
   );
 }
