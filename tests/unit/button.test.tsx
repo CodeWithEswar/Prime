@@ -3,6 +3,17 @@ import { describe, it, expect } from "vitest";
 import { Button } from "@/components/ui/button";
 
 describe("Button Primitive & Solid Neumorphic Language", () => {
+  it("renders an anchor through asChild without passing sibling nodes to Slot", () => {
+    render(
+      <Button asChild>
+        <a href="#roadmap">Explore PRIME</a>
+      </Button>
+    );
+    expect(screen.getByRole("link", { name: "Explore PRIME" })).toHaveAttribute(
+      "href",
+      "#roadmap"
+    );
+  });
   it("renders with primary neumorphic classes by default", () => {
     render(<Button>Start Practice</Button>);
     const button = screen.getByRole("button", { name: /start practice/i });
