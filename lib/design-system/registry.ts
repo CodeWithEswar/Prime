@@ -106,16 +106,39 @@ Never brighten a card to gray to make it visible.`,
     category: "foundations",
     subcategory: "Tokens",
     description:
-      "Physical, mechanical transition curves and restrained timings (80ms - 240ms) with full prefers-reduced-motion support.",
+      "A centralized motion language governed by five principles: FAST, PHYSICAL, DIRECTIONAL, CONSISTENT, INTENTIONAL. Shared tokens for durations, easings, springs, and reduced motion.",
     status: "stable",
     primitive: "motion/react",
-    clientComponent: false,
+    clientComponent: true,
     sections: ["preview", "description", "usage", "prompt"],
-    aiPrompt: `PRIME motion is mechanical and tactile.
-Timings: instant 80ms, fast 120ms, normal 180ms, deliberate 240ms.
-Easings: snappy [0.16, 1, 0.3, 1], easeOut, easeInOut, tactile.
-Springs: tight (stiffness 450, damping 32), balanced (350, 28).
-Reduced motion: disable transforms and durations immediately if prefers-reduced-motion: reduce is detected.`,
+    dodont: [
+      {
+        do: "Use Framer Motion for transform, scale, layoutId, and spatial panels",
+        doDescription:
+          "Keep durations between 120–240ms with physical, quickly-settling springs.",
+        dont: "Animate text colors or borders with Framer Motion",
+        dontDescription:
+          "Use CSS transitions for simple colors, background, and borders.",
+      },
+      {
+        do: "Respect prefers-reduced-motion across every animated element",
+        doDescription:
+          "Strip translations and scale; keep instant opacity crossfades so focus remains immediate.",
+        dont: "Introduce custom uncoordinated easing curves or bouncy toy springs",
+        dontDescription:
+          "Always consume centralized motionDuration, motionEase, and motionSpring tokens.",
+      },
+    ],
+    aiPrompt: `PRIME Motion System Specification:
+Principles: FAST, PHYSICAL, DIRECTIONAL, CONSISTENT, INTENTIONAL.
+Always import from '@/lib/motion':
+- Durations: motionDuration (instant: 0.08, fast: 0.12, normal: 0.18, moderate: 0.24, slow: 0.32).
+- Easings: motionEase (standard [0.2,0,0,1], enter [0.16,1,0.3,1], exit [0.4,0,1,1], emphasized [0.22,1,0.36,1]).
+- Springs: motionSpring (press: 520/32, control: 420/34, panel: 340/36, gentle: 280/30).
+- Directional overlays: Tooltips (100–140ms, 3px offset), Popovers (140–180ms, 5px offset), Sheets (spatial origin from edge with panel spring).
+- Shared indicators: Use layoutId for active tabs, TOC indicator, and segmented controls.
+- Reduced motion: Always respect prefers-reduced-motion by removing translations and springs.
+Never introduce arbitrary uncoordinated animation constants or bouncy toy springs.`,
   },
   {
     slug: "iconography",
@@ -228,13 +251,15 @@ Stroke width: 1.5. Always pair icon-only buttons with an accessible aria-label.`
         dontDescription: "Lacks context and hurts accessibility.",
       },
     ],
-    aiPrompt: `Build the PRIME Button component using CVA, Radix Slot, and PRIME tokens.
-Primary: .btn-neumorphic-primary (Pure Red #ff0000 with white highlight gradient, 1px compression on active).
-Secondary: .btn-neumorphic-secondary (#050505 black surface with tactile white-alpha edge).
-Outline: transparent background with white-alpha border.
-Ghost: text-secondary hovering to white.
-Destructive: pure red soft background with red-alpha border.
-Focus ring: shadow-[0_0_0_1px_#000,0_0_0_3px_rgba(255,0,0,0.72)].`,
+    aiPrompt: `Build PRIME Button using CVA, Radix Slot, and PRIME tokens.
+Motion specifications:
+- Hover: 1px upward lift (-translate-y-[1px]).
+- Press: physical compression scale 0.985 + downward translation 1px (translate-y-[1px]).
+- Motion spring: press (520 stiffness, 32 damping).
+- Primary: .btn-neumorphic-primary (Pure Red #ff0000, white highlight gradient, tactile press).
+- Secondary: .btn-neumorphic-secondary (#050505 surface, tactile edge).
+- Focus ring: shadow-[0_0_0_1px_#000,0_0_0_3px_rgba(255,0,0,0.72)].
+- Reduced motion: keep pressed background color change; remove physical translate/scale.`,
   },
   {
     slug: "input",
@@ -501,7 +526,13 @@ Focus container ring: shadow-[0_0_0_1px_#000,0_0_0_3px_rgba(255,0,0,0.72)].`,
         description: "Line tab with red underline or segmented pill.",
       },
     ],
-    aiPrompt: `Build PRIME Tabs supporting variant='line' (bottom pure red glowing bar on active tab) and variant='segmented' (pills inside raised container).`,
+    aiPrompt: `Build PRIME Tabs with shared indicator gliding using motion/react.
+Motion specifications:
+- Active indicator: use motion.span with layoutId="prime-ds-active-tab" (or scoped ID) and motionSpring.control (420 stiffness, 34 damping).
+- Line variant: 2px pure red bar glides along bottom.
+- Segmented variant: elevated pill surface glides beneath active selection.
+- Tab content: subtle crossfade (opacity 0 -> 1, y 3px -> 0, 120–180ms).
+- Respect prefers-reduced-motion.`,
   },
   {
     slug: "badge",
@@ -742,7 +773,13 @@ Today: border #ff0000 outline. Selected: bg-[#ff0000] text-white. Completed: whi
         description: "Pixel distance from trigger.",
       },
     ],
-    aiPrompt: `Build PRIME Tooltip using Radix Tooltip. Content: #060606 surface with rgba(255,255,255,0.20) border and shadow-elevation-2.`,
+    aiPrompt: `Build PRIME Tooltip with subtle directional motion.
+Motion specifications:
+- Duration: 100–140ms (motionTransitions.tooltip).
+- Direction-aware offset: Top (y: 3px -> 0), Bottom (y: -3px -> 0), Left (x: 3px -> 0), Right (x: -3px -> 0).
+- Scale: 0.96 -> 1, opacity: 0 -> 1.
+- Delay: 150ms sensible trigger delay to prevent flashing.
+- Respect prefers-reduced-motion.`,
   },
   {
     slug: "dropdown-menu",
@@ -791,7 +828,12 @@ Today: border #ff0000 outline. Selected: bg-[#ff0000] text-white. Completed: whi
         description: "Trigger and popover body.",
       },
     ],
-    aiPrompt: `Build PRIME Popover using Radix Popover. Content: #060606 surface, white-alpha border rgba(255,255,255,0.20), shadow-elevation-3.`,
+    aiPrompt: `Build PRIME Popover using Radix Popover and PRIME motion tokens.
+Motion specifications:
+- Opening: 140–180ms duration (motionTransitions.popover), scale 0.98 -> 1, 4–6px directional offset emerging from trigger.
+- Closing: slightly faster reverse transition (120ms).
+- Content: #060606 surface, border rgba(255,255,255,0.12), shadow-elevation-3.
+- Respect prefers-reduced-motion.`,
   },
   {
     slug: "dialog",
@@ -819,7 +861,14 @@ Today: border #ff0000 outline. Selected: bg-[#ff0000] text-white. Completed: whi
         description: "Open state change handler.",
       },
     ],
-    aiPrompt: `Build PRIME Dialog with backdrop rgba(0,0,0,0.82), content #030303, border rgba(255,255,255,0.12), tactile Cancel01Icon close button, and focus trap.`,
+    aiPrompt: `Use the existing PRIME shared motion tokens for Dialog.
+Opening:
+- Backdrop: opacity 0 -> 1 (rgba(0,0,0,0.84), duration 200ms).
+- Dialog surface: opacity 0 -> 1, scale 0.98 -> 1, 8px -> 0 vertical movement (duration 200ms, emphasized ease).
+Closing:
+- Slightly faster reverse transition (duration 140ms, scale 1 -> 0.985, y 0 -> 4px).
+Preserve Radix focus management and Escape key behavior.
+Respect prefers-reduced-motion. Do not introduce custom animation constants.`,
   },
   {
     slug: "alert-dialog",
@@ -847,7 +896,13 @@ Today: border #ff0000 outline. Selected: bg-[#ff0000] text-white. Completed: whi
         description: "Open state change handler.",
       },
     ],
-    aiPrompt: `Build PRIME AlertDialog with backdrop rgba(0,0,0,0.82), content #030303, Cancel button (outline/secondary), and Action button (destructive).`,
+    aiPrompt: `Build PRIME Alert Dialog using the shared dialog motion coordinates.
+Opening:
+- Backdrop: opacity 0 -> 1 (rgba(0,0,0,0.84), 200ms).
+- Surface: scale 0.98 -> 1, y 8px -> 0 (200ms).
+Closing:
+- Faster reverse transition (140ms).
+Preserve Radix focus trapping and Escape behavior. Do not shake or pulse modal on danger; danger is communicated via copy and destructive button.`,
   },
   {
     slug: "sheet",
@@ -881,7 +936,14 @@ Today: border #ff0000 outline. Selected: bg-[#ff0000] text-white. Completed: whi
         description: "Open state change handler.",
       },
     ],
-    aiPrompt: `Build PRIME Sheet docked to the right on desktop, with slide-in animation, background #030303, and border rgba(255,255,255,0.12).`,
+    aiPrompt: `Build PRIME Sheet drawer with spatial continuity using shared motion tokens.
+Motion specifications:
+- Right sheet: x 100% -> 0 on open; 0 -> 100% on close.
+- Left sheet: x -100% -> 0 on open; 0 -> -100% on close.
+- Bottom sheet: y 100% -> 0 on open; 0 -> 100% on close.
+- Motion spring: panel (340 stiffness, 36 damping, 0.85 mass).
+- Never fade a directional sheet into the middle of the screen.
+- Respect prefers-reduced-motion with instant or opacity-only transitions.`,
   },
   {
     slug: "command",
@@ -909,7 +971,12 @@ Today: border #ff0000 outline. Selected: bg-[#ff0000] text-white. Completed: whi
         description: "Open state change handler.",
       },
     ],
-    aiPrompt: `Build PRIME Command palette using cmdk inside Dialog. Header with Search01Icon, grouped items with keyboard shortcuts, and pure red selected indicators.`,
+    aiPrompt: `Build PRIME Command palette with fast keyboard-first velocity.
+Motion specifications:
+- Opening: backdrop opacity 0 -> 1, surface scale 0.97 -> 1, y -8px -> 0 (180–220ms).
+- Filtering: smooth layout reflow without per-row stagger or layout thrashing.
+- Keyboard: ⌘K toggle, Arrow keys, Enter activation, Escape dismissal.
+- Respect prefers-reduced-motion.`,
   },
   {
     slug: "skeleton",

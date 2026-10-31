@@ -4,6 +4,8 @@ import * as React from "react";
 import { Tick02Icon, Copy01Icon } from "@hugeicons/core-free-icons";
 import { Icon } from "@/components/ui/icon";
 import { cn } from "@/lib/utils";
+import { motion, AnimatePresence } from "motion/react";
+import { motionDuration, motionEase, motionSpring } from "@/lib/motion";
 
 export interface ComponentPreviewProps {
   children: React.ReactNode;
@@ -74,13 +76,20 @@ export function ComponentPreview({
                 type="button"
                 onClick={() => setBgMode(mode)}
                 className={cn(
-                  "px-2 py-0.5 rounded-[2px] capitalize transition-colors",
+                  "relative px-2 py-0.5 rounded-[2px] capitalize transition-colors cursor-pointer",
                   bgMode === mode
-                    ? "bg-[#090909] text-white font-semibold shadow-xs"
+                    ? "text-white font-semibold shadow-xs"
                     : "text-[var(--text-tertiary)] hover:text-white"
                 )}
               >
-                {mode}
+                {bgMode === mode && (
+                  <motion.span
+                    layoutId="preview-bg-indicator"
+                    className="absolute inset-0 bg-[#090909] rounded-[2px]"
+                    transition={motionSpring.control}
+                  />
+                )}
+                <span className="relative z-10">{mode}</span>
               </button>
             ))}
           </div>
@@ -93,13 +102,20 @@ export function ComponentPreview({
                 type="button"
                 onClick={() => setViewport(vp)}
                 className={cn(
-                  "px-2 py-0.5 rounded-[2px] capitalize transition-colors",
+                  "relative px-2 py-0.5 rounded-[2px] capitalize transition-colors cursor-pointer",
                   viewport === vp
-                    ? "bg-[#090909] text-white font-semibold shadow-xs"
+                    ? "text-white font-semibold shadow-xs"
                     : "text-[var(--text-tertiary)] hover:text-white"
                 )}
               >
-                {vp}
+                {viewport === vp && (
+                  <motion.span
+                    layoutId="preview-vp-indicator"
+                    className="absolute inset-0 bg-[#090909] rounded-[2px]"
+                    transition={motionSpring.control}
+                  />
+                )}
+                <span className="relative z-10">{vp}</span>
               </button>
             ))}
           </div>
@@ -107,71 +123,88 @@ export function ComponentPreview({
           {/* Preview vs Code Tab Switcher */}
           {code && (
             <div className="flex items-center rounded-[var(--radius-xs)] border border-[rgba(255,255,255,0.08)] bg-[#000000] p-0.5 text-[10px] font-mono">
-              <button
-                type="button"
-                onClick={() => setActiveTab("preview")}
-                className={cn(
-                  "px-2 py-0.5 rounded-[2px] transition-colors",
-                  activeTab === "preview"
-                    ? "bg-[#090909] text-white font-semibold"
-                    : "text-[var(--text-tertiary)] hover:text-white"
-                )}
-              >
-                Preview
-              </button>
-              <button
-                type="button"
-                onClick={() => setActiveTab("code")}
-                className={cn(
-                  "px-2 py-0.5 rounded-[2px] transition-colors",
-                  activeTab === "code"
-                    ? "bg-[#090909] text-white font-semibold"
-                    : "text-[var(--text-tertiary)] hover:text-white"
-                )}
-              >
-                Code
-              </button>
+              {(["preview", "code"] as const).map((tab) => (
+                <button
+                  key={tab}
+                  type="button"
+                  onClick={() => setActiveTab(tab)}
+                  className={cn(
+                    "relative px-2 py-0.5 rounded-[2px] capitalize transition-colors cursor-pointer",
+                    activeTab === tab
+                      ? "text-white font-semibold"
+                      : "text-[var(--text-tertiary)] hover:text-white"
+                  )}
+                >
+                  {activeTab === tab && (
+                    <motion.span
+                      layoutId="preview-tab-indicator"
+                      className="absolute inset-0 bg-[#090909] rounded-[2px]"
+                      transition={motionSpring.control}
+                    />
+                  )}
+                  <span className="relative z-10">{tab}</span>
+                </button>
+              ))}
             </div>
           )}
         </div>
       </div>
 
-      {/* Main Preview / Code Stage */}
-      {activeTab === "preview" ? (
-        <div
-          className={cn(
-            "p-8 sm:p-12 min-h-[260px] flex items-center justify-center transition-colors relative overflow-x-auto",
-            bgClasses
-          )}
-          style={{
-            backgroundImage:
-              "radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px)",
-            backgroundSize: "16px 16px",
-          }}
-        >
-          <div
-            className={cn("mx-auto transition-all duration-200", viewportWidthClasses)}
+      {/* Main Preview / Code Stage with AnimatePresence */}
+      <AnimatePresence mode="wait">
+        {activeTab === "preview" ? (
+          <motion.div
+            key="stage-preview"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: motionDuration.fast, ease: motionEase.enter }}
+            className={cn(
+              "p-8 sm:p-12 min-h-[260px] flex items-center justify-center transition-colors relative overflow-x-auto",
+              bgClasses
+            )}
+            style={{
+              backgroundImage:
+                "radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px)",
+              backgroundSize: "16px 16px",
+            }}
           >
-            <div className="flex items-center justify-center w-full">{children}</div>
-          </div>
-        </div>
-      ) : (
-        <div className="relative p-4 bg-[#020202] text-xs font-mono overflow-x-auto prime-scrollbar text-white/90">
-          <button
-            type="button"
-            onClick={handleCopy}
-            className="absolute right-4 top-4 flex items-center gap-1.5 px-2 py-1 rounded-[var(--radius-xs)] border border-[rgba(255,255,255,0.12)] bg-[#060606] text-[11px] text-[var(--text-secondary)] hover:text-white transition-colors"
+            {/* Viewport Resizing container with layout animation (240–320ms) */}
+            <motion.div
+              layout
+              transition={{ duration: motionDuration.slow, ease: motionEase.standard }}
+              className={cn("mx-auto", viewportWidthClasses)}
+            >
+              <div className="flex items-center justify-center w-full">{children}</div>
+            </motion.div>
+          </motion.div>
+        ) : (
+          <motion.div
+            key="stage-code"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: motionDuration.fast, ease: motionEase.enter }}
+            className="relative p-4 bg-[#020202] text-xs font-mono overflow-x-auto prime-scrollbar text-white/90"
           >
-            <Icon
-              icon={copied ? Tick02Icon : Copy01Icon}
-              size={13}
-              className={copied ? "text-[#ff0000]" : ""}
-            />
-            <span>{copied ? "Copied" : "Copy Code"}</span>
-          </button>
-          <pre className="pr-20 leading-relaxed">{code}</pre>
-        </div>
-      )}
+            <button
+              type="button"
+              onClick={handleCopy}
+              className="absolute right-4 top-4 flex items-center gap-1.5 px-2.5 py-1 rounded-[var(--radius-xs)] border border-[rgba(255,255,255,0.12)] bg-[#060606] text-[11px] text-[var(--text-secondary)] hover:text-white transition-colors cursor-pointer"
+            >
+              <Icon
+                icon={copied ? Tick02Icon : Copy01Icon}
+                size={13}
+                className={copied ? "text-[#ff0000]" : "text-[var(--text-tertiary)]"}
+              />
+              <span>{copied ? "Copied" : "Copy TSX"}</span>
+            </button>
+            <pre className="pr-20">
+              <code>{code}</code>
+            </pre>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
