@@ -20,3 +20,4 @@ $$ LANGUAGE plpgsql SECURITY DEFINER;
 
 -- Comments establishing RLS expectations for future migrations
 COMMENT ON FUNCTION public.handle_updated_at IS 'PRIME trigger: automatically keeps updated_at synchronized to UTC timestamp';
+

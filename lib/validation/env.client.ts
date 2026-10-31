@@ -9,18 +9,20 @@ const clientEnvSchema = z.object({
     .string()
     .url("NEXT_PUBLIC_SUPABASE_URL must be a valid Supabase project URL")
     .default("http://127.0.0.1:54321"),
-  NEXT_PUBLIC_SUPABASE_ANON_KEY: z
-    .string()
-    .min(1, "NEXT_PUBLIC_SUPABASE_ANON_KEY is required")
-    .default("anon-key-placeholder-for-bootstrap"),
+  NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: z.string().optional(),
+  NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string().optional(),
 });
 
-export type ClientEnv = z.infer<typeof clientEnvSchema>;
+export type ClientEnv = z.infer<typeof clientEnvSchema> & {
+  NEXT_PUBLIC_SUPABASE_ANON_KEY: string;
+};
 
 function validateClientEnv(): ClientEnv {
   const result = clientEnvSchema.safeParse({
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
     NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
+    NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY:
+      process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY,
     NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
   });
 
@@ -32,7 +34,16 @@ function validateClientEnv(): ClientEnv {
     throw new Error("Client environment validation failed");
   }
 
-  return result.data;
+  const key =
+    result.data.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ||
+    result.data.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+    "anon-key-placeholder-for-bootstrap";
+
+  return {
+    ...result.data,
+    NEXT_PUBLIC_SUPABASE_ANON_KEY: key,
+    NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: key,
+  };
 }
 
 export const clientEnv = validateClientEnv();
