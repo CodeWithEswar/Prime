@@ -1,0 +1,30 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "prime-worker-reminders",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-23",
+  "vars": {
+    "ENVIRONMENT": "development",
+    "SUPABASE_URL": "http://127.0.0.1:54321",
+    "EMAIL_FROM": "PRIME <notifications@primeprep.app>",
+  },
+  "env": {
+    "preview": {
+      "vars": {
+        "ENVIRONMENT": "preview",
+      },
+    },
+    "production": {
+      "vars": {
+        "ENVIRONMENT": "production",
+      },
+    },
+  },
+  // Cron Triggers: Morning preparation & evening incomplete reminders
+  // "triggers": {
+  //   "crons": [
+  //     "0 6 * * *",  // Morning dispatch (6:00 AM UTC)
+  //     "0 20 * * *"  // Evening incomplete reminder (8:00 PM UTC)
+  //   ]
+  // }
+}
