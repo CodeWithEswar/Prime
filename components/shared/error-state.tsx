@@ -12,8 +12,8 @@ export interface ErrorStateProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 /**
- * PRIME Error State Primitive
- * Restrained error notification with pure red destructive indicator.
+ * PRIME Error State Primitive (Amendment Section 6)
+ * Pure black canvas with pure red accent border and white-alpha messaging.
  */
 export function ErrorState({
   title = "Something went wrong",
@@ -27,13 +27,17 @@ export function ErrorState({
     return (
       <div
         className={cn(
-          "flex items-center justify-between gap-3 p-3 rounded-[var(--radius-sm)] border border-[var(--destructive-border)] bg-[var(--destructive-soft)] text-xs text-red-300",
+          "flex items-center justify-between gap-3 p-3 rounded-[var(--radius-sm)] border border-[var(--prime-accent-border)] bg-[rgba(255,0,0,0.04)] text-xs text-white",
           className
         )}
         {...props}
       >
         <div className="flex items-center gap-2">
-          <Icon icon={AlertCircleIcon} size={15} className="text-red-400 shrink-0" />
+          <Icon
+            icon={AlertCircleIcon}
+            size={15}
+            className="text-[var(--accent)] shrink-0"
+          />
           <span>{message}</span>
         </div>
         {onRetry && (
@@ -41,7 +45,7 @@ export function ErrorState({
             size="sm"
             variant="ghost"
             onClick={onRetry}
-            className="h-6 px-2 text-xs text-red-300 hover:text-white hover:bg-red-950/40"
+            className="h-6 px-2 text-xs text-white hover:bg-[rgba(255,0,0,0.12)]"
           >
             Retry
           </Button>
@@ -53,12 +57,12 @@ export function ErrorState({
   return (
     <div
       className={cn(
-        "flex flex-col items-center justify-center p-8 text-center rounded-[var(--radius-md)] border border-red-900/40 bg-red-950/15",
+        "flex flex-col items-center justify-center p-8 text-center rounded-[var(--radius-md)] border border-[var(--prime-accent-border)] bg-[rgba(255,0,0,0.03)]",
         className
       )}
       {...props}
     >
-      <div className="flex h-11 w-11 items-center justify-center rounded-full bg-red-950/40 border border-red-900/60 text-red-400 mb-3">
+      <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[rgba(255,0,0,0.08)] border border-[var(--prime-accent-border)] text-[var(--accent)] mb-3">
         <Icon icon={AlertCircleIcon} size={20} />
       </div>
 
@@ -66,12 +70,7 @@ export function ErrorState({
       <p className="mt-1 max-w-sm text-xs text-[var(--text-secondary)]">{message}</p>
 
       {onRetry && (
-        <Button
-          size="sm"
-          variant="secondary"
-          onClick={onRetry}
-          className="mt-4 border-red-900/50 hover:border-red-800"
-        >
+        <Button size="sm" variant="secondary" onClick={onRetry} className="mt-4">
           Try Again
         </Button>
       )}

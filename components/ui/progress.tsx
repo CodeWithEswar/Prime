@@ -11,6 +11,10 @@ export interface ProgressProps extends React.HTMLAttributes<HTMLDivElement> {
   showLabel?: boolean;
 }
 
+/**
+ * PRIME Progress Bar Primitive (Amendment Section 16)
+ * Pure white-alpha track (rgba(255,255,255,0.07)) with flat Pure Red active fill (#FF0000).
+ */
 export const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
   (
     {
@@ -59,11 +63,11 @@ export const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
               <div
                 key={index}
                 className={cn(
-                  "flex-1 rounded-[1px] transition-colors duration-200",
+                  "flex-1 rounded-[1px] transition-colors duration-150",
                   sizeClasses,
                   index < activeSegments
-                    ? "bg-[var(--accent)] shadow-[0_0_6px_rgba(255,0,0,0.4)]"
-                    : "bg-[var(--surface-raised)] border border-[var(--border-subtle)]"
+                    ? "bg-[var(--accent)]"
+                    : "bg-[rgba(255,255,255,0.07)]"
                 )}
               />
             ))}
@@ -76,7 +80,7 @@ export const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
       <div className="w-full space-y-1.5" ref={ref} {...props}>
         {showLabel && (
           <div className="flex justify-between items-center text-xs">
-            <span className="text-[var(--text-secondary)]">Progress</span>
+            <span className="text-[var(--text-secondary)]">Preparation Progress</span>
             <span className="text-white font-mono font-medium">
               {Math.round(percentage)}%
             </span>
@@ -88,14 +92,14 @@ export const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
           aria-valuemin={0}
           aria-valuemax={max}
           className={cn(
-            "relative w-full overflow-hidden rounded-full bg-[var(--surface-raised)] border border-[var(--border-subtle)]",
+            "relative w-full overflow-hidden rounded-[var(--radius-xs)] bg-[rgba(255,255,255,0.07)]",
             sizeClasses,
             className
           )}
         >
           <div
             className={cn(
-              "h-full w-full flex-1 bg-[var(--accent)] transition-all duration-300 ease-out shadow-[0_0_8px_rgba(255,0,0,0.5)]",
+              "h-full w-full flex-1 bg-[var(--accent)] transition-all duration-200 ease-out",
               indicatorClassName
             )}
             style={{ transform: `translateX(-${100 - percentage}%)` }}

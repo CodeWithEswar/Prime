@@ -14,14 +14,14 @@ export interface MetricStripProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 /**
- * PRIME Metric Strip Primitive
- * Minimal-chrome horizontal key performance indicator strip.
+ * PRIME Metric Strip Primitive (Amendment Section 2)
+ * Pure black horizontal strip separated with thin white-alpha borders.
  */
 export function MetricStrip({ items, className, ...props }: MetricStripProps) {
   return (
     <div
       className={cn(
-        "flex flex-wrap items-center divide-y md:divide-y-0 md:divide-x divide-[var(--border-subtle)] rounded-[var(--radius-md)] border border-[var(--border-default)] bg-[var(--surface-base)] shadow-elevation-1",
+        "flex flex-wrap items-center divide-y md:divide-y-0 md:divide-x divide-[rgba(255,255,255,0.06)] rounded-[var(--radius-md)] border border-[var(--border-default)] bg-[var(--prime-canvas)] shadow-elevation-1",
         className
       )}
       {...props}
@@ -44,7 +44,7 @@ export function MetricStrip({ items, className, ...props }: MetricStripProps) {
               </span>
             )}
             {item.change && (
-              <span className="ml-auto font-mono text-[10px] text-[var(--success-foreground)]">
+              <span className="ml-auto font-mono text-[10px] text-white opacity-70">
                 {item.change}
               </span>
             )}

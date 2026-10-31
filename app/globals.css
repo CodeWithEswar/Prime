@@ -6,14 +6,13 @@
     sans-serif;
   --font-mono: var(--font-geist-mono), monospace;
 
-  /* PRIME Pure Black & Pure Red Primitive Mapping */
+  /* PRIME Pure Black × Pure Red × White Primitive Mapping */
   --color-canvas: var(--prime-canvas);
-  --color-surface-base: var(--prime-surface-1);
-  --color-surface-raised: var(--prime-surface-2);
-  --color-surface-elevated: var(--prime-surface-3);
-  --color-surface-overlay: var(--prime-surface-4);
+  --color-surface-base: var(--prime-surface);
+  --color-surface-raised: var(--prime-surface-raised);
+  --color-surface-elevated: var(--prime-surface-elevated);
+  --color-surface-interactive: var(--prime-surface-interactive);
   --color-surface-hover: var(--prime-surface-hover);
-  --color-surface-active: var(--prime-surface-active);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -39,25 +38,9 @@
 
   --color-accent: var(--accent);
   --color-accent-soft: var(--accent-soft);
-  --color-accent-subtle: var(--accent-subtle);
+  --color-accent-muted: var(--accent-muted);
   --color-accent-border: var(--accent-border);
   --color-accent-foreground: var(--accent-foreground);
-
-  --color-success: var(--success);
-  --color-success-soft: var(--success-soft);
-  --color-success-border: var(--success-border);
-
-  --color-warning: var(--warning);
-  --color-warning-soft: var(--warning-soft);
-  --color-warning-border: var(--warning-border);
-
-  --color-destructive: var(--destructive);
-  --color-destructive-soft: var(--destructive-soft);
-  --color-destructive-border: var(--destructive-border);
-
-  --color-info: var(--info);
-  --color-info-soft: var(--info-soft);
-  --color-info-border: var(--info-border);
 
   --radius-xs: 4px;
   --radius-sm: 6px;
@@ -68,34 +51,45 @@
 
 :root {
   /* =========================================================================
-   * 1. PRIME Primitive Palette (Pure Black #000000 & Pure Red #FF0000)
+   * 1. PRIME Canonical Brand Primitives (Amendment: Pure Black × Pure Red × White)
    * ========================================================================= */
-  --prime-canvas: #000000; /* Pure True Void Black */
-
-  --prime-surface-1: #070708; /* Level 1: Base grouping surface */
-  --prime-surface-2: #0c0c0d; /* Level 2: Raised card surface */
-  --prime-surface-3: #111113; /* Level 3: Elevated popover / menu surface */
-  --prime-surface-4: #161619; /* Level 4: Modal overlay surface */
-  --prime-surface-hover: #1a1a1e;
-  --prime-surface-active: #202024;
-
-  --prime-border-subtle: #141416;
-  --prime-border-default: #222225;
-  --prime-border-strong: #333337;
-
-  --prime-text-primary: #ffffff;
-  --prime-text-secondary: #a3a3a8;
-  --prime-text-tertiary: #717178;
-  --prime-text-disabled: #4a4a50;
-
-  /* Pure Performance Red */
+  --prime-black: #000000;
   --prime-red: #ff0000;
-  --prime-red-hover: #ff2626;
-  --prime-red-active: #d60000;
+  --prime-white: #ffffff;
 
-  --prime-red-soft: rgba(255, 0, 0, 0.12);
-  --prime-red-subtle: rgba(255, 0, 0, 0.06);
-  --prime-red-border: rgba(255, 0, 0, 0.32);
+  /* Canvas */
+  --prime-canvas: #000000;
+
+  /* Black surfaces (narrow black range: #000000 - #0D0D0D) */
+  --prime-surface: #000000;
+  --prime-surface-raised: #030303;
+  --prime-surface-elevated: #060606;
+  --prime-surface-interactive: #090909;
+  --prime-surface-hover: #0d0d0d;
+
+  /* Borders (white alpha edges) */
+  --prime-border-subtle: rgba(255, 255, 255, 0.07);
+  --prime-border-default: rgba(255, 255, 255, 0.12);
+  --prime-border-strong: rgba(255, 255, 255, 0.2);
+
+  /* Text (white and white alpha) */
+  --prime-text-primary: #ffffff;
+  --prime-text-secondary: rgba(255, 255, 255, 0.68);
+  --prime-text-tertiary: rgba(255, 255, 255, 0.46);
+  --prime-text-disabled: rgba(255, 255, 255, 0.28);
+
+  /* Pure red accent */
+  --prime-accent: #ff0000;
+  --prime-accent-hover: #ff1a1a;
+  --prime-accent-active: #e60000;
+
+  /* Red transparency */
+  --prime-accent-soft: rgba(255, 0, 0, 0.12);
+  --prime-accent-muted: rgba(255, 0, 0, 0.07);
+  --prime-accent-border: rgba(255, 0, 0, 0.35);
+
+  /* Focus */
+  --prime-focus: #ff0000;
 
   /* =========================================================================
    * 2. Semantic Token Layer
@@ -103,14 +97,14 @@
   --background: var(--prime-canvas);
   --foreground: var(--prime-text-primary);
 
-  --surface-base: var(--prime-surface-1);
-  --surface-raised: var(--prime-surface-2);
-  --surface-elevated: var(--prime-surface-3);
-  --surface-overlay: var(--prime-surface-4);
+  --surface-base: var(--prime-surface);
+  --surface-raised: var(--prime-surface-raised);
+  --surface-elevated: var(--prime-surface-elevated);
+  --surface-overlay: var(--prime-surface-raised);
+  --surface-interactive: var(--prime-surface-interactive);
   --surface-hover: var(--prime-surface-hover);
-  --surface-active: var(--prime-surface-active);
 
-  --surface: var(--prime-surface-1);
+  --surface: var(--prime-surface);
 
   --border-subtle: var(--prime-border-subtle);
   --border-default: var(--prime-border-default);
@@ -122,50 +116,33 @@
   --text-tertiary: var(--prime-text-tertiary);
   --text-disabled: var(--prime-text-disabled);
 
-  --primary: var(--prime-red);
-  --primary-hover: var(--prime-red-hover);
-  --primary-active: var(--prime-red-active);
+  --primary: var(--prime-accent);
+  --primary-hover: var(--prime-accent-hover);
+  --primary-active: var(--prime-accent-active);
   --primary-foreground: #ffffff;
 
-  --secondary: var(--prime-surface-2);
+  --secondary: var(--prime-surface-raised);
   --secondary-hover: var(--prime-surface-hover);
   --secondary-foreground: var(--prime-text-primary);
 
-  --accent: var(--prime-red);
-  --accent-hover: var(--prime-red-hover);
-  --accent-active: var(--prime-red-active);
-  --accent-soft: var(--prime-red-soft);
-  --accent-subtle: var(--prime-red-subtle);
-  --accent-border: var(--prime-red-border);
+  --accent: var(--prime-accent);
+  --accent-hover: var(--prime-accent-hover);
+  --accent-active: var(--prime-accent-active);
+  --accent-soft: var(--prime-accent-soft);
+  --accent-muted: var(--prime-accent-muted);
+  --accent-subtle: var(--prime-accent-muted);
+  --accent-border: var(--prime-accent-border);
   --accent-foreground: #ffffff;
 
-  --accent-muted: var(--prime-red-soft);
-
-  --muted: var(--prime-surface-2);
+  --muted: var(--prime-surface-raised);
   --muted-foreground: var(--prime-text-secondary);
 
-  /* Muted semantic feedback (never competes with pure red) */
-  --success: #30a46c;
-  --success-soft: rgba(48, 164, 108, 0.12);
-  --success-border: rgba(48, 164, 108, 0.28);
-  --success-foreground: #45c486;
+  --destructive: var(--prime-accent);
+  --destructive-soft: var(--prime-accent-soft);
+  --destructive-border: var(--prime-accent-border);
+  --destructive-foreground: #ffffff;
 
-  --warning: #f5a524;
-  --warning-soft: rgba(245, 165, 36, 0.12);
-  --warning-border: rgba(245, 165, 36, 0.28);
-  --warning-foreground: #ffbe4d;
-
-  --destructive: #ff0000;
-  --destructive-soft: rgba(255, 0, 0, 0.15);
-  --destructive-border: rgba(255, 0, 0, 0.35);
-  --destructive-foreground: #ff6666;
-
-  --info: #3b82f6;
-  --info-soft: rgba(59, 130, 246, 0.12);
-  --info-border: rgba(59, 130, 246, 0.28);
-  --info-foreground: #60a5fa;
-
-  --focus-ring: var(--prime-red);
+  --focus-ring: var(--prime-focus);
 
   /* Radius System (Restrained: 4px - 12px) */
   --radius-xs: 4px;
@@ -197,107 +174,124 @@ body {
 
 /* Custom Selection in Pure Red Accent Soft */
 ::selection {
-  background: var(--accent-soft);
+  background: var(--prime-accent-soft);
   color: #ffffff;
 }
 
 /* =========================================================================
- * 3. Elevation & Layered Shadows (Pure Black-First Depth)
+ * 3. Elevation & Depth (Nearly Black with Subtle Inner Edges)
  * ========================================================================= */
 .shadow-elevation-1 {
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.03) inset,
-    0 1px 3px rgba(0, 0, 0, 0.7);
+    inset 0 1px 0 rgba(255, 255, 255, 0.025),
+    0 1px 2px rgba(0, 0, 0, 0.8);
 }
 
 .shadow-elevation-2 {
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.04) inset,
-    0 2px 8px rgba(0, 0, 0, 0.75),
-    0 8px 24px rgba(0, 0, 0, 0.5);
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 2px 5px rgba(0, 0, 0, 0.85),
+    0 6px 16px rgba(0, 0, 0, 0.6);
 }
 
 .shadow-elevation-3 {
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.05) inset,
-    0 4px 16px rgba(0, 0, 0, 0.8),
-    0 16px 40px rgba(0, 0, 0, 0.65);
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 4px 12px rgba(0, 0, 0, 0.9),
+    0 12px 32px rgba(0, 0, 0, 0.75);
 }
 
 .shadow-elevation-4 {
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.06) inset,
-    0 8px 32px rgba(0, 0, 0, 0.9),
-    0 24px 64px rgba(0, 0, 0, 0.85);
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 8px 24px rgba(0, 0, 0, 0.95),
+    0 20px 48px rgba(0, 0, 0, 0.9);
+}
+
+/* Focus Ring Specification (Section 20 of Amendment) */
+.focus-ring-prime:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 1px #000000,
+    0 0 0 3px rgba(255, 0, 0, 0.72);
 }
 
 /* =========================================================================
- * 4. Solid Precision Neumorphic Controls (Instrument Panel Feel)
+ * 4. Solid Neumorphic Controls (Amendment Sections 10, 11, 12, 13)
  * ========================================================================= */
+
+/* Primary Solid Pure Red Button */
 .btn-neumorphic-primary {
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0) 100%),
-    var(--prime-red);
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.14) 0%,
+      rgba(255, 255, 255, 0.03) 18%,
+      rgba(0, 0, 0, 0.05) 100%
+    ),
+    #ff0000;
   color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.28),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.45),
-    0 1px 2px rgba(0, 0, 0, 0.7),
-    0 4px 14px rgba(255, 0, 0, 0.25);
-  transition: all 120ms cubic-bezier(0.16, 1, 0.3, 1);
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.25),
+    0 1px 1px rgba(0, 0, 0, 0.9),
+    0 5px 12px rgba(0, 0, 0, 0.45);
+  transition: all 100ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-neumorphic-primary:hover {
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 100%),
-    var(--prime-red-hover);
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.18) 0%,
+      rgba(255, 255, 255, 0.05) 18%,
+      rgba(0, 0, 0, 0.05) 100%
+    ),
+    #ff1a1a;
   border-color: rgba(255, 255, 255, 0.22);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.35),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.5),
-    0 2px 4px rgba(0, 0, 0, 0.8),
-    0 6px 18px rgba(255, 0, 0, 0.35);
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.25),
+    0 2px 4px rgba(0, 0, 0, 0.9),
+    0 6px 14px rgba(0, 0, 0, 0.5);
 }
 
 .btn-neumorphic-primary:active {
-  background: var(--prime-red-active);
+  background: #e60000;
   transform: translateY(1px);
   box-shadow:
     inset 0 2px 4px rgba(0, 0, 0, 0.7),
     inset 0 -1px 0 rgba(255, 255, 255, 0.05);
 }
 
+/* Secondary Solid Black Neumorphic Button */
 .btn-neumorphic-secondary {
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 100%),
-    var(--prime-surface-2);
-  color: var(--prime-text-primary);
-  border: 1px solid var(--prime-border-default);
+  background: #050505;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.11);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.08),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.7),
-    0 1px 2px rgba(0, 0, 0, 0.6);
-  transition: all 120ms cubic-bezier(0.16, 1, 0.3, 1);
+    inset 0 1px 0 rgba(255, 255, 255, 0.045),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.85),
+    0 2px 5px rgba(0, 0, 0, 0.65);
+  transition: all 100ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-neumorphic-secondary:hover {
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 100%),
-    var(--prime-surface-hover);
-  border-color: var(--prime-border-strong);
+  background: #090909;
+  border-color: rgba(255, 255, 255, 0.16);
   color: #ffffff;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.12),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.75),
-    0 2px 5px rgba(0, 0, 0, 0.7);
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.85),
+    0 3px 6px rgba(0, 0, 0, 0.75);
 }
 
 .btn-neumorphic-secondary:active {
-  background: var(--prime-surface-active);
+  background: #020202;
   transform: translateY(1px);
   box-shadow:
-    inset 0 2px 3px rgba(0, 0, 0, 0.8),
+    inset 0 2px 4px rgba(0, 0, 0, 0.9),
     inset 0 -1px 0 rgba(255, 255, 255, 0.02);
 }
 

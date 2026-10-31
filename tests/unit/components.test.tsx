@@ -10,8 +10,8 @@ import { RevisionRow } from "@/components/shared/revision-row";
 import { Calendar } from "@/components/ui/calendar";
 import { Badge } from "@/components/ui/badge";
 
-describe("PRIME Design System Components", () => {
-  describe("StatusBadge", () => {
+describe("PRIME Design System Components (Pure Black × Pure Red)", () => {
+  describe("StatusBadge (Amendment Section 17)", () => {
     it("renders needs_revision with pure red accent class", () => {
       render(<StatusBadge status="needs_revision" />);
       const badge = screen.getByText("Needs Revision");
@@ -19,16 +19,22 @@ describe("PRIME Design System Components", () => {
       expect(badge.closest("span")).toHaveClass("text-[var(--accent)]");
     });
 
-    it("renders solved status with success styling", () => {
+    it("renders solved status with white monochromatic styling", () => {
       render(<StatusBadge status="solved" />);
       const badge = screen.getByText("Solved");
       expect(badge).toBeInTheDocument();
-      expect(badge.closest("span")).toHaveClass("text-[var(--success-foreground)]");
+      expect(badge.closest("span")).toHaveClass("text-white");
     });
 
-    it("renders learning status with info styling", () => {
+    it("renders learning status with white-alpha styling", () => {
       render(<StatusBadge status="learning" />);
       const badge = screen.getByText("Learning");
+      expect(badge).toBeInTheDocument();
+    });
+
+    it("renders not_started with 40% white-alpha styling", () => {
+      render(<StatusBadge status="not_started" />);
+      const badge = screen.getByText("Not Started");
       expect(badge).toBeInTheDocument();
     });
   });
@@ -92,10 +98,10 @@ describe("PRIME Design System Components", () => {
       expect(handleToggle).toHaveBeenCalledWith(true);
     });
 
-    it("renders active highlight styling", () => {
+    it("renders active highlight styling with pure red edge", () => {
       const { container } = render(<TaskRow title="Active Task" active={true} />);
       const row = container.firstChild as HTMLElement;
-      expect(row).toHaveClass("border-[var(--accent-border)]");
+      expect(row).toHaveClass("border-[var(--prime-accent-border)]");
     });
   });
 
@@ -155,16 +161,16 @@ describe("PRIME Design System Components", () => {
     });
   });
 
-  describe("Badge Variants", () => {
-    it("renders easy, medium, and hard difficulty badges", () => {
+  describe("Monochromatic Difficulty Badges (Amendment Section 18)", () => {
+    it("renders easy, medium, and hard difficulty badges without green/yellow/red", () => {
       const { rerender } = render(<Badge variant="easy">EASY</Badge>);
-      expect(screen.getByText("EASY")).toHaveClass("text-[var(--success-foreground)]");
+      expect(screen.getByText("EASY")).toHaveClass("font-normal");
 
       rerender(<Badge variant="medium">MEDIUM</Badge>);
-      expect(screen.getByText("MEDIUM")).toHaveClass("text-[var(--warning-foreground)]");
+      expect(screen.getByText("MEDIUM")).toHaveClass("font-medium");
 
       rerender(<Badge variant="hard">HARD</Badge>);
-      expect(screen.getByText("HARD")).toHaveClass("text-red-400");
+      expect(screen.getByText("HARD")).toHaveClass("font-semibold");
     });
   });
 });

@@ -19,8 +19,8 @@ export interface TaskRowProps extends Omit<
 }
 
 /**
- * PRIME Task Row Primitive
- * Precision actionable task item with interactive states.
+ * PRIME Task Row Primitive (Amendment Section 21)
+ * Visually black surface with red indicator and red-alpha edge when active.
  */
 export function TaskRow({
   title,
@@ -37,16 +37,20 @@ export function TaskRow({
   return (
     <div
       className={cn(
-        "group flex items-center justify-between gap-3 px-3.5 py-2.5 rounded-[var(--radius-sm)] border bg-[var(--surface-base)] transition-all duration-120",
+        "group relative flex items-center justify-between gap-3 px-3.5 py-2.5 rounded-[var(--radius-sm)] border transition-all duration-100",
         active
-          ? "border-[var(--accent-border)] bg-[var(--accent-subtle)] shadow-[0_0_12px_rgba(255,0,0,0.1)]"
-          : "border-[var(--border-subtle)] hover:border-[var(--border-default)] hover:bg-[var(--surface-hover)]",
-        completed && "opacity-75 bg-[var(--surface-raised)]",
-        disabled && "pointer-events-none opacity-40",
+          ? "border-[var(--prime-accent-border)] bg-[rgba(255,0,0,0.04)] shadow-elevation-1"
+          : "border-[var(--border-subtle)] bg-[var(--prime-canvas)] hover:border-[var(--border-default)] hover:bg-[var(--surface-hover)]",
+        completed && "opacity-60 bg-[var(--surface-raised)]",
+        disabled && "pointer-events-none opacity-30",
         className
       )}
       {...props}
     >
+      {active && (
+        <span className="absolute left-0 top-1.5 bottom-1.5 w-0.5 rounded-full bg-[var(--accent)]" />
+      )}
+
       <div className="flex items-center gap-3 min-w-0">
         <Checkbox
           checked={completed}
@@ -59,10 +63,10 @@ export function TaskRow({
             className={cn(
               "text-sm font-medium truncate transition-colors",
               completed
-                ? "line-through text-[var(--text-tertiary)]"
+                ? "line-through text-[var(--text-disabled)]"
                 : active
                   ? "text-white font-semibold"
-                  : "text-[var(--foreground)]"
+                  : "text-white"
             )}
           >
             {title}

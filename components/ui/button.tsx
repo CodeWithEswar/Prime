@@ -4,24 +4,24 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all duration-150 cursor-pointer disabled:pointer-events-none disabled:opacity-40 disabled:cursor-not-allowed select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]/50 focus-visible:ring-offset-1 focus-visible:ring-offset-[var(--background)]",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all duration-100 cursor-pointer disabled:pointer-events-none disabled:opacity-30 disabled:cursor-not-allowed select-none focus-visible:outline-none focus-visible:shadow-[0_0_0_1px_#000000,0_0_0_3px_rgba(255,0,0,0.72)]",
   {
     variants: {
       variant: {
-        // PRIME Precision Hardware Control - Solid Neumorphic Primary (Pure Red #FF0000)
+        // PRIME Solid Precision Neumorphic Primary (Pure Red #FF0000)
         primary:
           "btn-neumorphic-primary rounded-[var(--radius-sm)] font-semibold text-white",
-        // Solid Elevated Secondary Surface Control
+        // Solid Black Neumorphic Secondary (#050505 with physical edge depth)
         secondary: "btn-neumorphic-secondary rounded-[var(--radius-sm)]",
-        // Clean Minimal Outline
+        // Clean Minimal Outline (White-alpha border)
         outline:
-          "border border-[var(--border)] bg-transparent text-[var(--foreground)] hover:bg-[var(--surface-hover)] hover:border-[var(--border-strong)] rounded-[var(--radius-sm)] active:translate-y-[0.5px]",
+          "border border-[var(--border-default)] bg-transparent text-[var(--foreground)] hover:bg-[var(--surface-hover)] hover:border-[var(--border-strong)] rounded-[var(--radius-sm)] active:translate-y-[0.5px]",
         // Restrained Ghost
         ghost:
-          "text-[var(--text-secondary)] hover:text-[var(--foreground)] hover:bg-[var(--surface-hover)] rounded-[var(--radius-sm)]",
+          "text-[var(--text-secondary)] hover:text-white hover:bg-[var(--surface-hover)] rounded-[var(--radius-sm)]",
         // Destructive Precision Control
         destructive:
-          "bg-[var(--destructive-soft)] text-red-400 border border-[var(--destructive-border)] hover:bg-[var(--destructive-border)]/30 active:bg-[var(--destructive-soft)]/80 rounded-[var(--radius-sm)] shadow-[0_1px_2px_rgba(0,0,0,0.5)]",
+          "bg-[var(--prime-accent-soft)] text-white border border-[var(--prime-accent-border)] hover:bg-[var(--prime-accent-border)]/50 active:bg-[var(--prime-accent)] rounded-[var(--radius-sm)]",
         // Subtle Link Variant
         link: "text-[var(--accent)] underline-offset-4 hover:underline p-0 h-auto font-normal",
       },

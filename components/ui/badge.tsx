@@ -15,17 +15,11 @@ const badgeVariants = cva(
           "border border-[var(--border-default)] text-[var(--text-secondary)] bg-transparent",
         accent:
           "bg-[var(--accent-soft)] text-[var(--accent)] border border-[var(--accent-border)] font-semibold",
-        success:
-          "bg-[var(--success-soft)] text-[var(--success-foreground)] border border-[var(--success-border)]",
-        warning:
-          "bg-[var(--warning-soft)] text-[var(--warning-foreground)] border border-[var(--warning-border)]",
-        destructive:
-          "bg-[var(--destructive-soft)] text-red-400 border border-[var(--destructive-border)]",
-        // DSA Sheet Difficulty Variants
-        easy: "bg-[var(--success-soft)] text-[var(--success-foreground)] border border-[var(--success-border)]",
+        // Monochromatic Difficulty System (Amendment Section 18)
+        easy: "bg-[var(--surface-base)] text-[var(--text-secondary)] border border-[var(--border-subtle)] font-normal",
         medium:
-          "bg-[var(--warning-soft)] text-[var(--warning-foreground)] border border-[var(--warning-border)]",
-        hard: "bg-[var(--destructive-soft)] text-red-400 border border-[var(--destructive-border)] font-semibold",
+          "bg-[var(--surface-raised)] text-white border border-[var(--border-default)] font-medium",
+        hard: "bg-[var(--surface-elevated)] text-white border border-[var(--border-strong)] font-semibold",
       },
     },
     defaultVariants: {

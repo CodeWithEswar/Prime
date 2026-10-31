@@ -9,20 +9,20 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
 export const Card = React.forwardRef<HTMLDivElement, CardProps>(
   ({ className, elevation = "raised", interactive = false, ...props }, ref) => {
     const elevationClasses = {
-      base: "bg-[var(--surface-base)] border-[var(--border-subtle)] shadow-elevation-1",
+      base: "bg-[var(--prime-surface)] border-[var(--border-subtle)] shadow-elevation-1",
       surface:
-        "bg-[var(--surface-base)] border-[var(--border-subtle)] shadow-elevation-1",
+        "bg-[var(--prime-surface)] border-[var(--border-subtle)] shadow-elevation-1",
       raised:
-        "bg-[var(--surface-raised)] border-[var(--border-default)] shadow-elevation-2",
+        "bg-[var(--prime-surface-raised)] border-[var(--border-default)] shadow-elevation-2",
       elevated:
-        "bg-[var(--surface-elevated)] border-[var(--border-strong)] shadow-elevation-3",
+        "bg-[var(--prime-surface-elevated)] border-[var(--border-strong)] shadow-elevation-3",
     };
 
     return (
       <div
         ref={ref}
         className={cn(
-          "rounded-[var(--radius-md)] border text-[var(--foreground)] transition-all duration-150",
+          "rounded-[var(--radius-md)] border text-[var(--foreground)] transition-all duration-100",
           elevationClasses[elevation],
           interactive &&
             "hover:border-[var(--border-strong)] hover:bg-[var(--surface-hover)] cursor-pointer active:translate-y-[0.5px]",

@@ -19,8 +19,8 @@ export interface ProblemRowProps extends Omit<
 }
 
 /**
- * PRIME DSA Problem Row Primitive
- * High-density interview problem representation with external destination badge.
+ * PRIME DSA Problem Row Primitive (Amendment Section 18)
+ * Monochromatic difficulty hierarchy on pure black canvas with external link.
  */
 export function ProblemRow({
   id,
@@ -36,7 +36,7 @@ export function ProblemRow({
   return (
     <div
       className={cn(
-        "group flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 rounded-[var(--radius-sm)] border border-[var(--border-subtle)] bg-[var(--surface-base)] hover:border-[var(--border-default)] hover:bg-[var(--surface-hover)] transition-all duration-120",
+        "group flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 rounded-[var(--radius-sm)] border border-[var(--border-subtle)] bg-[var(--prime-canvas)] hover:border-[var(--border-default)] hover:bg-[var(--surface-hover)] transition-all duration-100",
         className
       )}
       {...props}
