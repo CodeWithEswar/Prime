@@ -118,9 +118,7 @@ async function PatternDocContent({ params }: PageProps) {
       </div>
 
       {/* Right Context Rail (Sticky TOC + Info Card) */}
-      <div className="hidden xl:block w-56 shrink-0 sticky top-20">
-        <DesignSystemContextRail item={item} />
-      </div>
+      <DesignSystemContextRail item={item} />
     </div>
   );
 }

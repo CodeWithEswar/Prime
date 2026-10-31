@@ -11,6 +11,7 @@ import { DesignSystemBreadcrumb } from "@/components/design-system/shared/breadc
 import { DesignSystemPrevNext } from "@/components/design-system/shared/prev-next";
 import { DesignSystemContextRail } from "@/components/design-system/shell/context-rail";
 import { PreviewRenderer } from "@/components/design-system/preview/preview-renderer";
+import { DoDontSection } from "@/components/design-system/dodont/dodont-section";
 import { PromptSection } from "@/components/design-system/prompt/prompt-section";
 import { DocPageSkeleton } from "@/components/design-system/shared/doc-skeleton";
 
@@ -94,21 +95,24 @@ async function FoundationDocContent({ params }: PageProps) {
           </p>
         </section>
 
-        {/* 3. Reusable AI Agent Implementation Prompt */}
+        {/* 3. Usage Guidelines (DO / DON'T) */}
+        {item.dodont && item.dodont.length > 0 && (
+          <DoDontSection dodont={item.dodont} className="scroll-mt-20 space-y-3" />
+        )}
+
+        {/* 4. Reusable AI Agent Implementation Prompt */}
         <PromptSection
           prompt={item.aiPrompt}
           componentName={item.name}
           className="scroll-mt-20"
         />
 
-        {/* 4. Prev / Next Navigation */}
+        {/* 5. Prev / Next Navigation */}
         <DesignSystemPrevNext prev={prev} next={next} />
       </div>
 
       {/* Right Context Rail (Sticky TOC + Info Card) */}
-      <div className="hidden xl:block w-56 shrink-0 sticky top-20">
-        <DesignSystemContextRail item={item} />
-      </div>
+      <DesignSystemContextRail item={item} />
     </div>
   );
 }
