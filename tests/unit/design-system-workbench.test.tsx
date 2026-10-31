@@ -17,20 +17,20 @@ import { DoDontSection } from "@/components/design-system/dodont/dodont-section"
 import { AnatomySection } from "@/components/design-system/anatomy/anatomy-section";
 
 describe("Design System Registry", () => {
-  it("contains exactly 46 total registered items", () => {
+  it("contains exactly 47 total registered items", () => {
     const items = getAllRegistryItems();
-    expect(items.length).toBe(46);
+    expect(items.length).toBe(47);
   });
 
-  it("contains 8 foundations, 26 components, and 12 patterns", () => {
+  it("contains 9 foundations, 26 components, and 12 patterns", () => {
     const foundations = getItemsByCategory("foundations");
     const components = getItemsByCategory("components");
     const patterns = getItemsByCategory("patterns");
 
-    expect(foundations.length).toBe(8);
+    expect(foundations.length).toBe(9);
     expect(components.length).toBe(26);
     expect(patterns.length).toBe(12);
-    expect(foundations.length + components.length + patterns.length).toBe(46);
+    expect(foundations.length + components.length + patterns.length).toBe(47);
   });
 
   it("finds components by slug correctly", () => {
