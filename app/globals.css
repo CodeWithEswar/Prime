@@ -50,6 +50,8 @@
 }
 
 :root {
+  color-scheme: dark;
+
   /* =========================================================================
    * 1. PRIME Canonical Brand Primitives (Amendment: Pure Black × Pure Red × White)
    * ========================================================================= */
@@ -153,7 +155,13 @@
   --radius: 8px;
 }
 
-/* Base Body Setup */
+/* Root & Base Document Setup */
+html {
+  color-scheme: dark;
+  scroll-behavior: smooth;
+  scrollbar-gutter: stable;
+}
+
 body {
   background-color: var(--background);
   color: var(--foreground);
@@ -296,17 +304,64 @@ body {
 }
 
 /* =========================================================================
- * 5. PRIME Custom Scrollbar Architecture (WebKit & Firefox)
+ * 5. PRIME Universal Custom Scrollbar Architecture (WebKit & Firefox)
  * ========================================================================= */
+
+/* Universal standard scrollbars (Firefox, modern Chromium) */
+*,
+*::before,
+*::after {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.16) transparent;
+}
+
+/* Universal WebKit scrollbars (Applies to root window, body, and all scroll containers) */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.16);
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  background-clip: padding-box;
+  transition: background-color 150ms ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.32);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background-color: #ff0000;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Eliminate native OS arrows completely */
+::-webkit-scrollbar-button {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Dedicated Class: Standard PRIME Scrollbar (6px width, stable gutter) */
 .prime-scrollbar {
   scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+  scrollbar-color: rgba(255, 255, 255, 0.16) transparent;
   scrollbar-gutter: stable;
 }
 
 .prime-scrollbar::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 .prime-scrollbar::-webkit-scrollbar-track {
@@ -314,28 +369,35 @@ body {
 }
 
 .prime-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.14);
-  border-radius: 999px;
-  border: 2px solid #000000;
+  background-color: rgba(255, 255, 255, 0.16);
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  background-clip: padding-box;
 }
 
 .prime-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.24);
+  background-color: rgba(255, 255, 255, 0.32);
 }
 
 .prime-scrollbar::-webkit-scrollbar-thumb:active {
-  background: #ff0000;
+  background-color: #ff0000;
 }
 
-/* Thin variant for sidebars and compact panels */
+.prime-scrollbar::-webkit-scrollbar-button {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Thin variant for sidebars, context rails, and compact panels (4px width) */
 .prime-scrollbar-thin {
   scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.14) transparent;
+  scrollbar-color: rgba(255, 255, 255, 0.12) transparent;
 }
 
 .prime-scrollbar-thin::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+  width: 4px;
+  height: 4px;
 }
 
 .prime-scrollbar-thin::-webkit-scrollbar-track {
@@ -343,16 +405,72 @@ body {
 }
 
 .prime-scrollbar-thin::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.12);
-  border-radius: 999px;
+  background-color: rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
 }
 
 .prime-scrollbar-thin::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.22);
+  background-color: rgba(255, 255, 255, 0.28);
 }
 
 .prime-scrollbar-thin::-webkit-scrollbar-thumb:active {
-  background: #ff0000;
+  background-color: #ff0000;
+}
+
+.prime-scrollbar-thin::-webkit-scrollbar-button {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Red accent variant for active code editors or highlighted telemetry */
+.prime-scrollbar-red {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 0, 0, 0.45) transparent;
+}
+
+.prime-scrollbar-red::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.prime-scrollbar-red::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.prime-scrollbar-red::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 0, 0, 0.38);
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  background-clip: padding-box;
+}
+
+.prime-scrollbar-red::-webkit-scrollbar-thumb:hover {
+  background-color: #ff0000;
+}
+
+.prime-scrollbar-red::-webkit-scrollbar-thumb:active {
+  background-color: #e60000;
+}
+
+.prime-scrollbar-red::-webkit-scrollbar-button {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Hidden scrollbar utility (maintains scroll behavior without visual bar) */
+.no-scrollbar,
+.prime-scrollbar-none {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+.no-scrollbar::-webkit-scrollbar,
+.prime-scrollbar-none::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }
 
 /* Reduced Motion Compliance */

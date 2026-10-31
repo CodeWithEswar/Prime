@@ -71,16 +71,45 @@ Never use rounded-2xl, rounded-3xl, or rounded-full on cards.`,
     category: "foundations",
     subcategory: "Tokens",
     description:
-      "White-alpha border system for crisp black-surface separation and high-visibility Pure Red focus rings without blooming halo.",
+      "White-alpha border system for crisp black-surface separation, high-visibility Pure Red focus rings, and universal custom scrollbar architecture with zero native OS chrome.",
     status: "stable",
     primitive: "CSS Variables",
     clientComponent: false,
     sections: ["preview", "description", "usage", "prompt"],
-    aiPrompt: `Borders in PRIME must use white-alpha edges:
+    dodont: [
+      {
+        do: "Use white-alpha borders (rgba(255, 255, 255, 0.07–0.20)) to delimit black surfaces",
+        doDescription:
+          "White alpha maintains surface contrast across all lighting and display contrast profiles.",
+        dont: "Use opaque gray borders like #262626 or #333333",
+        dontDescription:
+          "Opaque gray looks muddy and destroys the razor-sharp pure-black aesthetic.",
+      },
+      {
+        do: "Rely on universal global scrollbars (6px width, transparent track, Pure Red active drag)",
+        doDescription:
+          "Never let chunky Windows/Chromium default scrollbars or arrow buttons leak through.",
+        dont: "Allow native OS chunky gray scrollbars or arrow buttons to render",
+        dontDescription:
+          "Ensure ::webkit-scrollbar-button is hidden with display: none !important.",
+      },
+    ],
+    aiPrompt: `Borders, Focus & Scrollbar Architecture in PRIME:
+1. Borders:
 Subtle: rgba(255, 255, 255, 0.07)
 Default: rgba(255, 255, 255, 0.12)
 Strong: rgba(255, 255, 255, 0.20)
-Focus ring: outline: none; box-shadow: 0 0 0 1px #000000, 0 0 0 3px rgba(255, 0, 0, 0.72).`,
+
+2. Focus ring:
+outline: none; box-shadow: 0 0 0 1px #000000, 0 0 0 3px rgba(255, 0, 0, 0.72).
+
+3. Custom Scrollbars:
+- Universal 6px width (4px for .prime-scrollbar-thin)
+- Track: transparent (never gray)
+- Buttons: display: none !important (no native arrow buttons)
+- Thumb: rgba(255, 255, 255, 0.16) default, rgba(255, 255, 255, 0.32) hover
+- Active/Drag: #ff0000 (Pure Red brand accent)
+- Radius: 9999px rounded pill with 1px transparent padding border.`,
   },
   {
     slug: "elevation",
