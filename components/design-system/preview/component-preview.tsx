@@ -44,9 +44,9 @@ export function ComponentPreview({
   const viewportWidthClasses = {
     desktop: "w-full",
     tablet:
-      "max-w-[768px] border border-[rgba(255,255,255,0.15)] rounded-[var(--radius-md)] p-6 shadow-elevation-3 bg-[#010101]",
+      "w-full max-w-[768px] border border-[rgba(255,255,255,0.15)] rounded-[var(--radius-md)] p-6 shadow-elevation-3 bg-[#010101]",
     mobile:
-      "max-w-[375px] border border-[rgba(255,255,255,0.15)] rounded-[var(--radius-md)] p-4 shadow-elevation-3 bg-[#010101]",
+      "w-full max-w-[375px] border border-[rgba(255,255,255,0.15)] rounded-[var(--radius-md)] p-4 shadow-elevation-3 bg-[#010101]",
   }[viewport];
 
   const bgClasses = {
