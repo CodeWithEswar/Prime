@@ -5,10 +5,8 @@ const serverEnvSchema = z.object({
   NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
   NEXT_PUBLIC_APP_URL: z.string().url().default("http://localhost:3000"),
   NEXT_PUBLIC_SUPABASE_URL: z.string().url().default("http://127.0.0.1:54321"),
-  NEXT_PUBLIC_SUPABASE_ANON_KEY: z
-    .string()
-    .min(1)
-    .default("anon-key-placeholder-for-bootstrap"),
+  NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: z.string().optional(),
+  NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string().optional(),
   SUPABASE_SERVICE_ROLE_KEY: z
     .string()
     .min(1)
@@ -18,13 +16,17 @@ const serverEnvSchema = z.object({
   CLOUDFLARE_ACCOUNT_ID: z.string().optional(),
 });
 
-export type ServerEnv = z.infer<typeof serverEnvSchema>;
+export type ServerEnv = z.infer<typeof serverEnvSchema> & {
+  NEXT_PUBLIC_SUPABASE_ANON_KEY: string;
+};
 
 function validateServerEnv(): ServerEnv {
   const result = serverEnvSchema.safeParse({
     NODE_ENV: process.env.NODE_ENV,
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
     NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
+    NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY:
+      process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY,
     NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
     SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY,
     RESEND_API_KEY: process.env.RESEND_API_KEY,
@@ -40,7 +42,16 @@ function validateServerEnv(): ServerEnv {
     throw new Error("Server environment validation failed");
   }
 
-  return result.data;
+  const key =
+    result.data.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ||
+    result.data.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+    "anon-key-placeholder-for-bootstrap";
+
+  return {
+    ...result.data,
+    NEXT_PUBLIC_SUPABASE_ANON_KEY: key,
+    NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: key,
+  };
 }
 
 export const serverEnv = validateServerEnv();
