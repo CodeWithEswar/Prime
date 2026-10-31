@@ -1,11 +1,19 @@
 "use client";
 
 import * as React from "react";
-import { Tick02Icon, Copy01Icon } from "@hugeicons/core-free-icons";
+import {
+  EyeIcon,
+  CodeIcon,
+  LaptopMinimalIcon,
+  Tablet01Icon,
+  SmartPhone01Icon,
+  Refresh01Icon,
+} from "@hugeicons/core-free-icons";
 import { Icon } from "@/components/ui/icon";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "motion/react";
 import { motionDuration, motionEase, motionSpring } from "@/lib/motion";
+import { CodeHighlight } from "@/components/design-system/shared/code-highlight";
 
 export interface ComponentPreviewProps {
   children: React.ReactNode;
@@ -27,19 +35,18 @@ export function ComponentPreview({
     "desktop"
   );
   const [bgMode, setBgMode] = React.useState<"canvas" | "surface" | "raised">("canvas");
-  const [copied, setCopied] = React.useState(false);
+  const [replayKey, setReplayKey] = React.useState(0);
 
-  const handleCopy = () => {
-    if (!code) return;
-    navigator.clipboard.writeText(code);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const handleReplay = () => {
+    setReplayKey((prev) => prev + 1);
   };
 
   const viewportWidthClasses = {
     desktop: "w-full",
-    tablet: "max-w-[768px]",
-    mobile: "max-w-[375px]",
+    tablet:
+      "max-w-[768px] border border-[rgba(255,255,255,0.15)] rounded-[var(--radius-md)] p-6 shadow-elevation-3 bg-[#010101]",
+    mobile:
+      "max-w-[375px] border border-[rgba(255,255,255,0.15)] rounded-[var(--radius-md)] p-4 shadow-elevation-3 bg-[#010101]",
   }[viewport];
 
   const bgClasses = {
@@ -57,123 +64,220 @@ export function ComponentPreview({
       )}
     >
       {/* Top Toolbar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 px-4 py-2.5 border-b border-[rgba(255,255,255,0.08)] bg-[#030303]">
-        <div className="flex items-center gap-2">
-          {title && <span className="text-xs font-semibold text-white">{title}</span>}
-          {description && (
-            <span className="text-xs text-[var(--text-tertiary)] hidden sm:inline">
-              — {description}
-            </span>
-          )}
-        </div>
-
-        <div className="flex items-center gap-3 ml-auto">
-          {/* Background Mode Selector */}
-          <div className="flex items-center rounded-[var(--radius-xs)] border border-[rgba(255,255,255,0.08)] bg-[#000000] p-0.5 text-[10px] font-mono">
-            {(["canvas", "surface", "raised"] as const).map((mode) => (
-              <button
-                key={mode}
-                type="button"
-                onClick={() => setBgMode(mode)}
-                className={cn(
-                  "relative px-2 py-0.5 rounded-[2px] capitalize transition-colors cursor-pointer",
-                  bgMode === mode
-                    ? "text-white font-semibold shadow-xs"
-                    : "text-[var(--text-tertiary)] hover:text-white"
-                )}
-              >
-                {bgMode === mode && (
-                  <motion.span
-                    layoutId="preview-bg-indicator"
-                    className="absolute inset-0 bg-[#090909] rounded-[2px]"
-                    transition={motionSpring.control}
-                  />
-                )}
-                <span className="relative z-10">{mode}</span>
-              </button>
-            ))}
-          </div>
-
-          {/* Viewport Width Selector */}
-          <div className="hidden sm:flex items-center rounded-[var(--radius-xs)] border border-[rgba(255,255,255,0.08)] bg-[#000000] p-0.5 text-[10px] font-mono">
-            {(["desktop", "tablet", "mobile"] as const).map((vp) => (
-              <button
-                key={vp}
-                type="button"
-                onClick={() => setViewport(vp)}
-                className={cn(
-                  "relative px-2 py-0.5 rounded-[2px] capitalize transition-colors cursor-pointer",
-                  viewport === vp
-                    ? "text-white font-semibold shadow-xs"
-                    : "text-[var(--text-tertiary)] hover:text-white"
-                )}
-              >
-                {viewport === vp && (
-                  <motion.span
-                    layoutId="preview-vp-indicator"
-                    className="absolute inset-0 bg-[#090909] rounded-[2px]"
-                    transition={motionSpring.control}
-                  />
-                )}
-                <span className="relative z-10">{vp}</span>
-              </button>
-            ))}
-          </div>
-
-          {/* Preview vs Code Tab Switcher */}
+      <div className="flex flex-wrap items-center justify-between gap-3 px-3.5 py-2.5 border-b border-[rgba(255,255,255,0.08)] bg-[#030303]">
+        {/* Left: Mode Switcher (Preview vs Code) & Title */}
+        <div className="flex items-center gap-3">
           {code && (
-            <div className="flex items-center rounded-[var(--radius-xs)] border border-[rgba(255,255,255,0.08)] bg-[#000000] p-0.5 text-[10px] font-mono">
-              {(["preview", "code"] as const).map((tab) => (
-                <button
-                  key={tab}
-                  type="button"
-                  onClick={() => setActiveTab(tab)}
-                  className={cn(
-                    "relative px-2 py-0.5 rounded-[2px] capitalize transition-colors cursor-pointer",
-                    activeTab === tab
-                      ? "text-white font-semibold"
-                      : "text-[var(--text-tertiary)] hover:text-white"
-                  )}
-                >
-                  {activeTab === tab && (
-                    <motion.span
-                      layoutId="preview-tab-indicator"
-                      className="absolute inset-0 bg-[#090909] rounded-[2px]"
-                      transition={motionSpring.control}
-                    />
-                  )}
-                  <span className="relative z-10">{tab}</span>
-                </button>
-              ))}
+            <div className="flex items-center rounded-[var(--radius-xs)] border border-[rgba(255,255,255,0.10)] bg-[#000000] p-0.5 text-xs font-mono">
+              <button
+                type="button"
+                onClick={() => setActiveTab("preview")}
+                className={cn(
+                  "relative flex items-center gap-1.5 px-2.5 py-1 rounded-[2px] transition-colors cursor-pointer",
+                  activeTab === "preview"
+                    ? "text-white font-semibold"
+                    : "text-white/45 hover:text-white"
+                )}
+                aria-label="Preview component"
+              >
+                {activeTab === "preview" && (
+                  <motion.span
+                    layoutId="preview-tab-pill"
+                    className="absolute inset-0 bg-[#0a0a0a] border border-[rgba(255,255,255,0.14)] rounded-[2px]"
+                    transition={motionSpring.control}
+                  />
+                )}
+                <Icon icon={EyeIcon} size={13} className="relative z-10" />
+                <span className="relative z-10 font-medium">Preview</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setActiveTab("code")}
+                className={cn(
+                  "relative flex items-center gap-1.5 px-2.5 py-1 rounded-[2px] transition-colors cursor-pointer",
+                  activeTab === "code"
+                    ? "text-white font-semibold"
+                    : "text-white/45 hover:text-white"
+                )}
+                aria-label="View component code"
+              >
+                {activeTab === "code" && (
+                  <motion.span
+                    layoutId="preview-tab-pill"
+                    className="absolute inset-0 bg-[#0a0a0a] border border-[rgba(255,255,255,0.14)] rounded-[2px]"
+                    transition={motionSpring.control}
+                  />
+                )}
+                <Icon icon={CodeIcon} size={13} className="relative z-10" />
+                <span className="relative z-10 font-medium">Code</span>
+              </button>
+            </div>
+          )}
+
+          {title && (
+            <div className="flex items-center gap-2 pl-1">
+              <span className="text-xs font-semibold text-white tracking-wide">
+                {title}
+              </span>
+              {description && (
+                <span className="text-xs text-[var(--text-tertiary)] hidden md:inline">
+                  — {description}
+                </span>
+              )}
             </div>
           )}
         </div>
+
+        {/* Right: Viewport Controls, Background Swatch & Replay Button */}
+        {activeTab === "preview" ? (
+          <div className="flex items-center gap-2.5 ml-auto">
+            {/* Viewport Width Switcher with Device Icons */}
+            <div className="flex items-center rounded-[var(--radius-xs)] border border-[rgba(255,255,255,0.10)] bg-[#000000] p-0.5">
+              {[
+                {
+                  key: "desktop",
+                  icon: LaptopMinimalIcon,
+                  label: "Desktop",
+                  width: "100%",
+                },
+                { key: "tablet", icon: Tablet01Icon, label: "Tablet", width: "768px" },
+                {
+                  key: "mobile",
+                  icon: SmartPhone01Icon,
+                  label: "Mobile",
+                  width: "375px",
+                },
+              ].map((vp) => (
+                <button
+                  key={vp.key}
+                  type="button"
+                  onClick={() => setViewport(vp.key as "desktop" | "tablet" | "mobile")}
+                  title={`${vp.label} (${vp.width})`}
+                  className={cn(
+                    "relative flex items-center gap-1.5 px-2 py-1 rounded-[2px] text-[11px] font-mono transition-colors cursor-pointer",
+                    viewport === vp.key
+                      ? "text-white font-semibold"
+                      : "text-white/40 hover:text-white"
+                  )}
+                  aria-label={`${vp.label} viewport`}
+                >
+                  {viewport === vp.key && (
+                    <motion.span
+                      layoutId="preview-vp-pill"
+                      className="absolute inset-0 bg-[#0a0a0a] border border-[rgba(255,255,255,0.14)] rounded-[2px]"
+                      transition={motionSpring.control}
+                    />
+                  )}
+                  <Icon icon={vp.icon} size={13} className="relative z-10" />
+                  <span className="relative z-10 hidden sm:inline font-mono text-[10px]">
+                    {vp.width}
+                  </span>
+                </button>
+              ))}
+            </div>
+
+            {/* Background Surface Swatch Switcher */}
+            <div className="flex items-center rounded-[var(--radius-xs)] border border-[rgba(255,255,255,0.10)] bg-[#000000] p-0.5">
+              {[
+                {
+                  key: "canvas",
+                  label: "Canvas",
+                  color: "#000000",
+                  border: "rgba(255,255,255,0.25)",
+                },
+                {
+                  key: "surface",
+                  label: "Surface",
+                  color: "#030303",
+                  border: "rgba(255,255,255,0.18)",
+                },
+                {
+                  key: "raised",
+                  label: "Raised",
+                  color: "#060606",
+                  border: "rgba(255,255,255,0.18)",
+                },
+              ].map((mode) => (
+                <button
+                  key={mode.key}
+                  type="button"
+                  onClick={() => setBgMode(mode.key as "canvas" | "surface" | "raised")}
+                  title={`Background: ${mode.label}`}
+                  className={cn(
+                    "relative flex items-center gap-1.5 px-2 py-1 rounded-[2px] text-[11px] font-mono transition-colors cursor-pointer",
+                    bgMode === mode.key
+                      ? "text-white font-semibold"
+                      : "text-white/40 hover:text-white"
+                  )}
+                  aria-label={`${mode.label} background surface`}
+                >
+                  {bgMode === mode.key && (
+                    <motion.span
+                      layoutId="preview-bg-pill"
+                      className="absolute inset-0 bg-[#0a0a0a] border border-[rgba(255,255,255,0.14)] rounded-[2px]"
+                      transition={motionSpring.control}
+                    />
+                  )}
+                  <span
+                    className="relative z-10 h-2 w-2 rounded-full shrink-0"
+                    style={{
+                      backgroundColor: mode.color,
+                      border: `1px solid ${mode.border}`,
+                    }}
+                  />
+                  <span className="relative z-10 font-mono text-[10px] hidden md:inline">
+                    {mode.label}
+                  </span>
+                </button>
+              ))}
+            </div>
+
+            {/* Replay Animation Action Button */}
+            <button
+              type="button"
+              onClick={handleReplay}
+              title="Reset & Replay animations"
+              className="flex items-center justify-center p-1.5 rounded-[var(--radius-xs)] border border-[rgba(255,255,255,0.10)] bg-[#000000] text-white/50 hover:text-white hover:border-white/25 hover:bg-[#090909] transition-all cursor-pointer active:scale-95"
+              aria-label="Replay animations"
+            >
+              <Icon icon={Refresh01Icon} size={13} />
+            </button>
+          </div>
+        ) : (
+          /* Code View Header info */
+          <div className="flex items-center gap-2 ml-auto">
+            <span className="font-mono text-[10px] text-white/40 tracking-wider hidden sm:inline">
+              INTERACTIVE CODE INSPECTOR
+            </span>
+          </div>
+        )}
       </div>
 
       {/* Main Preview / Code Stage with AnimatePresence */}
       <AnimatePresence mode="wait">
         {activeTab === "preview" ? (
           <motion.div
-            key="stage-preview"
+            key={`stage-preview-${replayKey}`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: motionDuration.fast, ease: motionEase.enter }}
             className={cn(
-              "p-8 sm:p-12 min-h-[260px] flex items-center justify-center transition-colors relative overflow-x-auto",
+              "p-8 sm:p-12 min-h-[280px] flex items-center justify-center transition-colors relative overflow-x-auto",
               bgClasses
             )}
             style={{
               backgroundImage:
-                "radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px)",
-              backgroundSize: "16px 16px",
+                "radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px)",
+              backgroundSize: "20px 20px",
             }}
           >
             {/* Viewport Resizing container with layout animation (240–320ms) */}
             <motion.div
               layout
               transition={{ duration: motionDuration.slow, ease: motionEase.standard }}
-              className={cn("mx-auto", viewportWidthClasses)}
+              className={cn("mx-auto transition-all duration-300", viewportWidthClasses)}
             >
               <div className="flex items-center justify-center w-full">{children}</div>
             </motion.div>
@@ -185,23 +289,9 @@ export function ComponentPreview({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: motionDuration.fast, ease: motionEase.enter }}
-            className="relative p-4 bg-[#020202] text-xs font-mono overflow-x-auto prime-scrollbar text-white/90"
+            className="p-3 bg-[#000000]"
           >
-            <button
-              type="button"
-              onClick={handleCopy}
-              className="absolute right-4 top-4 flex items-center gap-1.5 px-2.5 py-1 rounded-[var(--radius-xs)] border border-[rgba(255,255,255,0.12)] bg-[#060606] text-[11px] text-[var(--text-secondary)] hover:text-white transition-colors cursor-pointer"
-            >
-              <Icon
-                icon={copied ? Tick02Icon : Copy01Icon}
-                size={13}
-                className={copied ? "text-[#ff0000]" : "text-[var(--text-tertiary)]"}
-              />
-              <span>{copied ? "Copied" : "Copy TSX"}</span>
-            </button>
-            <pre className="pr-20">
-              <code>{code}</code>
-            </pre>
+            <CodeHighlight code={code || ""} language="TSX" />
           </motion.div>
         )}
       </AnimatePresence>
