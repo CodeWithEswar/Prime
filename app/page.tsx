@@ -10,6 +10,8 @@ import {
   JourneyPath,
 } from "@/components/landing/landing-motion";
 import { DemoRows, ProductShowcase } from "@/components/landing/product-showcase";
+import { PreparationJourney } from "@/components/landing/preparation-journey";
+import { MasteryDiagnostic } from "@/components/landing/mastery-diagnostic";
 import "./landing.css";
 
 export const metadata: Metadata = {
@@ -76,9 +78,9 @@ export default function LandingPage() {
               </p>
               <div className="hero-actions">
                 <StartButton />
-                <a className="text-link" href="#method">
-                  See how it works
-                </a>
+                <Button asChild variant="secondary" size="default">
+                  <a href="#method">See how it works</a>
+                </Button>
               </div>
               <p className="hero-capabilities">
                 Roadmap planning <i /> Adaptive revision <i /> Mastery tracking
@@ -91,27 +93,7 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <section id="journey" className="landing-section journey-section">
-          <div className="landing-container">
-            <Reveal>
-              <div className="editorial-grid">
-                <p className="section-index">THE PRIME METHOD</p>
-                <div>
-                  <h2>
-                    RANDOM PRACTICE
-                    <br />
-                    IS NOT A PLAN.
-                  </h2>
-                  <p className="section-copy">
-                    Problem lists. Scattered notes. Forgotten concepts. Bring the pieces
-                    together into a preparation journey with a clear next step.
-                  </p>
-                </div>
-              </div>
-            </Reveal>
-            <JourneyPath steps={["Plan", "Practice", "Review", "Revise", "Master"]} />
-          </div>
-        </section>
+        <PreparationJourney />
 
         <section id="features" className="landing-section why-section">
           <div className="landing-container">
@@ -173,9 +155,11 @@ export default function LandingPage() {
                 <br />
                 System design · Interview preparation
               </p>
-              <a className="text-link" href="#experience">
-                Explore the roadmap
-              </a>
+              <div className="mt-6">
+                <Button asChild variant="secondary" size="default">
+                  <a href="#experience">Explore the roadmap</a>
+                </Button>
+              </div>
             </Reveal>
             <Reveal>
               <ProductPanel
@@ -215,7 +199,7 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <section className="landing-section practice-section">
+        <section id="practice" className="landing-section practice-section">
           <div className="landing-container">
             <Reveal>
               <div className="practice-heading">
@@ -240,7 +224,7 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <section className="landing-section story-section revision-section">
+        <section id="revision" className="landing-section story-section revision-section">
           <StoryGeometry variant="revision" />
           <div className="landing-container story-grid">
             <Reveal className="story-copy">
@@ -268,29 +252,24 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <section className="landing-section story-section mastery-section">
-          <div className="landing-container story-grid reverse">
-            <Reveal>
-              <ProductPanel
-                type="mastery"
-                title="A clearer picture of mastery"
-                subtitle="Topic insights / Where to focus next"
-              />
-            </Reveal>
-            <Reveal className="story-copy">
-              <p className="section-index">05 / WEAKNESS &amp; MASTERY</p>
-              <h2>
-                DONE IS A CHECK.
-                <br />
-                MASTERY IS
-                <br />A DIFFERENCE.
-              </h2>
-              <p className="section-copy">
-                Finishing a topic doesn’t mean it will stay with you. Bring practice
-                quality, revision performance, and confidence together to understand
-                what’s strong and what needs attention.
-              </p>
-            </Reveal>
+        <section id="mastery" className="landing-section story-section mastery-section">
+          <div className="landing-container">
+            <MasteryDiagnostic>
+              <Reveal className="story-copy">
+                <p className="section-index">05 / WEAKNESS &amp; MASTERY</p>
+                <h2>
+                  DONE IS A CHECK.
+                  <br />
+                  MASTERY IS
+                  <br />A DIFFERENCE.
+                </h2>
+                <p className="section-copy">
+                  Finishing a topic doesn’t mean it will stay with you. Bring practice
+                  quality, revision performance, and confidence together to understand
+                  what’s strong and what needs attention.
+                </p>
+              </Reveal>
+            </MasteryDiagnostic>
           </div>
         </section>
 

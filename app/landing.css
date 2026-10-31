@@ -145,10 +145,10 @@ html:has(.prime-landing) {
 .hero-actions {
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 16px;
   margin-top: 30px;
 }
-.hero-actions > a:first-child,
+.hero-actions > a,
 .final-section .btn-neumorphic-primary {
   min-height: 38px;
   height: 38px;
@@ -343,6 +343,7 @@ html:has(.prime-landing) {
   line-height: 2;
   margin-top: 22px;
 }
+.story-copy .btn-neumorphic-secondary,
 .story-copy .text-link {
   margin-top: 24px;
 }
@@ -1018,11 +1019,8 @@ html:has(.prime-landing) {
     display: grid;
     gap: 12px;
   }
-  .hero-actions > a:first-child {
+  .hero-actions > a {
     width: 100%;
-  }
-  .hero-actions .text-link {
-    justify-self: start;
   }
   .hero-capabilities {
     max-width: 220px;
@@ -1229,5 +1227,412 @@ html:has(.prime-landing) {
 @media (max-width: 767px) {
   .geometry-hero.geometry-left {
     left: -235px;
+  }
+}
+
+/* Mastery diagnostic: an open skill map, with a vertical mobile composition. */
+.mastery-section {
+  isolation: isolate;
+}
+.mastery-diagnostic {
+  position: relative;
+  isolation: isolate;
+  min-width: 0;
+}
+.mastery-backdrop {
+  position: absolute;
+  width: 680px;
+  height: 700px;
+  left: -180px;
+  top: -90px;
+  z-index: -1;
+  pointer-events: none;
+}
+.mastery-map-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding-block: 15px;
+  border-top: 1px solid #ffffff26;
+  color: #c2c2c2;
+}
+.mastery-map-heading > :last-child {
+  color: #999;
+  font-size: 8px;
+  letter-spacing: 0.08em;
+}
+.mastery-map-intro {
+  color: #999;
+  font-size: 11px;
+  line-height: 1.8;
+}
+.mastery-network {
+  position: relative;
+  aspect-ratio: 520 / 350;
+  margin-block: 25px 35px;
+  background: radial-gradient(ellipse at 44% 38%, #ff000008, transparent 38%);
+}
+.mastery-connections {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+}
+.mastery-topics {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.mastery-topic {
+  position: absolute;
+  left: var(--topic-x);
+  top: var(--topic-y);
+  width: 112px;
+  margin: -22px 0 0 -56px;
+}
+.mastery-node {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  min-height: 78px;
+  border-radius: 3px;
+}
+.mastery-node-target {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+}
+.mastery-node-dot {
+  display: block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 7px #020000;
+  transition:
+    transform 0.18s,
+    outline-color 0.18s;
+  outline: 1px solid transparent;
+  outline-offset: 5px;
+}
+.mastery-node-label {
+  display: block;
+  font-size: 11px;
+  line-height: 1.6;
+  white-space: nowrap;
+}
+.mastery-node-state {
+  display: block;
+  color: #999;
+  font:
+    8px/1.8 var(--font-geist-mono),
+    monospace;
+}
+.state-strong .mastery-node-dot {
+  width: 8px;
+  height: 8px;
+}
+.state-practicing .mastery-node-dot {
+  background: #030000;
+  border: 1px solid #fff;
+}
+.state-learning .mastery-node-dot {
+  background: #030000;
+  border: 1px solid #ffffff55;
+}
+.state-learning .mastery-node-label {
+  color: #aaa;
+}
+.state-needs-revision .mastery-node-dot {
+  background: red;
+  box-shadow:
+    0 0 0 7px #050000,
+    0 0 18px #ff000020;
+}
+.state-needs-revision .mastery-node-state {
+  color: #ff6666;
+}
+.mastery-node[aria-pressed="true"] .mastery-node-dot {
+  outline-color: #ffffff50;
+}
+.mastery-node:hover .mastery-node-dot {
+  transform: scale(1.04);
+  outline-color: #ffffff60;
+}
+.mastery-node:focus-visible {
+  outline: 1px solid #fff;
+  outline-offset: 1px;
+}
+.mastery-map-key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  color: #999;
+  font-size: 9px;
+  line-height: 1.8;
+  padding-bottom: 22px;
+}
+.mastery-map-key > span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.mastery-map-key i {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+}
+.key-solid {
+  background: white;
+}
+.key-outline {
+  border: 1px solid #aaa;
+}
+.key-attention {
+  background: red;
+}
+.mastery-insight {
+  border-top: 1px solid #ffffff26;
+  padding-top: 23px;
+  min-height: 295px;
+}
+.mastery-insight > .micro {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  font-size: 8px;
+  color: #aaa;
+}
+.mastery-insight > .micro > span {
+  letter-spacing: 0;
+  text-transform: none;
+}
+.insight-attention > .micro {
+  color: #ff6666;
+}
+.mastery-insight h3 {
+  font-size: 23px;
+  line-height: 1.4;
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  margin-top: 9px;
+}
+.mastery-insight-copy {
+  font-size: 12px;
+  line-height: 1.8;
+  color: #aaa;
+  margin-top: 10px;
+  max-width: 410px;
+  min-height: 65px;
+}
+.mastery-evidence {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 1fr;
+  gap: 16px;
+  margin-top: 21px;
+}
+.mastery-evidence dt {
+  color: #999;
+  font:
+    8px/1.7 var(--font-geist-mono),
+    monospace;
+}
+.mastery-evidence dd {
+  color: #ddd;
+  font-size: 10px;
+  line-height: 1.8;
+  margin-top: 5px;
+}
+.mastery-next {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-size: 11px;
+  margin-top: 24px;
+}
+.mastery-next .micro {
+  font-size: 8px;
+  color: #999;
+}
+.mastery-review {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 6px;
+  font-size: 11px;
+  border-bottom: 1px solid #ffffff30;
+  cursor: pointer;
+  transition: border-color 0.18s;
+}
+.mastery-review:hover {
+  border-color: red;
+}
+.mastery-review-preview {
+  padding-block: 20px;
+}
+.mastery-review-preview .micro {
+  color: #aaa;
+  font-size: 8px;
+}
+.mastery-review-preview ol {
+  list-style: decimal;
+  padding-left: 16px;
+  color: #aaa;
+  font-size: 11px;
+  line-height: 1.9;
+  margin-top: 10px;
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+  .mastery-section .story-grid {
+    gap: 32px;
+    grid-template-columns: 1.1fr 1fr;
+  }
+  .mastery-node-label {
+    font-size: 10px;
+  }
+  .mastery-node-state {
+    font-size: 7px;
+  }
+  .mastery-map-heading > :last-child {
+    font-size: 7px;
+  }
+}
+@media (max-width: 767px) {
+  .mastery-network {
+    aspect-ratio: auto;
+    margin-block: 20px;
+    background: none;
+  }
+  .mastery-connections {
+    display: none;
+  }
+  .mastery-topics {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .mastery-topic {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: 100%;
+    margin: 0;
+  }
+  .mastery-topic:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    height: 31px;
+    width: 1px;
+    background: #ffffff26;
+    top: 35px;
+    left: 22px;
+    z-index: -1;
+  }
+  .mastery-topic.state-needs-revision::after {
+    background: #ff000080;
+  }
+  .mastery-node {
+    display: grid;
+    grid-template-columns: 44px 1fr auto;
+    gap: 10px;
+    text-align: left;
+    min-height: 44px;
+  }
+  .mastery-node-label {
+    font-size: 12px;
+  }
+  .mastery-node-state {
+    font-size: 8px;
+    padding-right: 7px;
+  }
+  .mastery-map-key {
+    font-size: 8px;
+    gap: 8px 14px;
+  }
+  .mastery-map-heading > :last-child {
+    font-size: 7px;
+  }
+  .mastery-insight {
+    min-height: 0;
+  }
+  .mastery-evidence {
+    gap: 12px;
+  }
+  .mastery-insight-copy {
+    min-height: 0;
+  }
+  .mastery-backdrop {
+    width: 500px;
+    left: -230px;
+    opacity: 0.04;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mastery-backdrop,
+  .mastery-topic,
+  .mastery-node-dot {
+    transform: none !important;
+  }
+  .mastery-connections path {
+    stroke-dasharray: none !important;
+    stroke-dashoffset: 0 !important;
+  }
+}
+
+/* Keep the map compact and place its live evidence alongside the narrative. */
+.mastery-diagnostic {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(50px, 8vw, 130px);
+  align-items: start;
+}
+.mastery-map-column {
+  position: relative;
+  min-width: 0;
+}
+.mastery-detail-column {
+  min-width: 0;
+}
+.mastery-detail-column .mastery-insight {
+  margin-top: 32px;
+}
+.mastery-detail-column .story-copy {
+  max-width: none;
+}
+.mastery-insight-path {
+  display: none;
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+  .mastery-diagnostic {
+    gap: 32px;
+    grid-template-columns: 1.1fr 1fr;
+  }
+}
+@media (max-width: 767px) {
+  .mastery-diagnostic {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .mastery-detail-column {
+    display: contents;
+  }
+  .mastery-detail-column > .story-copy {
+    order: 0;
+  }
+  .mastery-map-column {
+    order: 1;
+  }
+  .mastery-detail-column .mastery-insight {
+    order: 2;
+    margin-top: 0;
   }
 }
