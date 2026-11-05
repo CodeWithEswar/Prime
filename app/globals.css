@@ -52,6 +52,13 @@
 :root {
   color-scheme: dark;
 
+  /* Consistent compact controls across desktop, tablet, and mobile. */
+  --control-height: 32px;
+  --control-height-sm: 28px;
+  --control-height-lg: 36px;
+  --control-row-height: 32px;
+  --control-height-auth: 40px;
+
   /* =========================================================================
    * 1. PRIME Canonical Brand Primitives (Amendment: Pure Black × Pure Red × White)
    * ========================================================================= */
@@ -223,6 +230,43 @@ body {
     0 0 0 1px #000000,
     0 0 0 3px rgba(255, 0, 0, 0.72);
 }
+
+/* =========================================================================
+ * Recharts Universal Focus Suppression & Polish
+ * Eliminates browser selection outline on charts, SVG layers, and portals
+ * ========================================================================= */
+.recharts-wrapper,
+.recharts-wrapper *,
+.recharts-surface,
+.recharts-surface *,
+.recharts-responsive-container,
+.recharts-responsive-container *,
+.prime-chart-plot,
+.prime-chart-plot *,
+g[class*="recharts-zIndex-layer"] {
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.recharts-wrapper:focus,
+.recharts-wrapper:focus-visible,
+.recharts-wrapper *:focus,
+.recharts-wrapper *:focus-visible,
+.recharts-surface:focus,
+.recharts-surface:focus-visible,
+.recharts-surface *:focus,
+.recharts-surface *:focus-visible,
+g[class*="recharts-zIndex-layer"]:focus,
+g[class*="recharts-zIndex-layer"]:focus-visible,
+g[tabindex]:focus,
+g[tabindex]:focus-visible,
+svg[tabindex]:focus,
+svg[tabindex]:focus-visible {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
 
 /* =========================================================================
  * 4. Solid Neumorphic Controls (Amendment Sections 10, 11, 12, 13)
@@ -513,4 +557,20 @@ body::-webkit-scrollbar-button,
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Saved display preferences use the same control tokens as the design system. */
+html[data-prime-density="compact"] {
+  --control-height: 28px;
+  --control-height-sm: 26px;
+  --control-height-lg: 32px;
+  --control-row-height: 28px;
+}
+html[data-prime-motion="reduced"] *,
+html[data-prime-motion="reduced"] *::before,
+html[data-prime-motion="reduced"] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
 }
