@@ -15,6 +15,7 @@ import {
   SelectItem,
   SelectTrigger,
 } from "@/components/ui/select";
+import { StatusIcon } from "./status-icon";
 import { cn } from "@/lib/utils";
 import type { PracticeCatalogFilter, PracticeSort, CompanyWindow } from "../types";
 import type { FilterOptionsData } from "../queries/get-filter-options";
@@ -31,14 +32,6 @@ const difficultyDisplayMap: Record<string, string> = {
   easy: "Easy",
   medium: "Medium",
   hard: "Hard",
-};
-
-const statusIconMap: Record<string, string> = {
-  not_started: "○",
-  attempted: "◐",
-  solved: "✓",
-  needs_revision: "↻",
-  mastered: "◆",
 };
 
 const statusShortNameMap: Record<string, string> = {
@@ -168,16 +161,16 @@ export function PracticeToolbar({
                     : "bg-[var(--surface-base)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-[var(--border-default)] hover:text-white"
                 )}
               >
-                <span className="flex items-center gap-1.5 truncate">
+                <span className="flex items-center gap-2.5 truncate">
                   <span
                     className={cn(
-                      "w-1.5 h-1.5 rounded-full shrink-0",
+                      "w-2 h-2 rounded-full shrink-0",
                       filters.difficulty === "easy" &&
-                        "bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.5)]",
+                        "bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.6)]",
                       filters.difficulty === "medium" &&
-                        "bg-amber-400 shadow-[0_0_6px_rgba(251,191,36,0.5)]",
+                        "bg-amber-400 shadow-[0_0_6px_rgba(251,191,36,0.6)]",
                       filters.difficulty === "hard" &&
-                        "bg-rose-500 shadow-[0_0_6px_rgba(244,63,94,0.5)]",
+                        "bg-rose-500 shadow-[0_0_6px_rgba(244,63,94,0.6)]",
                       !filters.difficulty && "bg-[var(--text-tertiary)]"
                     )}
                   />
@@ -194,29 +187,37 @@ export function PracticeToolbar({
                   </span>
                 </span>
               </SelectTrigger>
-              <SelectContent className="bg-[#050505] border-[var(--border-default)] text-xs font-mono">
+              <SelectContent className="bg-[#0A0A0A] border-[var(--border-default)] text-xs font-mono p-1">
                 <SelectItem value="all">
-                  <div className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--text-tertiary)] shrink-0" />
+                  <div className="flex items-center gap-2.5 py-0.5">
+                    <div className="w-4 h-4 flex items-center justify-center shrink-0">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[var(--text-tertiary)]" />
+                    </div>
                     <span>All Levels</span>
                   </div>
                 </SelectItem>
                 <SelectItem value="easy">
-                  <div className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
-                    <span>Easy</span>
+                  <div className="flex items-center gap-2.5 py-0.5">
+                    <div className="w-4 h-4 flex items-center justify-center shrink-0">
+                      <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.6)]" />
+                    </div>
+                    <span className="text-[#10B981] font-medium">Easy</span>
                   </div>
                 </SelectItem>
                 <SelectItem value="medium">
-                  <div className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0" />
-                    <span>Medium</span>
+                  <div className="flex items-center gap-2.5 py-0.5">
+                    <div className="w-4 h-4 flex items-center justify-center shrink-0">
+                      <span className="w-2 h-2 rounded-full bg-amber-400 shadow-[0_0_6px_rgba(251,191,36,0.6)]" />
+                    </div>
+                    <span className="text-[#F59E0B] font-medium">Medium</span>
                   </div>
                 </SelectItem>
                 <SelectItem value="hard">
-                  <div className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-rose-500 shrink-0" />
-                    <span>Hard</span>
+                  <div className="flex items-center gap-2.5 py-0.5">
+                    <div className="w-4 h-4 flex items-center justify-center shrink-0">
+                      <span className="w-2 h-2 rounded-full bg-rose-500 shadow-[0_0_6px_rgba(244,63,94,0.6)]" />
+                    </div>
+                    <span className="text-[#EF4444] font-medium">Hard</span>
                   </div>
                 </SelectItem>
               </SelectContent>
@@ -242,19 +243,8 @@ export function PracticeToolbar({
                     : "bg-[var(--surface-base)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-[var(--border-default)] hover:text-white"
                 )}
               >
-                <span className="flex items-center gap-1.5 truncate">
-                  <span
-                    className={cn(
-                      "text-xs font-mono leading-none shrink-0",
-                      filters.status === "solved" && "text-emerald-400 font-bold",
-                      filters.status === "needs_revision" && "text-[var(--accent)] font-bold",
-                      filters.status === "mastered" && "text-purple-400 font-bold",
-                      filters.status === "attempted" && "text-amber-400",
-                      !filters.status && "text-[var(--text-tertiary)]"
-                    )}
-                  >
-                    {filters.status ? statusIconMap[filters.status] : "○"}
-                  </span>
+                <span className="flex items-center gap-2.5 truncate">
+                  <StatusIcon status={filters.status} size={14} />
                   <span
                     className={cn(
                       filters.status
@@ -268,40 +258,52 @@ export function PracticeToolbar({
                   </span>
                 </span>
               </SelectTrigger>
-              <SelectContent className="bg-[#050505] border-[var(--border-default)] text-xs font-mono">
+              <SelectContent className="bg-[#0A0A0A] border-[var(--border-default)] text-xs font-mono p-1">
                 <SelectItem value="all">
-                  <div className="flex items-center gap-2">
-                    <span className="text-[var(--text-tertiary)]">○</span>
+                  <div className="flex items-center gap-2.5 py-0.5">
+                    <div className="w-4 h-4 flex items-center justify-center shrink-0">
+                      <StatusIcon status={null} size={13} />
+                    </div>
                     <span>All Statuses</span>
                   </div>
                 </SelectItem>
                 <SelectItem value="not_started">
-                  <div className="flex items-center gap-2">
-                    <span className="text-[var(--text-tertiary)]">○</span>
+                  <div className="flex items-center gap-2.5 py-0.5">
+                    <div className="w-4 h-4 flex items-center justify-center shrink-0">
+                      <StatusIcon status="not_started" size={13} />
+                    </div>
                     <span>Not Started</span>
                   </div>
                 </SelectItem>
                 <SelectItem value="attempted">
-                  <div className="flex items-center gap-2">
-                    <span className="text-amber-400">◐</span>
+                  <div className="flex items-center gap-2.5 py-0.5">
+                    <div className="w-4 h-4 flex items-center justify-center shrink-0">
+                      <StatusIcon status="attempted" size={14} />
+                    </div>
                     <span>Attempted</span>
                   </div>
                 </SelectItem>
                 <SelectItem value="solved">
-                  <div className="flex items-center gap-2">
-                    <span className="text-emerald-400 font-bold">✓</span>
-                    <span>Solved</span>
+                  <div className="flex items-center gap-2.5 py-0.5">
+                    <div className="w-4 h-4 flex items-center justify-center shrink-0">
+                      <StatusIcon status="solved" size={14} />
+                    </div>
+                    <span className="text-white font-medium">Solved</span>
                   </div>
                 </SelectItem>
                 <SelectItem value="needs_revision">
-                  <div className="flex items-center gap-2">
-                    <span className="text-[var(--accent)] font-bold">↻</span>
+                  <div className="flex items-center gap-2.5 py-0.5">
+                    <div className="w-4 h-4 flex items-center justify-center shrink-0">
+                      <StatusIcon status="needs_revision" size={13} />
+                    </div>
                     <span>Needs Revision</span>
                   </div>
                 </SelectItem>
                 <SelectItem value="mastered">
-                  <div className="flex items-center gap-2">
-                    <span className="text-purple-400 font-bold">◆</span>
+                  <div className="flex items-center gap-2.5 py-0.5">
+                    <div className="w-4 h-4 flex items-center justify-center shrink-0">
+                      <StatusIcon status="mastered" size={14} />
+                    </div>
                     <span>Mastered</span>
                   </div>
                 </SelectItem>
@@ -325,10 +327,10 @@ export function PracticeToolbar({
                     : "bg-[var(--surface-base)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-[var(--border-default)] hover:text-white"
                 )}
               >
-                <span className="flex items-center gap-1.5 truncate">
+                <span className="flex items-center gap-2.5 truncate">
                   <Icon
                     icon={Sorting01Icon}
-                    size={13}
+                    size={14}
                     className="text-[var(--text-tertiary)] shrink-0"
                   />
                   <span className="text-white font-medium truncate">
@@ -336,7 +338,7 @@ export function PracticeToolbar({
                   </span>
                 </span>
               </SelectTrigger>
-              <SelectContent className="bg-[#050505] border-[var(--border-default)] text-xs font-mono">
+              <SelectContent className="bg-[#0A0A0A] border-[var(--border-default)] text-xs font-mono p-1">
                 <SelectItem value="recommended">Recommended</SelectItem>
                 <SelectItem value="difficulty_asc">Easy First</SelectItem>
                 <SelectItem value="difficulty_desc">Hard First</SelectItem>
@@ -474,7 +476,7 @@ export function PracticeToolbar({
 
           {filters.status && (
             <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[var(--radius-xs)] bg-[var(--surface-raised)] text-white border border-[var(--border-subtle)]">
-              <span>{statusIconMap[filters.status] || "○"}</span>
+              <StatusIcon status={filters.status} size={12} />
               <span>{statusShortNameMap[filters.status] || filters.status}</span>
               <button
                 type="button"

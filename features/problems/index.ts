@@ -14,6 +14,7 @@ export * from "./mutations/get-problem-detail-action";
 export { RevisionBadge } from "./components/revision-badge";
 export { PriorityBadge } from "./components/priority-badge";
 export { DifficultyBadge } from "./components/difficulty-badge";
+export { StatusIcon } from "./components/status-icon";
 export { PracticeHeader } from "./components/practice-header";
 export { PracticeContextRail } from "./components/practice-context-rail";
 export { PracticeToolbar } from "./components/practice-toolbar";

@@ -8,6 +8,7 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
+import { StatusIcon } from "./status-icon";
 import { cn } from "@/lib/utils";
 import type { PracticeCatalogFilter } from "../types";
 import type { FilterOptionsData } from "../queries/get-filter-options";
@@ -79,11 +80,11 @@ export function PracticeFilterSheet({
             </span>
             <div className="flex flex-col gap-1.5">
               {[
-                { id: "not_started", label: "○ Not Started" },
-                { id: "attempted", label: "◐ Attempted" },
-                { id: "solved", label: "✓ Solved" },
-                { id: "needs_revision", label: "↻ Needs Revision" },
-                { id: "mastered", label: "◆ Mastered" },
+                { id: "not_started", label: "Not Started" },
+                { id: "attempted", label: "Attempted" },
+                { id: "solved", label: "Solved" },
+                { id: "needs_revision", label: "Needs Revision" },
+                { id: "mastered", label: "Mastered" },
               ].map((st) => {
                 const isSelected = filters.status === st.id;
                 return (
@@ -103,8 +104,11 @@ export function PracticeFilterSheet({
                         : "bg-[var(--surface-base)] text-[var(--text-secondary)] border-[var(--border-subtle)] hover:text-white"
                     )}
                   >
-                    <span>{st.label}</span>
-                    {isSelected && <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)]" />}
+                    <div className="flex items-center gap-2.5">
+                      <StatusIcon status={st.id} size={14} />
+                      <span>{st.label}</span>
+                    </div>
+                    {isSelected && <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)] shrink-0" />}
                   </button>
                 );
               })}
