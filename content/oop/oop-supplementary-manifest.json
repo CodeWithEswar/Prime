@@ -1,0 +1,167 @@
+[
+  {
+    "id": "supp-solid-masterclass",
+    "youtubeVideoId": "pTB30aXS77U",
+    "title": "SOLID Principles in Software Architecture with Java",
+    "canonicalWatchUrl": "https://www.youtube.com/watch?v=pTB30aXS77U",
+    "channelTitle": "freeCodeCamp.org",
+    "durationSeconds": 4320,
+    "assignedStudyDay": 11,
+    "topicIds": [
+      "solid",
+      "srp",
+      "ocp",
+      "lsp",
+      "isp",
+      "dip"
+    ],
+    "difficulty": "hard",
+    "interviewImportance": "critical",
+    "contentKind": "full_lesson",
+    "verificationStatus": "verified",
+    "verifiedAt": "2026-11-04T12:00:00Z",
+    "isSupplementary": true,
+    "coverageRationale": "Fills the primary course gap with dedicated SRP, OCP, LSP, ISP, and DIP refactoring examples."
+  },
+  {
+    "id": "supp-strategy-composition",
+    "youtubeVideoId": "v9ejT8FO-7I",
+    "title": "Strategy Pattern & Composition Over Inheritance in Java",
+    "canonicalWatchUrl": "https://www.youtube.com/watch?v=v9ejT8FO-7I",
+    "channelTitle": "Christopher Okhravi",
+    "durationSeconds": 2160,
+    "assignedStudyDay": 11,
+    "topicIds": [
+      "strategy-pattern",
+      "composition-over-inheritance"
+    ],
+    "difficulty": "medium",
+    "interviewImportance": "critical",
+    "contentKind": "full_lesson",
+    "verificationStatus": "verified",
+    "verifiedAt": "2026-11-04T12:00:00Z",
+    "isSupplementary": true,
+    "coverageRationale": "Deep dive into dynamic behavioral substitution via interface composition."
+  },
+  {
+    "id": "supp-factory-pattern",
+    "youtubeVideoId": "EcFVTg6JxxI",
+    "title": "Factory Method Pattern Tutorial with Real Java Code",
+    "canonicalWatchUrl": "https://www.youtube.com/watch?v=EcFVTg6JxxI",
+    "channelTitle": "Christopher Okhravi",
+    "durationSeconds": 1980,
+    "assignedStudyDay": 11,
+    "topicIds": [
+      "factory-pattern",
+      "creational-patterns"
+    ],
+    "difficulty": "medium",
+    "interviewImportance": "critical",
+    "contentKind": "full_lesson",
+    "verificationStatus": "verified",
+    "verifiedAt": "2026-11-04T12:00:00Z",
+    "isSupplementary": true,
+    "coverageRationale": "Explains object instantiation decoupling and dependency inversion via factories."
+  },
+  {
+    "id": "supp-observer-pattern",
+    "youtubeVideoId": "_BpmfnqjgzQ",
+    "title": "Observer Pattern — Head First Design Patterns in Java",
+    "canonicalWatchUrl": "https://www.youtube.com/watch?v=_BpmfnqjgzQ",
+    "channelTitle": "Christopher Okhravi",
+    "durationSeconds": 2280,
+    "assignedStudyDay": 11,
+    "topicIds": [
+      "observer-pattern",
+      "event-driven-architecture"
+    ],
+    "difficulty": "hard",
+    "interviewImportance": "high",
+    "contentKind": "full_lesson",
+    "verificationStatus": "verified",
+    "verifiedAt": "2026-11-04T12:00:00Z",
+    "isSupplementary": true,
+    "coverageRationale": "Essential publish-subscribe mechanism for notifications and decoupled event handling."
+  },
+  {
+    "id": "supp-builder-pattern",
+    "youtubeVideoId": "9Xnr8Q7APt0",
+    "title": "Builder Design Pattern Tutorial with Immutability in Java",
+    "canonicalWatchUrl": "https://www.youtube.com/watch?v=9Xnr8Q7APt0",
+    "channelTitle": "Derek Banas",
+    "durationSeconds": 1260,
+    "assignedStudyDay": 11,
+    "topicIds": [
+      "builder-pattern",
+      "immutability"
+    ],
+    "difficulty": "medium",
+    "interviewImportance": "critical",
+    "contentKind": "full_lesson",
+    "verificationStatus": "verified",
+    "verifiedAt": "2026-11-04T12:00:00Z",
+    "isSupplementary": true,
+    "coverageRationale": "Solves telescoping constructor anti-pattern and enforces object initialization contracts."
+  },
+  {
+    "id": "supp-singleton-deepdive",
+    "youtubeVideoId": "Vglx9Zg7a0g",
+    "title": "Singleton Pattern in Java: Double-Checked Locking & Thread Safety",
+    "canonicalWatchUrl": "https://www.youtube.com/watch?v=Vglx9Zg7a0g",
+    "channelTitle": "Derek Banas",
+    "durationSeconds": 1080,
+    "assignedStudyDay": 3,
+    "topicIds": [
+      "singleton-pattern",
+      "thread-safety"
+    ],
+    "difficulty": "hard",
+    "interviewImportance": "high",
+    "contentKind": "full_lesson",
+    "verificationStatus": "verified",
+    "verifiedAt": "2026-11-04T12:00:00Z",
+    "isSupplementary": true,
+    "coverageRationale": "Examines multithreading hazards, volatile memory model, and Enum singletons."
+  },
+  {
+    "id": "supp-hashmap-internals",
+    "youtubeVideoId": "70m3k1U7v_4",
+    "title": "How HashMap Works Internally in Java: Buckets, Collisions, hashCode & equals",
+    "canonicalWatchUrl": "https://www.youtube.com/watch?v=70m3k1U7v_4",
+    "channelTitle": "Telusko",
+    "durationSeconds": 1440,
+    "assignedStudyDay": 10,
+    "topicIds": [
+      "hashmap-internals",
+      "equals-hashcode-contract"
+    ],
+    "difficulty": "hard",
+    "interviewImportance": "critical",
+    "contentKind": "full_lesson",
+    "verificationStatus": "verified",
+    "verifiedAt": "2026-11-04T12:00:00Z",
+    "isSupplementary": true,
+    "coverageRationale": "Explains array-of-nodes structure, treeification (Red-Black tree in Java 8+), and mutable key hazards."
+  },
+  {
+    "id": "supp-parking-lot-lld",
+    "youtubeVideoId": "tVRyb4HaHgw",
+    "title": "Parking Lot Low Level Design (LLD) in Java — Object-Oriented System Design",
+    "canonicalWatchUrl": "https://www.youtube.com/watch?v=tVRyb4HaHgw",
+    "channelTitle": "Gaurav Sen",
+    "durationSeconds": 2880,
+    "assignedStudyDay": 12,
+    "topicIds": [
+      "low-level-design",
+      "parking-lot",
+      "uml-modeling"
+    ],
+    "difficulty": "hard",
+    "interviewImportance": "critical",
+    "contentKind": "full_lesson",
+    "verificationStatus": "verified",
+    "verifiedAt": "2026-11-04T12:00:00Z",
+    "isSupplementary": true,
+    "coverageRationale": "Industry standard LLD interview problem with end-to-end entity relationships and design patterns."
+  }
+]

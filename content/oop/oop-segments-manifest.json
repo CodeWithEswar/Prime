@@ -1,0 +1,212 @@
+[
+  {
+    "segmentId": "seg-classes",
+    "conceptTitle": "Classes and Blueprint Definition",
+    "assignedDay": 1,
+    "parentVideoId": "BSVKUk58K6U",
+    "startSeconds": 467,
+    "directTimestampUrl": "https://youtu.be/BSVKUk58K6U?t=467",
+    "topicSlug": "classes",
+    "interviewImportance": "critical"
+  },
+  {
+    "segmentId": "seg-this",
+    "conceptTitle": "this Keyword and Reference Resolution",
+    "assignedDay": 2,
+    "parentVideoId": "BSVKUk58K6U",
+    "startSeconds": 3380,
+    "directTimestampUrl": "https://youtu.be/BSVKUk58K6U?t=3380",
+    "topicSlug": "this-keyword",
+    "interviewImportance": "critical"
+  },
+  {
+    "segmentId": "seg-packages",
+    "conceptTitle": "Java Packages and Namespace Isolation",
+    "assignedDay": 3,
+    "parentVideoId": "_Ya6CN13t8k",
+    "startSeconds": 182,
+    "directTimestampUrl": "https://youtu.be/_Ya6CN13t8k?t=182",
+    "topicSlug": "packages",
+    "interviewImportance": "high"
+  },
+  {
+    "segmentId": "seg-static",
+    "conceptTitle": "Static Members and Class-Level Memory",
+    "assignedDay": 3,
+    "parentVideoId": "_Ya6CN13t8k",
+    "startSeconds": 1137,
+    "directTimestampUrl": "https://youtu.be/_Ya6CN13t8k?t=1137",
+    "topicSlug": "static-members",
+    "interviewImportance": "high"
+  },
+  {
+    "segmentId": "seg-singleton",
+    "conceptTitle": "Singleton Class Pattern in Java",
+    "assignedDay": 3,
+    "parentVideoId": "_Ya6CN13t8k",
+    "startSeconds": 4240,
+    "directTimestampUrl": "https://youtu.be/_Ya6CN13t8k?t=4240",
+    "topicSlug": "singleton",
+    "interviewImportance": "high"
+  },
+  {
+    "segmentId": "seg-inheritance",
+    "conceptTitle": "Inheritance and Extends Hierarchy",
+    "assignedDay": 4,
+    "parentVideoId": "46T2wD3IuhM",
+    "startSeconds": 146,
+    "directTimestampUrl": "https://youtu.be/46T2wD3IuhM?t=146",
+    "topicSlug": "inheritance",
+    "interviewImportance": "critical"
+  },
+  {
+    "segmentId": "seg-polymorphism",
+    "conceptTitle": "Polymorphism and Runtime Mechanics",
+    "assignedDay": 5,
+    "parentVideoId": "46T2wD3IuhM",
+    "startSeconds": 4226,
+    "directTimestampUrl": "https://youtu.be/46T2wD3IuhM?t=4226",
+    "topicSlug": "polymorphism",
+    "interviewImportance": "critical"
+  },
+  {
+    "segmentId": "seg-overloading-overriding",
+    "conceptTitle": "Method Overloading vs Method Overriding",
+    "assignedDay": 5,
+    "parentVideoId": "46T2wD3IuhM",
+    "startSeconds": 4834,
+    "directTimestampUrl": "https://youtu.be/46T2wD3IuhM?t=4834",
+    "topicSlug": "overriding",
+    "interviewImportance": "critical"
+  },
+  {
+    "segmentId": "seg-final-finally-finalize",
+    "conceptTitle": "Distinctions between final, finally, and finalize",
+    "assignedDay": 5,
+    "parentVideoId": "46T2wD3IuhM",
+    "startSeconds": 6317,
+    "directTimestampUrl": "https://youtu.be/46T2wD3IuhM?t=6317",
+    "topicSlug": "final-keyword",
+    "interviewImportance": "high"
+  },
+  {
+    "segmentId": "seg-encapsulation",
+    "conceptTitle": "Encapsulation and Data Hiding",
+    "assignedDay": 6,
+    "parentVideoId": "46T2wD3IuhM",
+    "startSeconds": 7022,
+    "directTimestampUrl": "https://youtu.be/46T2wD3IuhM?t=7022",
+    "topicSlug": "encapsulation",
+    "interviewImportance": "critical"
+  },
+  {
+    "segmentId": "seg-abstraction",
+    "conceptTitle": "Abstraction and Implementation Decoupling",
+    "assignedDay": 6,
+    "parentVideoId": "46T2wD3IuhM",
+    "startSeconds": 7102,
+    "directTimestampUrl": "https://youtu.be/46T2wD3IuhM?t=7102",
+    "topicSlug": "abstraction",
+    "interviewImportance": "critical"
+  },
+  {
+    "segmentId": "seg-object-class",
+    "conceptTitle": "The Root Object Class and Core Methods",
+    "assignedDay": 7,
+    "parentVideoId": "W145DXs8fFg",
+    "startSeconds": 1943,
+    "directTimestampUrl": "https://youtu.be/W145DXs8fFg?t=1943",
+    "topicSlug": "object-class",
+    "interviewImportance": "critical"
+  },
+  {
+    "segmentId": "seg-abstract-classes",
+    "conceptTitle": "Abstract Classes and Incomplete Blueprints",
+    "assignedDay": 8,
+    "parentVideoId": "rgHZa7-Dibg",
+    "startSeconds": 68,
+    "directTimestampUrl": "https://youtu.be/rgHZa7-Dibg?t=68",
+    "topicSlug": "abstract-classes",
+    "interviewImportance": "critical"
+  },
+  {
+    "segmentId": "seg-interfaces",
+    "conceptTitle": "Interfaces and Contract-Based Design",
+    "assignedDay": 8,
+    "parentVideoId": "rgHZa7-Dibg",
+    "startSeconds": 1510,
+    "directTimestampUrl": "https://youtu.be/rgHZa7-Dibg?t=1510",
+    "topicSlug": "interfaces",
+    "interviewImportance": "critical"
+  },
+  {
+    "segmentId": "seg-annotations",
+    "conceptTitle": "Java Annotations and Metadata Markers",
+    "assignedDay": 8,
+    "parentVideoId": "rgHZa7-Dibg",
+    "startSeconds": 3438,
+    "directTimestampUrl": "https://youtu.be/rgHZa7-Dibg?t=3438",
+    "topicSlug": "annotations",
+    "interviewImportance": "medium"
+  },
+  {
+    "segmentId": "seg-lambda",
+    "conceptTitle": "Lambda Expressions and Functional Interfaces",
+    "assignedDay": 9,
+    "parentVideoId": "OY2lPr8h93U",
+    "startSeconds": 2894,
+    "directTimestampUrl": "https://youtu.be/OY2lPr8h93U?t=2894",
+    "topicSlug": "lambdas",
+    "interviewImportance": "high"
+  },
+  {
+    "segmentId": "seg-exceptions",
+    "conceptTitle": "Exception Handling Hierarchy and try-catch-finally",
+    "assignedDay": 9,
+    "parentVideoId": "OY2lPr8h93U",
+    "startSeconds": 3405,
+    "directTimestampUrl": "https://youtu.be/OY2lPr8h93U?t=3405",
+    "topicSlug": "exceptions",
+    "interviewImportance": "critical"
+  },
+  {
+    "segmentId": "seg-cloning",
+    "conceptTitle": "Object Cloning: Shallow vs Deep Copy",
+    "assignedDay": 9,
+    "parentVideoId": "OY2lPr8h93U",
+    "startSeconds": 4352,
+    "directTimestampUrl": "https://youtu.be/OY2lPr8h93U?t=4352",
+    "topicSlug": "cloning",
+    "interviewImportance": "high"
+  },
+  {
+    "segmentId": "seg-collections",
+    "conceptTitle": "Java Collections Framework Architecture",
+    "assignedDay": 10,
+    "parentVideoId": "9ogGan-R1pc",
+    "startSeconds": 49,
+    "directTimestampUrl": "https://youtu.be/9ogGan-R1pc?t=49",
+    "topicSlug": "collections",
+    "interviewImportance": "critical"
+  },
+  {
+    "segmentId": "seg-vector",
+    "conceptTitle": "Vector Class and Thread-Safe Legacy Collections",
+    "assignedDay": 10,
+    "parentVideoId": "9ogGan-R1pc",
+    "startSeconds": 668,
+    "directTimestampUrl": "https://youtu.be/9ogGan-R1pc?t=668",
+    "topicSlug": "vector",
+    "interviewImportance": "medium"
+  },
+  {
+    "segmentId": "seg-enums",
+    "conceptTitle": "Java Enums as Type-Safe Named Constants",
+    "assignedDay": 10,
+    "parentVideoId": "9ogGan-R1pc",
+    "startSeconds": 909,
+    "directTimestampUrl": "https://youtu.be/9ogGan-R1pc?t=909",
+    "topicSlug": "enums",
+    "interviewImportance": "high"
+  }
+]

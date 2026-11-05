@@ -1,0 +1,199 @@
+[
+  {
+    "id": "supp-cn-01",
+    "assignedStudyDay": 6,
+    "youtubeVideoId": "MmwF1oHOvmg",
+    "title": "What are VLANs? -- the simplest explanation",
+    "channel": "Practical Networking",
+    "canonicalWatchUrl": "https://www.youtube.com/watch?v=MmwF1oHOvmg",
+    "durationSeconds": 688,
+    "difficulty": "medium",
+    "interviewImportance": "high",
+    "topicIds": [
+      "ethernet-wireless",
+      "vlans"
+    ],
+    "coverageRationale": "Learn how VLANs separate broadcast domains on shared network hardware.",
+    "verificationStatus": "verified",
+    "language": "English",
+    "isSupplementary": true,
+    "verifiedAt": "2026-11-04T16:16:46.507Z",
+    "progressId": "jqk9965zK6M",
+    "verifiedTitle": "What are VLANs? -- the simplest explanation",
+    "contentKind": "full_lesson"
+  },
+  {
+    "id": "supp-cn-02",
+    "assignedStudyDay": 9,
+    "youtubeVideoId": "rYodcvhh7b8",
+    "title": "Packet Traveling - How Packets Move Through a Network",
+    "channel": "Practical Networking",
+    "canonicalWatchUrl": "https://www.youtube.com/watch?v=rYodcvhh7b8",
+    "durationSeconds": 878,
+    "difficulty": "hard",
+    "interviewImportance": "critical",
+    "topicIds": [
+      "routing-protocols"
+    ],
+    "coverageRationale": "Follow packets across a network and see how forwarding and address resolution interact.",
+    "verificationStatus": "verified",
+    "language": "English",
+    "isSupplementary": true,
+    "verifiedAt": "2026-11-04T16:16:46.507Z",
+    "verifiedTitle": "Packet Traveling - How Packets Move Through a Network",
+    "contentKind": "full_lesson"
+  },
+  {
+    "id": "supp-cn-03",
+    "assignedStudyDay": 9,
+    "youtubeVideoId": "jJU2AVX6gpU",
+    "title": "5.2-2 Bellman Ford Distance Vector Routing (updated)",
+    "channel": "JimKurose",
+    "canonicalWatchUrl": "https://www.youtube.com/watch?v=jJU2AVX6gpU",
+    "durationSeconds": 1315,
+    "difficulty": "hard",
+    "interviewImportance": "critical",
+    "topicIds": [
+      "routing-protocols"
+    ],
+    "coverageRationale": "Work through Bellman–Ford distance-vector routing with Jim Kurose.",
+    "verificationStatus": "verified",
+    "language": "English",
+    "isSupplementary": true,
+    "verifiedAt": "2026-11-04T16:16:46.507Z",
+    "progressId": "gazC3VDJmHZ",
+    "verifiedTitle": "5.2-2 Bellman Ford Distance Vector Routing (updated)",
+    "contentKind": "full_lesson"
+  },
+  {
+    "id": "supp-cn-04",
+    "assignedStudyDay": 10,
+    "youtubeVideoId": "rLNmrFh-sd8",
+    "title": "Routing and Routing Protocols Simplified: BGP, OSPF, RIP",
+    "channel": "KnowledgeCatch",
+    "canonicalWatchUrl": "https://www.youtube.com/watch?v=rLNmrFh-sd8",
+    "durationSeconds": 1229,
+    "difficulty": "hard",
+    "interviewImportance": "high",
+    "topicIds": [
+      "routing-protocols"
+    ],
+    "coverageRationale": "Compare RIP, OSPF, and BGP and the roles they play in routing.",
+    "verificationStatus": "verified",
+    "language": "English",
+    "isSupplementary": true,
+    "verifiedAt": "2026-11-04T16:16:46.507Z",
+    "progressId": "QB4hI7tHsqM",
+    "verifiedTitle": "Routing and Routing Protocols Simplified: BGP, OSPF, RIP",
+    "contentKind": "full_lesson"
+  },
+  {
+    "id": "supp-cn-05",
+    "assignedStudyDay": 10,
+    "youtubeVideoId": "FTUV0t6JaDA",
+    "title": "NAT Explained - Network Address Translation",
+    "channel": "PowerCert Animated Videos",
+    "canonicalWatchUrl": "https://www.youtube.com/watch?v=FTUV0t6JaDA",
+    "durationSeconds": 266,
+    "difficulty": "hard",
+    "interviewImportance": "high",
+    "topicIds": [
+      "nat-ipv6"
+    ],
+    "coverageRationale": "See how network address translation maps private addresses to public addresses.",
+    "verificationStatus": "verified",
+    "language": "English",
+    "isSupplementary": true,
+    "verifiedAt": "2026-11-04T16:16:46.507Z",
+    "verifiedTitle": "NAT Explained - Network Address Translation",
+    "contentKind": "full_lesson"
+  },
+  {
+    "id": "supp-cn-06",
+    "assignedStudyDay": 11,
+    "youtubeVideoId": "JFch3ctY6nE",
+    "title": "TCP - 12 simple ideas to explain the Transmission Control Protocol",
+    "channel": "Practical Networking",
+    "canonicalWatchUrl": "https://www.youtube.com/watch?v=JFch3ctY6nE",
+    "durationSeconds": 2645,
+    "difficulty": "hard",
+    "interviewImportance": "critical",
+    "topicIds": [
+      "transport-application"
+    ],
+    "coverageRationale": "Review the concepts behind TCP connections and reliable delivery.",
+    "verificationStatus": "verified",
+    "language": "English",
+    "isSupplementary": true,
+    "verifiedAt": "2026-11-04T16:16:46.507Z",
+    "progressId": "uwoD5YsGACg",
+    "verifiedTitle": "TCP - 12 simple ideas to explain the Transmission Control Protocol",
+    "contentKind": "full_lesson"
+  },
+  {
+    "id": "supp-cn-07",
+    "assignedStudyDay": 11,
+    "youtubeVideoId": "mpQZVYPuDGU",
+    "title": "How a DNS Server (Domain Name System) works.",
+    "channel": "PowerCert Animated Videos",
+    "canonicalWatchUrl": "https://www.youtube.com/watch?v=mpQZVYPuDGU",
+    "durationSeconds": 364,
+    "difficulty": "hard",
+    "interviewImportance": "critical",
+    "topicIds": [
+      "transport-application"
+    ],
+    "coverageRationale": "Follow a DNS lookup through the resolver, root, TLD, and authoritative servers.",
+    "verificationStatus": "verified",
+    "language": "English",
+    "isSupplementary": true,
+    "verifiedAt": "2026-11-04T16:16:46.507Z",
+    "progressId": "27r4Bzuj5OI",
+    "verifiedTitle": "How a DNS Server (Domain Name System) works.",
+    "contentKind": "full_lesson"
+  },
+  {
+    "id": "supp-cn-08",
+    "assignedStudyDay": 11,
+    "youtubeVideoId": "0OrmKCB0UrQ",
+    "title": "Hyper Text Transfer Protocol Crash Course - HTTP 1.0, 1.1, HTTP/2, HTTP/3",
+    "channel": "Hussein Nasser",
+    "canonicalWatchUrl": "https://www.youtube.com/watch?v=0OrmKCB0UrQ",
+    "durationSeconds": 2734,
+    "difficulty": "hard",
+    "interviewImportance": "critical",
+    "topicIds": [
+      "transport-application"
+    ],
+    "coverageRationale": "Compare HTTP versions from HTTP/1.0 through HTTP/3 and QUIC.",
+    "verificationStatus": "verified",
+    "language": "English",
+    "isSupplementary": true,
+    "verifiedAt": "2026-11-04T16:16:46.507Z",
+    "progressId": "a-sBpeUXuEQ",
+    "verifiedTitle": "Hyper Text Transfer Protocol Crash Course - HTTP 1.0, 1.1, HTTP/2, HTTP/3",
+    "contentKind": "full_lesson"
+  },
+  {
+    "id": "supp-cn-09",
+    "assignedStudyDay": 11,
+    "youtubeVideoId": "86cQJ0MMses",
+    "title": "TLS Handshake Explained - Computerphile",
+    "channel": "Computerphile",
+    "canonicalWatchUrl": "https://www.youtube.com/watch?v=86cQJ0MMses",
+    "durationSeconds": 1019,
+    "difficulty": "hard",
+    "interviewImportance": "critical",
+    "topicIds": [
+      "transport-application"
+    ],
+    "coverageRationale": "Follow the TLS handshake and see how the client and server establish an encrypted session.",
+    "verificationStatus": "verified",
+    "language": "English",
+    "isSupplementary": true,
+    "verifiedAt": "2026-11-04T16:16:46.507Z",
+    "progressId": "86cQCEScZkc",
+    "verifiedTitle": "TLS Handshake Explained - Computerphile",
+    "contentKind": "full_lesson"
+  }
+]

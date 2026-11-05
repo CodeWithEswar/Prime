@@ -1,0 +1,7 @@
+# Company marks
+
+The registry in `features/problems/data/company-logos.json` covers 174 company names/aliases with 172 local entries and two controlled external assets. Local SVGs come from [Simple Icons 14.15.0](https://github.com/simple-icons/simple-icons/tree/14.15.0/icons) and [SVG Logos](https://github.com/gilbarbara/logos), whose repositories distribute the artwork under CC0. The marks remain their respective owners' trademarks. Brand-color fills are preserved without grayscale filters; dark marks receive a light tile for contrast.
+
+Google uses the existing transparent multicolor image in `brand/providers/google-g.png`. The existing Microsoft and Adobe assets are local vector marks. The Wissen Technology and Works Applications entries use fixed company-published image URLs, identified through the companies' own pages: [Wissen Technology](https://www.wissen.com/career/opportunities-wissen-technology) and [Works Applications](https://bizapp.worksap.co.jp/ebm/spec-archive/service-spec-08-20220906). Their availability was not verified by the offline layout check.
+
+Individual sources are recorded in `sources.json`. Exact company identity is required: same-name Compass CMS, Bolt CMS, and Hive cryptocurrency assets are excluded rather than assigned to unrelated interview companies. Unlisted or unavailable marks use a neutral company symbol with the company name beside it; initials are no longer displayed. No user-supplied remote URL is rendered.

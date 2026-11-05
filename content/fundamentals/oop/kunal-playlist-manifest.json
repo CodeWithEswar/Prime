@@ -1,0 +1,176 @@
+[
+  {
+    "order": 1,
+    "youtubeVideoId": "BSVKUk58K6U",
+    "title": "Introduction to OOP, Classes, Objects, Constructors, Keywords in Java",
+    "canonicalWatchUrl": "https://www.youtube.com/watch?v=BSVKUk58K6U",
+    "playlistContextUrl": "https://www.youtube.com/watch?v=BSVKUk58K6U&list=PL9gnSGHSqcno1G3XjUbwzXHL8_EttOuKk&index=1",
+    "channelTitle": "Kunal Kushwaha",
+    "durationSeconds": 7320,
+    "assignedDays": [
+      1,
+      2
+    ],
+    "topicIds": [
+      "classes",
+      "objects",
+      "constructors",
+      "this-keyword",
+      "memory-allocation",
+      "garbage-collection"
+    ],
+    "difficulty": "easy",
+    "interviewImportance": "critical",
+    "verificationStatus": "verified",
+    "verifiedAt": "2026-11-04T12:00:00Z",
+    "sourceProvenance": "instructor_syllabus"
+  },
+  {
+    "order": 2,
+    "youtubeVideoId": "_Ya6CN13t8k",
+    "title": "Packages, Static, Singleton Class, In-built Methods in Java",
+    "canonicalWatchUrl": "https://www.youtube.com/watch?v=_Ya6CN13t8k",
+    "playlistContextUrl": "https://www.youtube.com/watch?v=_Ya6CN13t8k&list=PL9gnSGHSqcno1G3XjUbwzXHL8_EttOuKk&index=2",
+    "channelTitle": "Kunal Kushwaha",
+    "durationSeconds": 5240,
+    "assignedDays": [
+      3
+    ],
+    "topicIds": [
+      "packages",
+      "static-members",
+      "singleton-pattern",
+      "initialization-blocks"
+    ],
+    "difficulty": "medium",
+    "interviewImportance": "high",
+    "verificationStatus": "verified",
+    "verifiedAt": "2026-11-04T12:00:00Z",
+    "sourceProvenance": "instructor_syllabus"
+  },
+  {
+    "order": 3,
+    "youtubeVideoId": "46T2wD3IuhM",
+    "title": "Principles of OOP: Inheritance, Polymorphism, Encapsulation, Abstraction",
+    "canonicalWatchUrl": "https://www.youtube.com/watch?v=46T2wD3IuhM",
+    "playlistContextUrl": "https://www.youtube.com/watch?v=46T2wD3IuhM&list=PL9gnSGHSqcno1G3XjUbwzXHL8_EttOuKk&index=3",
+    "channelTitle": "Kunal Kushwaha",
+    "durationSeconds": 7860,
+    "assignedDays": [
+      4,
+      5,
+      6
+    ],
+    "topicIds": [
+      "inheritance",
+      "polymorphism",
+      "encapsulation",
+      "abstraction",
+      "overloading",
+      "overriding",
+      "super-keyword"
+    ],
+    "difficulty": "hard",
+    "interviewImportance": "critical",
+    "verificationStatus": "verified",
+    "verifiedAt": "2026-11-04T12:00:00Z",
+    "sourceProvenance": "instructor_syllabus"
+  },
+  {
+    "order": 4,
+    "youtubeVideoId": "W145DXs8fFg",
+    "title": "Access Control, In-built Packages, Object Class in Java",
+    "canonicalWatchUrl": "https://www.youtube.com/watch?v=W145DXs8fFg",
+    "playlistContextUrl": "https://www.youtube.com/watch?v=W145DXs8fFg&list=PL9gnSGHSqcno1G3XjUbwzXHL8_EttOuKk&index=4",
+    "channelTitle": "Kunal Kushwaha",
+    "durationSeconds": 3780,
+    "assignedDays": [
+      7
+    ],
+    "topicIds": [
+      "access-modifiers",
+      "object-class",
+      "equals-hashcode",
+      "tostring",
+      "instanceof"
+    ],
+    "difficulty": "medium",
+    "interviewImportance": "critical",
+    "verificationStatus": "verified",
+    "verifiedAt": "2026-11-04T12:00:00Z",
+    "sourceProvenance": "instructor_syllabus"
+  },
+  {
+    "order": 5,
+    "youtubeVideoId": "rgHZa7-Dibg",
+    "title": "Abstract Classes, Interfaces, Annotations in Java",
+    "canonicalWatchUrl": "https://www.youtube.com/watch?v=rgHZa7-Dibg",
+    "playlistContextUrl": "https://www.youtube.com/watch?v=rgHZa7-Dibg&list=PL9gnSGHSqcno1G3XjUbwzXHL8_EttOuKk&index=5",
+    "channelTitle": "Kunal Kushwaha",
+    "durationSeconds": 4320,
+    "assignedDays": [
+      8
+    ],
+    "topicIds": [
+      "abstract-classes",
+      "interfaces",
+      "default-methods",
+      "multiple-inheritance",
+      "annotations"
+    ],
+    "difficulty": "hard",
+    "interviewImportance": "critical",
+    "verificationStatus": "verified",
+    "verifiedAt": "2026-11-04T12:00:00Z",
+    "sourceProvenance": "instructor_syllabus"
+  },
+  {
+    "order": 6,
+    "youtubeVideoId": "OY2lPr8h93U",
+    "title": "Generics, Custom ArrayList, Lambda Expressions, Exception Handling, Object Cloning",
+    "canonicalWatchUrl": "https://www.youtube.com/watch?v=OY2lPr8h93U",
+    "playlistContextUrl": "https://www.youtube.com/watch?v=OY2lPr8h93U&list=PL9gnSGHSqcno1G3XjUbwzXHL8_EttOuKk&index=6",
+    "channelTitle": "Kunal Kushwaha",
+    "durationSeconds": 5460,
+    "assignedDays": [
+      9
+    ],
+    "topicIds": [
+      "generics",
+      "type-erasure",
+      "exceptions",
+      "try-catch-finally",
+      "lambdas",
+      "cloning"
+    ],
+    "difficulty": "hard",
+    "interviewImportance": "high",
+    "verificationStatus": "verified",
+    "verifiedAt": "2026-11-04T12:00:00Z",
+    "sourceProvenance": "instructor_syllabus"
+  },
+  {
+    "order": 7,
+    "youtubeVideoId": "9ogGan-R1pc",
+    "title": "Java Collections Framework, Enums, Vector Class",
+    "canonicalWatchUrl": "https://www.youtube.com/watch?v=9ogGan-R1pc",
+    "playlistContextUrl": "https://www.youtube.com/watch?v=9ogGan-R1pc&list=PL9gnSGHSqcno1G3XjUbwzXHL8_EttOuKk&index=7",
+    "channelTitle": "Kunal Kushwaha",
+    "durationSeconds": 3960,
+    "assignedDays": [
+      10
+    ],
+    "topicIds": [
+      "collections-framework",
+      "list-set-map",
+      "vector",
+      "enums",
+      "comparable-comparator"
+    ],
+    "difficulty": "medium",
+    "interviewImportance": "critical",
+    "verificationStatus": "verified",
+    "verifiedAt": "2026-11-04T12:00:00Z",
+    "sourceProvenance": "instructor_syllabus"
+  }
+]
