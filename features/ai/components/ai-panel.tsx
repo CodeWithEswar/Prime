@@ -37,7 +37,7 @@ export default function AIPanel() {
   ) : (
     <Sheet open={ai.open} onOpenChange={ai.setOpen}>
       <SheetContent
-        className="ai-panel-sheet"
+        className="ai-panel-sheet w-full max-w-full sm:max-w-full md:max-w-[460px] md:w-[460px]"
         onCloseAutoFocus={(e) => {
           e.preventDefault();
           ai.restoreFocus();
