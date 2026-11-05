@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState, useEffect, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { Calendar03Icon } from "@hugeicons/core-free-icons";
 import {
@@ -59,19 +59,30 @@ export function PlannerRunwayDialog({
   onSuccess,
 }: PlannerRunwayDialogProps) {
   const router = useRouter();
-  const initialDays = daysBetween(startDate, currentTargetDate);
+  const baseStart = startDate < today ? today : startDate;
+  const initialDays = daysBetween(baseStart, currentTargetDate);
   const [days, setDays] = useState<number>(initialDays);
   const [targetDate, setTargetDate] = useState<string>(currentTargetDate);
   const [, setMode] = useState<"presets" | "custom_days" | "date">("presets");
   const [error, setError] = useState<string>("");
   const [busy, startTransition] = useTransition();
 
+  useEffect(() => {
+    if (open) {
+      const currentBase = startDate < today ? today : startDate;
+      const calculated = daysBetween(currentBase, currentTargetDate);
+      setDays(calculated);
+      setTargetDate(currentTargetDate);
+      setError("");
+    }
+  }, [open, startDate, currentTargetDate, today]);
+
   const maxSelectableDate = addDays(today, 365);
-  const daysRemaining = Math.max(0, daysBetween(today, targetDate) - 1);
+  const daysRemaining = Math.max(0, daysBetween(today, targetDate));
 
   function handleSelectPreset(d: number) {
     setDays(d);
-    setTargetDate(addDays(startDate, d - 1));
+    setTargetDate(addDays(baseStart, d - 1));
     setError("");
   }
 
@@ -83,13 +94,13 @@ export function PlannerRunwayDialog({
     }
     const clamped = Math.max(1, Math.min(365, num));
     setDays(clamped);
-    setTargetDate(addDays(startDate, clamped - 1));
+    setTargetDate(addDays(baseStart, clamped - 1));
     setError("");
   }
 
   function handleDateChange(dateStr: string) {
     setTargetDate(dateStr);
-    const calculatedDays = daysBetween(startDate, dateStr);
+    const calculatedDays = daysBetween(baseStart, dateStr);
     setDays(calculatedDays);
     setError("");
   }
@@ -106,7 +117,7 @@ export function PlannerRunwayDialog({
 
     setError("");
     startTransition(async () => {
-      const res = await updatePlanTarget(targetDate);
+      const res = await updatePlanTarget(targetDate, baseStart);
       if (!res.ok) {
         setError(res.error);
         return;

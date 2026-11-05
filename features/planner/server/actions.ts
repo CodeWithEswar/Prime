@@ -132,17 +132,23 @@ export async function scheduleFundamentalsCourse(course: unknown, start?: string
   });
 }
 
-export async function updatePlanTarget(targetDate: string) {
+export async function updatePlanTarget(targetDate: string, newStartDate?: string) {
   return action(async (owner) => {
     const parsedDate = z
       .string()
       .regex(/^\d{4}-\d{2}-\d{2}$/)
       .parse(targetDate);
+    const parsedStart = newStartDate
+      ? z
+          .string()
+          .regex(/^\d{4}-\d{2}-\d{2}$/)
+          .parse(newStartDate)
+      : undefined;
     const db = createAdminClient();
     const [settings, plan] = await Promise.all([
       db
         .from("user_settings")
-        .select("timezone,target_role,daily_study_minutes")
+        .select("timezone,target_role,daily_study_minutes,start_date")
         .eq("user_id", owner)
         .maybeSingle(),
       db
@@ -171,21 +177,35 @@ export async function updatePlanTarget(targetDate: string) {
     const dailyMinutes =
       settings?.data?.daily_study_minutes ?? plan?.data?.daily_capacity_minutes ?? 90;
 
+    const startDateToUse =
+      parsedStart ??
+      (plan?.data?.start_date && plan.data.start_date <= today
+        ? plan.data.start_date
+        : today);
+
     await db
       .from("user_settings")
-      .update({ target_date: parsedDate, updated_at: new Date().toISOString() })
+      .update({
+        target_date: parsedDate,
+        start_date: startDateToUse,
+        updated_at: new Date().toISOString(),
+      })
       .eq("user_id", owner);
 
     if (plan?.data?.id) {
       await db
         .from("preparation_plans")
-        .update({ target_date: parsedDate, updated_at: new Date().toISOString() })
+        .update({
+          target_date: parsedDate,
+          start_date: startDateToUse,
+          updated_at: new Date().toISOString(),
+        })
         .eq("id", plan.data.id)
         .eq("user_id", owner);
     } else {
       await db.from("preparation_plans").insert({
         user_id: owner,
-        start_date: today,
+        start_date: startDateToUse,
         target_date: parsedDate,
         timezone,
         target_role: targetRole,
@@ -194,7 +214,7 @@ export async function updatePlanTarget(targetDate: string) {
       });
     }
     refresh();
-    return { targetDate: parsedDate };
+    return { targetDate: parsedDate, startDate: startDateToUse };
   });
 }
 

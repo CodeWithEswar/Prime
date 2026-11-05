@@ -6,7 +6,7 @@ import { CN_12_DAY_CURRICULUM } from "@/domain/cn/curriculum";
 import { OOP_12_DAY_CURRICULUM } from "@/domain/oop/curriculum";
 import { createAdminClient } from "@/lib/supabase/admin";
 import type { Database, Json } from "@/lib/supabase/database.types";
-import { addDays, getDayOfWeekFromDate } from "@/domain/planning/capacity";
+import { addDays, daysBetween, getDayOfWeekFromDate } from "@/domain/planning/capacity";
 import {
   capacityDays,
   countsTowardsPlan,
@@ -221,7 +221,14 @@ async function coreWork(s: State, stage?: string, optional = false) {
 
 export async function getPlannerView(owner: string): Promise<PlannerView> {
   const s = await load(owner);
-  const days = capacityDays(s.today, s.target, s.tasks, (100 - s.bufferPercent) / 100);
+  const planSpan = Math.max(7, daysBetween(s.today, s.target.targetDate));
+  const days = capacityDays(
+    s.today,
+    s.target,
+    s.tasks,
+    (100 - s.bufferPercent) / 100,
+    planSpan
+  );
   const window = days.filter((d) => d.date <= s.target.targetDate);
   const active = window.filter((d) => !d.rest);
   const catalog = await roadmap(s).catch(() => null);
@@ -536,8 +543,7 @@ export async function buildProposal(
   const s = await load(owner);
   const { today, target, tasks } = s;
   const horizonLimit = addDays(today, 365);
-  const last =
-    target.targetDate > addDays(today, 89) ? target.targetDate : addDays(today, 89);
+  const last = target.targetDate || addDays(today, 89);
   let end = last;
   let start = today;
   let fixedDate: string | undefined;
