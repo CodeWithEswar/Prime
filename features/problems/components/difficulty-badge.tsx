@@ -61,3 +61,4 @@ export function DifficultyBadge({ difficulty, className }: DifficultyBadgeProps)
     </span>
   );
 }
+
