@@ -39,6 +39,7 @@
     "worker:planner:dev": "wrangler dev --config workers/planner/wrangler.jsonc",
     "worker:reminders:dev": "wrangler dev --config workers/reminders/wrangler.jsonc",
     "aptitude:generate": "node scripts/generate-aptitude-curriculum.mjs",
+    "aptitude:seed": "node --env-file=.env.local scripts/aptitude/seed-aptitude-db.mjs",
     "aptitude:verify-videos": "node scripts/aptitude/verify-videos.mjs",
     "aptitude:check-language": "node scripts/aptitude/check-audio-language.mjs"
   },
