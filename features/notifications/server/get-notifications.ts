@@ -13,6 +13,10 @@ const cursorSchema = z.object({
   id: z.uuid(),
 });
 
+// Cache sync timestamps in memory to prevent repeated Supabase queries on every request/poll
+const userSyncTimestamps = new Map<string, number>();
+const USER_SYNC_DEBOUNCE_MS = 5 * 60 * 1000; // 5 minutes
+
 export async function getNotifications(
   options: GetNotificationsOptions = {}
 ): Promise<NotificationsListResponse> {
@@ -33,11 +37,13 @@ export async function getNotifications(
   } = await supabase.auth.getUser();
   if (!user) throw new Error("Authentication required");
 
-  // Ensure user's notifications are automatically synchronized and populated
-  try {
-    await syncUserNotifications(user.id);
-  } catch (syncErr) {
-    console.warn("[Notifications] Non-blocking sync warning:", syncErr);
+  // Non-blocking notification sync: runs asynchronously in the background at most once every 5 minutes
+  const lastSync = userSyncTimestamps.get(user.id) ?? 0;
+  if (Date.now() - lastSync > USER_SYNC_DEBOUNCE_MS) {
+    userSyncTimestamps.set(user.id, Date.now());
+    syncUserNotifications(user.id).catch((syncErr) => {
+      console.warn("[Notifications] Non-blocking background sync warning:", syncErr);
+    });
   }
 
   let query = supabase
