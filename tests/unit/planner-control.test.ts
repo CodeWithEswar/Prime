@@ -186,4 +186,34 @@ describe("Planner control", () => {
     expect(tasks[0].date).toBe("2026-11-01");
     expect(result.days[0].planned).toBe(70);
   });
+
+  it("dynamically supports arbitrary preparation horizons including a 100-day runway", () => {
+    const horizon100 = "2027-02-09"; // 100 days from 2026-11-02 (index 0 to 99)
+    const target100: PreparationTarget = {
+      ...target,
+      targetDate: horizon100,
+    };
+    const calendar = capacityDays(today, target100, []);
+    expect(calendar.length).toBeGreaterThanOrEqual(100);
+    expect(calendar[99].date).toBe(horizon100);
+
+    const result = planControl({
+      today,
+      end: horizon100,
+      target: target100,
+      tasks: [],
+      work: [
+        {
+          title: "100-day milestone challenge",
+          minutes: 45,
+          type: "dsa_problem",
+          priority: "P0",
+          source: "planner_generated",
+        },
+      ],
+      fixedDate: horizon100,
+    });
+    expect(result.placements).toHaveLength(1);
+    expect(result.placements[0].date).toBe(horizon100);
+  });
 });

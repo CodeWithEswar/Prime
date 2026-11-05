@@ -22,7 +22,7 @@ import {
 import { Icon } from "@/components/ui/icon";
 import { useAI } from "@/features/ai/ai-provider";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { addDays } from "@/domain/planning/capacity";
+import { addDays, daysBetween } from "@/domain/planning/capacity";
 import {
   countsTowardsPlan,
   weekStart,
@@ -51,6 +51,7 @@ import {
 } from "./planner-fields";
 import type { FundamentalsCourse } from "@/domain/fundamentals/courses";
 import { PlannerSheet } from "./planner-sheet";
+import { PlannerRunwayDialog } from "./planner-runway-dialog";
 
 const splitHeader = "flex-row flex-wrap items-center justify-between gap-3 space-y-0";
 export function PlannerWorkspace({
@@ -117,7 +118,10 @@ export function PlannerWorkspace({
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
   const [busy, start] = useTransition();
-  const last = addDays(view.today, 89);
+  const [customizingRunway, setCustomizingRunway] = useState(false);
+  const totalDays = daysBetween(view.start, view.target);
+  const last =
+    view.target > addDays(view.today, 89) ? view.target : addDays(view.today, 89);
   const day = view.days.find((d) => d.date === date);
   const monday = weekStart(date);
   const week = view.days.filter((d) => d.date >= monday && d.date <= addDays(monday, 6));
@@ -319,17 +323,30 @@ export function PlannerWorkspace({
                 {trajectoryText}
               </span>
             </div>
-            <p className="font-mono text-xs text-[#888888]">
-              {dateLabel(view.start, { month: "short", day: "numeric" }).toUpperCase()} —{" "}
-              {dateLabel(view.target, {
-                month: "short",
-                day: "numeric",
-                year: "numeric",
-              }).toUpperCase()}{" "}
-              ·{" "}
-              <span className="font-bold text-white">{daysRemaining} DAYS REMAINING</span>{" "}
-              · {view.timezone.replaceAll("_", " ")}
-            </p>
+            <div className="flex flex-wrap items-center gap-2 pt-0.5">
+              <p className="font-mono text-xs text-[#888888]">
+                {dateLabel(view.start, { month: "short", day: "numeric" }).toUpperCase()} —{" "}
+                {dateLabel(view.target, {
+                  month: "short",
+                  day: "numeric",
+                  year: "numeric",
+                }).toUpperCase()}{" "}
+                ·{" "}
+                <span className="font-bold text-white">{daysRemaining} DAYS REMAINING</span>{" "}
+                · <span className="text-[#AAAAAA]">{totalDays}-DAY RUNWAY</span>{" "}
+                · {view.timezone.replaceAll("_", " ")}
+              </p>
+              <Button
+                variant="outline"
+                size="sm"
+                aria-label="Customize plan duration"
+                className="h-6 px-2 text-[11px] font-mono text-[#CCCCCC] hover:text-white border-[#262626] hover:border-[#444] rounded bg-[#101010] hover:bg-[#181818] transition-colors gap-1.5"
+                onClick={() => setCustomizingRunway(true)}
+              >
+                <Icon icon={Calendar03Icon} size={12} className="text-[#FF0000]" />
+                Customize runway ({totalDays}d)
+              </Button>
+            </div>
           </div>
           <div className="grid grid-cols-2 sm:flex sm:flex-wrap sm:items-center gap-2 w-full sm:w-auto">
             {ai?.enabled && (
@@ -356,7 +373,7 @@ export function PlannerWorkspace({
                 open({
                   kind: "automatic",
                   target:
-                    view.target < view.today || view.target > last ? last : view.target,
+                    view.target < view.today ? view.today : view.target,
                   horizon: "week",
                   optional: false,
                 })
@@ -446,21 +463,32 @@ export function PlannerWorkspace({
         </TabsList>
         <TabsContent value="timeline" className="grid gap-4 pt-2">
           <Card elevation="base">
-            <CardHeader>
-              <CardTitle>90-day timeline</CardTitle>
-              <CardDescription>
-                The next seven days are your near-term commitments. Later dates are
-                forecasts. Select a day to inspect its workload.
-              </CardDescription>
+            <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 space-y-0">
+              <div>
+                <CardTitle>{totalDays}-day timeline</CardTitle>
+                <CardDescription>
+                  The next seven days are your near-term commitments across your {totalDays}-day preparation runway. Select a day to inspect its workload.
+                </CardDescription>
+              </div>
+              <Button
+                variant="outline"
+                size="sm"
+                className="self-start sm:self-auto h-7 px-2.5 text-xs font-mono text-[#AAAAAA] hover:text-white border-[#262626] hover:border-[#444] rounded bg-[#0A0A0A] hover:bg-[#161616] transition-colors gap-1.5"
+                onClick={() => setCustomizingRunway(true)}
+              >
+                <Icon icon={Calendar03Icon} size={13} className="text-[#FF0000]" />
+                Customize runway
+              </Button>
             </CardHeader>
             <CardContent className="grid gap-3">
               <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,13rem),1fr))] gap-2">
-                {Array.from({ length: 13 }, (_, i) =>
-                  view.days.slice(i * 7, i * 7 + 7)
-                ).map((days, i) => (
+                {Array.from(
+                  { length: Math.max(1, Math.ceil(view.days.length / 7)) },
+                  (_, i) => view.days.slice(i * 7, i * 7 + 7)
+                ).filter((days) => days.length > 0).map((days, i) => (
                   <div
                     className="min-w-0 rounded-md border border-white/10 p-2"
-                    key={days[0].date}
+                    key={days[0]?.date ?? i}
                   >
                     <p className={eyebrow + " mb-2"}>
                       {i === 0 ? "Commitments" : "Week " + (i + 1)}{" "}
@@ -941,6 +969,17 @@ export function PlannerWorkspace({
               "Saved to backlog.",
               true
             );
+        }}
+      />
+      <PlannerRunwayDialog
+        open={customizingRunway}
+        onOpenChange={setCustomizingRunway}
+        startDate={view.start}
+        currentTargetDate={view.target}
+        today={view.today}
+        onSuccess={(msg) => {
+          setNotice(msg);
+          router.refresh();
         }}
       />
     </div>

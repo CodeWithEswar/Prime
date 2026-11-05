@@ -1,4 +1,4 @@
-import { addDays, getDailyCapacity, getDayOfWeekFromDate } from "./capacity";
+import { addDays, daysBetween, getDailyCapacity, getDayOfWeekFromDate } from "./capacity";
 import {
   DEFAULT_PLANNER_CONFIG,
   type PreparationTarget,
@@ -66,14 +66,17 @@ export function capacityDays(
   today: string,
   target: PreparationTarget,
   tasks: ScheduledWork[],
-  utilizationTarget = DEFAULT_PLANNER_CONFIG.utilizationTarget
+  utilizationTarget = DEFAULT_PLANNER_CONFIG.utilizationTarget,
+  horizonDays?: number
 ) {
   const totals = new Map<string, number>();
   for (const task of tasks)
     if (countsTowardsPlan(task.status)) {
       totals.set(task.date, (totals.get(task.date) ?? 0) + task.minutes);
     }
-  return Array.from({ length: 90 }, (_, index): CapacityDay => {
+  const span = target.targetDate ? daysBetween(today, target.targetDate) : 90;
+  const count = Math.max(90, span, horizonDays ?? 90);
+  return Array.from({ length: count }, (_, index): CapacityDay => {
     const date = addDays(today, index);
     const capacity = getDailyCapacity(date, target, { utilizationTarget });
     return {
@@ -104,7 +107,11 @@ export function planControl(input: {
   utilizationTarget?: number;
 }): ControlPreview {
   const { today, target, tasks } = input;
-  const days = capacityDays(today, target, tasks, input.utilizationTarget);
+  const requiredSpan = Math.max(
+    target.targetDate ? daysBetween(today, target.targetDate) : 90,
+    input.end ? daysBetween(today, input.end) : 90
+  );
+  const days = capacityDays(today, target, tasks, input.utilizationTarget, requiredSpan);
   const byDate = new Map(days.map((day) => [day.date, day]));
   const eligible = days.filter(
     (day) =>
