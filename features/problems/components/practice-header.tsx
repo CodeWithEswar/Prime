@@ -39,7 +39,7 @@ export function PracticeHeader({
 
       <div className="flex items-center gap-2 text-xs font-mono w-full md:w-auto overflow-x-auto sm:overflow-visible pb-1 sm:pb-0 shrink-0">
         {hasAttempts ? (
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-[var(--radius-sm)] bg-[var(--surface-base)] border border-[var(--border-subtle)]">
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-[var(--radius-sm)] bg-[var(--surface-base)] border border-[var(--border-subtle)] w-fit shrink-0">
             <div className="flex items-center gap-1.5">
               <span className="text-white font-semibold">{summary.totalSolved}</span>
               <span className="text-[var(--text-tertiary)] text-[11px]">solved</span>
@@ -72,7 +72,7 @@ export function PracticeHeader({
             </div>
           </div>
         ) : (
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-[var(--radius-sm)] bg-[var(--surface-base)] border border-[var(--border-subtle)] text-[var(--text-secondary)]">
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-[var(--radius-sm)] bg-[var(--surface-base)] border border-[var(--border-subtle)] text-[var(--text-secondary)] w-fit shrink-0">
             <span className="text-white font-medium">
               {totalCatalogCount.toLocaleString()}
             </span>
