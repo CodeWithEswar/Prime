@@ -252,8 +252,20 @@
   .ai-surface-panel > .ai-context-trace {
     margin: 14px 16px 0;
   }
-  .ai-composer {
-    padding: 10px 12px;
+  .ai-composer,
+  .ai-surface-panel .ai-composer,
+  .ai-composer-dock .ai-composer {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    box-sizing: border-box;
+    padding: 8px 10px;
+  }
+  .ai-surface-panel .ai-composer-disclaimer,
+  .ai-composer-disclaimer {
+    max-width: 100% !important;
+    width: 100% !important;
+    text-align: center;
   }
   .ai-surface-panel .ai-empty h2 {
     font-size: 24px;
