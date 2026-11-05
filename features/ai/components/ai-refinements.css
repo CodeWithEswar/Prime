@@ -36,7 +36,9 @@
   gap: 8px;
 }
 .ai-canvas-toolbar .ai-control {
-  width: 30px;
+  width: 28px;
+  height: 28px;
+  min-height: 28px;
   flex: none;
 }
 .ai-canvas-toolbar h1 {
@@ -52,8 +54,9 @@
   color: #707070;
 }
 .ai-surface-panel .ai-canvas-toolbar {
-  padding: 18px 20px;
-  min-height: 76px;
+  padding: 0 16px;
+  height: 44px;
+  min-height: 44px;
   flex: none;
   border-bottom: 1px solid #ffffff10;
 }
@@ -233,11 +236,12 @@
 }
 @media (max-width: 767px) {
   .ai-surface-panel .ai-canvas-toolbar {
-    padding: 14px 16px;
-    min-height: 68px;
+    padding: 0 12px;
+    height: 44px;
+    min-height: 44px;
   }
   .ai-surface-panel .ai-canvas-toolbar h1 {
-    font-size: 16px;
+    font-size: 14px;
   }
   .ai-canvas-toolbar .ai-action-row {
     gap: 5px;
