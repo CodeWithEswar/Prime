@@ -10,6 +10,7 @@ import {
   WindPower01Icon,
   RefreshIcon,
   LoaderIcon,
+  Globe02Icon,
 } from "@hugeicons/core-free-icons";
 import { Icon } from "@/components/ui/icon";
 import { Button } from "@/components/ui/button";
@@ -335,8 +336,16 @@ function WeatherDashboard({
         </section>
         <WeatherMeasurements weather={weather} hour={hours[0]} day={day} unit={unit} />
         <footer className="weather-attribution">
-          <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">
-            Weather data by Open-Meteo
+          <a
+            className="weather-attribution-link"
+            href="https://open-meteo.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Weather data by Open-Meteo"
+            title="Weather data by Open-Meteo"
+          >
+            <Icon icon={Globe02Icon} size={14} aria-hidden="true" />
+            <span className="sr-only">Weather data by Open-Meteo</span>
           </a>
           {location.mode === "device" && (
             <a
@@ -417,8 +426,11 @@ export function WeatherPage() {
             href="https://open-meteo.com/"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Weather data by Open-Meteo"
+            title="Weather data by Open-Meteo"
           >
-            Weather data by Open-Meteo
+            <Icon icon={Globe02Icon} size={15} aria-hidden="true" />
+            <span className="sr-only">Weather data by Open-Meteo</span>
           </a>
         </div>
       ) : query.data ? (
