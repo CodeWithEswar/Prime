@@ -9,6 +9,7 @@ import { StageRail } from "./stage-rail";
 import { StageSection } from "./stage-section";
 import { Icon } from "@/components/ui/icon";
 import { Button } from "@/components/ui/button";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Search01Icon } from "@hugeicons/core-free-icons";
 
 interface RoadmapViewProps {
@@ -127,21 +128,29 @@ export function RoadmapView({ data }: RoadmapViewProps) {
 
       {/* 3. Filter & Search Controls */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-4 sm:pt-6">
-        {/* Segmented Filter Control */}
-        <div className="w-full sm:w-auto overflow-x-auto no-scrollbar -mx-1 px-1 py-0.5">
-          <div className="inline-flex items-center p-1 rounded-xl bg-[#0E0E0E] border border-white/[0.08] gap-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]">
-            <button
-              type="button"
-              onClick={() => setActiveFilter("all")}
-              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium shrink-0 transition-all ${
-                activeFilter === "all"
-                  ? "bg-[#1E1E1E] text-white border border-white/10 shadow-[0_1px_4px_rgba(0,0,0,0.5)] font-semibold"
-                  : "text-[#888888] hover:text-white hover:bg-white/[0.04] border border-transparent"
+        {/* Design System Segmented Filter Tabs */}
+        <Tabs
+          value={activeFilter}
+          onValueChange={(val) => setActiveFilter(val as RoadmapFilter)}
+          className="w-full sm:w-auto"
+        >
+          <TabsList
+            variant="segmented"
+            layoutId="roadmap-filter"
+            className={`w-full sm:w-auto grid ${
+              progress.revisionDueCount > 0 ? "grid-cols-4" : "grid-cols-3"
+            } sm:flex sm:items-center gap-1 rounded-md border-[#222222] bg-[#0A0A0A] p-1`}
+          >
+            <TabsTrigger
+              value="all"
+              role="button"
+              className={`flex-1 w-full justify-center gap-1.5 px-2 sm:px-3 text-xs transition-colors rounded ${
+                activeFilter === "all" ? "bg-[#1E1E1E] text-white" : ""
               }`}
             >
-              <span>All Problems</span>
+              <span className="truncate">All Problems</span>
               <span
-                className={`font-mono text-[10px] px-1.5 py-0.2 rounded ${
+                className={`font-mono text-[10px] px-1.5 py-0.2 rounded shrink-0 ${
                   activeFilter === "all"
                     ? "bg-[#2A2A2A] text-white"
                     : "bg-[#141414] text-[#666666]"
@@ -149,20 +158,18 @@ export function RoadmapView({ data }: RoadmapViewProps) {
               >
                 {progress.totalRequired}
               </span>
-            </button>
+            </TabsTrigger>
 
-            <button
-              type="button"
-              onClick={() => setActiveFilter("current")}
-              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium shrink-0 transition-all ${
-                activeFilter === "current"
-                  ? "bg-[#1E1E1E] text-white border border-white/10 shadow-[0_1px_4px_rgba(0,0,0,0.5)] font-semibold"
-                  : "text-[#888888] hover:text-white hover:bg-white/[0.04] border border-transparent"
+            <TabsTrigger
+              value="current"
+              role="button"
+              className={`flex-1 w-full justify-center gap-1.5 px-2 sm:px-3 text-xs transition-colors rounded ${
+                activeFilter === "current" ? "bg-[#1E1E1E] text-white" : ""
               }`}
             >
-              <span>Incomplete</span>
+              <span className="truncate">Incomplete</span>
               <span
-                className={`font-mono text-[10px] px-1.5 py-0.2 rounded ${
+                className={`font-mono text-[10px] px-1.5 py-0.2 rounded shrink-0 ${
                   activeFilter === "current"
                     ? "bg-[#2A2A2A] text-white"
                     : "bg-[#141414] text-[#666666]"
@@ -170,20 +177,18 @@ export function RoadmapView({ data }: RoadmapViewProps) {
               >
                 {progress.remainingRequiredCount}
               </span>
-            </button>
+            </TabsTrigger>
 
-            <button
-              type="button"
-              onClick={() => setActiveFilter("completed")}
-              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium shrink-0 transition-all ${
-                activeFilter === "completed"
-                  ? "bg-[#1E1E1E] text-white border border-white/10 shadow-[0_1px_4px_rgba(0,0,0,0.5)] font-semibold"
-                  : "text-[#888888] hover:text-white hover:bg-white/[0.04] border border-transparent"
+            <TabsTrigger
+              value="completed"
+              role="button"
+              className={`flex-1 w-full justify-center gap-1.5 px-2 sm:px-3 text-xs transition-colors rounded ${
+                activeFilter === "completed" ? "bg-[#1E1E1E] text-white" : ""
               }`}
             >
-              <span>Completed</span>
+              <span className="truncate">Completed</span>
               <span
-                className={`font-mono text-[10px] px-1.5 py-0.2 rounded ${
+                className={`font-mono text-[10px] px-1.5 py-0.2 rounded shrink-0 ${
                   activeFilter === "completed"
                     ? "bg-[#2A2A2A] text-white"
                     : "bg-[#141414] text-[#666666]"
@@ -191,21 +196,21 @@ export function RoadmapView({ data }: RoadmapViewProps) {
               >
                 {progress.completedRequired}
               </span>
-            </button>
+            </TabsTrigger>
 
             {progress.revisionDueCount > 0 && (
-              <button
-                type="button"
-                onClick={() => setActiveFilter("revision_due")}
-                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium shrink-0 transition-all ${
+              <TabsTrigger
+                value="revision_due"
+                role="button"
+                className={`flex-1 w-full justify-center gap-1.5 px-2 sm:px-3 text-xs transition-colors rounded ${
                   activeFilter === "revision_due"
-                    ? "bg-[#FF0000] text-white border border-[#FF0000] shadow-[0_1px_4px_rgba(255,0,0,0.4)] font-semibold"
-                    : "bg-[#1A0505] text-[#FF4D4D] hover:bg-[#2A0808] border border-[#7F1D1D]/40"
+                    ? "bg-[#FF0000] text-white"
+                    : "text-[#FF4D4D] hover:bg-[#1A0505]"
                 }`}
               >
-                <span>Revision Due</span>
+                <span className="truncate">Revision Due</span>
                 <span
-                  className={`font-mono text-[10px] px-1.5 py-0.2 rounded ${
+                  className={`font-mono text-[10px] px-1.5 py-0.2 rounded shrink-0 ${
                     activeFilter === "revision_due"
                       ? "bg-[#CC0000] text-white"
                       : "bg-[#3D0A0A] text-[#FF4D4D]"
@@ -213,10 +218,10 @@ export function RoadmapView({ data }: RoadmapViewProps) {
                 >
                   {progress.revisionDueCount}
                 </span>
-              </button>
+              </TabsTrigger>
             )}
-          </div>
-        </div>
+          </TabsList>
+        </Tabs>
 
         {/* Search Input */}
         <div className="relative w-full sm:w-64">
@@ -230,7 +235,7 @@ export function RoadmapView({ data }: RoadmapViewProps) {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search problems, patterns..."
-            className="w-full h-8 pl-8 pr-3 text-xs bg-[#0E0E0E] border border-white/[0.08] focus:border-[#FF0000]/60 focus:bg-[#121212] rounded-lg text-white placeholder-[#666666] outline-none transition-colors"
+            className="w-full h-8 pl-8 pr-3 text-xs bg-[#0A0A0A] border border-[#222222] focus:border-[#FF0000]/60 focus:bg-[#121212] rounded-md text-white placeholder-[#666666] outline-none transition-colors"
           />
         </div>
       </div>
