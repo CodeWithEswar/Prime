@@ -120,12 +120,12 @@ export function PlannerRunwayDialog({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="w-[calc(100%-1.5rem)] sm:w-full max-w-md max-h-[92dvh] overflow-y-auto overscroll-contain border border-[#262626] bg-[#0A0A0A] p-4 sm:p-6 text-white shadow-2xl rounded-xl sm:rounded-xl">
-        <DialogHeader className="space-y-1">
+        <DialogHeader className="space-y-1.5 pr-8 sm:pr-10">
           <div className="flex items-center gap-2">
-            <span className="flex h-6 w-6 items-center justify-center rounded bg-[#FF0000]/10 text-[#FF0000]">
+            <span className="flex h-6 w-6 items-center justify-center rounded bg-[#FF0000]/10 text-[#FF0000] shrink-0">
               <Icon icon={Calendar03Icon} size={14} />
             </span>
-            <DialogTitle className="text-base font-semibold text-white">
+            <DialogTitle className="text-sm sm:text-base font-semibold text-white leading-tight">
               Customize Preparation Runway
             </DialogTitle>
           </div>
@@ -138,7 +138,7 @@ export function PlannerRunwayDialog({
         <div className="space-y-4 pt-1">
           {/* Current plan summary */}
           <div className="rounded-md border border-[#1F1F1F] bg-[#121212] p-3">
-            <div className="flex items-center justify-between text-xs">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-2 text-xs">
               <span className="text-[#888888]">Current plan runway:</span>
               <span className="font-mono font-medium text-white">
                 {initialDays} Days · Target: {dateLabel(currentTargetDate)}

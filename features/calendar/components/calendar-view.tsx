@@ -3,6 +3,7 @@
 import * as React from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useAI } from "@/features/ai/ai-provider";
+import { cn } from "@/lib/utils";
 import { addDays, parseDateParts } from "@/domain/planning/capacity";
 import { CalendarHeader } from "./calendar-header";
 import { PreparationMonth } from "./preparation-month";
@@ -85,6 +86,7 @@ export function CalendarView({ initialSnapshot }: CalendarViewProps) {
   };
 
   // Ask PRIME AI Integration
+  const isAIOpen = Boolean(ai?.open);
   const handleAskPrime = () => {
     if (ai) {
       ai.setOpen(true);
@@ -111,6 +113,7 @@ export function CalendarView({ initialSnapshot }: CalendarViewProps) {
         onNextMonth={handleNextMonth}
         onJumpToday={handleJumpToday}
         onAskPrime={handleAskPrime}
+        isAIOpen={isAIOpen}
       />
 
       {/* 2. Rebalance Diff Preview Banner (if active) */}
@@ -119,7 +122,12 @@ export function CalendarView({ initialSnapshot }: CalendarViewProps) {
       )}
 
       {/* 3. Main Responsive Calendar Surface */}
-      <div className="flex flex-col lg:flex-row gap-6 items-start">
+      <div
+        className={cn(
+          "w-full flex flex-col gap-6 items-start transition-all duration-300",
+          isAIOpen ? "2xl:flex-row" : "xl:flex-row"
+        )}
+      >
         {/* Main Canvas Area */}
         <div className="flex-1 w-full min-w-0">
           {/* Mobile View (< 768px) */}
@@ -180,10 +188,21 @@ export function CalendarView({ initialSnapshot }: CalendarViewProps) {
           </div>
         </div>
 
-        {/* 4. Desktop Right Contextual Day Lens */}
+        {/* 4. Desktop Contextual Day Lens */}
         {isLensOpen && selectedDay && (
-          <div className="hidden lg:block flex-shrink-0 sticky top-20">
-            <DayLens day={selectedDay} onClose={() => setIsLensOpen(false)} />
+          <div
+            className={cn(
+              "w-full flex-shrink-0 transition-all duration-300 hidden md:block",
+              isAIOpen
+                ? "2xl:w-[360px] 3xl:w-[400px] 2xl:sticky 2xl:top-20"
+                : "xl:w-[380px] 2xl:w-[420px] xl:sticky xl:top-20"
+            )}
+          >
+            <DayLens
+              day={selectedDay}
+              onClose={() => setIsLensOpen(false)}
+              className="w-full"
+            />
           </div>
         )}
       </div>
