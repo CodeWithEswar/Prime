@@ -4,6 +4,7 @@
   "main": "src/index.ts",
   "compatibility_date": "2026-10-23",
   "account_id": "de6ff29d95bdc8ce81317ce8a72424c0",
+  "workers_dev": true,
   "vars": {
     "ENVIRONMENT": "development",
     "SUPABASE_URL": "https://irioygnezxaptppbfpqz.supabase.co",

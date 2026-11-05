@@ -1,0 +1,27 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "prime-status-monitor",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-23",
+  "account_id": "de6ff29d95bdc8ce81317ce8a72424c0",
+  "workers_dev": true,
+  "vars": {
+    "ENVIRONMENT": "production",
+    "SUPABASE_URL": "https://irioygnezxaptppbfpqz.supabase.co",
+    "SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlyaW95Z25lenhhcHRwcGJmcHF6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM0MjQ2NjcsImV4cCI6MjEwOTAwMDY2N30.wJka6mXW6RZK-VM4RwL846_lkh1rRU2d93rOccrVrOc",
+    "APP_URL": "https://primeprep.app",
+    "ALERT_EMAIL_RECIPIENT": "eswarchinthakayala2004@gmail.com"
+  },
+  "kv_namespaces": [
+    {
+      "binding": "STATUS_KV",
+      "id": "67161f7caef042739f7ea8eb1b405949"
+    }
+  ],
+  "triggers": {
+    "crons": [
+      "*/5 * * * *",
+      "0 0 * * *"
+    ]
+  }
+}

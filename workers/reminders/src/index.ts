@@ -42,6 +42,68 @@ function isQuietHours(now: Date, timezone: string, startStr: string, endStr: str
 }
 
 /**
+ * Keeps Supabase PostgreSQL and PostgREST active by issuing a lightweight ping query.
+ * Supabase free-tier projects pause after 7 days of inactivity; this heartbeat guarantees
+ * the project stays active indefinitely by generating ongoing database activity.
+ */
+export async function pingSupabaseKeepAlive(supabase: any): Promise<{
+  alive: boolean;
+  timestamp: string;
+  latencyMs: number;
+  source: string;
+  error?: string;
+}> {
+  const start = Date.now();
+  try {
+    if (!supabase || typeof supabase.from !== "function") {
+      return { alive: false, timestamp: new Date().toISOString(), latencyMs: 0, source: "mock", error: "No client" };
+    }
+
+    // Perform an active SELECT query through PostgREST into Postgres.
+    // This generates real HTTP + DB activity that Supabase monitors to reset the 7-day inactivity timer.
+    const { error } = await supabase
+      .from("notifications")
+      .select("id")
+      .limit(1);
+
+    const latencyMs = Date.now() - start;
+
+    if (error) {
+      // Secondary fallback ping on another core table
+      const { error: fallbackError } = await supabase
+        .from("notification_preferences")
+        .select("user_id")
+        .limit(1);
+
+      if (fallbackError) {
+        return {
+          alive: false,
+          timestamp: new Date().toISOString(),
+          latencyMs,
+          source: "supabase-fallback",
+          error: error.message || fallbackError.message,
+        };
+      }
+    }
+
+    return {
+      alive: true,
+      timestamp: new Date().toISOString(),
+      latencyMs,
+      source: "supabase-postgrest",
+    };
+  } catch (err: any) {
+    return {
+      alive: false,
+      timestamp: new Date().toISOString(),
+      latencyMs: Date.now() - start,
+      source: "exception",
+      error: err?.message ?? String(err),
+    };
+  }
+}
+
+/**
  * Core processor for due notification schedules
  */
 async function processDueSchedules(env: ExtendedWorkerEnv): Promise<{
@@ -244,6 +306,23 @@ const worker = {
       );
     }
 
+    if (url.pathname === "/keep-alive" || url.pathname === "/ping") {
+      const supabase = createWorkerSupabaseClient(env);
+      const keepAlive = await pingSupabaseKeepAlive(supabase);
+      return new Response(
+        JSON.stringify({
+          status: keepAlive.alive ? "active" : "degraded",
+          service: "Supabase PostgreSQL Keep-Alive",
+          target: env.SUPABASE_URL,
+          keepAlive,
+        }),
+        {
+          status: keepAlive.alive ? 200 : 503,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+    }
+
     if (url.pathname === "/dispatch-due") {
       const stats = await processDueSchedules(env);
       return new Response(JSON.stringify({ success: true, stats }), {
@@ -281,6 +360,12 @@ const worker = {
     });
 
     try {
+      const supabase = createWorkerSupabaseClient(env);
+
+      // 1. Guaranteed Keep-Alive Heartbeat for Supabase (prevents 7-day free-tier auto-pause)
+      const keepAlive = await pingSupabaseKeepAlive(supabase);
+      workerLog("reminders", "info", "Supabase keep-alive heartbeat pulse dispatched", keepAlive);
+
       const appUrl = env.APP_URL || "https://primeprep.app";
       const secret = env.CRON_SECRET || env.EMAIL_DELIVERY_INTERNAL_SECRET || "";
 

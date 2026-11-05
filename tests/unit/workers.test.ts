@@ -37,6 +37,15 @@ describe("Cloudflare Workers Foundation", () => {
       expect(text).toContain("PRIME Planner Worker Foundation");
     });
 
+    it("responds to /keep-alive endpoint with service payload", async () => {
+      const request = new Request("http://localhost/keep-alive");
+      const response = await remindersWorker.fetch(request, mockEnv);
+      expect([200, 503]).toContain(response.status);
+      expect(response.headers.get("Content-Type")).toBe("application/json");
+      const body = await response.json();
+      expect(body.service).toContain("Keep-Alive");
+    });
+
     it("executes scheduled cron handler without throwing", async () => {
       const consoleSpy = vi.spyOn(console, "log").mockImplementation(() => {});
 
@@ -46,6 +55,15 @@ describe("Cloudflare Workers Foundation", () => {
 
       expect(consoleSpy).toHaveBeenCalled();
       consoleSpy.mockRestore();
+    });
+
+    it("responds to /keep-alive endpoint with service payload", async () => {
+      const request = new Request("http://localhost/keep-alive");
+      const response = await plannerWorker.fetch(request, mockEnv);
+      expect([200, 503]).toContain(response.status);
+      expect(response.headers.get("Content-Type")).toBe("application/json");
+      const body = await response.json();
+      expect(body.service).toContain("Keep-Alive");
     });
   });
 
@@ -71,6 +89,15 @@ describe("Cloudflare Workers Foundation", () => {
       expect(response.status).toBe(200);
       const text = await response.text();
       expect(text).toContain("PRIME Reminders Worker Foundation");
+    });
+
+    it("responds to /keep-alive endpoint with service payload", async () => {
+      const request = new Request("http://localhost/keep-alive");
+      const response = await remindersWorker.fetch(request, mockEnv);
+      expect([200, 503]).toContain(response.status);
+      expect(response.headers.get("Content-Type")).toBe("application/json");
+      const body = await response.json();
+      expect(body.service).toContain("Keep-Alive");
     });
 
     it("executes scheduled cron handler without throwing", async () => {
