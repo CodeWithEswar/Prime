@@ -142,6 +142,31 @@ describe("authentication boundaries", () => {
     auth.oauth.mockResolvedValue({ data: { url: "https://evil.example" }, error: null });
     expect((await googlePost(request("/auth/google", {}))).status).toBe(503);
   });
+  it("allows Google sign-in from Vercel deployment domain in production", async () => {
+    vi.stubEnv("NODE_ENV", "production");
+    auth.oauth.mockResolvedValue({
+      data: { url: "http://127.0.0.1:54321/auth/v1/authorize?provider=google" },
+      error: null,
+    });
+    const vercelReq = new NextRequest("https://primein.vercel.app/auth/google", {
+      method: "POST",
+      headers: {
+        origin: "https://primein.vercel.app",
+        host: "primein.vercel.app",
+        accept: "application/json",
+      },
+      body: new URLSearchParams({ next: "/" }),
+    });
+    const result = await googlePost(vercelReq);
+    expect(result.status).toBe(200);
+    expect(auth.oauth).toHaveBeenCalledWith({
+      provider: "google",
+      options: {
+        skipBrowserRedirect: true,
+        redirectTo: "https://primein.vercel.app/auth/callback?next=%2F",
+      },
+    });
+  });
   it("only reaches completion after a verified code exchange with a session", async () => {
     auth.exchange.mockResolvedValue({
       data: { user: { id: "verified" }, session: { access_token: "test" } },

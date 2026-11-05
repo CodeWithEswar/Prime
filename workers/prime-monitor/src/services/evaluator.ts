@@ -140,3 +140,4 @@ export function aggregateSystemState(serviceStates: ServiceState[]): ServiceStat
   if (serviceStates.some((s) => s === "operational")) return "degraded";
   return "unknown";
 }
+

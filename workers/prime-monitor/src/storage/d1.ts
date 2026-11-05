@@ -105,3 +105,4 @@ export async function recordObservationD1(
     console.warn("D1 record observation error:", err);
   }
 }
+

@@ -31,3 +31,4 @@ export default async function StatusPage() {
 
   return <StatusClient initialSnapshot={initialSnapshot} />;
 }
+
