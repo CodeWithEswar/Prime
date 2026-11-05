@@ -71,3 +71,4 @@ export function StatusIcon({ status, size = 14, className }: StatusIconProps) {
       );
   }
 }
+
