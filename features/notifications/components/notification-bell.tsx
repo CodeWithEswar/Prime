@@ -26,7 +26,7 @@ export function NotificationBell({ className }: NotificationBellProps) {
             : "Notifications"
         }
         className={cn(
-          "relative text-[var(--text-secondary)]",
+          "relative h-8 w-8 min-w-[32px] p-0 border border-[var(--border-default)] bg-[rgba(255,255,255,0.03)] text-[var(--text-secondary)] hover:border-[var(--border-strong)] hover:bg-[var(--surface-hover)] hover:text-white rounded-[var(--radius-sm)] shrink-0",
           unreadCount > 0 && "text-white",
           className
         )}

@@ -38,7 +38,7 @@ export function SidebarSheet({
       <SheetContent
         id="prime-sidebar-sheet"
         side="left"
-        className="shell-sidebar-sheet"
+        className="shell-sidebar-sheet !w-[248px] max-w-[70vw] sm:!w-[280px]"
         onCloseAutoFocus={onCloseAutoFocus}
       >
         <div className="shell-sidebar-sheet-heading">

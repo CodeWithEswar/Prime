@@ -29,7 +29,18 @@
 @media (max-width: 767px) {
   .shell-ask-prime {
     width: 32px;
+    height: 32px;
+    min-width: 32px;
     padding: 0;
+    border: 1px solid var(--border-default);
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: var(--radius-sm);
+    flex-shrink: 0;
+  }
+  .shell-ask-prime:hover,
+  .shell-ask-prime[aria-expanded="true"] {
+    border-color: var(--border-strong);
+    background: var(--surface-hover);
   }
   .shell-ask-prime span {
     display: none;
