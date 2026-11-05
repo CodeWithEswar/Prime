@@ -1,5 +1,6 @@
 .ai-workspace[aria-label] {
-  height: calc(var(--ai-viewport-height, 100dvh) - 96px);
+  height: var(--ai-viewport-height, 100dvh);
+  max-height: var(--ai-viewport-height, 100dvh);
   min-height: 0;
 }
 .ai-panel {
@@ -56,10 +57,36 @@
 }
 @media (max-width: 767px) {
   .ai-workspace[aria-label] {
-    height: calc(
-      var(--ai-viewport-height, 100dvh) - 120px - env(safe-area-inset-bottom, 0px)
-    );
+    display: flex;
+    flex-direction: column;
+    height: var(--ai-viewport-height, 100dvh);
+    max-height: var(--ai-viewport-height, 100dvh);
     min-height: 0;
+  }
+  .ai-workspace-history {
+    display: none;
+  }
+  .ai-mobile-menu-btn {
+    display: inline-flex;
+  }
+  .ai-surface-panel .ai-mobile-menu-btn {
+    display: none !important;
+  }
+  .ai-canvas-toolbar {
+    padding: 12px 14px;
+  }
+  .ai-canvas-toolbar h1 {
+    font-size: 16px;
+  }
+  .ai-composer-dock {
+    padding: 8px 12px max(10px, env(safe-area-inset-bottom));
+  }
+  .ai-composer-dock .ai-composer {
+    max-width: 100%;
+    padding: 8px 10px;
+  }
+  .ai-composer-dock .ai-composer-disclaimer {
+    font-size: 9px;
   }
   .ai-surface .ai-message-actions {
     row-gap: 8px;

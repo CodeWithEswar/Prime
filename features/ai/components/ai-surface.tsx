@@ -48,6 +48,8 @@ import {
   AiChat01Icon,
   RotateRight01Icon,
   Tick02Icon,
+  ArrowLeft01Icon,
+  Menu01Icon,
 } from "@hugeicons/core-free-icons";
 const intentIcons: Record<AIIntent, IconSvgElement> = {
   ask: AiChat01Icon,
@@ -233,8 +235,19 @@ export function ConversationRail({ onSelect }: { onSelect?: () => void }) {
   });
   return (
     <div className="ai-history">
+      <div className="ai-rail-header">
+        <Link
+          href="/roadmap"
+          className="ai-rail-back-link"
+          title="Return to PRIME Workspace"
+        >
+          <Icon icon={ArrowLeft01Icon} size={14} />
+          <span>Workspace</span>
+        </Link>
+        <span className="ai-rail-badge">PRIME AI</span>
+      </div>
       <AIControl
-        className="ai-secondary"
+        className="ai-rail-new-btn"
         icon={Add01Icon}
         onClick={() => {
           ai.newConversation();
@@ -539,11 +552,23 @@ export function AISurface({ panel = false }: { panel?: boolean }) {
   return (
     <div ref={surface} className={panel ? "ai-surface ai-surface-panel" : "ai-surface"}>
       <div className="ai-canvas-toolbar">
-        <div>
-          <span className="ai-eyebrow">Preparation intelligence</span>
-          <h1>
-            <Icon icon={AiChat01Icon} size={19} /> PRIME AI
-          </h1>
+        <div className="ai-canvas-heading">
+          {!panel && (
+            <AIControl
+              icon={Menu01Icon}
+              size="icon-sm"
+              className="ai-mobile-menu-btn"
+              title="Conversations"
+              aria-label="Conversations"
+              onClick={() => setHistoryOpen(true)}
+            />
+          )}
+          <div>
+            <span className="ai-eyebrow">Preparation intelligence</span>
+            <h1>
+              <Icon icon={AiChat01Icon} size={19} /> PRIME AI
+            </h1>
+          </div>
         </div>
         <div className="ai-action-row">
           <AIControl
@@ -570,6 +595,20 @@ export function AISurface({ panel = false }: { panel?: boolean }) {
             disabled={running}
             onClick={() => ai.newConversation()}
           ></AIControl>
+          {!panel && (
+            <AIControl
+              asChild
+              size="icon-sm"
+              title="Return to Workspace"
+              aria-label="Return to Workspace"
+              className="ai-exit-workspace-btn"
+            >
+              <Link href="/roadmap">
+                <Icon icon={Layout01Icon} size={15} />
+                <span className="sr-only">Return to Workspace</span>
+              </Link>
+            </AIControl>
+          )}
           {panel && (
             <>
               <AIControl
@@ -725,104 +764,106 @@ export function AISurface({ panel = false }: { panel?: boolean }) {
           Continue to latest
         </AIControl>
       )}
-      <form
-        className="ai-composer"
-        onSubmit={(e) => {
-          e.preventDefault();
-          if (!draft.trim() || running) return;
-          const text = draft;
-          setDraft("");
-          autoScroll.current = true;
-          setFollowing(true);
-          void ai.send(text, intent).then((accepted) => {
-            if (!accepted) setDraft((current) => current || text);
-          });
-        }}
-      >
-        <div className="ai-composer-context">
-          <span>
-            Using:{" "}
-            {ai.reference.type === "general" ? "General preparation" : ai.reference.type}
-          </span>
-          {ai.hintDepth > 0 && <span>Hint {ai.hintDepth}/5</span>}
-        </div>
-        <label
-          className="sr-only"
-          htmlFor={panel ? "ai-panel-prompt" : "ai-workspace-prompt"}
-        >
-          Ask PRIME
-        </label>
-        <textarea
-          disabled={!ready}
-          id={panel ? "ai-panel-prompt" : "ai-workspace-prompt"}
-          placeholder="Ask PRIME…"
-          rows={2}
-          maxLength={6000}
-          value={draft}
-          onChange={(e) => setDraft(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" && !e.shiftKey && !e.nativeEvent.isComposing) {
-              e.preventDefault();
-              e.currentTarget.form?.requestSubmit();
-            }
+      <div className="ai-composer-dock">
+        <form
+          className="ai-composer"
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (!draft.trim() || running) return;
+            const text = draft;
+            setDraft("");
+            autoScroll.current = true;
+            setFollowing(true);
+            void ai.send(text, intent).then((accepted) => {
+              if (!accepted) setDraft((current) => current || text);
+            });
           }}
-        />
-        <div className="ai-composer-footer">
-          <Select
-            value={intent}
-            onValueChange={(value) => setIntent(intentSchema.parse(value))}
+        >
+          <div className="ai-composer-context">
+            <span>
+              Using:{" "}
+              {ai.reference.type === "general" ? "General preparation" : ai.reference.type}
+            </span>
+            {ai.hintDepth > 0 && <span>Hint {ai.hintDepth}/5</span>}
+          </div>
+          <label
+            className="sr-only"
+            htmlFor={panel ? "ai-panel-prompt" : "ai-workspace-prompt"}
           >
-            <SelectTrigger aria-label="AI intent" className="ai-intent-select">
-              <Icon icon={intentIcons[intent]} size={14} aria-hidden="true" />
-              <SelectValue>{intentLabels[intent]}</SelectValue>
-            </SelectTrigger>
-            <SelectContent className="ai-intent-menu">
-              <SelectGroup>
-                <SelectLabel>Working mode</SelectLabel>
-                {intentSchema.options.map((key) => (
-                  <SelectItem key={key} value={key}>
-                    <span className="ai-select-item">
-                      <Icon icon={intentIcons[key]} size={14} />
-                      {intentLabels[key]}
-                    </span>
-                  </SelectItem>
-                ))}
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-          <span className="ai-character-count">{draft.length}/6000</span>
-          {running ? (
-            <AIControl
-              key="stop-generation"
-              iconOnly
-              icon={StopIcon}
-              type="button"
-              className="ai-secondary"
-              onClick={(event) => {
-                event.preventDefault();
-                ai.stop();
-              }}
+            Ask PRIME
+          </label>
+          <textarea
+            disabled={!ready}
+            id={panel ? "ai-panel-prompt" : "ai-workspace-prompt"}
+            placeholder="Ask PRIME…"
+            rows={2}
+            maxLength={6000}
+            value={draft}
+            onChange={(e) => setDraft(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && !e.shiftKey && !e.nativeEvent.isComposing) {
+                e.preventDefault();
+                e.currentTarget.form?.requestSubmit();
+              }
+            }}
+          />
+          <div className="ai-composer-footer">
+            <Select
+              value={intent}
+              onValueChange={(value) => setIntent(intentSchema.parse(value))}
             >
-              Stop generation
-            </AIControl>
-          ) : (
-            <AIControl
-              key="send-message"
-              iconOnly
-              icon={SentIcon}
-              variant="primary"
-              className="ai-primary"
-              type="submit"
-              disabled={!ready || !draft.trim()}
-            >
-              Send
-            </AIControl>
-          )}
-        </div>
-      </form>
-      <p className="ai-composer-disclaimer">
-        PRIME AI can make mistakes. Your recorded progress stays authoritative.
-      </p>
+              <SelectTrigger aria-label="AI intent" className="ai-intent-select">
+                <Icon icon={intentIcons[intent]} size={14} aria-hidden="true" />
+                <SelectValue>{intentLabels[intent]}</SelectValue>
+              </SelectTrigger>
+              <SelectContent className="ai-intent-menu">
+                <SelectGroup>
+                  <SelectLabel>Working mode</SelectLabel>
+                  {intentSchema.options.map((key) => (
+                    <SelectItem key={key} value={key}>
+                      <span className="ai-select-item">
+                        <Icon icon={intentIcons[key]} size={14} />
+                        {intentLabels[key]}
+                      </span>
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+            <span className="ai-character-count">{draft.length}/6000</span>
+            {running ? (
+              <AIControl
+                key="stop-generation"
+                iconOnly
+                icon={StopIcon}
+                type="button"
+                className="ai-secondary"
+                onClick={(event) => {
+                  event.preventDefault();
+                  ai.stop();
+                }}
+              >
+                Stop generation
+              </AIControl>
+            ) : (
+              <AIControl
+                key="send-message"
+                iconOnly
+                icon={SentIcon}
+                variant="primary"
+                className="ai-primary"
+                type="submit"
+                disabled={!ready || !draft.trim()}
+              >
+                Send
+              </AIControl>
+            )}
+          </div>
+        </form>
+        <p className="ai-composer-disclaimer">
+          PRIME AI can make mistakes. Your recorded progress stays authoritative.
+        </p>
+      </div>
       <Sheet open={historyOpen} onOpenChange={setHistoryOpen}>
         <SheetContent side="left" className="ai-drawer">
           <SheetTitle>Conversations</SheetTitle>
