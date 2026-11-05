@@ -16,61 +16,18 @@ interface RoadmapHeaderProps {
 
 export function RoadmapHeader({ progress }: RoadmapHeaderProps) {
   return (
-    <div className="space-y-5 pb-6 border-b border-[#1A1A1A]">
-      {/* Category Tag & Switcher Rail */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
-        {/* Beacon Badge */}
-        <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-[#FF0000]/10 border border-[#FF0000]/25 self-start">
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF0000] opacity-75" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#FF0000] shadow-[0_0_8px_#FF0000]" />
-          </span>
-          <span className="text-[10px] sm:text-[11px] font-mono font-bold tracking-widest text-[#FF4D4D] uppercase">
-            CURRICULUM · PRIME CORE
-          </span>
-        </div>
-
-        {/* Roadmap Switcher Rail - Smooth horizontal scroll on mobile, zero awkward wrap */}
-        <div className="w-full sm:w-auto overflow-x-auto no-scrollbar scroll-smooth -mx-1 px-1 py-0.5">
-          <nav
-            aria-label="Curriculum Switcher"
-            className="inline-flex items-center gap-1 p-1 rounded-xl bg-[#0E0E0E] border border-white/[0.08] shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]"
-          >
-            <span className="inline-flex items-center gap-1.5 rounded-lg bg-[#1F1F1F] px-3 py-1.5 text-xs font-semibold text-white shadow-sm border border-white/10 shrink-0 whitespace-nowrap">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#FF0000] shadow-[0_0_6px_#FF0000]" />
-              <span>DSA Roadmap</span>
+    <div className="space-y-4 pb-6 border-b border-[#1A1A1A]">
+      {/* Category Eyebrow & Title */}
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+        <div className="space-y-2">
+          {/* Eyebrow Label */}
+          <div className="flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#FF0000] shadow-[0_0_6px_#FF0000]" />
+            <span className="text-[11px] font-mono font-bold tracking-widest text-[#FF0000] uppercase">
+              CURRICULUM · PRIME CORE
             </span>
-            <Link
-              href="/roadmap/dbms"
-              className="rounded-lg px-3 py-1.5 text-xs font-medium text-[#888888] transition-all hover:text-white hover:bg-white/[0.04] shrink-0 whitespace-nowrap"
-            >
-              DBMS (12-Day)
-            </Link>
-            <Link
-              href="/roadmap/os"
-              className="rounded-lg px-3 py-1.5 text-xs font-medium text-[#888888] transition-all hover:text-white hover:bg-white/[0.04] shrink-0 whitespace-nowrap"
-            >
-              OS (12-Day)
-            </Link>
-            <Link
-              href="/roadmap/cn"
-              className="rounded-lg px-3 py-1.5 text-xs font-medium text-[#888888] transition-all hover:text-white hover:bg-white/[0.04] shrink-0 whitespace-nowrap"
-            >
-              CN (12-Day)
-            </Link>
-            <Link
-              href="/roadmap/oop"
-              className="rounded-lg px-3 py-1.5 text-xs font-medium text-[#888888] transition-all hover:text-white hover:bg-white/[0.04] shrink-0 whitespace-nowrap"
-            >
-              OOP Java (12-Day)
-            </Link>
-          </nav>
-        </div>
-      </div>
+          </div>
 
-      {/* Main Title & Subtitle */}
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pt-1">
-        <div className="space-y-1.5">
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight">
             DSA Roadmap
           </h1>
@@ -111,7 +68,7 @@ export function RoadmapHeader({ progress }: RoadmapHeaderProps) {
                 Solved
               </span>
             </div>
-            <span className="shrink-0 rounded-md border border-emerald-500/25 bg-emerald-500/10 px-1.5 py-0.5 font-mono text-[10px] sm:text-[11px] font-bold text-emerald-400">
+            <span className="font-mono text-xs font-bold text-emerald-400">
               {progress.completionPercentage}%
             </span>
           </div>
