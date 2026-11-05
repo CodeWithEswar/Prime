@@ -125,7 +125,7 @@ export function SubjectBadge({
     >
       <Icon icon={cfg.icon} size={iconSizes[size]} className="shrink-0" />
       {showLabel && (
-        <span className={size === "xs" ? "hidden sm:inline" : undefined}>
+        <span className={cn("truncate", size === "xs" && "hidden sm:inline")}>
           {cfg.shortLabel}
         </span>
       )}

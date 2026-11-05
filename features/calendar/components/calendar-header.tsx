@@ -22,6 +22,7 @@ export interface CalendarHeaderProps {
   onNextMonth: () => void;
   onJumpToday: () => void;
   onAskPrime?: () => void;
+  isAIOpen?: boolean;
 }
 
 export function CalendarHeader({
@@ -33,6 +34,7 @@ export function CalendarHeader({
   onNextMonth,
   onJumpToday,
   onAskPrime,
+  isAIOpen = false,
 }: CalendarHeaderProps) {
   const trajectory = plan?.trajectory || "on_track";
   const trajectoryText = trajectory.replace("_", " ").toUpperCase();
@@ -112,7 +114,11 @@ export function CalendarHeader({
               variant="outline"
               size="sm"
               onClick={onAskPrime}
-              className="text-xs font-mono h-8 border-[#262626] bg-[#0E0E0E] text-[#E0E0E0] hover:text-white hover:border-[#383838] gap-1.5 cursor-pointer px-2.5 sm:px-3"
+              className={cn(
+                "text-xs font-mono h-8 border-[#262626] bg-[#0E0E0E] text-[#E0E0E0] hover:text-white hover:border-[#383838] gap-1.5 cursor-pointer px-2.5 sm:px-3 transition-colors",
+                isAIOpen &&
+                  "border-[#FF0000]/60 bg-[#160606] text-white shadow-[0_0_10px_rgba(255,0,0,0.25)]"
+              )}
             >
               <Icon icon={SparklesIcon} size={14} className="text-[#FF0000]" />
               <span>Ask PRIME</span>

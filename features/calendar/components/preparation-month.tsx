@@ -137,7 +137,7 @@ export function PreparationMonth({
               onClick={() => onSelectDate(day.date)}
               onKeyDown={(e) => handleKeyDown(e, idx, day.date)}
               className={cn(
-                "group relative flex flex-col justify-between p-1.5 sm:p-2 min-h-[74px] sm:min-h-[92px] rounded-md border text-left transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#FF0000]",
+                "group relative flex flex-col justify-between p-1.5 sm:p-2 min-h-[74px] sm:min-h-[92px] rounded-md border text-left transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#FF0000] min-w-0 overflow-hidden",
                 // Current month vs adjacent month
                 day.isCurrentMonth
                   ? "bg-[#090909] border-[#181818] hover:border-[#2A2A2A] hover:bg-[#0E0E0E]"
@@ -148,12 +148,12 @@ export function PreparationMonth({
               )}
             >
               {/* Top Row: Date Number & Signal Terminals */}
-              <div className="w-full flex items-center justify-between">
+              <div className="w-full flex items-center justify-between gap-1 min-w-0">
                 {/* Date Number + Today Beacon */}
-                <div className="flex items-center gap-1.5">
+                <div className="flex items-center gap-1.5 min-w-0 flex-shrink-0">
                   {isToday && (
                     <span
-                      className="inline-block w-1.5 h-1.5 rounded-full bg-[#FF0000] shadow-[0_0_6px_rgba(255,0,0,0.9)]"
+                      className="inline-block w-1.5 h-1.5 rounded-full bg-[#FF0000] shadow-[0_0_6px_rgba(255,0,0,0.9)] flex-shrink-0"
                       title="Today"
                     />
                   )}
@@ -172,13 +172,14 @@ export function PreparationMonth({
                 </div>
 
                 {/* Right Badges: Target, Overdue, Carry */}
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-1 min-w-0 flex-shrink-0">
                   {day.isTargetDate && (
                     <span
                       className="px-1 py-0.2 rounded text-[9px] font-mono font-bold bg-[#FF0000]/15 text-[#FF0000] border border-[#FF0000]/40 uppercase tracking-tighter"
                       title="Preparation Target Date"
                     >
-                      TARGET
+                      <span className="hidden xl:inline">TARGET</span>
+                      <span className="xl:hidden">TGT</span>
                     </span>
                   )}
 
@@ -215,7 +216,7 @@ export function PreparationMonth({
               </div>
 
               {/* Middle: Scheduled Course & Subject Badges (DBMS, OS, OOP, CN, DSA) */}
-              <div className="w-full min-h-[22px] flex flex-wrap items-center gap-1 my-1">
+              <div className="w-full min-h-[22px] flex flex-wrap items-center gap-1 my-1 min-w-0 overflow-hidden">
                 {day.subjects && day.subjects.length > 0 ? (
                   day.subjects.map((subj) => (
                     <SubjectBadge key={subj} subject={subj} size="xs" showLabel={true} />
@@ -226,7 +227,7 @@ export function PreparationMonth({
               </div>
 
               {/* Middle / Bottom Load Rail & Metrics */}
-              <div className="w-full space-y-1.5 pt-1">
+              <div className="w-full space-y-1.5 pt-1 min-w-0">
                 {/* Day Load Rail */}
                 <LoadRail
                   plannedMinutes={day.plannedMinutes}
@@ -237,14 +238,15 @@ export function PreparationMonth({
                 />
 
                 {/* Bottom Status Text */}
-                <div className="flex items-center justify-between text-[10px] font-mono">
+                <div className="flex items-center justify-between text-[10px] font-mono min-w-0">
                   {day.isRestDay ? (
-                    <span className="text-[#666666] tracking-wider uppercase">
+                    <span className="text-[#666666] tracking-wider uppercase truncate">
                       REST
                     </span>
                   ) : (
                     <span
                       className={cn(
+                        "truncate",
                         day.plannedMinutes > 0 ? "text-[#AAAAAA]" : "text-[#444444]"
                       )}
                     >

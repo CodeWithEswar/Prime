@@ -55,7 +55,10 @@ export function DialogHeader({
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={cn("flex flex-col space-y-1.5 text-left", className)} {...props} />
+    <div
+      className={cn("flex flex-col space-y-1.5 text-left pr-8 sm:pr-10", className)}
+      {...props}
+    />
   );
 }
 DialogHeader.displayName = "DialogHeader";
