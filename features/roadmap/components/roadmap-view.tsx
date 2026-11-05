@@ -88,17 +88,16 @@ export function RoadmapView({ data }: RoadmapViewProps) {
               <Link
                 key={f.course}
                 href={f.href}
-                className="group relative overflow-hidden rounded-xl border border-white/[0.08] bg-gradient-to-b from-[#121212] to-[#080808] p-4 transition-all duration-200 hover:border-[#FF0000]/60 hover:shadow-[0_4px_24px_rgba(255,0,0,0.08)] hover:-translate-y-0.5"
+                className="group relative overflow-hidden rounded-md border border-[#222222] bg-[#0A0A0A] p-4 transition-all duration-150 hover:border-[#FF0000]/60 hover:shadow-[0_4px_24px_rgba(255,0,0,0.08)]"
               >
-                <div className="pointer-events-none absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#FF0000]/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                 <div className="flex items-center justify-between">
-                  <span className="rounded-md border border-white/10 bg-[#1A1A1A] px-2 py-0.5 font-mono text-[11px] font-bold text-white group-hover:border-[#FF0000]/40 group-hover:bg-[#FF0000]/15 group-hover:text-[#FF4D4D] transition-colors">
+                  <span className="rounded border border-white/10 bg-[#1A1A1A] px-2 py-0.5 font-mono text-[11px] font-bold text-white group-hover:border-[#FF0000]/40 group-hover:bg-[#FF0000]/15 group-hover:text-[#FF4D4D] transition-colors">
                     {f.label}
                   </span>
                   <span
                     className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${
                       f.enrolled
-                        ? "border border-green-500/40 bg-green-500/10 text-green-400"
+                        ? "border border-[#FF0000]/40 bg-[#FF0000]/10 text-[#FF4D4D]"
                         : "border border-white/10 bg-white/5 text-[#888888]"
                     }`}
                   >
