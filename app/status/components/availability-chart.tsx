@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import {
   AreaChart,
   Area,
@@ -19,6 +19,11 @@ interface AvailabilityChartProps {
 
 export function AvailabilityChart({ rollups }: AvailabilityChartProps) {
   const [viewMode, setViewMode] = useState<"timeline" | "curve">("timeline");
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Build a complete 14-day rolling window
   const days = useMemo(() => {
@@ -28,7 +33,12 @@ export function AvailabilityChart({ rollups }: AvailabilityChartProps) {
     }
 
     const result = [];
-    const now = new Date();
+    const latestDate = rollups && rollups.length > 0 ? rollups[rollups.length - 1].date : null;
+    const now = latestDate
+      ? new Date(`${latestDate}T12:00:00Z`)
+      : mounted
+        ? new Date()
+        : new Date("2026-11-05T12:00:00Z");
 
     for (let i = 13; i >= 0; i--) {
       const d = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() - i));

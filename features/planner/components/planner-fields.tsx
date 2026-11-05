@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/utils";
 import {
   Select,
   SelectContent,
@@ -575,27 +576,103 @@ export function PlannerFields({
         </Card>
       )}
       {editor.kind === "rule" && (
-        <>
-          <Field label={weekdays[editor.weekday] + " study minutes"}>
-            <Input
-              aria-label="Study minutes"
-              type="number"
-              min={0}
-              max={720}
-              value={Number.isNaN(editor.minutes) ? "" : editor.minutes}
-              onChange={(e) => onChange({ ...editor, minutes: e.target.valueAsNumber })}
-            />
-          </Field>
+        <div className="space-y-4">
+          <div className="rounded-lg border border-[#222222] bg-[#111111] p-3.5 flex items-center justify-between">
+            <div>
+              <p className="text-sm font-semibold text-white">{weekdays[editor.weekday]}</p>
+              <p className="text-xs text-[#888888]">
+                {editor.rest ? "Scheduled as a rest day" : "Scheduled as an active study day"}
+              </p>
+            </div>
+            <span
+              className={cn(
+                "px-2 py-0.5 rounded text-[10px] font-mono uppercase font-bold border",
+                editor.rest
+                  ? "bg-[#1E1E1E] text-[#888888] border-[#333333]"
+                  : "bg-[#FF0000]/15 text-[#FF0000] border-[#FF0000]/40"
+              )}
+            >
+              {editor.rest ? "REST DAY" : "ACTIVE"}
+            </span>
+          </div>
+
           <Toggle
-            label="Rest day"
+            label="Mark as rest day (0 minutes)"
             value={editor.rest}
-            onChange={(rest) => onChange({ ...editor, rest })}
+            onChange={(rest) =>
+              onChange({
+                ...editor,
+                rest,
+                minutes: rest ? 0 : editor.minutes || 90,
+              })
+            }
           />
-        </>
+
+          {!editor.rest && (
+            <div className="space-y-3 pt-1 border-t border-[#1F1F1F]">
+              <div className="space-y-1.5">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="font-medium text-white">Daily study minutes</span>
+                  <span className="font-mono text-xs text-[#AAAAAA]">
+                    {Math.floor((editor.minutes || 0) / 60)}h{" "}
+                    {(editor.minutes || 0) % 60 ? `${(editor.minutes || 0) % 60}m` : ""}
+                  </span>
+                </div>
+                <Input
+                  aria-label="Study minutes"
+                  type="number"
+                  min={15}
+                  max={720}
+                  step={15}
+                  value={Number.isNaN(editor.minutes) ? "" : editor.minutes}
+                  onChange={(e) =>
+                    onChange({ ...editor, minutes: e.target.valueAsNumber })
+                  }
+                  className="bg-[#121212] border-[#262626] text-white font-mono"
+                />
+              </div>
+
+              {/* Quick duration presets */}
+              <div className="space-y-1.5">
+                <span className="text-[10px] font-mono text-[#888888] uppercase tracking-wider block">
+                  Quick presets
+                </span>
+                <div className="grid grid-cols-4 gap-1.5">
+                  {[
+                    { label: "1h", val: 60 },
+                    { label: "1.5h", val: 90 },
+                    { label: "2h", val: 120 },
+                    { label: "3h", val: 180 },
+                  ].map((preset) => (
+                    <button
+                      key={preset.val}
+                      type="button"
+                      onClick={() => onChange({ ...editor, minutes: preset.val })}
+                      className={cn(
+                        "px-2 py-1.5 text-xs font-mono rounded border transition-colors",
+                        editor.minutes === preset.val
+                          ? "bg-[#FF0000]/15 text-[#FF0000] border-[#FF0000]/50 font-bold"
+                          : "bg-[#141414] text-[#AAAAAA] border-[#222222] hover:border-[#444] hover:text-white"
+                      )}
+                    >
+                      {preset.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
       )}
       {editor.kind === "buffer" && (
-        <>
-          <Field label="Time held in reserve (%)">
+        <div className="space-y-4">
+          <div className="space-y-1.5">
+            <div className="flex items-center justify-between text-xs font-medium text-white">
+              <span>Time held in reserve (%)</span>
+              <span className="font-mono text-xs font-bold text-[#FF0000]">
+                {Number.isNaN(editor.percent) ? 0 : editor.percent}%
+              </span>
+            </div>
             <Input
               aria-label="Planning buffer percent"
               type="number"
@@ -603,13 +680,69 @@ export function PlannerFields({
               max={40}
               value={Number.isNaN(editor.percent) ? "" : editor.percent}
               onChange={(e) => onChange({ ...editor, percent: e.target.valueAsNumber })}
+              className="bg-[#121212] border-[#262626] text-white font-mono"
             />
-          </Field>
-          <p className={"text-xs " + muted}>
-            Keep 5–40% of each study day available for harder problems and schedule
-            changes.
-          </p>
-        </>
+          </div>
+
+          {/* Quick presets */}
+          <div className="space-y-1.5">
+            <span className="text-[10px] font-mono text-[#888888] uppercase tracking-wider block">
+              Quick presets
+            </span>
+            <div className="grid grid-cols-4 gap-1.5">
+              {[10, 15, 20, 25].map((pct) => (
+                <button
+                  key={pct}
+                  type="button"
+                  onClick={() => onChange({ ...editor, percent: pct })}
+                  className={cn(
+                    "px-2 py-1.5 text-xs font-mono rounded border transition-colors",
+                    editor.percent === pct
+                      ? "bg-[#FF0000]/15 text-[#FF0000] border-[#FF0000]/50 font-bold"
+                      : "bg-[#141414] text-[#AAAAAA] border-[#222222] hover:border-[#444] hover:text-white"
+                  )}
+                >
+                  {pct}%{pct === 15 ? " ★" : ""}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Visual capacity reserve ratio bar */}
+          <div className="rounded-md border border-[#1F1F1F] bg-[#121212] p-3 space-y-2">
+            <div className="flex items-center justify-between text-xs font-mono">
+              <span className="text-[#888888]">
+                Active study:{" "}
+                <span className="text-white font-semibold">
+                  {Math.max(0, 100 - (Number.isNaN(editor.percent) ? 0 : editor.percent))}%
+                </span>
+              </span>
+              <span className="text-[#888888]">
+                Buffer reserve:{" "}
+                <span className="text-[#FF0000] font-semibold">
+                  {Number.isNaN(editor.percent) ? 0 : editor.percent}%
+                </span>
+              </span>
+            </div>
+            <div className="h-2 w-full rounded-full bg-[#1A1A1A] overflow-hidden flex">
+              <div
+                className="h-full bg-white/70 transition-all duration-300"
+                style={{
+                  width: `${Math.max(0, 100 - (Number.isNaN(editor.percent) ? 0 : editor.percent))}%`,
+                }}
+              />
+              <div
+                className="h-full bg-[#FF0000] transition-all duration-300"
+                style={{
+                  width: `${Math.min(100, Math.max(0, Number.isNaN(editor.percent) ? 0 : editor.percent))}%`,
+                }}
+              />
+            </div>
+            <p className="text-[11px] text-[#888888] leading-relaxed">
+              Keep 5–40% of each study day available for harder problems, revision debriefs, and unexpected disruptions.
+            </p>
+          </div>
+        </div>
       )}
       {editor.kind === "exception" && (
         <>

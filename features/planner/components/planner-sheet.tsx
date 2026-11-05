@@ -10,6 +10,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { cn } from "@/lib/utils";
 import {
   computePlanHealth,
   dateLabel,
@@ -18,11 +19,12 @@ import {
   muted,
   PlannerFields,
   reasons,
+  weekdays,
   type Editor,
 } from "./planner-fields";
 import type { PlannerView, ProposalView } from "../types";
 
-export function PlannerSheet({
+export function PlannerDialog({
   editor,
   view,
   last,
@@ -59,17 +61,38 @@ export function PlannerSheet({
     ) ?? [];
   const changes = proposal?.placements ?? [];
   const added = changes.filter((p) => !("moveId" in p)).length;
+
+  const isRule = editor?.kind === "rule";
+  const weekdayName = isRule ? weekdays[editor.weekday] : "";
   const titles = {
-    work: "Plan work",
-    course: "Schedule roadmap",
-    automatic: "Automatic plan",
-    move: "Move commitment",
-    rebalance: "Rebalance schedule",
-    buffer: "Edit planning buffer",
-    exception: "Edit date exception",
-    rule: "Edit weekly availability",
+    work: "Plan Work",
+    course: "Schedule Roadmap",
+    automatic: "Automatic Plan",
+    move: "Move Commitment",
+    rebalance: "Rebalance Schedule",
+    buffer: "Edit Planning Buffer",
+    exception: "Edit Date Exception",
+    rule: isRule ? `Edit ${weekdayName} Timing` : "Edit Weekly Availability",
   };
+  const descriptions = {
+    work: "Schedule new study commitments or add them to your backlog.",
+    course: "Place curriculum milestones into your daily preparation runway.",
+    automatic: "Set target date and distribute remaining tasks across your capacity.",
+    move: "Reschedule this commitment to a new date.",
+    rebalance: "Redistribute pending workload to restore balanced capacity.",
+    buffer: "Adjust capacity reserve held for harder problems and overruns.",
+    exception: "Override your normal scheduled study capacity for a specific date.",
+    rule: isRule
+      ? `Set study minutes and rest day status for ${weekdayName}.`
+      : "Configure weekly recurring study hours and rest days.",
+  };
+
   const title = editor ? titles[editor.kind] : "Planner";
+  const isCompact =
+    editor?.kind === "buffer" ||
+    editor?.kind === "rule" ||
+    editor?.kind === "exception";
+
   return (
     <Dialog
       open={Boolean(editor)}
@@ -77,17 +100,28 @@ export function PlannerSheet({
         if (!value && !busy) onClose();
       }}
     >
-      <DialogContent className="fixed z-50 flex flex-col gap-0 p-0 overflow-hidden bg-[#0A0A0A] border border-[#262626] shadow-2xl transition-all duration-200 ease-out max-sm:fixed max-sm:inset-0 max-sm:left-0 max-sm:right-0 max-sm:top-0 max-sm:bottom-0 max-sm:translate-x-0 max-sm:translate-y-0 max-sm:w-full max-sm:max-w-none max-sm:h-dvh max-sm:max-h-dvh max-sm:rounded-none sm:fixed sm:left-[50%] sm:top-[50%] sm:translate-x-[-50%] sm:translate-y-[-50%] sm:w-full sm:max-w-lg sm:h-auto sm:max-h-[88vh] sm:rounded-xl">
+      <DialogContent
+        className={cn(
+          "fixed left-[50%] top-[50%] z-50 flex flex-col gap-0 p-0 overflow-hidden bg-[#0A0A0A] border border-[#262626] shadow-2xl transition-all duration-200 ease-out translate-x-[-50%] translate-y-[-50%] w-[calc(100%-2rem)] max-h-[88vh] rounded-xl sm:rounded-2xl",
+          isCompact && !proposal ? "max-w-md sm:max-w-md" : "max-w-lg sm:max-w-xl"
+        )}
+      >
         <DialogHeader className="border-b border-[#1F1F1F] bg-[#0E0E0E]/90 px-4 py-4 pr-12 sm:px-6">
-          <p className={eyebrow}>Planner · {proposal ? "Review" : "Setup"}</p>
+          <p className={eyebrow}>
+            {proposal
+              ? "Planner · Review Impact"
+              : editor?.kind === "buffer" || editor?.kind === "rule"
+                ? "Availability · Setup"
+                : "Planner · Setup"}
+          </p>
           <DialogTitle className="text-base sm:text-lg font-bold text-white">
             {proposal?.title ?? title}
           </DialogTitle>
           <DialogDescription className="text-xs text-[#888888]">
             {proposal
               ? "Review the impact before applying it to your schedule."
-              : editor?.kind === "automatic"
-                ? "Set your target and choose how far ahead to plan."
+              : editor
+                ? descriptions[editor.kind]
                 : "Preview changes to your preparation schedule."}
           </DialogDescription>
         </DialogHeader>
@@ -285,13 +319,17 @@ export function PlannerSheet({
             </p>
           )}
         </div>
-        <DialogFooter className="flex flex-row items-center justify-end gap-2 border-t border-[#1F1F1F] bg-[#0E0E0E]/90 px-4 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:px-6">
+        <DialogFooter className="flex flex-row items-center justify-end gap-2 border-t border-[#1F1F1F] bg-[#0E0E0E]/90 px-4 py-3 sm:px-6">
+          <Button variant="outline" size="sm" disabled={busy} onClick={onClose}>
+            Cancel
+          </Button>
           {proposal ? (
             <>
-              <Button variant="secondary" disabled={busy} onClick={onBack}>
+              <Button variant="secondary" size="sm" disabled={busy} onClick={onBack}>
                 Back to setup
               </Button>
               <Button
+                size="sm"
                 disabled={!proposal.id}
                 loading={busy}
                 onClick={onConfirm}
@@ -303,11 +341,12 @@ export function PlannerSheet({
           ) : (
             <>
               {editor?.kind === "work" && !editor.backlogId && (
-                <Button variant="secondary" disabled={busy} onClick={onSave}>
+                <Button variant="secondary" size="sm" disabled={busy} onClick={onSave}>
                   Save to backlog
                 </Button>
               )}
               <Button
+                size="sm"
                 loading={busy}
                 onClick={onPreview}
                 className="bg-[#FF0000] text-white hover:bg-[#CC0000] font-semibold"
@@ -322,4 +361,4 @@ export function PlannerSheet({
   );
 }
 
-export { PlannerSheet as PlannerDialog };
+export { PlannerDialog as PlannerSheet };
