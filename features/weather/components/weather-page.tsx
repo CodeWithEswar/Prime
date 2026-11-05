@@ -370,11 +370,13 @@ export function WeatherPage() {
     <div className="weather-page" ref={root} tabIndex={-1}>
       {!location ? (
         <div className="weather-welcome">
+          <div className="weather-welcome-badge">
+            <WeatherIcon code={2} size={36} />
+          </div>
           <span className="weather-eyebrow">
             <i />
             Weather intelligence
           </span>
-          <WeatherIcon code={2} size={55} />
           <h1>
             Your forecast.
             <br />
@@ -384,23 +386,33 @@ export function WeatherPage() {
             Current conditions, the hours ahead, and a clear view of the week. Choose a
             location to begin.
           </p>
-          <div>
+          <div className="weather-welcome-actions">
             <Button
+              className="weather-action-btn weather-action-locate"
               onClick={(event) => void locate(event.currentTarget)}
               disabled={locating}
+              aria-label={locating ? "Finding your location…" : "Use current location"}
             >
-              <Icon icon={Navigation03Icon} size={16} aria-hidden="true" />
-              {locating ? "Finding your location…" : "Use my location"}
+              <Icon
+                icon={Navigation03Icon}
+                size={16}
+                aria-hidden="true"
+                className={locating ? "animate-spin" : ""}
+              />
+              <span>{locating ? "Locating…" : "My location"}</span>
             </Button>
             <Button
               variant="outline"
+              className="weather-action-btn weather-action-search"
               onClick={(event) => openSelector(event.currentTarget)}
             >
               <Icon icon={Search01Icon} size={16} aria-hidden="true" />
-              Search city
+              <span>Search city</span>
             </Button>
           </div>
-          <small>Location access is optional. Device coordinates are never saved.</small>
+          <small className="weather-welcome-note">
+            Location access is optional. Device coordinates are never saved.
+          </small>
           <a
             className="weather-attribution-link"
             href="https://open-meteo.com/"
@@ -432,16 +444,20 @@ export function WeatherPage() {
           <span className="weather-eyebrow">Weather</span>
           <h1>{location.name}</h1>
           <p>Unable to refresh weather. Your selected location is still saved.</p>
-          <div>
-            <Button onClick={() => void query.refetch()}>
+          <div className="weather-welcome-actions">
+            <Button
+              className="weather-action-btn weather-action-locate"
+              onClick={() => void query.refetch()}
+            >
               <Icon icon={RefreshIcon} size={16} aria-hidden="true" />
-              Retry
+              <span>Retry</span>
             </Button>
             <Button
               variant="outline"
+              className="weather-action-btn weather-action-search"
               onClick={(event) => openSelector(event.currentTarget)}
             >
-              Change location
+              <span>Change location</span>
             </Button>
           </div>
         </div>
