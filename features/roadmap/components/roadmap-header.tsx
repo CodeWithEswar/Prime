@@ -1,6 +1,7 @@
 "use client";
 
 import { Icon } from "@/components/ui/icon";
+import { Card } from "@/components/ui/card";
 import {
   CheckmarkCircle02Icon,
   Clock01Icon,
@@ -41,7 +42,7 @@ export function RoadmapHeader({ progress }: RoadmapHeaderProps) {
         {progress.revisionDueCount > 0 && (
           <Link
             href="/revision"
-            className="group inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-gradient-to-r from-[#200707] to-[#140404] border border-[#FF0000]/40 text-xs font-semibold text-[#FF4D4D] hover:border-[#FF0000] hover:text-white transition-all shadow-sm self-start sm:self-auto shrink-0"
+            className="group inline-flex items-center gap-2 px-3.5 py-2 rounded-md bg-[#180606] border border-[#FF0000]/40 text-xs font-semibold text-[#FF4D4D] hover:border-[#FF0000] hover:text-white transition-all shadow-sm self-start sm:self-auto shrink-0"
           >
             <Icon
               icon={RotateRight01Icon}
@@ -54,21 +55,22 @@ export function RoadmapHeader({ progress }: RoadmapHeaderProps) {
       </div>
 
       {/* Telemetry Stat Cards Grid */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3.5 pt-2">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3 pt-2">
         {/* Solved Card */}
-        <div className="group relative overflow-hidden rounded-xl border border-white/[0.08] bg-gradient-to-b from-[#131313] to-[#080808] p-3.5 sm:p-4 transition-all duration-200 hover:border-emerald-500/30 hover:shadow-[0_4px_24px_rgba(16,185,129,0.08)]">
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-emerald-500/60 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
+        <Card
+          elevation="surface"
+          className="group relative overflow-hidden rounded-md border border-[#222222] bg-[#0A0A0A] p-3.5 sm:p-4 transition-all duration-150 hover:border-[#333333]"
+        >
           <div className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-2 min-w-0">
-              <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-emerald-500/20 bg-emerald-500/10 text-emerald-400">
-                <Icon icon={CheckmarkCircle02Icon} size={15} />
+              <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded border border-white/10 bg-white/5 text-white">
+                <Icon icon={CheckmarkCircle02Icon} size={14} />
               </div>
-              <span className="text-[10px] sm:text-[11px] font-mono font-semibold uppercase tracking-wider text-[#999999] truncate">
+              <span className="text-[10px] sm:text-[11px] font-mono font-semibold uppercase tracking-wider text-[#888888] truncate">
                 Solved
               </span>
             </div>
-            <span className="font-mono text-xs font-bold text-emerald-400">
+            <span className="font-mono text-xs font-semibold text-white">
               {progress.completionPercentage}%
             </span>
           </div>
@@ -82,31 +84,32 @@ export function RoadmapHeader({ progress }: RoadmapHeaderProps) {
             </span>
           </div>
 
-          {/* Micro progress track */}
-          <div className="mt-2.5 sm:mt-3 h-1 w-full overflow-hidden rounded-full bg-white/[0.06]">
+          {/* Micro progress track in pure red */}
+          <div className="mt-2.5 sm:mt-3 h-1 w-full overflow-hidden rounded-full bg-[#1A1A1A]">
             <div
-              className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-emerald-400 transition-all duration-500"
+              className="h-full rounded-full bg-[#FF0000] transition-all duration-500"
               style={{
                 width: `${Math.min(100, Math.max(0, progress.completionPercentage))}%`,
               }}
             />
           </div>
-        </div>
+        </Card>
 
         {/* In Progress Card */}
-        <div className="group relative overflow-hidden rounded-xl border border-white/[0.08] bg-gradient-to-b from-[#131313] to-[#080808] p-3.5 sm:p-4 transition-all duration-200 hover:border-amber-500/30 hover:shadow-[0_4px_24px_rgba(245,158,11,0.08)]">
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-amber-500/60 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
+        <Card
+          elevation="surface"
+          className="group relative overflow-hidden rounded-md border border-[#222222] bg-[#0A0A0A] p-3.5 sm:p-4 transition-all duration-150 hover:border-[#333333]"
+        >
           <div className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-2 min-w-0">
-              <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-amber-500/20 bg-amber-500/10 text-amber-400">
-                <Icon icon={Clock01Icon} size={15} />
+              <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded border border-white/10 bg-white/5 text-[#AAAAAA]">
+                <Icon icon={Clock01Icon} size={14} />
               </div>
-              <span className="text-[10px] sm:text-[11px] font-mono font-semibold uppercase tracking-wider text-[#999999] truncate">
+              <span className="text-[10px] sm:text-[11px] font-mono font-semibold uppercase tracking-wider text-[#888888] truncate">
                 In Progress
               </span>
             </div>
-            <span className="h-2 w-2 rounded-full bg-amber-400 shadow-[0_0_6px_rgba(251,191,36,0.6)] shrink-0" />
+            <span className="h-1.5 w-1.5 rounded-full bg-white/60 shrink-0" />
           </div>
 
           <div className="mt-3 flex items-baseline gap-1.5">
@@ -116,40 +119,33 @@ export function RoadmapHeader({ progress }: RoadmapHeaderProps) {
             <span className="text-[11px] font-mono text-[#666666]">active</span>
           </div>
 
-          <div className="mt-2.5 sm:mt-3 flex items-center justify-between text-[10px] font-mono text-[#777777]">
+          <div className="mt-2.5 sm:mt-3 flex items-center justify-between text-[10px] font-mono text-[#666666]">
             <span>Attempted items</span>
-            <span className="text-[#999999]">in flight</span>
+            <span className="text-[#888888]">in flight</span>
           </div>
-        </div>
+        </Card>
 
         {/* Revision Due Card */}
-        <div
-          className={`group relative overflow-hidden rounded-xl border transition-all duration-200 ${
+        <Card
+          elevation="surface"
+          className={`group relative overflow-hidden rounded-md border transition-all duration-150 ${
             progress.revisionDueCount > 0
-              ? "border-[#FF0000]/30 bg-gradient-to-b from-[#180909] to-[#0A0606] hover:border-[#FF0000]/60 hover:shadow-[0_4px_24px_rgba(255,0,0,0.12)]"
-              : "border-white/[0.08] bg-gradient-to-b from-[#131313] to-[#080808] hover:border-white/20"
+              ? "border-[#FF0000]/40 bg-[#120606] hover:border-[#FF0000]/60"
+              : "border-[#222222] bg-[#0A0A0A] hover:border-[#333333]"
           } p-3.5 sm:p-4`}
         >
-          <div
-            className={`pointer-events-none absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#FF0000]/70 to-transparent ${
-              progress.revisionDueCount > 0
-                ? "opacity-100"
-                : "opacity-0 group-hover:opacity-100"
-            } transition-opacity duration-300`}
-          />
-
           <div className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-2 min-w-0">
               <div
-                className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border ${
+                className={`flex h-6 w-6 shrink-0 items-center justify-center rounded border ${
                   progress.revisionDueCount > 0
-                    ? "border-red-500/30 bg-red-500/15 text-[#FF4D4D]"
-                    : "border-white/[0.08] bg-white/[0.04] text-[#888888]"
+                    ? "border-[#FF0000]/30 bg-[#FF0000]/10 text-[#FF4D4D]"
+                    : "border-white/10 bg-white/5 text-[#888888]"
                 }`}
               >
-                <Icon icon={RotateRight01Icon} size={15} />
+                <Icon icon={RotateRight01Icon} size={14} />
               </div>
-              <span className="text-[10px] sm:text-[11px] font-mono font-semibold uppercase tracking-wider text-[#999999] truncate">
+              <span className="text-[10px] sm:text-[11px] font-mono font-semibold uppercase tracking-wider text-[#888888] truncate">
                 Revision Due
               </span>
             </div>
@@ -174,7 +170,7 @@ export function RoadmapHeader({ progress }: RoadmapHeaderProps) {
             <span className="text-[11px] font-mono text-[#666666]">due</span>
           </div>
 
-          <div className="mt-2.5 sm:mt-3 flex items-center justify-between text-[10px] font-mono text-[#777777]">
+          <div className="mt-2.5 sm:mt-3 flex items-center justify-between text-[10px] font-mono text-[#666666]">
             <span>
               {progress.revisionDueCount > 0 ? "Spaced repetition" : "All caught up"}
             </span>
@@ -188,18 +184,19 @@ export function RoadmapHeader({ progress }: RoadmapHeaderProps) {
               {progress.revisionDueCount > 0 ? "Action required" : "Clear"}
             </span>
           </div>
-        </div>
+        </Card>
 
         {/* Remaining Card */}
-        <div className="group relative overflow-hidden rounded-xl border border-white/[0.08] bg-gradient-to-b from-[#131313] to-[#080808] p-3.5 sm:p-4 transition-all duration-200 hover:border-white/20 hover:shadow-[0_4px_24px_rgba(255,255,255,0.04)]">
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
+        <Card
+          elevation="surface"
+          className="group relative overflow-hidden rounded-md border border-[#222222] bg-[#0A0A0A] p-3.5 sm:p-4 transition-all duration-150 hover:border-[#333333]"
+        >
           <div className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-2 min-w-0">
-              <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.04] text-[#888888]">
-                <Icon icon={Target02Icon} size={15} />
+              <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded border border-white/10 bg-white/5 text-[#888888]">
+                <Icon icon={Target02Icon} size={14} />
               </div>
-              <span className="text-[10px] sm:text-[11px] font-mono font-semibold uppercase tracking-wider text-[#999999] truncate">
+              <span className="text-[10px] sm:text-[11px] font-mono font-semibold uppercase tracking-wider text-[#888888] truncate">
                 Remaining
               </span>
             </div>
@@ -213,9 +210,9 @@ export function RoadmapHeader({ progress }: RoadmapHeaderProps) {
             <span className="text-[11px] font-mono text-[#666666]">problems</span>
           </div>
 
-          <div className="mt-2.5 sm:mt-3 flex items-center justify-between text-[10px] font-mono text-[#777777]">
+          <div className="mt-2.5 sm:mt-3 flex items-center justify-between text-[10px] font-mono text-[#666666]">
             <span>Curriculum target</span>
-            <span className="text-[#999999]">
+            <span className="text-[#888888]">
               {progress.totalRequired > 0
                 ? `${Math.round(
                     (progress.remainingRequiredCount / progress.totalRequired) * 100
@@ -223,7 +220,7 @@ export function RoadmapHeader({ progress }: RoadmapHeaderProps) {
                 : "0%"}
             </span>
           </div>
-        </div>
+        </Card>
       </div>
     </div>
   );
