@@ -195,22 +195,43 @@ export function SolarCycle({
   const isPastSunset = valid && sameDay && currentTime > day.sunset!;
   const isBeforeSunrise = valid && sameDay && currentTime < day.sunrise!;
 
-  const progress =
-    valid && sameDay
+  // 24-hour elliptical celestial coordinate system
+  const rx = 94;
+  const ry = 44;
+  const cx = 120;
+  const cy = 62;
+
+  // Daytime solar progress (0 to 1)
+  const dayProgress =
+    valid && sameDay && isDaytime
       ? Math.max(0, Math.min(1, (currentTime - day.sunrise!) / (day.sunset! - day.sunrise!)))
       : null;
 
-  // Arc geometry: Ellipse rx=96, ry=66 centered at (120, 88)
-  const rx = 96;
-  const ry = 66;
-  const cx = 120;
-  const cy = 88;
+  const dayAngle = dayProgress !== null ? Math.PI * (1 - dayProgress) : null;
+  const sunX = dayAngle !== null ? cx + rx * Math.cos(dayAngle) : null;
+  const sunY = dayAngle !== null ? cy - ry * Math.sin(dayAngle) : null;
 
-  const angle = progress !== null ? Math.PI * (1 - progress) : null;
-  const sunX = angle !== null ? cx + rx * Math.cos(angle) : null;
-  const sunY = angle !== null ? cy - ry * Math.sin(angle) : null;
+  // Nighttime progress (from sunset to next sunrise)
+  let nightProgress = 0;
+  if (valid && sameDay && !isDaytime) {
+    const nightDuration = 24 * 3600000 - (day.sunset! - day.sunrise!);
+    const elapsedNight = isPastSunset
+      ? currentTime - day.sunset!
+      : currentTime + 24 * 3600000 - day.sunset!;
+    nightProgress = Math.max(0, Math.min(1, elapsedNight / nightDuration));
+  }
 
-  // Daylight duration and status badge
+  // Moon coordinates in night sky (above horizon)
+  const moonAngle = Math.PI * (1 - nightProgress);
+  const moonX = cx + rx * Math.cos(moonAngle);
+  const moonY = cy - ry * Math.sin(moonAngle);
+
+  // Subterranean Sun coordinates (below horizon)
+  const sunSubAngle = Math.PI * nightProgress;
+  const sunSubX = cx + rx * Math.cos(sunSubAngle);
+  const sunSubY = cy + ry * Math.sin(sunSubAngle);
+
+  // Daylight duration and dynamic status badge
   let daylightStr = "";
   let statusBadge = "";
   if (valid) {
@@ -224,14 +245,17 @@ export function SolarCycle({
         const remainingMs = day.sunset! - currentTime;
         const remainingMins = Math.round(remainingMs / 60000);
         if (remainingMins <= 60 && remainingMins > 0) {
-          statusBadge = `Golden hour · ${remainingMins}m until sunset`;
+          statusBadge = `Golden hour · ${remainingMins}m to sunset`;
         } else {
           const remHrs = Math.floor(remainingMs / 3600000);
           const remMins = Math.round((remainingMs % 3600000) / 60000);
-          statusBadge = `${remHrs}h ${remMins}m remaining`;
+          statusBadge = `${remHrs}h ${remMins}m daylight left`;
         }
       } else if (isPastSunset) {
-        statusBadge = "Night · Sun below horizon";
+        const untilSunriseMs = day.sunrise! + 24 * 3600000 - currentTime;
+        const untilHrs = Math.floor(untilSunriseMs / 3600000);
+        const untilMins = Math.round((untilSunriseMs % 3600000) / 60000);
+        statusBadge = `Night · Sunrise in ${untilHrs}h ${untilMins}m`;
       } else if (isBeforeSunrise) {
         const untilMs = day.sunrise! - currentTime;
         const untilHrs = Math.floor(untilMs / 3600000);
@@ -246,75 +270,116 @@ export function SolarCycle({
   return (
     <div className="weather-solar">
       <div className="weather-solar-plot">
-        <svg viewBox="0 0 240 105" aria-hidden="true" className="weather-solar-svg">
+        <svg viewBox="0 0 240 120" aria-hidden="true" className="weather-solar-svg">
           <defs>
-            {/* Daylight Path Glow Gradient */}
+            {/* Daytime Sun Arc Gradient */}
             <linearGradient id="sun-arc-grad" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stopColor="#ff5500" />
               <stop offset="50%" stopColor="#ffb700" />
               <stop offset="100%" stopColor="#ff3300" />
             </linearGradient>
 
-            {/* Atmosphere Fill Under Arc */}
+            {/* Daytime Sky Fill */}
             <linearGradient id="sun-sky-fill" x1="0%" y1="0%" x2="0%" y2="100%">
               <stop offset="0%" stopColor="rgba(255, 170, 0, 0.22)" />
               <stop offset="70%" stopColor="rgba(255, 70, 0, 0.05)" />
               <stop offset="100%" stopColor="rgba(0, 0, 0, 0)" />
             </linearGradient>
 
-            {/* Sun Disc Blur Halo */}
-            <filter id="solar-corona" x="-40%" y="-40%" width="180%" height="180%">
+            {/* Nighttime Moon Arc Gradient */}
+            <linearGradient id="moon-arc-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#70a1ff" />
+              <stop offset="60%" stopColor="#dfe4ea" />
+              <stop offset="100%" stopColor="#ffffff" />
+            </linearGradient>
+
+            {/* Nighttime Sky Fill */}
+            <linearGradient id="moon-sky-fill" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="rgba(160, 210, 255, 0.16)" />
+              <stop offset="70%" stopColor="rgba(112, 161, 255, 0.04)" />
+              <stop offset="100%" stopColor="rgba(0, 0, 0, 0)" />
+            </linearGradient>
+
+            {/* Subterranean Sun Track Gradient */}
+            <linearGradient id="night-sub-grad" x1="100%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="rgba(255, 68, 68, 0.5)" />
+              <stop offset="100%" stopColor="rgba(255, 120, 0, 0.25)" />
+            </linearGradient>
+
+            {/* Corona Glow Filter */}
+            <filter id="solar-corona" x="-50%" y="-50%" width="200%" height="200%">
               <feGaussianBlur stdDeviation="3.5" result="blur" />
+              <feComposite in="SourceGraphic" in2="blur" operator="over" />
+            </filter>
+
+            <filter id="moon-corona" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="3" result="blur" />
               <feComposite in="SourceGraphic" in2="blur" operator="over" />
             </filter>
           </defs>
 
-          {/* Full Day Arc Background (dashed trajectory) */}
+          {/* 1. Daytime Sky Arc (Upper Hemisphere) */}
           <path
             d={`M ${cx - rx} ${cy} A ${rx} ${ry} 0 0 1 ${cx + rx} ${cy}`}
             fill="none"
-            stroke="rgba(255, 255, 255, 0.12)"
+            stroke={isDaytime ? "rgba(255, 255, 255, 0.12)" : "rgba(255, 255, 255, 0.08)"}
             strokeDasharray="3 4"
             strokeWidth="1.5"
           />
 
-          {/* Horizon Line */}
+          {/* 2. Subterranean Nocturnal Arc (Lower Hemisphere) */}
+          <path
+            d={`M ${cx + rx} ${cy} A ${rx} ${ry} 0 0 1 ${cx - rx} ${cy}`}
+            fill="none"
+            stroke={!isDaytime ? "rgba(255, 255, 255, 0.1)" : "rgba(255, 255, 255, 0.05)"}
+            strokeDasharray="2 4"
+            strokeWidth="1"
+          />
+
+          {/* Horizon Line and Zenith Axes */}
           <line
-            x1="14"
+            x1="12"
             y1={cy}
-            x2="226"
+            x2="228"
             y2={cy}
             stroke="rgba(255, 255, 255, 0.14)"
             strokeWidth="1"
           />
           <line
             x1={cx - rx}
-            y1={cy}
+            y1={cy - 4}
+            x2={cx - rx}
+            y2={cy + 4}
+            stroke="rgba(255, 170, 51, 0.5)"
+            strokeWidth="1.5"
+          />
+          <line
+            x1={cx + rx}
+            y1={cy - 4}
             x2={cx + rx}
-            y2={cy}
-            stroke="rgba(255, 255, 255, 0.25)"
-            strokeWidth="1"
-            strokeDasharray="2 3"
+            y2={cy + 4}
+            stroke="rgba(255, 68, 68, 0.5)"
+            strokeWidth="1.5"
           />
 
-          {/* Daylight elapsed path and sky glow */}
-          {sunX !== null && sunY !== null && isDaytime && (
+          {/* ─── DAYTIME RENDERING ─── */}
+          {isDaytime && sunX !== null && sunY !== null && (
             <>
-              {/* Sky area fill */}
+              {/* Daylight Atmosphere Fill */}
               <path
                 d={`M ${cx - rx} ${cy} A ${rx} ${ry} 0 0 1 ${sunX} ${sunY} L ${sunX} ${cy} Z`}
                 fill="url(#sun-sky-fill)"
               />
-              {/* Elapsed Arc Stroke */}
+              {/* Active Daylight Arc */}
               <path
                 d={`M ${cx - rx} ${cy} A ${rx} ${ry} 0 0 1 ${sunX} ${sunY}`}
                 fill="none"
                 stroke="url(#sun-arc-grad)"
                 strokeWidth="2.5"
                 strokeLinecap="round"
-                filter="drop-shadow(0 0 6px rgba(255, 85, 0, 0.6))"
+                filter="drop-shadow(0 0 6px rgba(255, 85, 0, 0.7))"
               />
-              {/* Vertical Sun Ray dropped to horizon */}
+              {/* Vertical Sun Ray */}
               <line
                 x1={sunX}
                 y1={sunY}
@@ -324,55 +389,161 @@ export function SolarCycle({
                 strokeWidth="1"
                 strokeDasharray="2 2"
               />
-              {/* Ground Intercept Beacon */}
+              {/* Horizon Anchor */}
               <circle cx={sunX} cy={cy} r="2.5" fill="#ff7700" opacity="0.8" />
+
+              {/* Radiant Sun Orb */}
+              <g>
+                {!reduced && (
+                  <motion.circle
+                    cx={sunX}
+                    cy={sunY}
+                    r="13"
+                    fill="rgba(255, 120, 0, 0.3)"
+                    filter="url(#solar-corona)"
+                    animate={{ scale: [1, 1.35, 1], opacity: [0.4, 0.15, 0.4] }}
+                    transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+                  />
+                )}
+                <circle
+                  cx={sunX}
+                  cy={sunY}
+                  r="6"
+                  fill="#ffffff"
+                  filter="drop-shadow(0 0 8px #ff7700)"
+                />
+                <circle cx={sunX} cy={sunY} r="3.5" fill="#ffcc00" />
+              </g>
             </>
           )}
 
-          {/* Sun Body at current position */}
-          {sunX !== null && sunY !== null && isDaytime && (
-            <g>
-              {/* Pulsing solar corona */}
-              {!reduced && (
+          {/* ─── NIGHTTIME RENDERING ─── */}
+          {!isDaytime && valid && sameDay && (
+            <>
+              {/* Twinkling Celestial Stars */}
+              {[
+                { x: 50, y: 32, r: 1 },
+                { x: 82, y: 24, r: 1.2 },
+                { x: 120, y: 16, r: 1 },
+                { x: 160, y: 26, r: 1.2 },
+                { x: 190, y: 36, r: 1 },
+              ].map((star, i) => (
                 <motion.circle
-                  cx={sunX}
-                  cy={sunY}
-                  r="13"
-                  fill="rgba(255, 120, 0, 0.3)"
-                  filter="url(#solar-corona)"
-                  animate={{ scale: [1, 1.35, 1], opacity: [0.4, 0.15, 0.4] }}
-                  transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+                  key={i}
+                  cx={star.x}
+                  cy={star.y}
+                  r={star.r}
+                  fill="#ffffff"
+                  animate={reduced ? undefined : { opacity: [0.2, 0.85, 0.2] }}
+                  transition={{
+                    repeat: Infinity,
+                    duration: 2.2 + i * 0.6,
+                    ease: "easeInOut",
+                  }}
                 />
-              )}
-              {/* Solar Core */}
-              <circle
-                cx={sunX}
-                cy={sunY}
-                r="6"
-                fill="#ffffff"
-                filter="drop-shadow(0 0 8px #ff7700)"
-              />
-              <circle cx={sunX} cy={sunY} r="3.5" fill="#ffcc00" />
-            </g>
-          )}
+              ))}
 
-          {/* Night indicator (when after sunset or before sunrise) */}
-          {valid && sameDay && !isDaytime && (
-            <g transform={`translate(${cx - 10}, ${cy - 10})`}>
-              <circle cx="10" cy="10" r="14" fill="rgba(255, 255, 255, 0.03)" />
-              <circle
-                cx="10"
-                cy="10"
-                r="5"
-                fill="rgba(255, 255, 255, 0.5)"
-                filter="drop-shadow(0 0 6px rgba(255, 255, 255, 0.4))"
+              {/* Moonlight Atmosphere Fill */}
+              <path
+                d={`M ${cx - rx} ${cy} A ${rx} ${ry} 0 0 1 ${moonX} ${moonY} L ${moonX} ${cy} Z`}
+                fill="url(#moon-sky-fill)"
               />
-            </g>
+
+              {/* Elapsed Moonlight Arc */}
+              <path
+                d={`M ${cx - rx} ${cy} A ${rx} ${ry} 0 0 1 ${moonX} ${moonY}`}
+                fill="none"
+                stroke="url(#moon-arc-grad)"
+                strokeWidth="2"
+                strokeLinecap="round"
+                filter="drop-shadow(0 0 6px rgba(160, 210, 255, 0.6))"
+              />
+
+              {/* Vertical Moon Ray */}
+              <line
+                x1={moonX}
+                y1={moonY}
+                x2={moonX}
+                y2={cy}
+                stroke="rgba(160, 210, 255, 0.3)"
+                strokeWidth="1"
+                strokeDasharray="2 2"
+              />
+              <circle cx={moonX} cy={cy} r="2" fill="#a0c4ff" opacity="0.8" />
+
+              {/* Luminous Moon Orb in Night Sky */}
+              <g>
+                {!reduced && (
+                  <motion.circle
+                    cx={moonX}
+                    cy={moonY}
+                    r="12"
+                    fill="rgba(160, 210, 255, 0.25)"
+                    filter="url(#moon-corona)"
+                    animate={{ scale: [1, 1.3, 1], opacity: [0.35, 0.15, 0.35] }}
+                    transition={{ repeat: Infinity, duration: 3.2, ease: "easeInOut" }}
+                  />
+                )}
+                <circle
+                  cx={moonX}
+                  cy={moonY}
+                  r="5.5"
+                  fill="#f0f6fc"
+                  filter="drop-shadow(0 0 8px rgba(180, 220, 255, 0.8))"
+                />
+                <circle
+                  cx={moonX - 1.5}
+                  cy={moonY - 1}
+                  r="4"
+                  fill="#080808"
+                  opacity="0.85"
+                />
+              </g>
+
+              {/* Subterranean Sun Track and Position (Below Horizon) */}
+              <path
+                d={`M ${cx + rx} ${cy} A ${rx} ${ry} 0 0 1 ${sunSubX} ${sunSubY}`}
+                fill="none"
+                stroke="url(#night-sub-grad)"
+                strokeWidth="2"
+                strokeLinecap="round"
+                filter="drop-shadow(0 0 5px rgba(255, 68, 68, 0.4))"
+              />
+              <line
+                x1={sunSubX}
+                y1={sunSubY}
+                x2={sunSubX}
+                y2={cy}
+                stroke="rgba(255, 68, 68, 0.25)"
+                strokeWidth="1"
+                strokeDasharray="2 2"
+              />
+              {/* Subterranean Sun Ember */}
+              <circle
+                cx={sunSubX}
+                cy={sunSubY}
+                r="4.5"
+                fill="#ff4444"
+                opacity="0.85"
+                filter="drop-shadow(0 0 6px #ff0000)"
+              />
+              <circle cx={sunSubX} cy={sunSubY} r="2" fill="#ffffff" />
+            </>
           )}
         </svg>
       </div>
 
-      {/* Sunrise & Sunset Controls */}
+      {/* Dynamic Status Pill */}
+      {statusBadge && (
+        <div className="weather-solar-status-row">
+          <span className="weather-solar-status-pill">
+            <span className={`weather-status-dot ${isDaytime ? "sun" : "moon"}`} />
+            {statusBadge}
+          </span>
+        </div>
+      )}
+
+      {/* Sunrise, Duration Divider, Sunset */}
       <dl className="weather-solar-times">
         <div className="weather-solar-node sunrise">
           <span className="weather-solar-icon">
@@ -388,11 +559,9 @@ export function SolarCycle({
           </div>
         </div>
 
-        {statusBadge && (
-          <div className="weather-solar-status">
-            <span>{statusBadge}</span>
-          </div>
-        )}
+        <div className="weather-solar-divider">
+          <span className="weather-solar-duration">{daylightStr}</span>
+        </div>
 
         <div className="weather-solar-node sunset">
           <span className="weather-solar-icon">

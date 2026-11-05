@@ -836,21 +836,56 @@
 .weather-solar-svg {
   width: 100%;
   height: auto;
-  max-height: 105px;
+  max-height: 122px;
   overflow: visible;
+}
+.weather-solar-status-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-block: 2px 4px;
+}
+.weather-solar-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 10px;
+  font-family: var(--font-geist-mono), monospace;
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 3px 10px;
+  border-radius: 9999px;
+  white-space: nowrap;
+}
+.weather-status-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.weather-status-dot.sun {
+  background: #ff7700;
+  box-shadow: 0 0 6px #ff7700;
+}
+.weather-status-dot.moon {
+  background: #a0c4ff;
+  box-shadow: 0 0 6px #a0c4ff;
 }
 .weather-solar-times {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  padding-top: 8px;
+  padding-top: 10px;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
+  width: 100%;
 }
 .weather-solar-node {
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-shrink: 0;
 }
 .weather-solar-node.sunset {
   flex-direction: row-reverse;
@@ -877,6 +912,19 @@
   border-color: rgba(255, 68, 68, 0.25);
   box-shadow: 0 0 10px rgba(255, 68, 68, 0.15);
 }
+.weather-solar-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  min-width: 0;
+}
+.weather-solar-duration {
+  font-size: 9.5px;
+  color: rgba(255, 255, 255, 0.45);
+  font-family: var(--font-geist-mono), monospace;
+  white-space: nowrap;
+}
 .weather-solar-node dt {
   font-size: 10px;
   color: rgba(255, 255, 255, 0.45);
@@ -888,16 +936,6 @@
   font-weight: 600;
   font-family: var(--font-geist-mono), monospace;
   color: #ffffff;
-}
-.weather-solar-status {
-  font-size: 9.5px;
-  color: rgba(255, 255, 255, 0.6);
-  font-family: var(--font-geist-mono), monospace;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  padding: 3px 8px;
-  border-radius: 12px;
-  white-space: nowrap;
 }
 .weather-attribution {
   display: flex;
