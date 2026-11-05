@@ -608,14 +608,26 @@
   font-size: 10px;
   margin-top: 30px;
 }
-.weather-attribution a,
-.weather-attribution-link {
+.weather-attribution a:not(.weather-attribution-link) {
   color: #ffffffa0;
   text-decoration: underline;
   text-underline-offset: 4px;
 }
-.weather-attribution a:hover {
+.weather-attribution .weather-attribution-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  color: rgba(255, 255, 255, 0.45);
+  text-decoration: none;
+  transition: color 0.15s, background-color 0.15s;
+}
+.weather-attribution a:hover,
+.weather-attribution .weather-attribution-link:hover {
   color: #fff;
+  background: rgba(255, 255, 255, 0.08);
 }
 .weather-refresh-notice {
   position: relative;
@@ -692,16 +704,22 @@
   max-width: 420px;
 }
 .weather-welcome .weather-attribution-link {
-  font-size: 11px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
   color: rgba(255, 255, 255, 0.4);
   text-decoration: none;
-  border-bottom: 1px dotted rgba(255, 255, 255, 0.25);
-  padding-bottom: 1px;
-  transition: color 0.15s, border-color 0.15s;
+  background: transparent;
+  border: 1px solid transparent;
+  transition: color 0.15s, background-color 0.15s, border-color 0.15s;
 }
 .weather-welcome .weather-attribution-link:hover {
-  color: rgba(255, 255, 255, 0.85);
-  border-bottom-color: rgba(255, 255, 255, 0.6);
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.12);
 }
 .weather-loading {
   padding: 55px clamp(24px, 4vw, 60px);
