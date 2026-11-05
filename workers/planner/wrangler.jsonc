@@ -3,22 +3,25 @@
   "name": "prime-worker-planner",
   "main": "src/index.ts",
   "compatibility_date": "2026-10-23",
+  "account_id": "de6ff29d95bdc8ce81317ce8a72424c0",
   "vars": {
     "ENVIRONMENT": "development",
-    "SUPABASE_URL": "http://127.0.0.1:54321",
+    "SUPABASE_URL": "https://irioygnezxaptppbfpqz.supabase.co"
   },
   "env": {
     "preview": {
       "vars": {
         "ENVIRONMENT": "preview",
-      },
+        "SUPABASE_URL": "https://irioygnezxaptppbfpqz.supabase.co"
+      }
     },
     "production": {
       "vars": {
         "ENVIRONMENT": "production",
-      },
-    },
-  },
+        "SUPABASE_URL": "https://irioygnezxaptppbfpqz.supabase.co"
+      }
+    }
+  }
   // Cron Triggers: Activated when daily planning algorithms are implemented in Phase 1+
   // "triggers": {
   //   "crons": ["0 0 * * *"] // Daily at midnight UTC
