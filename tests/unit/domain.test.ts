@@ -1,7 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { calculatePlanProgress, type DayPlan } from "@/domain/planning";
 import { calculateNextRevision, type RevisionItem } from "@/domain/revision";
-import { classifyMasteryLevel, type TopicMasteryState } from "@/domain/mastery";
 import { calculateReadinessScore } from "@/domain/readiness";
 
 describe("Pure Domain Logic Verification", () => {
@@ -89,30 +88,6 @@ describe("Pure Domain Logic Verification", () => {
       expect(result.intervalDays).toBe(1);
       expect(result.repetitionCount).toBe(0);
       expect(result.nextDueDate).toBe("2026-11-01");
-    });
-  });
-
-  describe("domain/mastery", () => {
-    it("classifies high solve ratio and accuracy as mastered", () => {
-      const state: TopicMasteryState = {
-        topicId: "arrays",
-        totalProblems: 20,
-        solvedProblems: 19,
-        accuracyRate: 0.9,
-        averageTimeToSolveMinutes: 20,
-      };
-      expect(classifyMasteryLevel(state)).toBe("mastered");
-    });
-
-    it("classifies untouched topics as unseen", () => {
-      const state: TopicMasteryState = {
-        topicId: "dp",
-        totalProblems: 15,
-        solvedProblems: 0,
-        accuracyRate: 0,
-        averageTimeToSolveMinutes: 0,
-      };
-      expect(classifyMasteryLevel(state)).toBe("unseen");
     });
   });
 

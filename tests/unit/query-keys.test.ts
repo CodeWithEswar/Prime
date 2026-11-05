@@ -16,5 +16,10 @@ describe("Query Keys Factory", () => {
       "due",
       "2026-10-31",
     ]);
+
+    expect(queryKeys.settings.all).toEqual(["settings"]);
+    expect(queryKeys.settings.user("user-123")).toEqual(["settings", "user-123"]);
+    expect(queryKeys.profile.all).toEqual(["profile"]);
+    expect(queryKeys.profile.user()).toEqual(["profile", "me"]);
   });
 });
