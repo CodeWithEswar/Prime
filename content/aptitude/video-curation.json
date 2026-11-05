@@ -1,0 +1,804 @@
+{
+  "version": 3,
+  "reviewBasis": "English-only original instruction: audio-track and original automatic-caption metadata, or matching English speech transcripts. Conflicting and unconfirmed sources are withheld. Full syllabus coverage is not certified.",
+  "associations": {
+    "D01_T01": {
+      "primaryId": "_dbDpXoz3nQ",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D01_T02": {
+      "primaryId": "WxXZaP8Y8pI",
+      "backupId": "41eVMYPCWTQ",
+      "primaryCoverage": "Number types, including natural numbers, integers, and real numbers.",
+      "backupCoverage": "Prime and composite numbers."
+    },
+    "D01_T03": {
+      "primaryId": "QUP1FpINICo",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D01_T04": {
+      "primaryId": "0NvLtTwnUHs",
+      "backupId": "rUrLuTMq-sw",
+      "primaryCoverage": "Factoring whole numbers.",
+      "backupCoverage": "How factors and multiples are related."
+    },
+    "D02_T01": {
+      "primaryId": "xyyejJYeILM",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D02_T02": {
+      "primaryId": "XGbOiYhHY2c",
+      "backupId": "-RhdzNYfF-M",
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D02_T03": {
+      "primaryId": "qJBtLMSwLq0",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D02_T04": {
+      "primaryId": "81pwuMJ8OIU",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D03_T01": {
+      "primaryId": "GiSpzFKI5_w",
+      "backupId": null,
+      "primaryCoverage": "Order-of-operations foundation; additional placement shortcuts are not covered.",
+      "backupCoverage": null
+    },
+    "D03_T02": {
+      "primaryId": "tnc9ojITRg4",
+      "backupId": "8XmhGjgsiVc",
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D03_T03": {
+      "primaryId": "3MijXB91DVo",
+      "backupId": null,
+      "primaryCoverage": "Worked radical simplification with variables; not a complete indices course.",
+      "backupCoverage": null
+    },
+    "D04_T01": {
+      "primaryId": "RWdNhJWwzSs",
+      "backupId": "_TdyTKpNY8g",
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D04_T02": {
+      "primaryId": "a_PoENQeKik",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D04_T03": {
+      "primaryId": "YXpZhN6iwXI",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D05_T01": {
+      "primaryId": "jfoJBivWlnQ",
+      "backupId": "jxlWNJ1MghA",
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D05_T02": {
+      "primaryId": "q4ScLaSt8gQ",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D05_T03": {
+      "primaryId": "hn9TKnr8L_8",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D06_T01": {
+      "primaryId": "rhSxQ4ieAYc",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D06_T02": {
+      "primaryId": "tJHl73PBnwY",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D06_T03": {
+      "primaryId": "OKSJDDAyqP0",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D07_T01": {
+      "primaryId": "T2odvmxqi1I",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D07_T02": {
+      "primaryId": "So02BxHOHgM",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D07_T03": {
+      "primaryId": "FW97hRrHcSw",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D08_T01": {
+      "primaryId": "T6wBHgOxUhc",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D08_T02": {
+      "primaryId": "PbUZnzncmR4",
+      "backupId": "P2CYSiF0unU",
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D08_T03": {
+      "primaryId": "e5nwJKUc3bA",
+      "backupId": "m5Tf6vgoJtQ",
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D09_T01": {
+      "primaryId": "KE7tQf9spPg",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D09_T02": {
+      "primaryId": "KE7tQf9spPg",
+      "backupId": null,
+      "primaryCoverage": "Apply work-rate methods to compare efficiency.",
+      "backupCoverage": null
+    },
+    "D09_T03": {
+      "primaryId": "mBtBD1N7ywQ",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D10_T01": {
+      "primaryId": "jzNxXm5twx4",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D10_T02": {
+      "primaryId": "IgbUBgrTqxY",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D10_T03": {
+      "primaryId": "78b4Jn4rw44",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D10_T04": {
+      "primaryId": "kYLWhzcJO74",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D11_T01": {
+      "primaryId": "bAerID24QJ0",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D11_T02": {
+      "primaryId": "qeByhTF8WEw",
+      "backupId": "IlNAJl36-10",
+      "primaryCoverage": "Solve quadratic equations by factoring.",
+      "backupCoverage": "Use the quadratic formula."
+    },
+    "D11_T03": {
+      "primaryId": "hw5DE8HSZk0",
+      "backupId": null,
+      "primaryCoverage": "Perfect-square binomial identity; not the full algebraic identities syllabus.",
+      "backupCoverage": null
+    },
+    "D11_T04": {
+      "primaryId": "VgDe_D8ojxw",
+      "backupId": "WZmMHZseee4",
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D12_T01": {
+      "primaryId": "G-gqX4Oo9PA",
+      "backupId": "XZJdyPkCxuE",
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D12_T02": {
+      "primaryId": "rdC4Blp8qmk",
+      "backupId": "gua96ju_FBk",
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D12_T03": {
+      "primaryId": "83nJmniFmNk",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D13_T01": {
+      "primaryId": "XJnIdRXUi7A",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D13_T02": {
+      "primaryId": "XJnIdRXUi7A",
+      "backupId": null,
+      "primaryCoverage": "Combined permutations and combinations lesson.",
+      "backupCoverage": null
+    },
+    "D13_T03": {
+      "primaryId": "pxh__ugRKz8",
+      "backupId": "0NAASclUm4k",
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D14_T01": {
+      "primaryId": "ximxxERGSUc",
+      "backupId": "GfSCnbsZHm4",
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D14_T02": {
+      "primaryId": "ibINrxJLvlM",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D14_T03": {
+      "primaryId": "6wkb6osx8-0",
+      "backupId": "yhmTJWVR6uw",
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D15_T01": {
+      "primaryId": "WX2TMJSaQjo",
+      "backupId": "u2OYPDu_mhk",
+      "primaryCoverage": "Triangle foundations; pair with the circle lesson for broader coverage.",
+      "backupCoverage": "Circle theorems and angle relationships."
+    },
+    "D15_T02": {
+      "primaryId": "xwqUyOT-cmU",
+      "backupId": "2rp_-h6PnFo",
+      "primaryCoverage": "2D area and perimeter.",
+      "backupCoverage": "3D volume and surface area."
+    },
+    "D15_T03": {
+      "primaryId": "8Oe_kswv0Pg",
+      "backupId": "Mg0R6p-gHzE",
+      "primaryCoverage": "Coordinate geometry foundations.",
+      "backupCoverage": "An additional coordinate geometry worked example."
+    },
+    "D15_T04": {
+      "primaryId": "edEvlh0tqzk",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D15_T05": {
+      "primaryId": "oxc4G14nyUY",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D16_T01": {
+      "primaryId": "5GeNpaEeQLM",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D16_T02": {
+      "primaryId": "Xe3cDAP-GIg",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D17_T01": {
+      "primaryId": "gXBuL_FyahE",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D17_T02": {
+      "primaryId": "3cZFoiDcpTY",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D17_T03": {
+      "primaryId": "gi_7qz2Uljg",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D18_T01": {
+      "primaryId": "EddcDYxQ0HU",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D18_T02": {
+      "primaryId": "gRZjw7ttVqY",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D18_T03": {
+      "primaryId": null,
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null,
+      "videoStatusReason": "An English-language lesson has not been confirmed. Study notes remain available."
+    },
+    "D19_T01": {
+      "primaryId": "LRdLhfDupMU",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D19_T02": {
+      "primaryId": "LRdLhfDupMU",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D19_T03": {
+      "primaryId": "x0WkptLF6oE",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D20_T01": {
+      "primaryId": "PFdnB22uIk8",
+      "backupId": "dJ92uTgO0_k",
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D20_T02": {
+      "primaryId": "PFdnB22uIk8",
+      "backupId": null,
+      "primaryCoverage": "Ordering and ranking methods.",
+      "backupCoverage": null
+    },
+    "D20_T03": {
+      "primaryId": "Ttlg4H1nrj8",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D21_T01": {
+      "primaryId": "knFLfSr35wU",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D21_T02": {
+      "primaryId": "EiSP9GRaJH0",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D21_T03": {
+      "primaryId": "8ZZp9LwXPDI",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D22_T01": {
+      "primaryId": "GYe98jwCn7g",
+      "backupId": null,
+      "primaryCoverage": "Seating arrangement methods; includes broader arrangement patterns.",
+      "backupCoverage": null
+    },
+    "D22_T02": {
+      "primaryId": "U96HiN2wigE",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D22_T03": {
+      "primaryId": "eUiMFmCtFAk",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D23_T01": {
+      "primaryId": null,
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null,
+      "videoStatusReason": "An English-language lesson has not been confirmed. Study notes remain available."
+    },
+    "D23_T02": {
+      "primaryId": "ESfUVR5KPtQ",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D23_T03": {
+      "primaryId": "yD1J2WCI8Dc",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D24_T01": {
+      "primaryId": "ClN7XfBUkpI",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D24_T02": {
+      "primaryId": "8ZZp9LwXPDI",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D24_T03": {
+      "primaryId": null,
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null,
+      "videoStatusReason": "An English-language lesson has not been confirmed. Study notes remain available."
+    },
+    "D24_T04": {
+      "primaryId": "zqVHsBO88Tg",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D25_T01": {
+      "primaryId": "CzMbznbN3xk",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D25_T02": {
+      "primaryId": "2v3hTxxhC-w",
+      "backupId": "VlTve2YABOg",
+      "primaryCoverage": "Mirror and water-image reasoning.",
+      "backupCoverage": "Additional water-image examples."
+    },
+    "D25_T03": {
+      "primaryId": null,
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null,
+      "videoStatusReason": "An English-language lesson has not been confirmed. Study notes remain available."
+    },
+    "D25_T04": {
+      "primaryId": "jEKkTU0ec2U",
+      "backupId": "furUORyxJHE",
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D26_T01": {
+      "primaryId": null,
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null,
+      "videoStatusReason": "An English-language lesson has not been confirmed. Study notes remain available."
+    },
+    "D26_T02": {
+      "primaryId": null,
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null,
+      "videoStatusReason": "An English-language lesson has not been confirmed. Study notes remain available."
+    },
+    "D26_T03": {
+      "primaryId": "4WCq6leqnHs",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D27_T01": {
+      "primaryId": "SceDmiBEESI",
+      "backupId": "chjmnCSPnbw",
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D27_T02": {
+      "primaryId": "U304CZiFgO0",
+      "backupId": "faUvT7zfsyk",
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D27_T03": {
+      "primaryId": "yVpFFZVMymA",
+      "backupId": "KEdI0-xIUFc",
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D27_T04": {
+      "primaryId": "TNkq01wrqUg",
+      "backupId": "4EsDY2VbIXs",
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D28_T01": {
+      "primaryId": "5Z1FBGz8dxM",
+      "backupId": "NTrvUvlPdXM",
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D28_T02": {
+      "primaryId": "-FdEaeD1MdY",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D28_T03": {
+      "primaryId": "Qu5pvwL9u4Q",
+      "backupId": "M6AzQ99bYO8",
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D28_T04": {
+      "primaryId": "9pzQhtEKepw",
+      "backupId": "NbT7hJT1yhQ",
+      "primaryCoverage": "Error spotting focused on articles.",
+      "backupCoverage": "Error spotting focused on pronouns."
+    },
+    "D29_T01": {
+      "primaryId": "dfXA1D_5ad4",
+      "backupId": "1teVJjANAQY",
+      "primaryCoverage": "Synonyms and antonyms explained.",
+      "backupCoverage": "Additional antonym vocabulary practice."
+    },
+    "D29_T02": {
+      "primaryId": "DQnjlv_Xcec",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D29_T03": {
+      "primaryId": "5LuIRvQiJ_E",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D29_T04": {
+      "primaryId": "aSJO9RItSWQ",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D30_T01": {
+      "primaryId": "xrEq-1UujOo",
+      "backupId": "QMIQv7yPlkI",
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D30_T02": {
+      "primaryId": "qw0cd4VNpc4",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D30_T03": {
+      "primaryId": "LbO3lRXT0ww",
+      "backupId": "Xkzs16rXKwA",
+      "primaryCoverage": "Identify the main idea in a passage.",
+      "backupCoverage": "Identify tone and mood."
+    },
+    "D30_T04": {
+      "primaryId": "nKBzdtADTiY",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D31_T01": {
+      "primaryId": "GHEUovx7rfg",
+      "backupId": "Gxe9mq2xu0w",
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D31_T02": {
+      "primaryId": "jx3m69JZLUo",
+      "backupId": "kLUAG8if-6o",
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D31_T03": {
+      "primaryId": "_bgyQ9I6rE8",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D32_T01": {
+      "primaryId": "35Io4-tZEk4",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D32_T02": {
+      "primaryId": "bMhIgxQzBZQ",
+      "backupId": "qwX4Drh42OE",
+      "primaryCoverage": "Sentence completion using articles.",
+      "backupCoverage": "Sentence completion using pronouns."
+    },
+    "D32_T03": {
+      "primaryId": "CiNggzdWkIo",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D33_T01": {
+      "primaryId": "bmVFWZzRcXY",
+      "backupId": null,
+      "primaryCoverage": "Verbal sentence-completion practice; this video is a walkthrough, not an in-app scored mock.",
+      "backupCoverage": null
+    },
+    "D33_T02": {
+      "primaryId": "SceDmiBEESI",
+      "backupId": "U304CZiFgO0",
+      "primaryCoverage": "Review the parts of speech.",
+      "backupCoverage": "Review English tenses."
+    },
+    "D34_T01": {
+      "primaryId": "wLTYn8MVIrA",
+      "backupId": null,
+      "primaryCoverage": "Read line graphs and tables together.",
+      "backupCoverage": null
+    },
+    "D34_T02": {
+      "primaryId": "g_pyxyJjgM8",
+      "backupId": "2YtYsaKelmY",
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D34_T03": {
+      "primaryId": "A-lRlFBO5_U",
+      "backupId": null,
+      "primaryCoverage": "Percentage calculations for data interpretation.",
+      "backupCoverage": null
+    },
+    "D35_T01": {
+      "primaryId": "LEM2xQEVYGo",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D35_T02": {
+      "primaryId": "LEM2xQEVYGo",
+      "backupId": null,
+      "primaryCoverage": "Bar-graph methods for comparing data series; includes broader bar-chart practice.",
+      "backupCoverage": null
+    },
+    "D35_T03": {
+      "primaryId": "2ndlt3A6s6U",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D36_T01": {
+      "primaryId": "wLTYn8MVIrA",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D36_T02": {
+      "primaryId": "jAcDJDjQk2g",
+      "backupId": "2T3Bb23W2Is",
+      "primaryCoverage": "Calculate percentage increase and decrease between periods.",
+      "backupCoverage": "More percent-change practice."
+    },
+    "D36_T03": {
+      "primaryId": "wLTYn8MVIrA",
+      "backupId": null,
+      "primaryCoverage": "Line-graph and table comparison methods.",
+      "backupCoverage": null
+    },
+    "D37_T01": {
+      "primaryId": "fA8cQW-nmIw",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D37_T02": {
+      "primaryId": "sdMT6iasnYQ",
+      "backupId": null,
+      "primaryCoverage": "Convert pie-chart percentages into sector angles.",
+      "backupCoverage": null
+    },
+    "D37_T03": {
+      "primaryId": "fA8cQW-nmIw",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D38_T01": {
+      "primaryId": "ETpXfJVGDWQ",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D38_T02": {
+      "primaryId": "F-rioM8TZI4",
+      "backupId": null,
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D38_T03": {
+      "primaryId": "hHbC3sGfQ9A",
+      "backupId": "fOH8u9knxmg",
+      "primaryCoverage": null,
+      "backupCoverage": null
+    },
+    "D38_T04": {
+      "primaryId": "DHBDV2RJJao",
+      "backupId": null,
+      "primaryCoverage": "Worked data-interpretation calculations; use a separate timer for speed practice.",
+      "backupCoverage": null
+    },
+    "D39_T01": {
+      "primaryId": "V2azCSchs58",
+      "backupId": null,
+      "primaryCoverage": "Aptitude question walkthrough; not an official company mock.",
+      "backupCoverage": null
+    },
+    "D39_T02": {
+      "primaryId": "4WCq6leqnHs",
+      "backupId": null,
+      "primaryCoverage": "Logical reasoning question walkthrough; not a scored in-app test.",
+      "backupCoverage": null
+    },
+    "D39_T03": {
+      "primaryId": "39zRq_cVDGQ",
+      "backupId": "Hbq-yP1SfoQ",
+      "primaryCoverage": "Verbal reasoning worked questions.",
+      "backupCoverage": null
+    },
+    "D39_T04": {
+      "primaryId": "THf4eg_xfgk",
+      "backupId": null,
+      "primaryCoverage": "Data interpretation worked example.",
+      "backupCoverage": null
+    },
+    "D40_T01": {
+      "primaryId": "5GeNpaEeQLM",
+      "backupId": null,
+      "primaryCoverage": "Placement aptitude worked questions; not an official company assessment.",
+      "backupCoverage": null
+    },
+    "D40_T02": {
+      "primaryId": "hVrZaPZZY9o",
+      "backupId": null,
+      "primaryCoverage": "Placement practice questions. Previous-exam provenance has not been independently confirmed.",
+      "backupCoverage": null
+    },
+    "D40_T03": {
+      "primaryId": "XKFN9jYrtYc",
+      "backupId": null,
+      "primaryCoverage": "General reasoning revision; revisit quantitative and verbal review lessons separately.",
+      "backupCoverage": null
+    }
+  }
+}

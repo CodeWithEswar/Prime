@@ -1,0 +1,110 @@
+[
+  {
+    "id": "cn-ex-01",
+    "dayNumber": 1,
+    "title": "Home Network Architecture & Topology Analysis",
+    "description": "Draw a home network diagram, distinguish Layer 2 MAC addresses from Layer 3 IP addresses and Layer 4 port numbers, and compare circuit switching vs packet switching.",
+    "category": "Fundamentals",
+    "difficulty": "easy",
+    "estimatedMinutes": 20
+  },
+  {
+    "id": "cn-ex-02",
+    "dayNumber": 2,
+    "title": "OSI Encapsulation Trace & Terminal Command Diagnostics",
+    "description": "Trace encapsulation of an HTTP GET request through all 7 OSI layers. Run ping, traceroute, and nslookup, documenting TTL and latency.",
+    "category": "OSI / TCP-IP",
+    "difficulty": "medium",
+    "estimatedMinutes": 25
+  },
+  {
+    "id": "cn-ex-03",
+    "dayNumber": 3,
+    "title": "Bit Stuffing & Byte Stuffing Framing Calculations",
+    "description": "Perform bit stuffing on raw bit sequences using flag 01111110. Show the escaped byte stream during character-oriented byte stuffing.",
+    "category": "Data Link",
+    "difficulty": "medium",
+    "estimatedMinutes": 25
+  },
+  {
+    "id": "cn-ex-04",
+    "dayNumber": 4,
+    "title": "CRC Error Detection & Network Latency Numericals",
+    "description": "Compute the transmitted CRC codeword for a given message bit string and generator polynomial. Calculate Transmission Delay, Propagation Delay, and BDP.",
+    "category": "Error Control",
+    "difficulty": "hard",
+    "estimatedMinutes": 30
+  },
+  {
+    "id": "cn-ex-05",
+    "dayNumber": 5,
+    "title": "Sliding Window Protocol Efficiency & Window Sizing",
+    "description": "Calculate optimal sender window size for Go-Back-N and Selective Repeat given bandwidth, RTT, and packet size. Derive sequence number space.",
+    "category": "Flow Control",
+    "difficulty": "hard",
+    "estimatedMinutes": 30
+  },
+  {
+    "id": "cn-ex-06",
+    "dayNumber": 6,
+    "title": "CSMA/CD Minimum Frame Size & VLAN Design",
+    "description": "Calculate minimum frame size in CSMA/CD to ensure collision detection over a 1 km coaxial cable at 100 Mbps. Segment collision and broadcast domains.",
+    "category": "Ethernet & Switching",
+    "difficulty": "hard",
+    "estimatedMinutes": 25
+  },
+  {
+    "id": "cn-ex-07",
+    "dayNumber": 7,
+    "title": "IPv4 CIDR Subnetting: 10 Core Problems",
+    "description": "Compute Network Address, Broadcast Address, Subnet Mask, Wildcard Mask, Usable Host Range, and Total Addresses for 10 distinct CIDR subnets including /30, /31, and /32.",
+    "category": "Subnetting",
+    "difficulty": "hard",
+    "estimatedMinutes": 35
+  },
+  {
+    "id": "cn-ex-08",
+    "dayNumber": 8,
+    "title": "Variable Length Subnet Masking (VLSM) Enterprise Plan",
+    "description": "Design a VLSM address allocation plan for an organization with 4 departments (100 hosts, 50 hosts, 25 hosts, 10 hosts) from base 192.168.10.0/24 without overlapping subnets.",
+    "category": "VLSM",
+    "difficulty": "hard",
+    "estimatedMinutes": 35
+  },
+  {
+    "id": "cn-ex-09",
+    "dayNumber": 9,
+    "title": "Dijkstra Shortest Path & Routing Table Longest-Prefix Match",
+    "description": "Execute Dijkstra's algorithm step-by-step on a 6-node network graph. Given a routing table, determine the outgoing interface for incoming destination IPs using longest prefix match.",
+    "category": "Routing",
+    "difficulty": "hard",
+    "estimatedMinutes": 35
+  },
+  {
+    "id": "cn-ex-10",
+    "dayNumber": 10,
+    "title": "NAT/PAT Translation Table & IPv6 Address Compression",
+    "description": "Map internal private IP:port pairs to external public IP:port entries in a NAT table. Compress and expand multiple 128-bit IPv6 addresses using RFC rules.",
+    "category": "NAT & IPv6",
+    "difficulty": "hard",
+    "estimatedMinutes": 30
+  },
+  {
+    "id": "cn-ex-11",
+    "dayNumber": 11,
+    "title": "URL Lifecycle Trace: DNS to TCP/QUIC to TLS to HTTP Response",
+    "description": "Trace every network event occurring from entering https://example.com in a browser: DNS recursion, TCP 3-way handshake or QUIC, TLS 1.3 key exchange, HTTP request/response.",
+    "category": "Transport & Application",
+    "difficulty": "hard",
+    "estimatedMinutes": 40
+  },
+  {
+    "id": "cn-ex-12",
+    "dayNumber": 12,
+    "title": "Comprehensive Network Troubleshooting & Mock Interview",
+    "description": "Diagnose 7 production network scenarios (DNS failure, bad subnet mask, default gateway unreachable, TCP timeout, port blocked, routing loop, TLS certificate error) and solve 25 high-frequency interview questions.",
+    "category": "Troubleshooting & Interview",
+    "difficulty": "hard",
+    "estimatedMinutes": 50
+  }
+]

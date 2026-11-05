@@ -1,0 +1,19 @@
+{
+  "aliases": [],
+  "excludeRecords": [
+    {
+      "source": "booleanstack",
+      "record": "BS-DSA-0967",
+      "reason": "Tutorial article, not a practice problem URL"
+    },
+    {
+      "source": "booleanstack",
+      "record": "BS-DSA-1166",
+      "reason": "Trie learning course, not an individual practice problem URL"
+    }
+  ],
+  "excludedTopicTags": ["Database", "Pandas"],
+  "merges": [],
+  "canonical": {},
+  "note": "Add reviewed aliases as {alias, targetIdentity, reason}; merges as {fromIdentity, toIdentity, reason}. Identities use provider:slug or url:normalized-url. Canonical overrides are keyed by identity and may supply title, difficulty, topicSlugs. Never copy upstream raw_variations into approved aliases."
+}

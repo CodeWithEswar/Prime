@@ -1,0 +1,1650 @@
+[
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0021",
+    "originalUrl": "https://leetcode.com/problems/fractional-knapsack-problem",
+    "url": "https://practice.geeksforgeeks.org/problems/fractional-knapsack/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B242"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0022",
+    "originalUrl": "https://leetcode.com/problems/greedy-algorithm-to-find-minimum-number-of-coins",
+    "url": "https://practice.geeksforgeeks.org/problems/coin-piles/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B243"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0028",
+    "originalUrl": "https://leetcode.com/problems/topological-sort",
+    "url": "https://practice.geeksforgeeks.org/problems/topological-sort/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/DSA%20by%20Shradha%20Ma'am.xlsx",
+    "cell": "B304"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0030",
+    "originalUrl": "https://leetcode.com/problems/count-number-of-bits-to-be-flipped-to-convert-a-to-b",
+    "url": "https://practice.geeksforgeeks.org/problems/bit-difference/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B474"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0031",
+    "originalUrl": "https://leetcode.com/problems/aggressive-cows",
+    "url": "https://spoj.com/problems/AGGRCOW",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B124"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0035",
+    "originalUrl": "https://leetcode.com/problems/chocolate-distribution-problem",
+    "url": "https://practice.geeksforgeeks.org/problems/chocolate-distribution-problem/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B261"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0047",
+    "originalUrl": "https://leetcode.com/problems/delete-nodes-which-have-a-greater-value-on-right-side",
+    "url": "https://practice.geeksforgeeks.org/problems/delete-nodes-having-greater-value-on-right/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B171"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0055",
+    "originalUrl": "https://leetcode.com/problems/combinational-sum",
+    "url": "https://practice.geeksforgeeks.org/problems/combination-sum/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B286"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0088",
+    "originalUrl": "https://leetcode.com/problems/find-the-two-non-repeating-elements-in-an-array-of-repeating-elements",
+    "url": "https://practice.geeksforgeeks.org/problems/finding-the-numbers0215/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B473"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0094",
+    "originalUrl": "https://leetcode.com/problems/book-allocation-problem",
+    "url": "https://practice.geeksforgeeks.org/problems/allocate-minimum-number-of-pages/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B125"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0098",
+    "originalUrl": "https://leetcode.com/problems/find-four-elements-that-sum-to-a-given-value",
+    "url": "https://practice.geeksforgeeks.org/problems/find-all-four-sum-numbers/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B111"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0111",
+    "originalUrl": "https://leetcode.com/problems/kth-max-and-min-element-of-an-array",
+    "url": "https://practice.geeksforgeeks.org/problems/kth-smallest-element/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B8"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0115",
+    "originalUrl": "https://leetcode.com/problems/merge-overlapping-intervals",
+    "url": "https://practice.geeksforgeeks.org/problems/overlapping-intervals/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B311"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0117",
+    "originalUrl": "https://leetcode.com/problems/minimise-the-maximum-difference-between-heights-vimp",
+    "url": "https://practice.geeksforgeeks.org/problems/minimize-the-heights3351/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B14"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0118",
+    "originalUrl": "https://leetcode.com/problems/minimum-swaps-required-bring-elements-less-equal-k-together",
+    "url": "https://practice.geeksforgeeks.org/problems/minimum-swaps-required-to-bring-all-elements-less-than-or-equal-to-k-together/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B38"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0133",
+    "originalUrl": "https://leetcode.com/problems/find-median-in-a-row-wise-sorted-matrix",
+    "url": "https://practice.geeksforgeeks.org/problems/median-in-a-row-wise-sorted-matrix1527/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B46"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0134",
+    "originalUrl": "https://leetcode.com/problems/find-row-with-maximum-no-of-1s",
+    "url": "https://practice.geeksforgeeks.org/problems/row-with-max-1s0023/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B47"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0135",
+    "originalUrl": "https://leetcode.com/problems/kth-smallest-element-in-a-row-cpumn-wise-sorted-matrix",
+    "url": "https://practice.geeksforgeeks.org/problems/kth-element-in-matrix/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B52"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0136",
+    "originalUrl": "https://leetcode.com/problems/print-elements-in-sorted-order-using-row-column-wise-sorted-matrix",
+    "url": "https://practice.geeksforgeeks.org/problems/sorted-matrix/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B48"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0144",
+    "originalUrl": "https://leetcode.com/problems/add-two-numbers-represented-by-linked-lists",
+    "url": "https://practice.geeksforgeeks.org/problems/add-two-numbers-represented-by-linked-lists/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B148"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0145",
+    "originalUrl": "https://leetcode.com/problems/clone-a-linked-list-with-next-and-random-pointer",
+    "url": "https://practice.geeksforgeeks.org/problems/clone-a-linked-list-with-next-and-random-pointer/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B168"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0152",
+    "originalUrl": "https://leetcode.com/problems/merge-sort-for-linked-listsvery-important",
+    "url": "https://practice.geeksforgeeks.org/problems/sort-a-linked-list/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B151"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0153",
+    "originalUrl": "https://leetcode.com/problems/quicksort-for-linked-listsvery-important",
+    "url": "https://practice.geeksforgeeks.org/problems/quick-sort-on-linked-list/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B152"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0154",
+    "originalUrl": "https://leetcode.com/problems/remove-duplicates-in-a-sorted-linked-list",
+    "url": "https://practice.geeksforgeeks.org/problems/remove-duplicate-element-from-sorted-linked-list/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B144"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0155",
+    "originalUrl": "https://leetcode.com/problems/reverse-a-doubly-linked-list",
+    "url": "https://practice.geeksforgeeks.org/problems/reverse-a-doubly-linked-list/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B158"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0157",
+    "originalUrl": "https://leetcode.com/problems/sort-a-ll-of-0s-1s-and-2s",
+    "url": "https://practice.geeksforgeeks.org/problems/given-a-linked-list-of-0s-1s-and-2s-sort-it/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B167"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0159",
+    "originalUrl": "https://leetcode.com/problems/write-a-program-to-check-whether-the-singly-linked-list-is-a-palindrome-or-not",
+    "url": "https://practice.geeksforgeeks.org/problems/check-if-linked-list-is-pallindrome/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B156"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0163",
+    "originalUrl": "https://leetcode.com/problems/evaluation-of-postfix-expression",
+    "url": "https://practice.geeksforgeeks.org/problems/evaluation-of-postfix-expression/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B307"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0165",
+    "originalUrl": "https://leetcode.com/problems/implement-queue-using-stack",
+    "url": "https://practice.geeksforgeeks.org/problems/queue-using-two-stacks/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B318"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0166",
+    "originalUrl": "https://leetcode.com/problems/implement-stack-using-queue",
+    "url": "https://practice.geeksforgeeks.org/problems/stack-using-two-queues/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B315"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0176",
+    "originalUrl": "https://leetcode.com/problems/rotten-oranges",
+    "url": "https://practice.geeksforgeeks.org/problems/rotten-oranges2536/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/DSA%20by%20Shradha%20Ma'am.xlsx",
+    "cell": "B170"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0177",
+    "originalUrl": "https://leetcode.com/problems/sort-a-stack-using-recursion",
+    "url": "https://practice.geeksforgeeks.org/problems/sort-a-stack/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B310"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0180",
+    "originalUrl": "https://leetcode.com/problems/the-celebrity-problem",
+    "url": "https://practice.geeksforgeeks.org/problems/the-celebrity-problem/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B305"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0209",
+    "originalUrl": "https://leetcode.com/problems/reverse-level-order-traversal",
+    "url": "https://practice.geeksforgeeks.org/problems/reverse-level-order-traversal/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B178"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0218",
+    "originalUrl": "https://leetcode.com/problems/check-whether-bst-contains-dead-end",
+    "url": "https://practice.geeksforgeeks.org/problems/check-whether-bst-contains-dead-end/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B233"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0231",
+    "originalUrl": "https://leetcode.com/problems/given-a-sequence-of-words-print-all-anagrams-together",
+    "url": "https://practice.geeksforgeeks.org/problems/k-anagrams-1/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B405"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0232",
+    "originalUrl": "https://leetcode.com/problems/implement-a-phone-directory",
+    "url": "https://practice.geeksforgeeks.org/problems/phone-directory/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B406"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0233",
+    "originalUrl": "https://leetcode.com/problems/print-unique-rows-in-a-given-boolean-matrix",
+    "url": "https://practice.geeksforgeeks.org/problems/unique-rows-in-boolean-matrix/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B407"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0234",
+    "originalUrl": "https://leetcode.com/problems/activity-selection-problem",
+    "url": "https://practice.geeksforgeeks.org/problems/n-meetings-in-one-room/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B238"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0235",
+    "originalUrl": "https://leetcode.com/problems/arrange-arranging-amplifiers",
+    "url": "https://spoj.com/problems/ARRANGE",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B267"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0239",
+    "originalUrl": "https://leetcode.com/problems/defkin-defense-of-a-kingdom",
+    "url": "https://spoj.com/problems/DEFKIN",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B262"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0240",
+    "originalUrl": "https://leetcode.com/problems/diehard-die-hard",
+    "url": "https://spoj.com/problems/DIEHARD",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B263"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0243",
+    "originalUrl": "https://leetcode.com/problems/find-smallest-number-with-given-number-of-digits-and-sum-of-digits",
+    "url": "https://practice.geeksforgeeks.org/problems/smallest-number5829/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B270"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0244",
+    "originalUrl": "https://leetcode.com/problems/find-the-minimum-and-maximum-amount-to-buy-all-n-candies",
+    "url": "https://practice.geeksforgeeks.org/problems/shop-in-candy-store/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B247"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0245",
+    "originalUrl": "https://leetcode.com/problems/gergovia-wine-trading-in-gergovia",
+    "url": "https://spoj.com/problems/GERGOVIA",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B264"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0246",
+    "originalUrl": "https://leetcode.com/problems/huffman-coding",
+    "url": "https://practice.geeksforgeeks.org/problems/huffman-encoding/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B240"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0250",
+    "originalUrl": "https://leetcode.com/problems/maximize-array-sum-after-k-negations",
+    "url": "https://practice.geeksforgeeks.org/problems/maximize-sum-after-k-negations/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B253"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0251",
+    "originalUrl": "https://leetcode.com/problems/maximize-sum-of-consecutive-differences-in-a-circular-array",
+    "url": "https://practice.geeksforgeeks.org/problems/swap-and-maximize/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B256"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0252",
+    "originalUrl": "https://leetcode.com/problems/maximize-the-sum-of-arrii",
+    "url": "https://practice.geeksforgeeks.org/problems/maximize-arrii-of-an-array/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B254"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0258",
+    "originalUrl": "https://leetcode.com/problems/minimum-platforms-problem",
+    "url": "https://practice.geeksforgeeks.org/problems/minimum-platforms/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B245"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0260",
+    "originalUrl": "https://leetcode.com/problems/picking-up-chicks",
+    "url": "https://spoj.com/problems/GCJ101BB",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B265"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0261",
+    "originalUrl": "https://leetcode.com/problems/program-for-least-recently-used-lru-page-replacement-algorithm",
+    "url": "https://practice.geeksforgeeks.org/problems/page-faults-in-lru/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B259"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0262",
+    "originalUrl": "https://leetcode.com/problems/rearrange-characters-in-a-string-such-that-no-two-adjacent-are-same",
+    "url": "https://practice.geeksforgeeks.org/problems/rearrange-characters/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B352"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0264",
+    "originalUrl": "https://leetcode.com/problems/water-connection-problem",
+    "url": "https://practice.geeksforgeeks.org/problems/water-connection-problem/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B241"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0265",
+    "originalUrl": "https://leetcode.com/problems/find-maximum-number-possible-by-doing-at-most-k-swaps",
+    "url": "https://practice.geeksforgeeks.org/problems/largest-number-in-k-swaps/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B287"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0267",
+    "originalUrl": "https://leetcode.com/problems/partition-of-a-set-intok-subsets-with-equal-sum",
+    "url": "https://practice.geeksforgeeks.org/problems/partition-array-to-k-subsets/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B292"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0279",
+    "originalUrl": "https://leetcode.com/problems/boolean-parenthesization",
+    "url": "https://practice.geeksforgeeks.org/problems/boolean-parenthesization5610/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/DSA%20by%20Shradha%20Ma'am.xlsx",
+    "cell": "B69"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0280",
+    "originalUrl": "https://leetcode.com/problems/box-stacking",
+    "url": "https://practice.geeksforgeeks.org/problems/box-stacking/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/DSA%20Day-wise%20siddharth%20singh.xlsx",
+    "cell": "A439"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0294",
+    "originalUrl": "https://leetcode.com/problems/longest-repeating-subsequence",
+    "url": "https://practice.geeksforgeeks.org/problems/longest-repeating-subsequence2004/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/DSA%20by%20Shradha%20Ma'am.xlsx",
+    "cell": "B349"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0297",
+    "originalUrl": "https://leetcode.com/problems/maximum-difference-of-zeros-and-ones-in-binary-string",
+    "url": "https://practice.geeksforgeeks.org/problems/maximum-difference-of-zeros-and-ones-in-binary-string4111/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B437"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0300",
+    "originalUrl": "https://leetcode.com/problems/maximum-sum-increasing-subsequence",
+    "url": "https://practice.geeksforgeeks.org/problems/maximum-sum-increasing-subsequence4749/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B428"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0302",
+    "originalUrl": "https://leetcode.com/problems/minimum-cost-to-fill-given-weight-in-a-bag",
+    "url": "https://practice.geeksforgeeks.org/problems/minimum-cost-to-fill-given-weight-in-a-bag1956/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B439"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0327",
+    "originalUrl": "https://leetcode.com/problems/mother-vertex",
+    "url": "https://practice.geeksforgeeks.org/problems/mother-vertex/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/DSA%20Day-wise%20siddharth%20singh.xlsx",
+    "cell": "A249"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0340",
+    "originalUrl": "https://leetcode.com/problems/count-total-set-bits-in-all-numbers-from-1-to-n",
+    "url": "https://practice.geeksforgeeks.org/problems/count-total-set-bits/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B475"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0342",
+    "originalUrl": "https://leetcode.com/problems/find-position-of-the-only-set-bit",
+    "url": "https://practice.geeksforgeeks.org/problems/find-position-of-set-bit3706/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B477"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0343",
+    "originalUrl": "https://leetcode.com/problems/friends-pairing-problem",
+    "url": "https://practice.geeksforgeeks.org/problems/friends-pairing-problem5425/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B418"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0344",
+    "originalUrl": "https://leetcode.com/problems/power-set",
+    "url": "https://practice.geeksforgeeks.org/problems/power-set4302/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B481"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0408",
+    "originalUrl": "https://leetcode.com/problems/allocate-books",
+    "url": "https://interviewbit.com/problems/allocate-books",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/AlgoPrep's%20151%20Problems%20Sheet.xlsx",
+    "cell": "B76"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0409",
+    "originalUrl": "https://leetcode.com/problems/allocate-minimum-number-of-pages",
+    "url": "https://practice.geeksforgeeks.org/problems/allocate-minimum-number-of-pages0937/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/DSA%20by%20Shradha%20Ma'am.xlsx",
+    "cell": "B97"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0417",
+    "originalUrl": "https://leetcode.com/problems/count-triplet-with-sum-smaller-than-a-given-value",
+    "url": "https://practice.geeksforgeeks.org/problems/count-triplets-with-sum-smaller-than-x5549/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B113"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0420",
+    "originalUrl": "https://leetcode.com/problems/doublehelix-spoj",
+    "url": "https://spoj.com/problems/ANARC05B",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B132"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0421",
+    "originalUrl": "https://leetcode.com/problems/ekospoj",
+    "url": "https://spoj.com/problems/EKO",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B126"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0422",
+    "originalUrl": "https://leetcode.com/problems/find-a-fixed-point-value-equal-to-index-in-a-given-array",
+    "url": "https://practice.geeksforgeeks.org/problems/value-equal-to-index-value1330/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B102"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0423",
+    "originalUrl": "https://leetcode.com/problems/find-a-pair-with-a-given-difference",
+    "url": "https://practice.geeksforgeeks.org/problems/find-pair-given-difference/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B110"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0428",
+    "originalUrl": "https://leetcode.com/problems/find-first-and-last-positions-of-an-element-in-a-sorted-array",
+    "url": "https://practice.geeksforgeeks.org/problems/first-and-last-occurrences-of-x/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B101"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0436",
+    "originalUrl": "https://leetcode.com/problems/find-the-repeating-and-the-missing",
+    "url": "https://practice.geeksforgeeks.org/problems/find-missing-and-repeating2512/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B107"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0445",
+    "originalUrl": "https://leetcode.com/problems/inversion-of-array",
+    "url": "https://practice.geeksforgeeks.org/problems/inversion-of-array-1587115620/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/DSA%20by%20Shradha%20Ma'am.xlsx",
+    "cell": "B86"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0447",
+    "originalUrl": "https://leetcode.com/problems/k-th-element-of-two-sorted-arrays",
+    "url": "https://practice.geeksforgeeks.org/problems/k-th-element-of-two-sorted-array/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B123"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0453",
+    "originalUrl": "https://leetcode.com/problems/maximum-and-minimum-of-an-array-using-minimum-number-of-comparisons",
+    "url": "https://practice.geeksforgeeks.org/problems/middle-of-three2926/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B105"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0455",
+    "originalUrl": "https://leetcode.com/problems/maximum-sum-such-that-no-2-elements-are-adjacent",
+    "url": "https://practice.geeksforgeeks.org/problems/stickler-theif/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B112"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0464",
+    "originalUrl": "https://leetcode.com/problems/minimum-no-of-swaps-required-to-sort-the-array",
+    "url": "https://practice.geeksforgeeks.org/problems/minimum-swaps/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B118"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0467",
+    "originalUrl": "https://leetcode.com/problems/missing-number-in-ap",
+    "url": "https://practice.geeksforgeeks.org/problems/arithmetic-number/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B128"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0473",
+    "originalUrl": "https://leetcode.com/problems/print-all-subarrays-with-0-sum",
+    "url": "https://practice.geeksforgeeks.org/problems/zero-sum-subarrays/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B115"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0475",
+    "originalUrl": "https://leetcode.com/problems/product-array-puzzle",
+    "url": "https://practice.geeksforgeeks.org/problems/product-array-puzzle/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B116"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0482",
+    "originalUrl": "https://leetcode.com/problems/roti-prata-spoj",
+    "url": "https://spoj.com/problems/PRATA",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B131"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0491",
+    "originalUrl": "https://leetcode.com/problems/smallest-number-with-atleastn-trailing-zeroes-infactorial",
+    "url": "https://practice.geeksforgeeks.org/problems/smallest-factorial-number5929/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B129"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0494",
+    "originalUrl": "https://leetcode.com/problems/sort-array-according-to-count-of-set-bits",
+    "url": "https://practice.geeksforgeeks.org/problems/sort-by-set-bit-count/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B117"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0496",
+    "originalUrl": "https://leetcode.com/problems/square-root-of-an-integer",
+    "url": "https://practice.geeksforgeeks.org/problems/count-squares3649/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B104"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0497",
+    "originalUrl": "https://leetcode.com/problems/subset-sums",
+    "url": "https://spoj.com/problems/SUBSUMS",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B133"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0510",
+    "originalUrl": "https://leetcode.com/problems/bulb-switcher-3",
+    "url": "https://leetcode.com/problems/bulb-switcher-iii",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/DSA%20Day-wise%20siddharth%20singh.xlsx",
+    "cell": "A77"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0523",
+    "originalUrl": "https://leetcode.com/problems/find-all-pairs-on-integer-array-whose-sum-is-equal-to-given-number",
+    "url": "https://practice.geeksforgeeks.org/problems/count-pairs-with-given-sum5022/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B23"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0525",
+    "originalUrl": "https://leetcode.com/problems/find-common-elements-in-3-sorted-arrays",
+    "url": "https://practice.geeksforgeeks.org/problems/common-elements1132/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B24"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0526",
+    "originalUrl": "https://leetcode.com/problems/find-factorial-of-a-large-number",
+    "url": "https://practice.geeksforgeeks.org/problems/factorials-of-large-numbers/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B27"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0527",
+    "originalUrl": "https://leetcode.com/problems/find-if-there-is-any-subarray-with-sum-equal-to-0",
+    "url": "https://practice.geeksforgeeks.org/problems/subarray-with-0-sum/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B26"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0529",
+    "originalUrl": "https://leetcode.com/problems/find-longest-coinsecutive-subsequence",
+    "url": "https://practice.geeksforgeeks.org/problems/longest-consecutive-subsequence/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B29"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0531",
+    "originalUrl": "https://leetcode.com/problems/find-maximum-product-subarray",
+    "url": "https://practice.geeksforgeeks.org/problems/maximum-product-subarray3604/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B28"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0538",
+    "originalUrl": "https://leetcode.com/problems/find-the-triplet-that-sum-to-a-given-value",
+    "url": "https://practice.geeksforgeeks.org/problems/triplet-sum-in-array/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B33"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0539",
+    "originalUrl": "https://leetcode.com/problems/find-the-union-and-intersection-of-the-two-sorted-arrays",
+    "url": "https://practice.geeksforgeeks.org/problems/union-of-two-arrays/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B11"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0540",
+    "originalUrl": "https://leetcode.com/problems/find-whether-an-array-is-a-subset-of-another-array",
+    "url": "https://practice.geeksforgeeks.org/problems/array-subset-of-another-array/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B32"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0545",
+    "originalUrl": "https://leetcode.com/problems/given-an-array-which-consists-of-only-0-1-and-2-sort-the-array-without-using-any-sorting-algo",
+    "url": "https://practice.geeksforgeeks.org/problems/sort-an-array-of-0s-1s-and-2s/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B9"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0559",
+    "originalUrl": "https://leetcode.com/problems/kth-smallest-element",
+    "url": "https://practice.geeksforgeeks.org/problems/kth-smallest-element5635/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/DSA%20by%20Shradha%20Ma'am.xlsx",
+    "cell": "B30"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0585",
+    "originalUrl": "https://leetcode.com/problems/median-of-2-sorted-arrays-of-equal-size",
+    "url": "https://practice.geeksforgeeks.org/problems/find-the-median0527/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B40"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0593",
+    "originalUrl": "https://leetcode.com/problems/minimum-no-of-operations-required-to-make-an-array-palindrome",
+    "url": "https://practice.geeksforgeeks.org/problems/palindromic-array/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B39"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0594",
+    "originalUrl": "https://leetcode.com/problems/minimum-xor-value",
+    "url": "https://interviewbit.com/problems/min-xor-value",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/DSA%20Day-wise%20siddharth%20singh.xlsx",
+    "cell": "A537"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0596",
+    "originalUrl": "https://leetcode.com/problems/mode-of-frequencies",
+    "url": "https://codechef.com/LTIME87B/problems/MODEFREQ",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/DSA%20Day-wise%20siddharth%20singh.xlsx",
+    "cell": "A361"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0615",
+    "originalUrl": "https://leetcode.com/problems/repeat-and-missing-number-array",
+    "url": "https://interviewbit.com/problems/repeat-and-missing-number-array",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/DSA%20by%20Shradha%20Ma'am.xlsx",
+    "cell": "B20"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0634",
+    "originalUrl": "https://leetcode.com/problems/smallest-subarray-with-sum-greater-than-a-given-value",
+    "url": "https://practice.geeksforgeeks.org/problems/smallest-subarray-with-sum-greater-than-x/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B36"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0641",
+    "originalUrl": "https://leetcode.com/problems/three-way-partitioning-of-an-array-around-a-given-value",
+    "url": "https://practice.geeksforgeeks.org/problems/three-way-partitioning/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B37"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0645",
+    "originalUrl": "https://leetcode.com/problems/write-a-program-to-cyclically-rotate-an-array-by-one",
+    "url": "https://practice.geeksforgeeks.org/problems/cyclically-rotate-an-array-by-one/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B12"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0652",
+    "originalUrl": "https://leetcode.com/problems/maximum-size-rectangle",
+    "url": "https://practice.geeksforgeeks.org/problems/max-rectangle/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B49"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0662",
+    "originalUrl": "https://leetcode.com/problems/check-if-two-given-strings-are-isomorphic-to-each-other",
+    "url": "https://practice.geeksforgeeks.org/problems/isomorphic-strings/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B97"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0664",
+    "originalUrl": "https://leetcode.com/problems/check-whether-a-string-is-palindrome-or-not",
+    "url": "https://practice.geeksforgeeks.org/problems/palindrome-string0817/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B57"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0665",
+    "originalUrl": "https://leetcode.com/problems/converting-roman-numerals-to-decimal",
+    "url": "https://practice.geeksforgeeks.org/problems/roman-number-to-integer/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B81"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0666",
+    "originalUrl": "https://leetcode.com/problems/count-all-palindromic-subsequence-in-a-given-string",
+    "url": "https://practice.geeksforgeeks.org/problems/count-palindromic-subsequences/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B451"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0673",
+    "originalUrl": "https://leetcode.com/problems/find-next-greater-number-with-same-set-of-digits-very-very-imp",
+    "url": "https://practice.geeksforgeeks.org/problems/next-permutation/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B70"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0674",
+    "originalUrl": "https://leetcode.com/problems/find-the-first-repeated-word-in-string",
+    "url": "https://practice.geeksforgeeks.org/problems/second-most-repeated-string-in-a-sequence/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B84"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0675",
+    "originalUrl": "https://leetcode.com/problems/find-the-smallest-window-in-a-string-containing-all-characters-of-another-string",
+    "url": "https://practice.geeksforgeeks.org/problems/smallest-window-in-a-string-containing-all-the-characters-of-another-string/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B92"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0687",
+    "originalUrl": "https://leetcode.com/problems/minimum-number-of-bracket-reversals-needed-to-make-an-expression-balanced",
+    "url": "https://practice.geeksforgeeks.org/problems/count-the-reversals/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B76"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0688",
+    "originalUrl": "https://leetcode.com/problems/minimum-number-of-swaps-for-bracket-balancing",
+    "url": "https://practice.geeksforgeeks.org/problems/minimum-swaps-for-bracket-balancing/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B85"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0690",
+    "originalUrl": "https://leetcode.com/problems/number-of-flips-to-make-binary-string-alternate",
+    "url": "https://practice.geeksforgeeks.org/problems/min-number-of-flips/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B83"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0698",
+    "originalUrl": "https://leetcode.com/problems/recursively-remove-all-adjacent-duplicates",
+    "url": "https://practice.geeksforgeeks.org/problems/consecutive-elements/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B93"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0699",
+    "originalUrl": "https://leetcode.com/problems/remove-consecutive-characters",
+    "url": "https://practice.geeksforgeeks.org/problems/consecutive-elements2306/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/DSA%20by%20Shradha%20Ma'am.xlsx",
+    "cell": "B43"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0706",
+    "originalUrl": "https://leetcode.com/problems/search-a-word-in-a-2d-grid-of-characters",
+    "url": "https://practice.geeksforgeeks.org/problems/find-the-string-in-grid/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B79"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0709",
+    "originalUrl": "https://leetcode.com/problems/smallest-window-in-a-string-containing-all-the-characters-of-another-string",
+    "url": "https://practice.geeksforgeeks.org/problems/smallest-window-in-a-string-containing-all-the-characters-of-another-string-1587115621/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/DSA%20by%20Shradha%20Ma'am.xlsx",
+    "cell": "B54"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0712",
+    "originalUrl": "https://leetcode.com/problems/string-matching-where-one-string-contains-wildcard-characters",
+    "url": "https://practice.geeksforgeeks.org/problems/wildcard-string-matching/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B94"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0721",
+    "originalUrl": "https://leetcode.com/problems/wildcard-string-matching",
+    "url": "https://practice.geeksforgeeks.org/problems/wildcard-string-matching1126/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/DSA%20by%20Shradha%20Ma'am.xlsx",
+    "cell": "B55"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0722",
+    "originalUrl": "https://leetcode.com/problems/word-wrap",
+    "url": "https://practice.geeksforgeeks.org/problems/word-wrap1646/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/DSA%20by%20Shradha%20Ma'am.xlsx",
+    "cell": "B389"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0726",
+    "originalUrl": "https://leetcode.com/problems/write-a-program-to-find-the-longest-palindrome-in-a-string-longest-palindromic-substring",
+    "url": "https://practice.geeksforgeeks.org/problems/longest-palindrome-in-a-string/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B63"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0727",
+    "originalUrl": "https://leetcode.com/problems/write-a-program-tofind-the-smallest-window-that-contains-all-characters-of-string-itself",
+    "url": "https://practice.geeksforgeeks.org/problems/smallest-distant-window/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B88"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0738",
+    "originalUrl": "https://leetcode.com/problems/add-1-to-a-number-represented-as-a-linked-list",
+    "url": "https://practice.geeksforgeeks.org/problems/add-1-to-a-number-represented-as-linked-list/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B147"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0740",
+    "originalUrl": "https://leetcode.com/problems/check-if-a-linked-list-is-a-circular-linked-list",
+    "url": "https://practice.geeksforgeeks.org/problems/circular-linked-list/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B154"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0757",
+    "originalUrl": "https://leetcode.com/problems/flatten-a-linked-list",
+    "url": "https://practice.geeksforgeeks.org/problems/flattening-a-linked-list/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B166"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0764",
+    "originalUrl": "https://leetcode.com/problems/intersection-of-two-sorted-linked-list",
+    "url": "https://practice.geeksforgeeks.org/problems/intersection-of-two-sorted-linked-lists/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B149"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0765",
+    "originalUrl": "https://leetcode.com/problems/intersection-point-of-two-linked-lists",
+    "url": "https://practice.geeksforgeeks.org/problems/intersection-point-in-y-shapped-linked-lists/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B150"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0774",
+    "originalUrl": "https://leetcode.com/problems/multiply-2-no-represented-by-ll",
+    "url": "https://practice.geeksforgeeks.org/problems/multiply-two-linked-lists/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B170"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0778",
+    "originalUrl": "https://leetcode.com/problems/program-for-nth-node-from-the-end-of-a-linked-list",
+    "url": "https://practice.geeksforgeeks.org/problems/nth-node-from-end-of-linked-list/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B173"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0782",
+    "originalUrl": "https://leetcode.com/problems/remove-duplicates-in-a-un-sorted-linked-list",
+    "url": "https://practice.geeksforgeeks.org/problems/remove-duplicates-from-an-unsorted-linked-list/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B145"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0795",
+    "originalUrl": "https://leetcode.com/problems/segregate-even-and-odd-nodes-in-a-linked-list",
+    "url": "https://practice.geeksforgeeks.org/problems/segregate-even-and-odd-nodes-in-a-linked-list/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B172"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0802",
+    "originalUrl": "https://leetcode.com/problems/split-a-circular-linked-list-into-two-halves",
+    "url": "https://practice.geeksforgeeks.org/problems/split-a-circular-linked-list-into-two-halves/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B155"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0808",
+    "originalUrl": "https://leetcode.com/problems/write-a-program-to-delete-loop-in-a-linked-list",
+    "url": "https://practice.geeksforgeeks.org/problems/remove-loop-in-linked-list/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B142"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0809",
+    "originalUrl": "https://leetcode.com/problems/write-a-program-to-detect-loop-in-a-linked-list",
+    "url": "https://practice.geeksforgeeks.org/problems/detect-loop-in-linked-list/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B141"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0820",
+    "originalUrl": "https://leetcode.com/problems/design-a-stack-that-supports-getmin-in-o1-time-and-o1-extra-space",
+    "url": "https://practice.geeksforgeeks.org/problems/special-stack/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B303"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0823",
+    "originalUrl": "https://leetcode.com/problems/distance-of-nearest-cell",
+    "url": "https://practice.geeksforgeeks.org/problems/distance-of-nearest-cell-having-1-1587115620/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/DSA%20by%20Shradha%20Ma'am.xlsx",
+    "cell": "B169"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0824",
+    "originalUrl": "https://leetcode.com/problems/distance-of-nearest-cell-having-1-in-a-binary-matrix",
+    "url": "https://practice.geeksforgeeks.org/problems/distance-of-nearest-cell-having-1/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B327"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0833",
+    "originalUrl": "https://leetcode.com/problems/find-the-next-greater-element",
+    "url": "https://practice.geeksforgeeks.org/problems/next-larger-element/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B304"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0834",
+    "originalUrl": "https://leetcode.com/problems/first-negative-integer-in-every-window-of-size-k",
+    "url": "https://practice.geeksforgeeks.org/problems/first-negative-integer-in-every-window-of-size-k/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B328"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0838",
+    "originalUrl": "https://leetcode.com/problems/implement-2-stack-in-an-array",
+    "url": "https://practice.geeksforgeeks.org/problems/implement-two-stacks-in-an-array/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B298"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0862",
+    "originalUrl": "https://leetcode.com/problems/largest-rectangular-area-in-histogram",
+    "url": "https://practice.geeksforgeeks.org/problems/maximum-rectangular-area-in-a-histogram/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B312"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0868",
+    "originalUrl": "https://leetcode.com/problems/lru-cache-implementationa",
+    "url": "https://practice.geeksforgeeks.org/problems/lru-cache/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B321"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0875",
+    "originalUrl": "https://leetcode.com/problems/minimum-sum-of-squares-of-character-counts-in-a-given-string-after-removing-k-characters",
+    "url": "https://practice.geeksforgeeks.org/problems/game-with-string/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B331"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0877",
+    "originalUrl": "https://leetcode.com/problems/minimum-time-required-to-rot-all-oranges",
+    "url": "https://practice.geeksforgeeks.org/problems/rotten-oranges/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B326"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0882",
+    "originalUrl": "https://leetcode.com/problems/next-larger-element",
+    "url": "https://practice.geeksforgeeks.org/problems/next-larger-element-1587115620/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/DSA%20by%20Shradha%20Ma'am.xlsx",
+    "cell": "B168"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0891",
+    "originalUrl": "https://leetcode.com/problems/reverse-a-string-using-stack",
+    "url": "https://practice.geeksforgeeks.org/problems/reverse-a-string-using-stack/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B302"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0915",
+    "originalUrl": "https://leetcode.com/problems/check-if-2-trees-are-mirror-or-not",
+    "url": "https://practice.geeksforgeeks.org/problems/check-mirror-in-n-ary-tree/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B201"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0920",
+    "originalUrl": "https://leetcode.com/problems/check-if-binary-tree-is-sum-tree-or-not",
+    "url": "https://practice.geeksforgeeks.org/problems/sum-tree/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B198"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0925",
+    "originalUrl": "https://leetcode.com/problems/check-mirror-in-n-ary-tree",
+    "url": "https://practice.geeksforgeeks.org/problems/check-mirror-in-n-ary-tree1528/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/DSA%20by%20Shradha%20Ma'am.xlsx",
+    "cell": "B45"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0931",
+    "originalUrl": "https://leetcode.com/problems/construct-binary-tree-from-inorder-and-preorder-traversal",
+    "url": "https://practice.geeksforgeeks.org/problems/construct-tree-1/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B196"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0956",
+    "originalUrl": "https://leetcode.com/problems/fenwick-tree",
+    "url": "https://spoj.com/problems/FENTREE",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/DSA%20Day-wise%20siddharth%20singh.xlsx",
+    "cell": "A226"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-0983",
+    "originalUrl": "https://leetcode.com/problems/level-order-traversal",
+    "url": "https://practice.geeksforgeeks.org/problems/level-order-traversal/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B177"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1029",
+    "originalUrl": "https://leetcode.com/problems/segment-tree",
+    "url": "https://spoj.com/problems/RMQSQ",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/DSA%20Day-wise%20siddharth%20singh.xlsx",
+    "cell": "A234"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1030",
+    "originalUrl": "https://leetcode.com/problems/shortest-unique-prefix",
+    "url": "https://interviewbit.com/problems/shortest-unique-prefix",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/DSA%20Day-wise%20siddharth%20singh.xlsx",
+    "cell": "A547"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1032",
+    "originalUrl": "https://leetcode.com/problems/sum-of-nodes-on-the-longest-path-from-root-to-leaf-node",
+    "url": "https://practice.geeksforgeeks.org/problems/sum-of-the-longest-bloodline-of-a-tree/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B202"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1054",
+    "originalUrl": "https://leetcode.com/problems/check-if-a-tree-is-a-bst-or-not",
+    "url": "https://practice.geeksforgeeks.org/problems/check-for-bst/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B218"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1055",
+    "originalUrl": "https://leetcode.com/problems/check-preorder-is-valid-or-not",
+    "url": "https://practice.geeksforgeeks.org/problems/preorder-to-postorder/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B232"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1071",
+    "originalUrl": "https://leetcode.com/problems/find-kth-smallest-element-in-a-bst",
+    "url": "https://practice.geeksforgeeks.org/problems/find-k-th-smallest-element-in-bst/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B226"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1072",
+    "originalUrl": "https://leetcode.com/problems/find-lca-of-2-nodes-in-a-bst",
+    "url": "https://practice.geeksforgeeks.org/problems/lowest-common-ancestor-in-a-bst/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B220"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1084",
+    "originalUrl": "https://leetcode.com/problems/largest-bst-in-a-binary-tree-vvvvv-imp",
+    "url": "https://practice.geeksforgeeks.org/problems/largest-bst/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B234"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1091",
+    "originalUrl": "https://leetcode.com/problems/preorder-to-postorder",
+    "url": "https://practice.geeksforgeeks.org/problems/preorder-to-postorder4423/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/DSA%20by%20Shradha%20Ma'am.xlsx",
+    "cell": "B251"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1096",
+    "originalUrl": "https://leetcode.com/problems/check-if-a-binary-tree-is-heap",
+    "url": "https://practice.geeksforgeeks.org/problems/is-binary-tree-heap/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B348"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1140",
+    "originalUrl": "https://leetcode.com/problems/median-in-a-stream-of-integers",
+    "url": "https://practice.geeksforgeeks.org/problems/find-median-in-a-stream/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B347"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1141",
+    "originalUrl": "https://leetcode.com/problems/merge-2-binary-max-heaps",
+    "url": "https://practice.geeksforgeeks.org/problems/merge-two-binary-max-heap/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B342"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1143",
+    "originalUrl": "https://leetcode.com/problems/merge-k-sorted-arrays-imp",
+    "url": "https://practice.geeksforgeeks.org/problems/merge-k-sorted-arrays/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B341"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1148",
+    "originalUrl": "https://leetcode.com/problems/minimum-sum-of-two-numbers-formed-from-digits-of-an-array",
+    "url": "https://practice.geeksforgeeks.org/problems/minimum-sum4058/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B353"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1157",
+    "originalUrl": "https://leetcode.com/problems/smallest-range-in-k-lists",
+    "url": "https://practice.geeksforgeeks.org/problems/find-smallest-range-containing-elements-from-k-lists/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B346"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1165",
+    "originalUrl": "https://leetcode.com/problems/k-largest-element-in-an-array",
+    "url": "https://geeksforgeeks.org/problems/k-largest-elements4206/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B339"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1212",
+    "originalUrl": "https://leetcode.com/problems/solve-the-sudoku",
+    "url": "https://practice.geeksforgeeks.org/problems/solve-the-sudoku-1587115621/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/DSA%20by%20Shradha%20Ma'am.xlsx",
+    "cell": "B106"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1218",
+    "originalUrl": "https://leetcode.com/problems/bbt-counter",
+    "url": "https://practice.geeksforgeeks.org/problems/bbt-counter4914/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/DSA%20by%20Shradha%20Ma'am.xlsx",
+    "cell": "B344"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1221",
+    "originalUrl": "https://leetcode.com/problems/boolean-parenthesization-problem",
+    "url": "https://practice.geeksforgeeks.org/problems/boolean-parenthesization/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B463"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1233",
+    "originalUrl": "https://leetcode.com/problems/count-balanced-binary-trees-of-height-h",
+    "url": "https://practice.geeksforgeeks.org/problems/bbt-counter/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B443"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1236",
+    "originalUrl": "https://leetcode.com/problems/count-number-of-ways-to-reacha-given-score-in-a-game",
+    "url": "https://practice.geeksforgeeks.org/problems/reach-a-given-score/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B442"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1245",
+    "originalUrl": "https://leetcode.com/problems/egg-dropping-problem",
+    "url": "https://practice.geeksforgeeks.org/problems/egg-dropping-puzzle/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B432"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1246",
+    "originalUrl": "https://leetcode.com/problems/egg-dropping-puzzle",
+    "url": "https://practice.geeksforgeeks.org/problems/egg-dropping-puzzle-1587115620/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/DSA%20by%20Shradha%20Ma'am.xlsx",
+    "cell": "B373"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1268",
+    "originalUrl": "https://leetcode.com/problems/largest-square-in-matrix",
+    "url": "https://practice.geeksforgeeks.org/problems/largest-square-formed-in-a-matrix0806/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/DSA%20by%20Shradha%20Ma'am.xlsx",
+    "cell": "B375"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1272",
+    "originalUrl": "https://leetcode.com/problems/longest-alternating-sequence",
+    "url": "https://practice.geeksforgeeks.org/problems/longest-alternating-subsequence5951/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/DSA%20by%20Shradha%20Ma'am.xlsx",
+    "cell": "B384"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1273",
+    "originalUrl": "https://leetcode.com/problems/longest-alternating-subsequence",
+    "url": "https://practice.geeksforgeeks.org/problems/longest-alternating-subsequence/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B453"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1295",
+    "originalUrl": "https://leetcode.com/problems/maximum-size-square-sub-matrix-with-all-1s",
+    "url": "https://practice.geeksforgeeks.org/problems/largest-square-formed-in-a-matrix/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B434"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1298",
+    "originalUrl": "https://leetcode.com/problems/maximum-sum-of-pairs-with-specific-difference",
+    "url": "https://practice.geeksforgeeks.org/problems/pairs-with-specific-difference/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B435"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1299",
+    "originalUrl": "https://leetcode.com/problems/maximum-sum-rectangle",
+    "url": "https://practice.geeksforgeeks.org/problems/maximum-sum-rectangle2948/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/DSA%20by%20Shradha%20Ma'am.xlsx",
+    "cell": "B64"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1300",
+    "originalUrl": "https://leetcode.com/problems/maximum-sum-rectangle-in-a-2d-matrix",
+    "url": "https://practice.geeksforgeeks.org/problems/maximum-sum-rectangle/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B466"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1312",
+    "originalUrl": "https://leetcode.com/problems/minimum-number-of-jumps",
+    "url": "https://practice.geeksforgeeks.org/problems/minimum-number-of-jumps-1587115620/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/DSA%20by%20Shradha%20Ma'am.xlsx",
+    "cell": "B377"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1326",
+    "originalUrl": "https://leetcode.com/problems/pairs-with-specific-difference",
+    "url": "https://practice.geeksforgeeks.org/problems/pairs-with-specific-difference1533/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/DSA%20by%20Shradha%20Ma'am.xlsx",
+    "cell": "B350"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1339",
+    "originalUrl": "https://leetcode.com/problems/reach-a-given-score",
+    "url": "https://practice.geeksforgeeks.org/problems/reach-a-given-score-1587115621/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/DSA%20by%20Shradha%20Ma'am.xlsx",
+    "cell": "B345"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1364",
+    "originalUrl": "https://leetcode.com/problems/castle-run",
+    "url": "https://practice.geeksforgeeks.org/problems/castle-run/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/DSA%20Day-wise%20siddharth%20singh.xlsx",
+    "cell": "A280"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1391",
+    "originalUrl": "https://leetcode.com/problems/doctor-strange",
+    "url": "https://practice.geeksforgeeks.org/problems/doctor-strange/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/DSA%20Day-wise%20siddharth%20singh.xlsx",
+    "cell": "A267"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1394",
+    "originalUrl": "https://leetcode.com/problems/euler-circuit-in-a-directed-graph",
+    "url": "https://practice.geeksforgeeks.org/problems/euler-circuit-in-a-directed-graph/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/DSA%20Day-wise%20siddharth%20singh.xlsx",
+    "cell": "A269"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1395",
+    "originalUrl": "https://leetcode.com/problems/eulerian-path-in-an-undirected-graph",
+    "url": "https://practice.geeksforgeeks.org/problems/eulerian-path-in-an-undirected-graph/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/DSA%20Day-wise%20siddharth%20singh.xlsx",
+    "cell": "A268"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1400",
+    "originalUrl": "https://leetcode.com/problems/find-the-maximum-flow",
+    "url": "https://practice.geeksforgeeks.org/problems/find-the-maximum-flow/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/DSA%20Day-wise%20siddharth%20singh.xlsx",
+    "cell": "A288"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1401",
+    "originalUrl": "https://leetcode.com/problems/find-the-no-of-isalnds",
+    "url": "https://practice.geeksforgeeks.org/problems/find-the-number-of-islands/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B371"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1413",
+    "originalUrl": "https://leetcode.com/problems/implement-bellman-ford-algorithm",
+    "url": "https://practice.geeksforgeeks.org/problems/negative-weight-cycle/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B376"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1431",
+    "originalUrl": "https://leetcode.com/problems/m-colouringproblem",
+    "url": "https://practice.geeksforgeeks.org/problems/m-coloring-problem/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B392"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1433",
+    "originalUrl": "https://leetcode.com/problems/maximum-bipartite-matching",
+    "url": "https://practice.geeksforgeeks.org/problems/maximum-bipartite-matching/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/DSA%20Day-wise%20siddharth%20singh.xlsx",
+    "cell": "A289"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1440",
+    "originalUrl": "https://leetcode.com/problems/minimum-step-by-knight",
+    "url": "https://practice.geeksforgeeks.org/problems/steps-by-knight/0",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/FINAL450.xlsx",
+    "cell": "B362"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1442",
+    "originalUrl": "https://leetcode.com/problems/negative-weighted-cycle",
+    "url": "https://practice.geeksforgeeks.org/problems/negative-weight-cycle3504/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/DSA%20by%20Shradha%20Ma'am.xlsx",
+    "cell": "B310"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1466",
+    "originalUrl": "https://leetcode.com/problems/steps-by-knight",
+    "url": "https://practice.geeksforgeeks.org/problems/steps-by-knight5927/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/DSA%20by%20Shradha%20Ma'am.xlsx",
+    "cell": "B300"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1497",
+    "originalUrl": "https://leetcode.com/problems/max-and-pair",
+    "url": "https://practice.geeksforgeeks.org/problems/maximum-and-value-1587115620/1",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/AlgoPrep's%20151%20Problems%20Sheet.xlsx",
+    "cell": "B47"
+  },
+  {
+    "source": "booleanstack",
+    "record": "BS-DSA-1517",
+    "originalUrl": "https://leetcode.com/problems/tri-tiling",
+    "url": "https://open.kattis.com/problems/tritiling",
+    "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/blob/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4/DSA%20Day-wise%20siddharth%20singh.xlsx",
+    "cell": "A517"
+  }
+]

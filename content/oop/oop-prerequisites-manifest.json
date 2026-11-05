@@ -1,0 +1,72 @@
+[
+  {
+    "prerequisiteId": "pre-intro",
+    "youtubeVideoId": "4EP8YzcN0hQ",
+    "title": "Introduction to Java Programming and Setup",
+    "canonicalWatchUrl": "https://youtu.be/4EP8YzcN0hQ",
+    "channelTitle": "Kunal Kushwaha",
+    "durationSeconds": 3600,
+    "recommendedUse": "Optional pre-course diagnostic / contextual remediation",
+    "verificationStatus": "verified"
+  },
+  {
+    "prerequisiteId": "pre-io",
+    "youtubeVideoId": "TAtrPoaJ7gc",
+    "title": "Java Input, Output and Data Types",
+    "canonicalWatchUrl": "https://youtu.be/TAtrPoaJ7gc",
+    "channelTitle": "Kunal Kushwaha",
+    "durationSeconds": 4500,
+    "recommendedUse": "Optional pre-course diagnostic / contextual remediation",
+    "verificationStatus": "verified"
+  },
+  {
+    "prerequisiteId": "pre-conditionals",
+    "youtubeVideoId": "ldYLYRNaucM",
+    "title": "Conditionals and Loops in Java",
+    "canonicalWatchUrl": "https://youtu.be/ldYLYRNaucM",
+    "channelTitle": "Kunal Kushwaha",
+    "durationSeconds": 4200,
+    "recommendedUse": "Optional pre-course diagnostic / contextual remediation",
+    "verificationStatus": "verified"
+  },
+  {
+    "prerequisiteId": "pre-switch",
+    "youtubeVideoId": "mA23x39DjbI",
+    "title": "Switch Statements and Nested Switch in Java",
+    "canonicalWatchUrl": "https://youtu.be/mA23x39DjbI",
+    "channelTitle": "Kunal Kushwaha",
+    "durationSeconds": 2400,
+    "recommendedUse": "Optional pre-course diagnostic / contextual remediation",
+    "verificationStatus": "verified"
+  },
+  {
+    "prerequisiteId": "pre-functions",
+    "youtubeVideoId": "vvanI8NRlSI",
+    "title": "Functions and Methods in Java",
+    "canonicalWatchUrl": "https://youtu.be/vvanI8NRlSI",
+    "channelTitle": "Kunal Kushwaha",
+    "durationSeconds": 5100,
+    "recommendedUse": "Optional pre-course diagnostic / contextual remediation",
+    "verificationStatus": "verified"
+  },
+  {
+    "prerequisiteId": "pre-arrays",
+    "youtubeVideoId": "n60Dn0UsbEk",
+    "title": "Arrays and ArrayList in Java",
+    "canonicalWatchUrl": "https://youtu.be/n60Dn0UsbEk",
+    "channelTitle": "Kunal Kushwaha",
+    "durationSeconds": 6300,
+    "recommendedUse": "Optional pre-course diagnostic / contextual remediation",
+    "verificationStatus": "verified"
+  },
+  {
+    "prerequisiteId": "pre-best-practices",
+    "youtubeVideoId": "waGfV-IoOt8",
+    "title": "Java Coding Best Practices and Time Complexity Basics",
+    "canonicalWatchUrl": "https://youtu.be/waGfV-IoOt8",
+    "channelTitle": "Kunal Kushwaha",
+    "durationSeconds": 3300,
+    "recommendedUse": "Optional pre-course diagnostic / contextual remediation",
+    "verificationStatus": "verified"
+  }
+]

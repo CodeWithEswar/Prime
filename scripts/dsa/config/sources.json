@@ -1,0 +1,54 @@
+[
+  {
+    "slug": "booleanstack",
+    "name": "BooleanStack DSA consolidation",
+    "sourceType": "repository",
+    "repositoryUrl": "https://github.com/orkait-abhay/dsa-sheets",
+    "revision": "dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4",
+    "license": null,
+    "licenseUrl": null,
+    "attributionRequired": true,
+    "redistributionStatus": "metadata_only",
+    "approval": {
+      "basis": "user_directed_factual_metadata",
+      "reason": "User explicitly instructed 'no problem import them' on 2026-11-01 after the source review. Import factual reference metadata only; no statements, explanations, solutions, or claim of an upstream redistribution license.",
+      "evidenceUrl": "https://github.com/orkait-abhay/dsa-sheets/tree/dc5b55cb3ca0c611b0b0dcc14d0f896466b918e4",
+      "metadataOnly": true
+    },
+    "checkedAt": "2026-10-31T00:00:00Z",
+    "evidence": "Complete recursive tree: no LICENSE, COPYING, or NOTICE. README gives no reuse grant. Consolidated company data derives from the unlicensed liquidslr source; upstream rights remain unresolved.",
+    "files": [
+      {
+        "path": "booleanstack_dsa_problems.json",
+        "format": "booleanstack-dsa",
+        "sha": "dad22a048f615e88522a8fb5cc89e10f08c378c4"
+      },
+      {
+        "path": "leetcode_company_wise_pyqs.json",
+        "format": "booleanstack-company",
+        "sha": "a8381941f77c82f0f768d3b2f19e2f23f8b1f7c0"
+      }
+    ]
+  },
+  {
+    "slug": "liquidslr",
+    "discovery": "company-csv-tree",
+    "name": "LeetCode company-wise reference",
+    "sourceType": "company_dataset",
+    "repositoryUrl": "https://github.com/liquidslr/leetcode-company-wise-problems",
+    "revision": "2b71796266751b4736a7ef180efb6847879166ee",
+    "license": null,
+    "licenseUrl": null,
+    "attributionRequired": true,
+    "redistributionStatus": "metadata_only",
+    "approval": {
+      "basis": "user_directed_factual_metadata",
+      "reason": "User explicitly instructed 'no problem import them' on 2026-11-01 after the source review. Import factual reference metadata only; no statements, explanations, solutions, or claim of an upstream redistribution license.",
+      "evidenceUrl": "https://github.com/liquidslr/leetcode-company-wise-problems/tree/2b71796266751b4736a7ef180efb6847879166ee",
+      "metadataOnly": true
+    },
+    "checkedAt": "2026-10-31T00:00:00Z",
+    "evidence": "Complete recursive tree: no LICENSE, COPYING, or NOTICE. Readme.md contains no permission grant. No company frequency or acceptance-rate data is approved for redistribution.",
+    "files": []
+  }
+]

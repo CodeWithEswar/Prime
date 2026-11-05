@@ -1,0 +1,869 @@
+[
+  {
+    "slug": "shopee",
+    "source": "https://shopee.com",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "sap",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/sap.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "asana",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/asana-icon.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "dell",
+    "source": "https://www.dell.com",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "uipath",
+    "source": "https://www.uipath.com/newsroom",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "zoho",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/zoho.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "garmin",
+    "source": "https://creative.garmin.com/styleguide/logo/",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "cisco",
+    "source": "https://www.cisco.com",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "visa",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/visa.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "odoo",
+    "source": "https://www.odoo.com/page/brand-assets",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "deliveroo",
+    "source": "https://deliveroo.com",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "mixpanel",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/mixpanel.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "veritas",
+    "source": "https://my.veritas.com/cs/groups/partner/documents/styleguide/mdaw/mdq5/~edisp/tus3cpeapp3855186572.pdf",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "revolut",
+    "source": "https://developer.revolut.com/docs/resources/marketing-assets-guidelines/marketing-guidelines",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "doordash",
+    "source": "https://www.doordash.com/about/",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "databricks",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/databricks-icon.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "splunk",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/splunk.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "gusto",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/gusto.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "oyo",
+    "source": "https://www.oyorooms.com",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "tesla",
+    "source": "https://www.tesla.com/tesla-gallery",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "zomato",
+    "source": "https://www.zomato.com/business/apps",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "nokia",
+    "source": "https://www.nokia.com",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "tiktok",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/tiktok-icon.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "tripadvisor",
+    "source": "https://tripadvisor.mediaroom.com/logo-guidelines",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "stripe",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/stripe.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "airbnb",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/airbnb-icon.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "reddit",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/reddit-icon.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "zendesk",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/zendesk-icon.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "samsung",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/samsung.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "barclays",
+    "source": "https://home.barclays",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "bytedance",
+    "source": "https://www.bytedance.com",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "dropbox",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/dropbox.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "baidu",
+    "source": "https://www.baidu.com",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "deutsche-bank",
+    "source": "https://www.db.com",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "airtel",
+    "source": "https://www.airtel.in/logo-tune",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "twitch",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/twitch.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "mastercard",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/mastercard.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "palo-alto-networks",
+    "source": "https://www.paloaltonetworks.com",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "zoom",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/zoom-icon.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "duolingo",
+    "source": "https://design.duolingo.com",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "riot-games",
+    "source": "https://www.riotgames.com/en/press",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "airbus-se",
+    "source": "https://brand.airbus.com/en/asset-library/airbus-logo",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "nvidia",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/nvidia.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "robinhood",
+    "source": "https://press.robinhood.com",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "coinbase",
+    "source": "https://www.coinbase.com/press",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "wix",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/wix.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "okx",
+    "source": "https://commons.wikimedia.org/wiki/File:OKX_logo.svg",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "unity",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/unity.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "akamai",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/akamai.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "rakuten",
+    "source": "https://global.rakuten.com/corp/news/media",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "houzz",
+    "source": "https://www.houzz.com/logoGuidelines",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "wise",
+    "source": "https://wise.design/foundations/logo",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "netflix",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/netflix-icon.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "openai",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/openai-icon.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "hp",
+    "source": "https://brandcentral.hp.com/us/en/elements/hp-logo.html",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "paytm",
+    "source": "https://paytm.com",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "mongodb",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/mongodb-icon.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "valve",
+    "source": "https://www.valvesoftware.com",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "toptal",
+    "source": "https://www.toptal.com/branding",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "okta",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/okta-icon.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "general-motors",
+    "source": "https://www.gm.com",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "yelp",
+    "source": "https://www.yelp.com/brand",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "groupon",
+    "source": "https://about.groupon.com/press/",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "autodesk",
+    "source": "https://brand.autodesk.com/brand-system/logo",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "dunzo",
+    "source": "https://www.dunzo.com",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "western-digital",
+    "source": "https://www.westerndigital.com",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "target",
+    "source": "https://www.target.com",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "hubspot",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/hubspot.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "peloton",
+    "source": "https://press.onepeloton.com/#logos",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "expedia",
+    "source": "https://brandfolder.com/portals/brand-expedia",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "sumo-logic",
+    "source": "https://sites.google.com/sumologic.com/sumo-logic-brand/home",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "hsbc",
+    "source": "https://www.hsbc.com",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "intuit",
+    "source": "https://www.intuit.com",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "citrix",
+    "source": "https://brand.citrix.com",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "sony",
+    "source": "https://www.sony.com",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "box",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/box.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "lyft",
+    "source": "https://www.lyft.com/press",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "cognizant",
+    "source": "https://www.cognizant.com",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "netapp",
+    "source": "https://www.netapp.com",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "shopify",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/shopify.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "warnermedia",
+    "source": "https://www.warnerbros.com",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "paypal",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/paypal.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "wells-fargo",
+    "source": "https://www.wellsfargo.com/about",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "bank-of-america",
+    "source": "https://www.bankofamerica.com",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "sentry",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/sentry-icon.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "goldman-sachs",
+    "source": "https://design.gs.com/brand/goldman-sachs-logo",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "juniper-networks",
+    "source": "https://www.juniper.net/us/en/company/press-center/images/image-library/logos/",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "indeed",
+    "source": "https://indeed.design/resources",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "activision",
+    "source": "https://www.activision.com",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "salesforce",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/salesforce.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "quora",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/quora.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "grab",
+    "source": "https://en.wikipedia.org/wiki/File:Grab_(application)_logo.svg",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "tinder",
+    "source": "https://www.gotinder.com/press",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "amazon",
+    "source": "https://github.com/simple-icons/simple-icons/blob/14.15.0/icons/amazon.svg",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "razorpay",
+    "source": "https://razorpay.com/newsroom/brand-assets/",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "fiverr",
+    "source": "https://www.fiverr.com/press-kit",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "spotify",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/spotify-icon.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "bosch",
+    "source": "https://www.bosch.de",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "twilio",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/twilio-icon.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "swiggy",
+    "source": "https://www.swiggy.com",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "nextdoor",
+    "source": "https://about.nextdoor.com/us-media/",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "line",
+    "source": "https://line.me/en/logo",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "apple",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/apple.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "canonical",
+    "source": "https://design.ubuntu.com/resources",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "tesco",
+    "source": "https://www.tesco.com",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "roblox",
+    "source": "https://www.roblox.com",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "instacart",
+    "source": "https://www.instacart.com/press",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "vk",
+    "source": "https://vk.com/brand",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "patreon",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/patreon.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "cloudflare",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/cloudflare-icon.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "wipro",
+    "source": "https://www.wipro.com/content/dam/nexus/en/service-lines/applications/latest-thinking/state-of-cybersecurity-report-2019.pdf",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "atlassian",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/atlassian.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "x",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/x.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "huawei",
+    "source": "https://e.huawei.com/ph/material/partner/0a72728b864949c48b22106454352483",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "nutanix",
+    "source": "https://www.nutanix.com/content/dam/nutanix/en/cmn/documents/nutanix-brandbook.pdf",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "ge-healthcare",
+    "source": "https://www.ge.com/brand/",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "lucid",
+    "source": "https://lucid.co/brand",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "coursera",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/coursera.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "wish",
+    "source": "https://wish.com",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "snowflake",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/snowflake-icon.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "qualcomm",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/qualcomm.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "postmates",
+    "source": "https://postmates.com/press-and-media",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "fortinet",
+    "source": "https://www.fortinet.com",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "walmart-labs",
+    "source": "https://corporate.walmart.com",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "squarespace",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/squarespace.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "uber",
+    "source": "https://assets.uber.com/d/k4nuxdZ8MC7E/logos/collection/151",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "infosys",
+    "source": "https://www.infosys.com/newsroom/journalist-resources/infosyslogo.html",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "american-express",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/amex.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "zalando",
+    "source": "https://www.zalando.co.uk",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "vimeo",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/vimeo-icon.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "audible",
+    "source": "https://commons.wikimedia.org/wiki/File:Audible_logo.svg",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "accenture",
+    "source": "https://www.accenture.com",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "amd",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/amd.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "flipkart",
+    "source": "https://www.flipkart.com",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "hcl",
+    "source": "https://www.hcl.com/brand-guidelines",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "grammarly",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/grammarly-icon.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "ge-digital",
+    "source": "https://www.ge.com/brand/",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "godaddy",
+    "source": "https://aboutus.godaddy.net/newsroom/media-resources/",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "ripple",
+    "source": "https://www.ripple.com/media-kit/",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "microstrategy",
+    "source": "https://www.microstrategy.com/en/company/press-kit",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "pinterest",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/pinterest.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "jio",
+    "source": "https://commons.wikimedia.org/wiki/File:Reliance_Jio_Logo.svg",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "snap",
+    "source": "https://www.snapchat.com/brand-guidelines",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "ebay",
+    "source": "https://go.developer.ebay.com/logos",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "mapbox",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/mapbox-icon.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "opentext",
+    "source": "https://www.opentext.com",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "intel",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/intel.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "kakao",
+    "source": "https://www.kakaocorp.com/kakao/introduce/ci",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "grubhub",
+    "source": "https://www.grubhub.com",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "roku",
+    "source": "https://www.roku.com",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "vmware",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/vmware.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "datadog",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/datadog-icon.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "meta",
+    "source": "https://github.com/simple-icons/simple-icons/blob/14.15.0/icons/meta.svg",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "siemens",
+    "source": "https://siemens.com",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "qualtrics",
+    "source": "https://www.qualtrics.com/brand-book",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "teradata",
+    "source": "https://github.com/Teradata/teradata.github.io/blob/0fb3886aaeefea7bea4951c300f49ac8f9c2476f/src/assets/icons/teradata-icon.svg",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "phonepe",
+    "source": "https://www.phonepe.com/press/",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "cloudera",
+    "source": "https://www.cloudera.com",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "nike",
+    "source": "https://www.nike.com",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "ibm",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/ibm.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "microsoft",
+    "source": "public/brand/companies/microsoft.svg",
+    "provider": "Local vector mark"
+  },
+  {
+    "slug": "harness",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/harness-icon.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "yandex",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/yandex-ru.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "oracle",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/oracle.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "braze",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/braze-icon.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "appdynamics",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/appdynamics-icon.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "linkedin",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/linkedin-icon.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "yahoo",
+    "source": "https://github.com/gilbarbara/logos/blob/main/logos/yahoo.svg",
+    "provider": "SVG Logos"
+  },
+  {
+    "slug": "adobe",
+    "source": "public/brand/companies/adobe.svg",
+    "provider": "Local vector mark"
+  },
+  {
+    "slug": "tcs",
+    "source": "https://www.tcs.com",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "tcs",
+    "source": "https://github.com/simple-icons/simple-icons/blob/14.15.0/icons/tcs.svg",
+    "provider": "Simple Icons 14.15.0"
+  },
+  {
+    "slug": "wissen-technology",
+    "source": "https://www.wissen.com/career/opportunities-wissen-technology",
+    "asset": "https://assets-global.website-files.com/6448bf6f0640203c982ca15f/6448bf6f0640204d942ca31c_Wissen%2520Logo-New-p-1600.png",
+    "provider": "Official company asset"
+  },
+  {
+    "slug": "works-applications",
+    "source": "https://bizapp.worksap.co.jp/ebm/spec-archive/service-spec-08-20220906",
+    "asset": "https://bizapp.worksap.co.jp/ebm/images/wap_logo_rgb_positive.png",
+    "provider": "Official company asset"
+  }
+]
