@@ -9,6 +9,7 @@ import {
   HumidityIcon,
   WindPower01Icon,
   RefreshIcon,
+  LoaderIcon,
 } from "@hugeicons/core-free-icons";
 import { Icon } from "@/components/ui/icon";
 import { Button } from "@/components/ui/button";
@@ -394,10 +395,10 @@ export function WeatherPage() {
               aria-label={locating ? "Finding your location…" : "Use current location"}
             >
               <Icon
-                icon={Navigation03Icon}
+                icon={locating ? LoaderIcon : Navigation03Icon}
                 size={16}
                 aria-hidden="true"
-                className={locating ? "animate-spin" : ""}
+                className={locating ? "animate-spin text-white" : ""}
               />
               <span>{locating ? "Locating…" : "My location"}</span>
             </Button>

@@ -5,6 +5,7 @@ import {
   Location01Icon,
   Navigation03Icon,
   Search01Icon,
+  LoaderIcon,
 } from "@hugeicons/core-free-icons";
 import { Icon } from "@/components/ui/icon";
 import {
@@ -57,9 +58,19 @@ export function LocationSelector({
           Search for a city, or use your location for this session. Device coordinates are
           not saved.
         </DialogDescription>
-        <Button variant="outline" onClick={() => void locate()} disabled={locating}>
-          <Icon icon={Navigation03Icon} size={16} aria-hidden="true" />
-          {locating ? "Finding your location…" : "Use my location"}
+        <Button
+          variant="outline"
+          onClick={() => void locate()}
+          disabled={locating}
+          className="weather-dialog-locate-btn"
+        >
+          <Icon
+            icon={locating ? LoaderIcon : Navigation03Icon}
+            size={16}
+            aria-hidden="true"
+            className={locating ? "animate-spin text-red-500" : ""}
+          />
+          <span>{locating ? "Finding your location…" : "Use my location"}</span>
         </Button>
         {geoError && (
           <p className="weather-message" role="alert">
@@ -70,7 +81,16 @@ export function LocationSelector({
           Search city
         </label>
         <div className="weather-search-field">
-          <Icon icon={Search01Icon} size={17} aria-hidden="true" />
+          <Icon
+            icon={waiting || results.isFetching ? LoaderIcon : Search01Icon}
+            size={17}
+            aria-hidden="true"
+            className={
+              waiting || results.isFetching
+                ? "animate-spin text-red-500"
+                : "text-neutral-400"
+            }
+          />
           <input
             ref={searchRef}
             id={`${id}-search`}
@@ -134,15 +154,20 @@ export function LocationSelector({
           ))}
         </div>
         <p className="weather-message" role="status">
-          {query.trim().length < 3
-            ? "Enter at least 3 characters."
-            : waiting || results.isFetching
-              ? "Searching cities…"
-              : results.isError
-                ? "City search is unavailable. Try again."
-                : locations.length
-                  ? `${locations.length} matching locations.`
-                  : "No locations found. Try a nearby city or add a country."}
+          {query.trim().length < 3 ? (
+            "Enter at least 3 characters."
+          ) : waiting || results.isFetching ? (
+            <span className="inline-flex items-center gap-1.5 text-neutral-300">
+              <Icon icon={LoaderIcon} size={14} className="animate-spin text-red-500" />
+              <span>Searching cities…</span>
+            </span>
+          ) : results.isError ? (
+            "City search is unavailable. Try again."
+          ) : locations.length ? (
+            `${locations.length} matching locations.`
+          ) : (
+            "No locations found. Try a nearby city or add a country."
+          )}
         </p>
         {location?.mode === "city" && (
           <button
