@@ -237,12 +237,12 @@ export function RoadmapView({ data }: RoadmapViewProps) {
       </div>
 
       {/* 4. Main Learning Spine Layout (Sticky Rail + Stage Sections) */}
-      <div className="flex items-start gap-8">
+      <div className="flex items-start gap-6 lg:gap-8 max-w-full">
         {/* Sticky Stage Navigation Rail (Desktop) */}
         <StageRail stages={stages} currentStageId={currentStageId} />
 
         {/* Stage Sections (The Spine) */}
-        <div className="flex-1 min-w-0 space-y-6">
+        <div className="flex-1 min-w-0 max-w-full space-y-6">
           {filteredStages.length === 0 ? (
             <div className="p-12 text-center rounded-lg border border-[#1A1A1A] bg-[#0A0A0A] space-y-3">
               <div className="text-sm font-mono text-[#888888] uppercase tracking-wider">
