@@ -23,7 +23,7 @@ export const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
       <div
         className={cn(
           "relative flex items-center w-full group rounded-[var(--radius-sm)] border border-[rgba(255,255,255,0.10)] bg-[var(--prime-canvas)] transition-all duration-100 focus-within:border-[rgba(255,0,0,0.65)] focus-within:shadow-[0_0_0_1px_#000000,0_0_0_3px_rgba(255,0,0,0.72)]",
-          size === "sm" ? "h-8" : "h-9",
+          size === "sm" ? "h-[var(--control-height-sm)]" : "h-[var(--control-height)]",
           className
         )}
       >

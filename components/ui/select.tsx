@@ -17,7 +17,7 @@ export const SelectTrigger = React.forwardRef<
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      "flex h-9 w-full items-center justify-between rounded-[var(--radius-sm)] border border-[var(--border)] bg-[var(--prime-canvas)] px-3 py-2 text-sm text-[var(--foreground)] placeholder:text-[var(--text-disabled)] transition-all duration-120 focus:outline-none focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)]/50 disabled:cursor-not-allowed disabled:opacity-40 [&>span]:line-clamp-1",
+      "flex h-[var(--control-height)] w-full items-center justify-between rounded-[var(--radius-sm)] border border-[var(--border)] bg-[var(--prime-canvas)] px-2.5 py-1 text-[13px] text-[var(--foreground)] placeholder:text-[var(--text-disabled)] transition-all duration-120 focus:outline-none focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)]/50 disabled:cursor-not-allowed disabled:opacity-40 [&>span]:line-clamp-1",
       className
     )}
     {...props}
@@ -85,7 +85,7 @@ export const SelectContent = React.forwardRef<
         className={cn(
           "p-1",
           position === "popper" &&
-            "h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]"
+            "w-full min-w-[var(--radix-select-trigger-width)]"
         )}
       >
         {children}
@@ -118,7 +118,7 @@ export const SelectItem = React.forwardRef<
   <SelectPrimitive.Item
     ref={ref}
     className={cn(
-      "relative flex w-full cursor-pointer select-none items-center rounded-[var(--radius-xs)] py-1.5 pl-2 pr-8 text-sm outline-none transition-colors focus:bg-[var(--surface-hover)] focus:text-white data-[disabled]:pointer-events-none data-[disabled]:opacity-40",
+      "relative flex min-h-[var(--control-row-height)] w-full cursor-pointer select-none items-center rounded-[var(--radius-xs)] py-1 pl-2 pr-7 text-[13px] outline-none transition-colors focus:bg-[#1E1E1E] focus:text-white data-[highlighted]:bg-[#1E1E1E] data-[highlighted]:text-white data-[disabled]:pointer-events-none data-[disabled]:opacity-40",
       className
     )}
     {...props}

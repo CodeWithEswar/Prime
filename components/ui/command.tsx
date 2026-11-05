@@ -35,7 +35,7 @@ export function CommandDialog({
   return (
     <Dialog open={open} onOpenChange={onOpenChange} {...props}>
       <DialogContent className="overflow-hidden p-0 shadow-elevation-4 max-w-xl">
-        <Command className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-semibold [&_[cmdk-group-heading]]:text-[var(--text-tertiary)] [&_[cmdk-group-heading]]:text-[10px] [&_[cmdk-group-heading]]:uppercase [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-4 [&_[cmdk-input-wrapper]_svg]:w-4 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-3 [&_[cmdk-item]]:py-2 [&_[cmdk-item]_svg]:h-4 [&_[cmdk-item]_svg]:w-4">
+        <Command className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-semibold [&_[cmdk-group-heading]]:text-[var(--text-tertiary)] [&_[cmdk-group-heading]]:text-[10px] [&_[cmdk-group-heading]]:uppercase [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-4 [&_[cmdk-input-wrapper]_svg]:w-4 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-1 [&_[cmdk-item]_svg]:h-4 [&_[cmdk-item]_svg]:w-4">
           {children}
         </Command>
       </DialogContent>
@@ -59,7 +59,7 @@ export const CommandInput = React.forwardRef<
     <CommandPrimitive.Input
       ref={ref}
       className={cn(
-        "flex h-11 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-[var(--text-disabled)] disabled:cursor-not-allowed disabled:opacity-50",
+        "flex h-[var(--control-height-auth)] w-full rounded-md bg-transparent py-2 text-[13px] outline-none placeholder:text-[var(--text-disabled)] disabled:cursor-not-allowed disabled:opacity-50",
         className
       )}
       {...props}
@@ -129,7 +129,7 @@ export const CommandItem = React.forwardRef<
   <CommandPrimitive.Item
     ref={ref}
     className={cn(
-      "relative flex cursor-pointer select-none items-center gap-2 rounded-[var(--radius-xs)] px-2 py-1.5 text-sm outline-none transition-colors data-[disabled=true]:pointer-events-none data-[selected=true]:bg-[var(--surface-hover)] data-[selected=true]:text-white data-[disabled=true]:opacity-40",
+      "relative flex min-h-[var(--control-row-height)] cursor-pointer select-none items-center gap-2 rounded-[var(--radius-xs)] px-2 py-1 text-[13px] outline-none transition-colors data-[disabled=true]:pointer-events-none data-[selected=true]:bg-[var(--surface-hover)] data-[selected=true]:text-white data-[disabled=true]:opacity-40",
       className
     )}
     {...props}

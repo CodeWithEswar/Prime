@@ -97,7 +97,8 @@ export function MotionPlayground() {
               2. Dialog Modal Coordinates
             </h4>
             <p className="text-[11px] text-[var(--text-secondary)]">
-              Backdrop 0 → 0.84; dialog scale 0.98 → 1, y 8px → 0 (200ms in, 140ms out).
+              Backdrop 0 to 0.84; dialog scale 0.98 to 1, y 8px to 0 (200ms in, 140ms
+              out).
             </p>
           </div>
           <Badge variant="outline" className="font-mono text-[9px]">
@@ -212,7 +213,7 @@ export function MotionPlayground() {
               5. Popover Spatial Relationship
             </h4>
             <p className="text-[11px] text-[var(--text-secondary)]">
-              Directional 5px offset + scale 0.98 → 1, anchored directly to trigger
+              Directional 5px offset + scale 0.98 to 1, anchored directly to trigger
               position.
             </p>
           </div>
@@ -312,7 +313,7 @@ export function MotionPlayground() {
               7. Smooth Accordion Expansion
             </h4>
             <p className="text-[11px] text-[var(--text-secondary)]">
-              Clean height 0 → auto and opacity transition with rotating chevron.
+              Clean height 0 to auto and opacity transition with rotating chevron.
             </p>
           </div>
           <Badge variant="outline" className="font-mono text-[9px]">
