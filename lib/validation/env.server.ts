@@ -14,6 +14,9 @@ const serverEnvSchema = z.object({
   RESEND_API_KEY: z.string().optional(),
   EMAIL_FROM: z.string().default("PRIME <notifications@primeprep.app>"),
   CLOUDFLARE_ACCOUNT_ID: z.string().optional(),
+  GROQ_API_KEY: z.string().optional(),
+  GROQ_MODEL: z.string().max(120).optional(),
+  PRIME_AI_ENABLED: z.enum(["true", "false"]).default("false"),
 });
 
 export type ServerEnv = z.infer<typeof serverEnvSchema> & {
@@ -32,6 +35,9 @@ function validateServerEnv(): ServerEnv {
     RESEND_API_KEY: process.env.RESEND_API_KEY,
     EMAIL_FROM: process.env.EMAIL_FROM,
     CLOUDFLARE_ACCOUNT_ID: process.env.CLOUDFLARE_ACCOUNT_ID,
+    GROQ_API_KEY: process.env.GROQ_API_KEY,
+    GROQ_MODEL: process.env.GROQ_MODEL,
+    PRIME_AI_ENABLED: process.env.PRIME_AI_ENABLED,
   });
 
   if (!result.success) {
