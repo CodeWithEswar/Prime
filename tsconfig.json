@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -19,7 +23,9 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": [
+        "./*"
+      ]
     }
   },
   "include": [
@@ -28,7 +34,21 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
-    "**/*.mts"
+    "**/*.mts",
+    ".next-shell-qa/types/**/*.ts",
+    ".next-shell-qa/dev/types/**/*.ts",
+    ".next-problem-qa/types/**/*.ts",
+    ".next-problem-qa/dev/types/**/*.ts",
+    ".next-weather-qa/types/**/*.ts",
+    ".next-weather-qa/dev/types/**/*.ts",
+    ".next-ai-qa/types/**/*.ts",
+    ".next-ai-qa/dev/types/**/*.ts",
+    ".next-lab-qa/types/**/*.ts",
+    ".next-lab-qa/dev/types/**/*.ts",
+    ".next-planner-qa/types/**/*.ts",
+    ".next-planner-qa/dev/types/**/*.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }

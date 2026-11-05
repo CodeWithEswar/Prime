@@ -23,7 +23,7 @@ const securityHeaders = [
   },
   {
     key: "Permissions-Policy",
-    value: "camera=(), microphone=(), geolocation=()",
+    value: "camera=(), microphone=(), geolocation=(self)",
   },
   {
     key: "Content-Security-Policy",
@@ -32,14 +32,30 @@ const securityHeaders = [
       "script-src 'self' 'unsafe-eval' 'unsafe-inline'", // unsafe-eval needed for Next.js dev and worker sandboxes
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' data: https:",
+      "media-src 'self'",
       "font-src 'self' data:",
       "connect-src 'self' http://127.0.0.1:* https://*.supabase.co wss://*.supabase.co https://api.resend.com",
+      "frame-src 'self' https://www.youtube-nocookie.com https://www.youtube.com https://*.youtube.com https://*.youtube-nocookie.com",
       "frame-ancestors 'none'",
     ].join("; "),
   },
 ];
 
 const nextConfig: NextConfig = {
+  distDir:
+    process.env.PRIME_PLANNER_QA === "1"
+      ? ".next-planner-qa"
+      : process.env.PRIME_LAB_QA === "1"
+      ? ".next-lab-qa"
+      : process.env.PRIME_AI_QA === "1"
+      ? ".next-ai-qa"
+      : process.env.PRIME_WEATHER_QA === "1"
+        ? ".next-weather-qa"
+        : process.env.PRIME_PROBLEM_QA === "1"
+          ? ".next-problem-qa"
+          : process.env.PRIME_SHELL_QA === "1"
+            ? ".next-shell-qa"
+            : ".next",
   cacheComponents: true,
   partialPrefetching: true,
   experimental: {
@@ -54,11 +70,37 @@ const nextConfig: NextConfig = {
       },
     },
   },
+  async redirects() {
+    return [
+      {
+        source: "/planner",
+        destination: "/plan",
+        permanent: false,
+      },
+      {
+        source: "/progress",
+        destination: "/analytics",
+        permanent: false,
+      },
+    ];
+  },
   async headers() {
     return [
       {
         source: "/(.*)",
         headers: securityHeaders,
+      },
+      {
+        source: "/weather/video/:file*",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=86400, must-revalidate" },
+        ],
+      },
+      {
+        source: "/weather/posters/:file*",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=86400, must-revalidate" },
+        ],
       },
     ];
   },
