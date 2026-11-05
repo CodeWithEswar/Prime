@@ -1,6 +1,7 @@
 "use client";
 import { useState, useRef } from "react";
 import dynamic from "next/dynamic";
+import { motion, AnimatePresence } from "motion/react";
 import {
   Location01Icon,
   Navigation03Icon,
@@ -14,6 +15,7 @@ import {
 } from "@hugeicons/core-free-icons";
 import { Icon } from "@/components/ui/icon";
 import { Button } from "@/components/ui/button";
+import { motionSpring, usePrimeReducedMotion } from "@/lib/motion";
 import { useWeatherPreferences } from "../weather-provider";
 import { useForecast } from "../queries";
 import { weatherCondition, resolveWeatherScene } from "@/lib/weather/conditions";
@@ -50,6 +52,7 @@ function WeatherDashboard({
   location: WeatherLocation;
   onChange: (trigger: HTMLElement) => void;
 }) {
+  const reduced = usePrimeReducedMotion();
   const { unit, setUnit } = useWeatherPreferences(),
     c = weather.current,
     hours = upcomingHours(weather);
@@ -202,45 +205,66 @@ function WeatherDashboard({
                 role="group"
                 aria-label="Hourly forecast"
               >
-                {hours.map((h, i) => (
-                  <button
-                    key={h.time}
-                    aria-label={`${weatherTime(h.time, weather.timezone)}, ${temperature(h.temperature, unit)}, precipitation ${measure(h.rainProbability, "%")}`}
-                    aria-pressed={activeHour?.time === h.time}
-                    tabIndex={activeHour?.time === h.time ? 0 : -1}
-                    onClick={() => setSelectedHour(h.time)}
-                    onKeyDown={(e) => {
-                      if (["ArrowLeft", "ArrowRight", "Home", "End"].includes(e.key)) {
-                        e.preventDefault();
-                        const next =
-                          e.key === "Home"
-                            ? 0
-                            : e.key === "End"
-                              ? hours.length - 1
-                              : (i + (e.key === "ArrowRight" ? 1 : -1) + hours.length) %
-                                hours.length;
-                        setSelectedHour(hours[next].time);
-                        e.currentTarget
-                          .closest("[data-hourly-rail]")
-                          ?.querySelectorAll<HTMLButtonElement>("button")
-                          [next]?.focus();
-                      }
-                    }}
-                  >
-                    <span>
-                      {i === 0
-                        ? "Now"
-                        : weatherTime(h.time, weather.timezone, { hour: "numeric" })}
-                    </span>
-                    <strong>{temperature(h.temperature, unit, false)}</strong>
-                    <WeatherIcon
-                      code={h.code}
-                      isDay={hourIsDay(h.time, weather)}
-                      size={25}
-                    />
-                    <small>{measure(h.rainProbability, "%")}</small>
-                  </button>
-                ))}
+                {hours.map((h, i) => {
+                  const isSelected = activeHour?.time === h.time;
+                  return (
+                    <button
+                      key={h.time}
+                      aria-label={`${weatherTime(h.time, weather.timezone)}, ${temperature(h.temperature, unit)}, precipitation ${measure(h.rainProbability, "%")}`}
+                      aria-pressed={isSelected}
+                      tabIndex={isSelected ? 0 : -1}
+                      onClick={() => setSelectedHour(h.time)}
+                      onKeyDown={(e) => {
+                        if (["ArrowLeft", "ArrowRight", "Home", "End"].includes(e.key)) {
+                          e.preventDefault();
+                          const next =
+                            e.key === "Home"
+                              ? 0
+                              : e.key === "End"
+                                ? hours.length - 1
+                                : (i + (e.key === "ArrowRight" ? 1 : -1) + hours.length) %
+                                  hours.length;
+                          setSelectedHour(hours[next].time);
+                          e.currentTarget
+                            .closest("[data-hourly-rail]")
+                            ?.querySelectorAll<HTMLButtonElement>("button")
+                            [next]?.focus();
+                        }
+                      }}
+                    >
+                      {isSelected && (
+                        <motion.span
+                          layoutId={reduced ? undefined : "weather-active-hour-bg"}
+                          className="weather-hour-active-bg"
+                          transition={motionSpring.control}
+                        />
+                      )}
+                      {isSelected && (
+                        <motion.span
+                          layoutId={reduced ? undefined : "weather-active-hour-indicator"}
+                          className="weather-hour-indicator"
+                          transition={motionSpring.control}
+                        />
+                      )}
+                      <span className="relative z-10">
+                        {i === 0
+                          ? "Now"
+                          : weatherTime(h.time, weather.timezone, { hour: "numeric" })}
+                      </span>
+                      <strong className="relative z-10">
+                        {temperature(h.temperature, unit, false)}
+                      </strong>
+                      <span className="weather-hour-icon-wrap relative z-10">
+                        <WeatherIcon
+                          code={h.code}
+                          isDay={hourIsDay(h.time, weather)}
+                          size={25}
+                        />
+                      </span>
+                      <small className="relative z-10">{measure(h.rainProbability, "%")}</small>
+                    </button>
+                  );
+                })}
               </div>
               {activeHour && (
                 <p className="weather-hour-selection" role="status">
@@ -275,64 +299,95 @@ function WeatherDashboard({
             <span className="weather-caption">Low / high</span>
           </div>
           <div className="weather-daily-list">
-            {weather.daily.map((d) => (
-              <button
-                key={d.time}
-                aria-pressed={day?.time === d.time}
-                onClick={() => setSelectedDay(d.time)}
-              >
-                <span className="weather-day-label">
-                  <strong>
-                    {weatherDateKey(d.time, weather.timezone) ===
-                    weatherDateKey(c.time, weather.timezone)
-                      ? "Today"
-                      : weatherTime(d.time, weather.timezone, { weekday: "short" })}
-                  </strong>
-                  <small>
-                    {weatherTime(d.time, weather.timezone, {
-                      month: "short",
-                      day: "numeric",
-                    })}
-                  </small>
-                </span>
-                <WeatherIcon code={d.code} />
-                <span className="weather-day-condition">
-                  {weatherCondition(d.code).label}
-                </span>
-                <small className="weather-day-rain">
-                  {measure(d.rainProbability, "%")}
-                </small>
-                <span className="weather-day-low">{temperature(d.low, unit, false)}</span>
-                <span className="weather-range-track" aria-hidden="true">
-                  {d.low !== null && d.high !== null && (
-                    <i
-                      style={{
-                        left: `${max > min ? ((d.low - min) / (max - min)) * 100 : 0}%`,
-                        width: `${max > min ? Math.max(2, ((d.high - d.low) / (max - min)) * 100) : 100}%`,
-                      }}
+            {weather.daily.map((d) => {
+              const isSelected = day?.time === d.time;
+              return (
+                <button
+                  key={d.time}
+                  aria-pressed={isSelected}
+                  onClick={() => setSelectedDay(d.time)}
+                >
+                  {isSelected && (
+                    <motion.span
+                      layoutId={reduced ? undefined : "weather-active-day-bg"}
+                      className="weather-day-active-bg"
+                      transition={motionSpring.control}
                     />
                   )}
-                </span>
-                <strong className="weather-day-high">
-                  {temperature(d.high, unit, false)}
-                </strong>
-              </button>
-            ))}
+                  {isSelected && (
+                    <motion.span
+                      layoutId={reduced ? undefined : "weather-active-day-pill"}
+                      className="weather-day-indicator"
+                      transition={motionSpring.control}
+                    />
+                  )}
+                  <span className="weather-day-label relative z-10">
+                    <strong>
+                      {weatherDateKey(d.time, weather.timezone) ===
+                      weatherDateKey(c.time, weather.timezone)
+                        ? "Today"
+                        : weatherTime(d.time, weather.timezone, { weekday: "short" })}
+                    </strong>
+                    <small>
+                      {weatherTime(d.time, weather.timezone, {
+                        month: "short",
+                        day: "numeric",
+                      })}
+                    </small>
+                  </span>
+                  <span className="weather-day-icon-wrap relative z-10">
+                    <WeatherIcon code={d.code} />
+                  </span>
+                  <span className="weather-day-condition relative z-10">
+                    {weatherCondition(d.code).label}
+                  </span>
+                  <small className="weather-day-rain relative z-10">
+                    {measure(d.rainProbability, "%")}
+                  </small>
+                  <span className="weather-day-low relative z-10">
+                    {temperature(d.low, unit, false)}
+                  </span>
+                  <span className="weather-range-track relative z-10" aria-hidden="true">
+                    {d.low !== null && d.high !== null && (
+                      <i
+                        style={{
+                          left: `${max > min ? ((d.low - min) / (max - min)) * 100 : 0}%`,
+                          width: `${max > min ? Math.max(2, ((d.high - d.low) / (max - min)) * 100) : 100}%`,
+                        }}
+                      />
+                    )}
+                  </span>
+                  <strong className="weather-day-high relative z-10">
+                    {temperature(d.high, unit, false)}
+                  </strong>
+                </button>
+              );
+            })}
           </div>
           {!weather.daily.length && (
             <p className="weather-message">Daily forecast is unavailable.</p>
           )}
-          {day && (
-            <p className="weather-selected-day" role="status">
-              <strong>
-                {weatherTime(day.time, weather.timezone, { weekday: "long" })}
-              </strong>{" "}
-              · {weatherCondition(day.code).label} · Precipitation{" "}
-              {measure(day.rainProbability, "%")} · Total{" "}
-              {measure(day.precipitation, " mm", 1)} · Max wind{" "}
-              {measure(day.windSpeed, " km/h")}
-            </p>
-          )}
+          <AnimatePresence mode="wait">
+            {day && (
+              <motion.p
+                key={day.time}
+                initial={reduced ? undefined : { opacity: 0, y: 3 }}
+                animate={reduced ? undefined : { opacity: 1, y: 0 }}
+                exit={reduced ? undefined : { opacity: 0, y: -3 }}
+                transition={{ duration: 0.18, ease: "easeOut" }}
+                className="weather-selected-day"
+                role="status"
+              >
+                <strong>
+                  {weatherTime(day.time, weather.timezone, { weekday: "long" })}
+                </strong>{" "}
+                · {weatherCondition(day.code).label} · Precipitation{" "}
+                {measure(day.rainProbability, "%")} · Total{" "}
+                {measure(day.precipitation, " mm", 1)} · Max wind{" "}
+                {measure(day.windSpeed, " km/h")}
+              </motion.p>
+            )}
+          </AnimatePresence>
         </section>
         <WeatherMeasurements weather={weather} hour={hours[0]} day={day} unit={unit} />
         <footer className="weather-attribution">

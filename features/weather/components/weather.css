@@ -314,25 +314,57 @@
   padding: 12px 8px 18px;
   scroll-snap-align: start;
   color: #ffffffc0;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background 0.15s;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.15s ease, background 0.15s ease;
 }
 .weather-hourly-rail button:hover {
-  background: #ffffff05;
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
 }
 .weather-hourly-rail button[aria-pressed="true"] {
   color: #fff;
-  background: #ffffff07;
 }
-.weather-hourly-rail button[aria-pressed="true"]::after {
-  content: "";
+.weather-hour-active-bg {
+  position: absolute;
+  inset: 3px;
+  border-radius: 6px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 0, 0, 0.08) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  pointer-events: none;
+  z-index: 1;
+}
+.weather-hour-indicator {
   position: absolute;
   bottom: 0;
-  left: 10px;
-  right: 10px;
-  height: 2px;
+  left: 12px;
+  right: 12px;
+  height: 2.5px;
   background: #ff0000;
+  border-radius: 2px 2px 0 0;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.9), 0 0 3px #ff0000;
+  pointer-events: none;
+  z-index: 5;
+}
+.weather-hour-icon-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.2s ease,
+              filter 0.25s ease;
+}
+.weather-hourly-rail button:hover .weather-hour-icon-wrap {
+  transform: scale(1.15) translateY(-2px);
+  color: #ffffff;
+  filter: drop-shadow(0 2px 8px rgba(255, 255, 255, 0.25));
+}
+.weather-hourly-rail button[aria-pressed="true"] .weather-hour-icon-wrap {
+  transform: scale(1.1);
+  color: #ffffff;
+  filter: drop-shadow(0 0 8px rgba(255, 0, 0, 0.7));
 }
 .weather-hourly-rail button > span {
   font-size: 11px;
@@ -460,8 +492,9 @@
   margin-bottom: 24px;
 }
 .weather-daily-list button {
+  position: relative;
   display: grid;
-  grid-template-columns: 68px 30px minmax(80px, 1fr) 48px 42px minmax(80px, 1.5fr) 42px;
+  grid-template-columns: 68px 32px minmax(80px, 1fr) 48px 42px minmax(80px, 1.5fr) 42px;
   align-items: center;
   gap: 18px;
   min-height: 62px;
@@ -471,24 +504,67 @@
   color: #ffffffbe;
   cursor: pointer;
   padding: 8px 12px;
-  border-radius: 4px;
-  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+  transition: color 0.15s ease, background 0.15s ease;
 }
 .weather-daily-list button:hover {
-  background: #ffffff04;
+  background: rgba(255, 255, 255, 0.035);
+  color: #fff;
 }
 .weather-daily-list button[aria-pressed="true"] {
-  background: #ffffff05;
-  color: white;
+  color: #fff;
 }
-.weather-daily-list button[aria-pressed="true"]::before {
-  content: "";
-  width: 2px;
+.weather-day-active-bg {
   position: absolute;
-  top: 16px;
-  bottom: 16px;
+  inset: 3px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, rgba(255, 0, 0, 0.09) 0%, rgba(255, 255, 255, 0.04) 22%, rgba(255, 255, 255, 0.015) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  pointer-events: none;
+  z-index: 1;
+}
+.weather-day-indicator {
+  position: absolute;
   left: 0;
+  top: 14px;
+  bottom: 14px;
+  width: 3px;
   background: #ff0000;
+  border-radius: 0 2px 2px 0;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.9), 0 0 4px #ff0000;
+  pointer-events: none;
+  z-index: 5;
+}
+.weather-day-icon-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.8);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.2s ease,
+              border-color 0.2s ease,
+              color 0.2s ease,
+              box-shadow 0.25s ease;
+}
+.weather-daily-list button:hover .weather-day-icon-wrap {
+  transform: scale(1.12) translateY(-1px);
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
+}
+.weather-daily-list button[aria-pressed="true"] .weather-day-icon-wrap {
+  transform: scale(1.08);
+  color: #ffffff;
+  background: rgba(255, 0, 0, 0.15);
+  border-color: rgba(255, 0, 0, 0.4);
+  box-shadow: 0 0 14px rgba(255, 0, 0, 0.35);
 }
 .weather-day-label {
   display: flex;
@@ -525,18 +601,29 @@
   color: #ffffff80;
 }
 .weather-range-track {
-  height: 3px;
+  height: 4px;
   position: relative;
-  background: #ffffff0b;
-  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 9999px;
   overflow: hidden;
 }
 .weather-range-track i {
   position: absolute;
   top: 0;
   height: 100%;
-  background: #ffffffa0;
-  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 9999px;
+  transition: left 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              width 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.25s ease,
+              box-shadow 0.25s ease;
+}
+.weather-daily-list button:hover .weather-range-track i {
+  background: #ffffff;
+}
+.weather-daily-list button[aria-pressed="true"] .weather-range-track i {
+  background: linear-gradient(90deg, #ff3333, #ffffff);
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.6);
 }
 .weather-selected-day {
   font-size: 11px;
@@ -945,7 +1032,16 @@
   }
   .weather-daily-list button {
     gap: 12px;
-    grid-template-columns: 62px 26px minmax(70px, 1fr) 40px 32px minmax(70px, 1.2fr) 32px;
+    grid-template-columns: 62px 28px minmax(70px, 1fr) 40px 32px minmax(70px, 1.2fr) 32px;
+  }
+  .weather-day-icon-wrap {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+  }
+  .weather-day-icon-wrap svg {
+    width: 19px;
+    height: 19px;
   }
 }
 @media (max-width: 767px) {
@@ -1052,7 +1148,7 @@
     height: 210px;
   }
   .weather-daily-list button {
-    grid-template-columns: 44px 23px minmax(0, 1fr) 25px minmax(38px, 0.8fr) 25px;
+    grid-template-columns: 44px 24px minmax(0, 1fr) 25px minmax(38px, 0.8fr) 25px;
     gap: 9px;
     min-height: 60px;
     padding-inline: 8px;
@@ -1070,9 +1166,15 @@
   .weather-day-label small {
     font-size: 8px;
   }
+  .weather-day-icon-wrap {
+    width: 24px;
+    height: 24px;
+    border-radius: 5px;
+  }
+  .weather-day-icon-wrap svg,
   .weather-daily-list > button > svg {
-    width: 21px;
-    height: 21px;
+    width: 17px;
+    height: 17px;
   }
   .weather-measurement-grid {
     grid-template-columns: 1fr;
@@ -1181,7 +1283,16 @@
   }
   .weather-daily-list button {
     gap: 6px;
-    grid-template-columns: 40px 21px minmax(0, 1fr) 24px 35px 24px;
+    grid-template-columns: 40px 22px minmax(0, 1fr) 24px 35px 24px;
+  }
+  .weather-day-icon-wrap {
+    width: 22px;
+    height: 22px;
+    border-radius: 4px;
+  }
+  .weather-day-icon-wrap svg {
+    width: 15px;
+    height: 15px;
   }
   .weather-welcome h1 {
     font-size: 24px;
