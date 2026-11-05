@@ -15,27 +15,27 @@ function RoadmapSkeleton() {
   return (
     <div className="w-full max-w-[1440px] mx-auto p-4 sm:p-6 lg:p-8 space-y-6 animate-pulse">
       {/* Category & Title */}
-      <div className="h-20 bg-[#0E0E0E] rounded-md border border-[#1A1A1A]" />
+      <div className="h-24 bg-[#0E0E0E] rounded-xl border border-white/[0.08]" />
 
       {/* Progress Strip */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3.5">
         {[1, 2, 3, 4].map((i) => (
-          <div key={i} className="h-16 bg-[#0A0A0A] rounded-md border border-[#161616]" />
+          <div key={i} className="h-24 bg-[#0E0E0E] rounded-xl border border-white/[0.08]" />
         ))}
       </div>
 
       {/* Hero */}
-      <div className="h-36 bg-[#0E0E0E] rounded-md border border-[#222222]" />
+      <div className="h-36 bg-[#0E0E0E] rounded-xl border border-white/[0.08]" />
 
       {/* Filter strip */}
-      <div className="h-10 bg-[#0A0A0A] rounded-md border border-[#161616]" />
+      <div className="h-10 bg-[#0A0A0A] rounded-xl border border-white/[0.08]" />
 
       {/* Main Spine */}
       <div className="flex gap-8">
-        <div className="hidden xl:block w-64 h-96 bg-[#0A0A0A] rounded-md border border-[#161616]" />
+        <div className="hidden xl:block w-64 h-96 bg-[#0A0A0A] rounded-xl border border-white/[0.08]" />
         <div className="flex-1 space-y-4">
           {[1, 2, 3].map((i) => (
-            <div key={i} className="h-44 bg-[#0A0A0A] rounded-md border border-[#161616]" />
+            <div key={i} className="h-44 bg-[#0A0A0A] rounded-xl border border-white/[0.08]" />
           ))}
         </div>
       </div>
