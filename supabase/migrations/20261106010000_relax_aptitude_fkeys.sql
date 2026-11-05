@@ -25,3 +25,4 @@ alter table if exists public.aptitude_attempts
 
 alter table if exists public.aptitude_resource_reports
   drop constraint if exists aptitude_resource_reports_topic_id_fkey;
+

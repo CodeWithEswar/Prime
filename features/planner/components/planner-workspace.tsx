@@ -50,7 +50,7 @@ import {
   type Editor,
 } from "./planner-fields";
 import type { FundamentalsCourse } from "@/domain/fundamentals/courses";
-import { PlannerSheet } from "./planner-sheet";
+import { PlannerDialog } from "./planner-sheet";
 import { PlannerRunwayDialog } from "./planner-runway-dialog";
 
 const splitHeader = "flex-row flex-wrap items-center justify-between gap-3 space-y-0";
@@ -230,7 +230,7 @@ export function PlannerWorkspace({
     return (
       <li
         key={task.id}
-        className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-t border-white/10 py-3"
+        className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 py-3.5"
       >
         <div className="min-w-0">
           <p className="break-words text-sm font-medium">{task.title}</p>
@@ -299,7 +299,7 @@ export function PlannerWorkspace({
       request: { ...emptyRequest, ...(fixed ? { when: "date", date } : {}) },
     });
   return (
-    <div className="grid min-w-0 gap-5 pb-8">
+    <div className="grid min-w-0 gap-6 sm:gap-7 pb-10">
       <Card className="relative overflow-hidden border-[#222222] bg-[#0A0A0A]">
         <CardContent className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-5 p-4 sm:p-6">
           <div className="min-w-0 space-y-2 w-full sm:w-auto">
@@ -447,7 +447,7 @@ export function PlannerWorkspace({
           {error}
         </p>
       )}
-      <Tabs value={tab} onValueChange={setTab} className="min-w-0">
+      <Tabs value={tab} onValueChange={setTab} className="min-w-0 space-y-5">
         <TabsList
           variant="segmented"
           layoutId="planner-workspace"
@@ -463,7 +463,7 @@ export function PlannerWorkspace({
             </TabsTrigger>
           ))}
         </TabsList>
-        <TabsContent value="timeline" className="grid gap-4 pt-2">
+        <TabsContent value="timeline" className="grid gap-6 sm:gap-7 pt-1">
           <Card elevation="base">
             <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 space-y-0">
               <div>
@@ -560,14 +560,14 @@ export function PlannerWorkspace({
             </CardHeader>
             <CardContent>
               {missed.length ? (
-                <ul>{missed.map(taskRow)}</ul>
+                <ul className="divide-y divide-[#1F1F1F] border-t border-[#1F1F1F]">{missed.map(taskRow)}</ul>
               ) : (
                 <p className={"text-sm " + muted}>No pending work from previous days.</p>
               )}
             </CardContent>
           </Card>
         </TabsContent>
-        <TabsContent value="week" className="grid gap-4 pt-2">
+        <TabsContent value="week" className="grid gap-6 sm:gap-7 pt-1">
           <Card elevation="base">
             <CardHeader className={splitHeader}>
               <div className="space-y-1">
@@ -605,11 +605,11 @@ export function PlannerWorkspace({
                 </Button>
               </div>
             </CardHeader>
-            <CardContent className="grid gap-3">
-              <div className="grid grid-cols-7 gap-1.5">
+            <CardContent className="grid gap-4">
+              <div className="grid grid-cols-7 gap-2 sm:gap-2.5">
                 {week.map((d) => dayButton(d))}
               </div>
-              <div className="flex flex-wrap items-center justify-between gap-2 pt-1 border-t border-[#1A1A1A] text-xs font-mono">
+              <div className="flex flex-wrap items-center justify-between gap-3 pt-3.5 mt-1 border-t border-[#1F1F1F] text-xs font-mono">
                 <span className="text-[#AAAAAA]">
                   {weekTasks.filter((t) => t.type === "dsa_problem").length} DSA ·{" "}
                   {weekTasks.filter((t) => t.type === "revision").length} reviews ·{" "}
@@ -662,7 +662,7 @@ export function PlannerWorkspace({
             </CardHeader>
             <CardContent>
               {selected.length ? (
-                <ul>{selected.map(taskRow)}</ul>
+                <ul className="divide-y divide-[#1F1F1F] border-t border-[#1F1F1F]">{selected.map(taskRow)}</ul>
               ) : (
                 <p className={"text-sm " + muted}>
                   {day?.rest
@@ -673,7 +673,7 @@ export function PlannerWorkspace({
             </CardContent>
           </Card>
         </TabsContent>
-        <TabsContent value="backlog" className="pt-2">
+        <TabsContent value="backlog" className="grid gap-6 sm:gap-7 pt-1">
           <Card elevation="base">
             <CardHeader className={splitHeader}>
               <div className="space-y-1">
@@ -698,11 +698,11 @@ export function PlannerWorkspace({
             </CardHeader>
             <CardContent>
               {view.backlog.length ? (
-                <ul>
+                <ul className="divide-y divide-[#1F1F1F] border-t border-[#1F1F1F]">
                   {view.backlog.map((item) => (
                     <li
                       key={item.id}
-                      className="flex flex-wrap items-center justify-between gap-3 border-t border-white/10 py-3"
+                      className="flex flex-wrap items-center justify-between gap-3 py-3.5"
                     >
                       <div className="min-w-0 space-y-1">
                         <div className="flex items-center gap-2">
@@ -780,22 +780,25 @@ export function PlannerWorkspace({
             </CardContent>
           </Card>
         </TabsContent>
-        <TabsContent value="availability" className="grid gap-4 pt-2 lg:grid-cols-2">
+        <TabsContent value="availability" className="grid gap-6 sm:gap-7 pt-1 lg:grid-cols-2">
           <Card elevation="base">
-            <CardHeader>
+            <CardHeader className="p-4 sm:p-6 pb-2 sm:pb-3">
               <CardTitle>Weekly availability</CardTitle>
               <CardDescription>
                 Set recurring study hours and rest days. Preview the impact before saving.
               </CardDescription>
             </CardHeader>
-            <CardContent>
-              <div className="mb-2 flex flex-wrap items-center justify-between gap-2 rounded-md border border-[#222222] bg-[#0E0E0E] px-3 py-2 text-sm">
-                <span>
-                  Planning buffer{" "}
-                  <span className="ml-1 font-mono font-bold text-white">
+            <CardContent className="p-4 sm:p-6 pt-2 sm:pt-3">
+              <div className="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-[#222222] bg-[#0E0E0E] px-4 py-3 text-sm">
+                <div>
+                  <span className="text-white font-medium">Planning buffer</span>
+                  <span className="ml-2 font-mono font-bold text-[#FF0000]">
                     {view.bufferPercent}%
                   </span>
-                </span>
+                  <p className="text-xs text-[#888888] mt-0.5">
+                    Capacity reserve held for problem delays and revision overflow
+                  </p>
+                </div>
                 <Button
                   variant="outline"
                   size="sm"
@@ -804,7 +807,7 @@ export function PlannerWorkspace({
                   Edit buffer
                 </Button>
               </div>
-              <ul>
+              <ul className="divide-y divide-[#1A1A1A] border-t border-[#1A1A1A]">
                 {view.rules.map((rule) => {
                   const maxDailyMinutes = Math.max(
                     ...view.rules.map((r) => r.minutes),
@@ -816,7 +819,7 @@ export function PlannerWorkspace({
                   return (
                     <li
                       key={rule.weekday}
-                      className="flex items-center justify-between gap-3 border-t border-[#1A1A1A] py-2.5 text-sm"
+                      className="flex items-center justify-between gap-3 py-3 text-sm"
                     >
                       <div className="min-w-[90px]">
                         <span className="font-medium text-white">
@@ -944,7 +947,7 @@ export function PlannerWorkspace({
           </Card>
         </TabsContent>
       </Tabs>
-      <PlannerSheet
+      <PlannerDialog
         editor={editor}
         view={view}
         last={last}
