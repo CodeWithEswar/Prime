@@ -1,0 +1,47 @@
+.ai-notebook {
+  display: grid;
+  grid-template-columns: 230px minmax(0, 1fr);
+  gap: 32px;
+  min-width: 0;
+}
+.ai-notebook nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.ai-notebook nav button {
+  padding: 12px;
+  text-align: left;
+  font-size: 12px;
+  color: #aaa;
+  background: #050505;
+  border: 1px solid #ffffff12;
+  border-radius: 6px;
+  overflow-wrap: anywhere;
+}
+.ai-notebook nav button[aria-current="true"] {
+  border-left: 2px solid red;
+  color: white;
+}
+.ai-notebook small {
+  display: block;
+  font-size: 9px;
+  color: #666;
+  margin-top: 6px;
+}
+.ai-notebook article {
+  min-width: 0;
+  max-width: 850px;
+}
+.ai-notebook article > .ai-action-row {
+  margin-bottom: 24px;
+}
+@media (max-width: 767px) {
+  .ai-notebook {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ai-notebook nav {
+    max-height: 180px;
+    overflow: auto;
+  }
+}

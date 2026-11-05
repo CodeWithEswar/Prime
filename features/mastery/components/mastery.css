@@ -1,0 +1,141 @@
+/**
+ * PRIME Mastery Intelligence Engine — Diagnostic Visual Language
+ * Strict Palette: Pure Black #000000, Pure White #FFFFFF, Pure Red #FF0000
+ * Surface hierarchy: #000000 -> #030303 -> #060606 -> #090909
+ */
+
+.mastery-shell {
+  background-color: #000000;
+  color: #ffffff;
+  min-height: 100vh;
+  container: mastery / inline-size;
+}
+
+.mastery-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.mastery-inline-lens {
+  display: none;
+}
+
+@container mastery (min-width: 52rem) {
+  .mastery-columns {
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  }
+
+  .mastery-inline-lens {
+    display: block;
+    position: sticky;
+    top: 1rem;
+    min-width: 0;
+    max-height: calc(100dvh - 6.5rem);
+    overflow-y: auto;
+    scrollbar-gutter: stable;
+  }
+}
+
+.mastery-skill-card {
+  background-image: linear-gradient(155deg, rgb(255 255 255 / 0.032), transparent 60%);
+}
+
+.mastery-skill-card[aria-pressed="true"] {
+  background-image: radial-gradient(
+    ellipse at top left,
+    rgb(255 0 0 / 0.09),
+    transparent 56%
+  );
+}
+
+.evidence-rail-container {
+  display: block;
+  min-width: 0;
+  height: 0.5rem;
+  background-color: var(--prime-surface-elevated);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.08);
+  border-radius: 9999px;
+  position: relative;
+  overflow: hidden;
+}
+
+.evidence-rail-container::after {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background: linear-gradient(to left, rgb(0 0 0 / 0.6) 1px, transparent 1px) 0 0 / 25%
+    100%;
+}
+
+.evidence-rail-fill {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, #777, #e4e4e4);
+  border-radius: inherit;
+  transition: width 240ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.evidence-rail-container[data-emphasized="true"] .evidence-rail-fill {
+  background: linear-gradient(90deg, #999, #fff);
+}
+
+.evidence-rail-fill.is-regression {
+  background: linear-gradient(90deg, #a61b22, #ff5960);
+}
+
+.evidence-rail-container[data-emphasized="true"] .evidence-rail-fill.is-regression {
+  background: linear-gradient(90deg, #b91c24, #ff686e);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .evidence-rail-fill {
+    transition: none;
+  }
+}
+
+/* Semantic Level Badges */
+.badge-level-mastered {
+  background-color: #ffffff;
+  color: #000000;
+  font-weight: 700;
+}
+
+.badge-level-proficient {
+  background-color: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.badge-level-practiced {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.badge-level-learning {
+  background-color: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.76);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.badge-level-exposed {
+  background-color: transparent;
+  color: rgba(255, 255, 255, 0.66);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.badge-level-unseen {
+  background-color: transparent;
+  color: rgba(255, 255, 255, 0.60);
+  border: 1px dashed rgba(255, 255, 255, 0.20);
+}
+
+.badge-attention {
+  color: #ff0000;
+  border-color: rgba(255, 0, 0, 0.3);
+  background-color: rgba(255, 0, 0, 0.06);
+}

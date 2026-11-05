@@ -1,0 +1,238 @@
+.prime-manuscript.ai-prose {
+  --ai-prose: #dedede;
+  --ai-prose-muted: #a8a8a8;
+  container-type: inline-size;
+  container-name: prime-manuscript;
+  min-width: 0;
+  max-width: 100%;
+  font-family: var(--font-geist-sans), sans-serif;
+  font-size: 15px;
+  line-height: 1.72;
+  color: var(--ai-prose);
+  overflow-wrap: anywhere;
+  user-select: text;
+}
+.prime-manuscript.ai-prose > :first-child {
+  margin-top: 0;
+}
+.prime-manuscript.ai-prose .prime-md-paragraph {
+  font-size: inherit;
+  line-height: inherit;
+  margin: 14px 0;
+  max-width: 74ch;
+  text-wrap: pretty;
+}
+.prime-manuscript.ai-prose .prime-md-heading {
+  max-width: 70ch;
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.35;
+  color: #fff;
+  text-wrap: balance;
+  scroll-margin-top: 24px;
+  margin-block: 28px 10px;
+}
+.prime-manuscript.ai-prose .prime-md-h1 {
+  font-size: 27px;
+  margin-top: 30px;
+}
+.prime-manuscript.ai-prose .prime-md-h2 {
+  font-size: 21px;
+}
+.prime-manuscript.ai-prose .prime-md-h3 {
+  font-size: 18px;
+}
+.prime-manuscript.ai-prose .prime-md-h4,
+.prime-manuscript.ai-prose .prime-md-h5,
+.prime-manuscript.ai-prose .prime-md-h6 {
+  font-size: 16px;
+}
+.prime-manuscript.ai-prose strong {
+  font-weight: 600;
+  color: #fff;
+}
+.prime-manuscript.ai-prose em {
+  color: #c6c6c6;
+}
+.prime-manuscript.ai-prose :not(pre) > code.prime-inline-code {
+  font:
+    12.5px/1.5 var(--font-geist-mono),
+    monospace;
+  color: #eee;
+  background: #080808;
+  border: 1px solid #ffffff22;
+  padding: 2px 5px;
+  border-radius: 4px;
+  white-space: break-spaces;
+  overflow-wrap: anywhere;
+}
+.prime-manuscript.ai-prose .prime-md-list {
+  max-width: 74ch;
+  padding-inline-start: 24px;
+  margin: 16px 0;
+  list-style: revert;
+}
+.prime-manuscript.ai-prose ul.prime-md-list {
+  list-style-type: square;
+}
+.prime-manuscript.ai-prose ol.prime-md-list {
+  list-style-type: decimal-leading-zero;
+}
+.prime-manuscript.ai-prose .prime-md-list li {
+  padding-inline-start: 4px;
+  margin: 7px 0;
+  line-height: 1.7;
+}
+.prime-manuscript.ai-prose .prime-md-list li::marker {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 11px;
+  color: #a0a0a0;
+}
+.prime-manuscript.ai-prose .prime-md-list .prime-md-list {
+  margin: 6px 0;
+  padding-inline-start: 20px;
+}
+.prime-manuscript.ai-prose .prime-md-list li > .prime-md-paragraph {
+  margin: 5px 0;
+}
+.prime-manuscript.ai-prose .prime-md-task-list {
+  list-style: none;
+  padding-inline-start: 0;
+}
+.prime-md-task-list input[type="checkbox"] {
+  appearance: auto;
+  accent-color: #ddd;
+  width: 13px;
+  height: 13px;
+  margin-inline-end: 9px;
+  vertical-align: baseline;
+  pointer-events: none;
+}
+.prime-manuscript.ai-prose .prime-md-quote {
+  max-width: 72ch;
+  border-inline-start: 1px solid #ffffff50;
+  padding: 2px 18px;
+  margin: 22px 0;
+  background: none;
+  color: #b8b8b8;
+}
+.prime-manuscript.ai-prose .prime-md-quote .prime-md-paragraph {
+  margin: 5px 0;
+}
+.prime-manuscript.ai-prose .prime-md-divider {
+  height: 0;
+  border: 0;
+  border-top: 1px solid #ffffff1c;
+  margin: 28px 0;
+}
+.prime-manuscript.ai-prose a {
+  color: #f5f5f5;
+  overflow-wrap: anywhere;
+  text-decoration-thickness: 1px;
+  text-decoration-color: #777;
+  text-underline-offset: 4px;
+}
+.prime-manuscript.ai-prose a:hover {
+  color: #fff;
+  text-decoration-color: #f00;
+}
+.prime-manuscript.ai-prose a:focus-visible {
+  outline: 2px solid #ff0000;
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+.prime-manuscript.ai-prose .prime-entity-link {
+  border-bottom: 1px solid #ffffff44;
+  text-decoration: none;
+}
+.prime-entity-link:before {
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  background: #f00;
+  margin-inline-end: 7px;
+  vertical-align: middle;
+}
+.prime-stream-terminal {
+  display: inline-block;
+  width: 3px;
+  height: 15px;
+  background: #f00;
+  margin-inline-start: 4px;
+  vertical-align: middle;
+}
+.prime-format-fallback {
+  font-size: 14px;
+  color: #ddd;
+  min-width: 0;
+}
+.prime-format-fallback > p {
+  font-size: 11px;
+  color: #aaa;
+}
+.prime-format-fallback pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font:
+    14px/1.75 var(--font-geist-sans),
+    sans-serif;
+}
+.ai-message-column {
+  max-width: 900px;
+}
+.ai-message-assistant .ai-message-label:before {
+  content: "";
+  width: 4px;
+  height: 4px;
+  background: red;
+  display: inline-block;
+  transform: rotate(45deg);
+}
+@container prime-manuscript (max-width:420px) {
+  .prime-manuscript.ai-prose .prime-md-h1 {
+    font-size: 23px;
+  }
+  .prime-manuscript.ai-prose .prime-md-h2 {
+    font-size: 19px;
+  }
+  .prime-manuscript.ai-prose .prime-md-h3 {
+    font-size: 17px;
+  }
+  .prime-manuscript.ai-prose .prime-md-list {
+    padding-inline-start: 20px;
+  }
+  .prime-manuscript.ai-prose .prime-md-list .prime-md-list {
+    padding-inline-start: 16px;
+  }
+  .prime-manuscript.ai-prose .prime-md-quote {
+    padding-inline-start: 12px;
+    margin-block: 18px;
+  }
+  .prime-manuscript.ai-prose .prime-md-paragraph {
+    margin-block: 12px;
+  }
+}
+@container prime-manuscript (min-width:680px) {
+  .prime-md-paragraph,
+  .prime-md-list,
+  .prime-md-quote {
+    font-size: 16px;
+  }
+}
+@media (forced-colors: active) {
+  .prime-manuscript.ai-prose,
+  .prime-code-frame {
+    color: CanvasText;
+  }
+  .prime-stream-terminal,
+  .prime-entity-link:before {
+    background: Highlight;
+  }
+  .prime-manuscript a {
+    color: LinkText;
+  }
+  .prime-md-quote {
+    border-color: CanvasText !important;
+  }
+}
