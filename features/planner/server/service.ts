@@ -535,7 +535,9 @@ export async function buildProposal(
 ): Promise<ProposalView> {
   const s = await load(owner);
   const { today, target, tasks } = s;
-  const last = addDays(today, 89);
+  const horizonLimit = addDays(today, 365);
+  const last =
+    target.targetDate > addDays(today, 89) ? target.targetDate : addDays(today, 89);
   let end = last;
   let start = today;
   let fixedDate: string | undefined;
@@ -556,14 +558,14 @@ export async function buildProposal(
     start = command.start ?? today;
     const requiredHorizon = addDays(start, Math.max(30, courseDays[command.course].length * 2));
     if (target.targetDate < requiredHorizon) {
-      target.targetDate = requiredHorizon < last ? requiredHorizon : last;
+      target.targetDate = requiredHorizon < horizonLimit ? requiredHorizon : horizonLimit;
       changes.target = {
         date: target.targetDate,
         minutes: target.defaultDailyCapacityMinutes,
         role: target.targetRole,
       };
     }
-    if (start < today || start > last || start > target.targetDate)
+    if (start < today || start > horizonLimit || start > target.targetDate)
       throw new Error("PLANNER_DATE");
 
     const existing = new Map(
@@ -623,7 +625,7 @@ export async function buildProposal(
   } else if (command.kind === "automatic") {
     title = "Automatic plan";
     if (command.target && (command.target !== target.targetDate || !s.raw.plan)) {
-      if (command.target < today || command.target > last)
+      if (command.target < today || command.target > horizonLimit)
         throw new Error("PLANNER_DATE");
       target.targetDate = command.target;
       changes.target = {
@@ -633,7 +635,7 @@ export async function buildProposal(
       };
       rebalance = true;
     }
-    end = command.horizon === "week" ? addDays(today, 6) : last;
+    end = command.horizon === "week" ? addDays(today, 6) : target.targetDate;
     const backlog = await Promise.all(
       s.backlog
         .filter(

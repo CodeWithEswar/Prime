@@ -29,6 +29,9 @@ beforeAll(async () => {
   await db.exec(
     await readFile("supabase/migrations/20261103162620_planner_control.sql", "utf8")
   );
+  await db.exec(
+    await readFile("supabase/migrations/20261105050000_expand_planner_horizon.sql", "utf8")
+  );
   await db.query(
     "insert into auth.users(id,email) values($1,'planner@example.test'),($2,'other@example.test')",
     [owner, other]

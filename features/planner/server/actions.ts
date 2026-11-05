@@ -3,6 +3,8 @@
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
+import { addDays } from "@/domain/planning/capacity";
 import { plannerCommand, sources, workRequest } from "../schema";
 import { buildProposal, changePlanner, confirmProposal, plannerChoices } from "./service";
 
@@ -31,7 +33,7 @@ async function action<T>(run: (owner: string) => Promise<T>) {
     if (message === "PLANNER_DATE")
       return {
         ok: false as const,
-        error: "Choose a date within the 90-day planning window.",
+        error: "Choose a date within your planning window.",
       };
     console.error("Planner action failed", error);
     return {
@@ -127,5 +129,132 @@ export async function scheduleFundamentalsCourse(course: unknown, start?: string
       scheduledDays: proposal.placements.length,
       unplacedDays: proposal.unplaced.length,
     };
+  });
+}
+
+export async function updatePlanTarget(targetDate: string) {
+  return action(async (owner) => {
+    const parsedDate = z
+      .string()
+      .regex(/^\d{4}-\d{2}-\d{2}$/)
+      .parse(targetDate);
+    const db = createAdminClient();
+    const [settings, plan] = await Promise.all([
+      db
+        .from("user_settings")
+        .select("timezone,target_role,daily_study_minutes")
+        .eq("user_id", owner)
+        .maybeSingle(),
+      db
+        .from("preparation_plans")
+        .select("id,timezone,target_role,daily_capacity_minutes,start_date")
+        .eq("user_id", owner)
+        .eq("status", "active")
+        .order("created_at", { ascending: false })
+        .order("id")
+        .limit(1)
+        .maybeSingle(),
+    ]);
+    const timezone = settings?.data?.timezone ?? plan?.data?.timezone ?? "UTC";
+    const today = new Intl.DateTimeFormat("en-CA", {
+      timeZone: timezone,
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    }).format(new Date());
+
+    if (parsedDate < today) {
+      throw new Error("Target date must be today or in the future.");
+    }
+    const targetRole =
+      plan?.data?.target_role ?? settings?.data?.target_role ?? "Software Engineer";
+    const dailyMinutes =
+      settings?.data?.daily_study_minutes ?? plan?.data?.daily_capacity_minutes ?? 90;
+
+    await db
+      .from("user_settings")
+      .update({ target_date: parsedDate, updated_at: new Date().toISOString() })
+      .eq("user_id", owner);
+
+    if (plan?.data?.id) {
+      await db
+        .from("preparation_plans")
+        .update({ target_date: parsedDate, updated_at: new Date().toISOString() })
+        .eq("id", plan.data.id)
+        .eq("user_id", owner);
+    } else {
+      await db.from("preparation_plans").insert({
+        user_id: owner,
+        start_date: today,
+        target_date: parsedDate,
+        timezone,
+        target_role: targetRole,
+        daily_capacity_minutes: dailyMinutes,
+        status: "active",
+      });
+    }
+    refresh();
+    return { targetDate: parsedDate };
+  });
+}
+
+export async function updatePlanDuration(days: number) {
+  return action(async (owner) => {
+    const totalDays = z.number().int().min(7).max(365).parse(days);
+    const db = createAdminClient();
+    const [settings, plan] = await Promise.all([
+      db
+        .from("user_settings")
+        .select("timezone,target_role,daily_study_minutes,start_date")
+        .eq("user_id", owner)
+        .maybeSingle(),
+      db
+        .from("preparation_plans")
+        .select("id,timezone,target_role,daily_capacity_minutes,start_date")
+        .eq("user_id", owner)
+        .eq("status", "active")
+        .order("created_at", { ascending: false })
+        .order("id")
+        .limit(1)
+        .maybeSingle(),
+    ]);
+    const timezone = settings?.data?.timezone ?? plan?.data?.timezone ?? "UTC";
+    const today = new Intl.DateTimeFormat("en-CA", {
+      timeZone: timezone,
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    }).format(new Date());
+    const startDate = plan?.data?.start_date ?? settings?.data?.start_date ?? today;
+    const targetDate = addDays(startDate, totalDays - 1);
+    const targetRole =
+      plan?.data?.target_role ?? settings?.data?.target_role ?? "Software Engineer";
+    const dailyMinutes =
+      settings?.data?.daily_study_minutes ?? plan?.data?.daily_capacity_minutes ?? 90;
+
+    await db
+      .from("user_settings")
+      .update({ target_date: targetDate, updated_at: new Date().toISOString() })
+      .eq("user_id", owner);
+
+    if (plan?.data?.id) {
+      await db
+        .from("preparation_plans")
+        .update({ target_date: targetDate, updated_at: new Date().toISOString() })
+        .eq("id", plan.data.id)
+        .eq("user_id", owner);
+    } else {
+      await db.from("preparation_plans").insert({
+        user_id: owner,
+        start_date: startDate,
+        target_date: targetDate,
+        timezone,
+        target_role: targetRole,
+        daily_capacity_minutes: dailyMinutes,
+        status: "active",
+      });
+    }
+    refresh();
+    return { targetDate, totalDays };
   });
 }
