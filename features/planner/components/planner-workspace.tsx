@@ -308,13 +308,13 @@ export function PlannerWorkspace({
                 PREPARATION PLAN
               </span>
               <span className="text-[#333333]">/</span>
-              <span className="font-mono text-xs font-semibold uppercase tracking-wider text-white">
+              <span className="font-mono text-xs sm:text-sm font-semibold uppercase tracking-wider text-white truncate">
                 {view.role}
               </span>
               <span className="text-[#333333]">·</span>
               <span
                 className={
-                  "inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-mono uppercase font-semibold border " +
+                  "inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-mono uppercase font-semibold border shrink-0 " +
                   (isAtRisk
                     ? "border-[#FF0000]/40 text-[#FF0000] bg-[#FF0000]/10"
                     : "border-[#262626] text-[#AAAAAA] bg-[#0E0E0E]")
@@ -323,37 +323,39 @@ export function PlannerWorkspace({
                 {trajectoryText}
               </span>
             </div>
-            <div className="flex flex-wrap items-center gap-2 pt-0.5">
-              <p className="font-mono text-xs text-[#888888]">
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-1.5 text-xs font-mono text-[#888888] pt-1">
+              <span>
                 {dateLabel(view.start, { month: "short", day: "numeric" }).toUpperCase()} —{" "}
                 {dateLabel(view.target, {
                   month: "short",
                   day: "numeric",
                   year: "numeric",
-                }).toUpperCase()}{" "}
-                ·{" "}
-                <span className="font-bold text-white">{daysRemaining} DAYS REMAINING</span>{" "}
-                · <span className="text-[#AAAAAA]">{totalDays}-DAY RUNWAY</span>{" "}
-                · {view.timezone.replaceAll("_", " ")}
-              </p>
-              <Button
-                variant="outline"
-                size="sm"
-                aria-label="Customize plan duration"
-                className="h-6 px-2 text-[11px] font-mono text-[#CCCCCC] hover:text-white border-[#262626] hover:border-[#444] rounded bg-[#101010] hover:bg-[#181818] transition-colors gap-1.5"
+                }).toUpperCase()}
+              </span>
+              <span className="text-[#333333]">·</span>
+              <span className="font-bold text-white">
+                {daysRemaining} DAYS REMAINING
+              </span>
+              <span className="text-[#333333]">·</span>
+              <button
+                type="button"
                 onClick={() => setCustomizingRunway(true)}
+                className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded border border-[#262626] hover:border-[#444444] bg-[#111111] hover:bg-[#191919] text-[#CCCCCC] hover:text-white transition-colors cursor-pointer select-none"
+                title="Customize preparation runway"
               >
-                <Icon icon={Calendar03Icon} size={12} className="text-[#FF0000]" />
-                Customize runway ({totalDays}d)
-              </Button>
+                <Icon icon={Calendar03Icon} size={11} className="text-[#FF0000]" />
+                <span>{totalDays}-DAY RUNWAY</span>
+              </button>
+              <span className="text-[#333333]">·</span>
+              <span>{view.timezone.replaceAll("_", " ")}</span>
             </div>
           </div>
-          <div className="grid grid-cols-2 sm:flex sm:flex-wrap sm:items-center gap-2 w-full sm:w-auto">
+          <div className="grid grid-cols-2 sm:flex sm:flex-wrap sm:items-center gap-2 w-full sm:w-auto pt-2 sm:pt-0">
             {ai?.enabled && (
               <Button
-                variant="secondary"
+                variant="outline"
                 disabled={Boolean(aiBusy)}
-                className="w-full sm:w-auto justify-center"
+                className="w-full sm:w-auto justify-center h-9 text-xs font-medium border-[#262626] bg-[#0E0E0E] text-[#E0E0E0] hover:text-white hover:border-[#383838]"
                 onClick={(e) => {
                   const context = { type: "planner" as const, date };
                   if (ai.reference.type !== context.type || ai.reference.date !== date) {
@@ -363,12 +365,12 @@ export function PlannerWorkspace({
                 }}
               >
                 <Icon icon={AiChat01Icon} size={15} />
-                Plan with AI
+                <span>Plan with AI</span>
               </Button>
             )}
             <Button
-              variant={ai?.enabled ? "outline" : "secondary"}
-              className={`${ai?.enabled ? "w-full" : "col-span-2"} sm:w-auto justify-center`}
+              variant="outline"
+              className={`${ai?.enabled ? "w-full" : "col-span-2"} sm:w-auto justify-center h-9 text-xs font-medium border-[#262626] bg-[#0E0E0E] text-[#E0E0E0] hover:text-white hover:border-[#383838]`}
               onClick={() =>
                 open({
                   kind: "automatic",
@@ -379,14 +381,14 @@ export function PlannerWorkspace({
                 })
               }
             >
-              Automatic plan
+              <span>Automatic plan</span>
             </Button>
             <Button
-              className="col-span-2 sm:w-auto justify-center bg-[#FF0000] text-white hover:bg-[#CC0000] font-semibold"
+              className="col-span-2 sm:col-span-1 sm:w-auto justify-center h-9 bg-[#FF0000] text-white hover:bg-[#CC0000] font-semibold text-xs font-mono shadow-[0_0_12px_rgba(255,0,0,0.35)] cursor-pointer"
               onClick={() => planWork(tab === "week" && date <= view.target)}
             >
               <Icon icon={Add01Icon} size={15} />
-              Plan work
+              <span>Plan work</span>
             </Button>
           </div>
         </CardContent>
