@@ -7,6 +7,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { Icon } from "@/components/ui/icon";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { parseDateParts } from "@/domain/planning/capacity";
+import { cn } from "@/lib/utils";
 
 function calendarDate(value: string) {
   const { year, month, day } = parseDateParts(value);
@@ -20,6 +21,7 @@ export function PlannerDateField({
   min,
   max,
   disabled,
+  className,
   onChange,
 }: {
   id?: string;
@@ -28,6 +30,7 @@ export function PlannerDateField({
   min: string;
   max: string;
   disabled?: boolean;
+  className?: string;
   onChange: (date: string) => void;
 }) {
   const [open, setOpen] = useState(false);
@@ -44,7 +47,10 @@ export function PlannerDateField({
           variant="outline"
           disabled={disabled || min > max}
           aria-label={display ? label + ", " + display : label}
-          className="w-full min-w-0 justify-start gap-2.5 bg-[var(--prime-canvas)] px-2.5 text-left font-normal"
+          className={cn(
+            "w-full min-w-0 justify-start gap-2.5 bg-[var(--prime-canvas)] px-2.5 text-left font-normal",
+            className
+          )}
         >
           <Icon
             icon={Calendar03Icon}
