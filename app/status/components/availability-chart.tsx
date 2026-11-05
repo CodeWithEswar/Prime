@@ -56,7 +56,7 @@ export function AvailabilityChart({ rollups }: AvailabilityChartProps) {
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
               data={chartData}
-              margin={{ top: 10, right: 10, left: 0, bottom: 0 }}
+              margin={{ top: 10, right: 10, left: 4, bottom: 0 }}
             >
               <CartesianGrid strokeDasharray="3 3" stroke="#222222" vertical={false} />
               <XAxis
@@ -67,7 +67,7 @@ export function AvailabilityChart({ rollups }: AvailabilityChartProps) {
                 axisLine={{ stroke: "#222222" }}
               />
               <YAxis
-                width={38}
+                width={42}
                 stroke="#666666"
                 fontSize={10}
                 tickLine={false}
