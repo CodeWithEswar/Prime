@@ -48,6 +48,14 @@
     min-height: 30px;
   }
 }
+@media (max-width: 640px) {
+  .prime-response-secondary {
+    display: none;
+  }
+  .prime-response-more {
+    display: block;
+  }
+}
 @media (pointer: coarse) {
   .prime-response-actions .ai-control:before {
     content: "";

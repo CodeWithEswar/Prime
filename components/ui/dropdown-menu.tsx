@@ -77,7 +77,7 @@ export const DropdownMenuItem = React.forwardRef<
   <DropdownMenuPrimitive.Item
     ref={ref}
     className={cn(
-      "relative flex min-h-[var(--control-row-height)] cursor-pointer select-none items-center rounded-[var(--radius-xs)] px-2 py-1 text-[13px] outline-none transition-colors focus:bg-[var(--surface-hover)] focus:text-white data-[disabled]:pointer-events-none data-[disabled]:opacity-40",
+      "relative flex min-h-[var(--control-row-height)] cursor-pointer select-none items-center gap-2 rounded-[var(--radius-xs)] px-2 py-1 text-[13px] outline-none transition-colors focus:bg-[var(--surface-hover)] focus:text-white data-[disabled]:pointer-events-none data-[disabled]:opacity-40",
       inset && "pl-8",
       destructive && "text-red-400 focus:bg-[var(--destructive-soft)] focus:text-red-300",
       className
