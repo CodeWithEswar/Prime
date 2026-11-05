@@ -4,11 +4,14 @@ import { RevisionBadge } from "@/features/problems/components/revision-badge";
 import { ProblemRow } from "@/features/problems/components/problem-row";
 import { AttemptHistoryList } from "@/features/problems/components/attempt-history-list";
 import { PracticeHeader } from "@/features/problems/components/practice-header";
+import { PracticeToolbar } from "@/features/problems/components/practice-toolbar";
 import type {
   CatalogProblemItem,
   ProblemAttemptRecord,
   UserPracticeSummary,
+  PracticeCatalogFilter,
 } from "@/features/problems/types";
+import type { FilterOptionsData } from "@/features/problems/queries/get-filter-options";
 
 describe("DSA Practice UI Components", () => {
   describe("RevisionBadge", () => {
@@ -162,6 +165,92 @@ describe("DSA Practice UI Components", () => {
       expect(screen.getByText("142")).toBeInTheDocument();
       expect(screen.getByText("4")).toBeInTheDocument();
       expect(screen.getByText("35")).toBeInTheDocument();
+    });
+  });
+
+  describe("PracticeToolbar", () => {
+    const mockFilterOptions: FilterOptionsData = {
+      topics: [{ id: "t1", slug: "arrays", name: "Arrays", problemCount: 10 }],
+      collections: [{ id: "c1", slug: "blind75", name: "Blind 75", problemCount: 75 }],
+      companies: [{ id: "co1", slug: "google", name: "Google", problemCount: 50 }],
+    };
+
+    const emptyFilters: PracticeCatalogFilter = {
+      q: "",
+      difficulty: "",
+      status: "",
+      topic: "",
+      collection: "",
+      company: "",
+      window: "",
+      revision: "",
+      sort: "recommended",
+      page: 1,
+      pageSize: 50,
+    };
+
+    it("renders search input, filter triggers, and sort with clean developer labels", () => {
+      const onFilterChange = vi.fn();
+      const onOpenMobileFilters = vi.fn();
+
+      render(
+        <PracticeToolbar
+          filterOptions={mockFilterOptions}
+          filters={emptyFilters}
+          onFilterChange={onFilterChange}
+          onOpenMobileFilters={onOpenMobileFilters}
+        />
+      );
+
+      expect(
+        screen.getByPlaceholderText("Search problems by title, slug, or topic...")
+      ).toBeInTheDocument();
+      expect(screen.getByText("Difficulty")).toBeInTheDocument();
+      expect(screen.getByText("Status")).toBeInTheDocument();
+      expect(screen.getByText("Recommended")).toBeInTheDocument();
+      expect(screen.getByText("Filters")).toBeInTheDocument();
+    });
+
+    it("displays active filter badges and calls onFilterChange when dismissed", () => {
+      const onFilterChange = vi.fn();
+
+      render(
+        <PracticeToolbar
+          filterOptions={mockFilterOptions}
+          filters={{
+            ...emptyFilters,
+            difficulty: "easy",
+            topic: "arrays",
+          }}
+          onFilterChange={onFilterChange}
+        />
+      );
+
+      // Should render active difficulty tag and active topic tag
+      expect(screen.getByText("Easy")).toBeInTheDocument();
+      expect(screen.getByText("arrays")).toBeInTheDocument();
+
+      // Dismiss difficulty
+      const removeDiffBtn = screen.getByLabelText("Remove difficulty filter");
+      fireEvent.click(removeDiffBtn);
+      expect(onFilterChange).toHaveBeenCalledWith({ difficulty: "", page: 1 });
+    });
+
+    it("displays active count badge on mobile filters button when filters are active", () => {
+      render(
+        <PracticeToolbar
+          filterOptions={mockFilterOptions}
+          filters={{
+            ...emptyFilters,
+            difficulty: "medium",
+            status: "solved",
+          }}
+          onFilterChange={vi.fn()}
+          onOpenMobileFilters={vi.fn()}
+        />
+      );
+
+      expect(screen.getByText("2")).toBeInTheDocument();
     });
   });
 });
