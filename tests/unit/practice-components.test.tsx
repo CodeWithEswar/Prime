@@ -1,6 +1,8 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 import { RevisionBadge } from "@/features/problems/components/revision-badge";
+import { PriorityBadge } from "@/features/problems/components/priority-badge";
+import { DifficultyBadge } from "@/features/problems/components/difficulty-badge";
 import { ProblemRow } from "@/features/problems/components/problem-row";
 import { AttemptHistoryList } from "@/features/problems/components/attempt-history-list";
 import { PracticeHeader } from "@/features/problems/components/practice-header";
@@ -46,6 +48,64 @@ describe("DSA Practice UI Components", () => {
       const badge = screen.getByText("Overdue");
       expect(badge).toBeInTheDocument();
       expect(badge.parentElement).toHaveClass("text-[var(--accent)]");
+    });
+  });
+
+  describe("PriorityBadge", () => {
+    it("renders null when priority is missing or empty", () => {
+      const { container } = render(<PriorityBadge priority={null} />);
+      expect(container.firstChild).toBeNull();
+    });
+
+    it("renders Core badge with sparkles and accent styling for core/canonical", () => {
+      render(<PriorityBadge priority="canonical" />);
+      const badge = screen.getByText("Core");
+      expect(badge).toBeInTheDocument();
+      expect(badge.parentElement).toHaveClass("text-[var(--accent)]");
+    });
+
+    it("renders High badge with amber styling", () => {
+      render(<PriorityBadge priority="high" />);
+      const badge = screen.getByText("High");
+      expect(badge).toBeInTheDocument();
+      expect(badge.parentElement).toHaveClass("text-amber-400");
+    });
+
+    it("renders Advanced badge with purple styling", () => {
+      render(<PriorityBadge priority="advanced" />);
+      const badge = screen.getByText("Advanced");
+      expect(badge).toBeInTheDocument();
+      expect(badge.parentElement).toHaveClass("text-purple-400");
+    });
+
+    it("renders Standard badge with sky blue styling", () => {
+      render(<PriorityBadge priority="standard" />);
+      const badge = screen.getByText("Standard");
+      expect(badge).toBeInTheDocument();
+      expect(badge.parentElement).toHaveClass("text-sky-400");
+    });
+  });
+
+  describe("DifficultyBadge", () => {
+    it("renders Easy badge with emerald coloring and beacon dot", () => {
+      render(<DifficultyBadge difficulty="easy" />);
+      const badge = screen.getByText("easy");
+      expect(badge).toBeInTheDocument();
+      expect(badge).toHaveClass("text-[#10B981]");
+    });
+
+    it("renders Medium badge with amber coloring and beacon dot", () => {
+      render(<DifficultyBadge difficulty="medium" />);
+      const badge = screen.getByText("medium");
+      expect(badge).toBeInTheDocument();
+      expect(badge).toHaveClass("text-[#F59E0B]");
+    });
+
+    it("renders Hard badge with red coloring and beacon dot", () => {
+      render(<DifficultyBadge difficulty="hard" />);
+      const badge = screen.getByText("hard");
+      expect(badge).toBeInTheDocument();
+      expect(badge).toHaveClass("text-[#EF4444]");
     });
   });
 

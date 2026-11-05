@@ -5,6 +5,8 @@ import Link from "next/link";
 import { ArrowUpRight01Icon } from "@hugeicons/core-free-icons";
 import { Icon } from "@/components/ui/icon";
 import { RevisionBadge } from "./revision-badge";
+import { PriorityBadge } from "./priority-badge";
+import { DifficultyBadge } from "./difficulty-badge";
 import { cn, cleanProblemTitle } from "@/lib/utils";
 import type { CatalogProblemItem, UserProblemStatus } from "../types";
 
@@ -17,18 +19,12 @@ interface ProblemRowProps {
   className?: string;
 }
 
-const difficultyStyle: Record<string, string> = {
-  easy: "text-[rgba(255,255,255,0.60)]",
-  medium: "text-[rgba(255,255,255,0.85)] font-medium",
-  hard: "text-white font-semibold",
-};
-
 function StatusSymbol({ status }: { status: UserProblemStatus }) {
   switch (status) {
     case "solved":
       return (
         <span
-          className="text-white font-mono text-sm leading-none font-bold"
+          className="text-[#10B981] font-mono text-sm leading-none font-bold"
           title="Solved"
           aria-label="Status: Solved"
         >
@@ -38,7 +34,7 @@ function StatusSymbol({ status }: { status: UserProblemStatus }) {
     case "needs_revision":
       return (
         <span
-          className="text-[var(--accent)] font-mono text-sm leading-none font-bold"
+          className="text-[var(--accent)] font-mono text-sm leading-none font-bold animate-pulse"
           title="Needs Revision"
           aria-label="Status: Needs Revision"
         >
@@ -48,7 +44,7 @@ function StatusSymbol({ status }: { status: UserProblemStatus }) {
     case "mastered":
       return (
         <span
-          className="text-white font-mono text-xs leading-none font-bold"
+          className="text-purple-400 font-mono text-xs leading-none font-bold shadow-[0_0_6px_rgba(168,85,247,0.4)]"
           title="Mastered"
           aria-label="Status: Mastered"
         >
@@ -58,7 +54,7 @@ function StatusSymbol({ status }: { status: UserProblemStatus }) {
     case "attempted":
       return (
         <span
-          className="text-[rgba(255,255,255,0.72)] font-mono text-sm leading-none"
+          className="text-[#F59E0B] font-mono text-sm leading-none"
           title="Attempted"
           aria-label="Status: Attempted"
         >
@@ -69,7 +65,7 @@ function StatusSymbol({ status }: { status: UserProblemStatus }) {
     default:
       return (
         <span
-          className="text-[rgba(255,255,255,0.28)] font-mono text-sm leading-none"
+          className="text-[var(--text-disabled)] font-mono text-sm leading-none"
           title="Not Started"
           aria-label="Status: Not Started"
         >
@@ -116,20 +112,27 @@ export function ProblemRow({
         "group relative flex items-center justify-between gap-3 px-4 py-3 border-b border-[var(--border-subtle)] bg-[var(--prime-canvas)] transition-all cursor-pointer select-none",
         "before:absolute before:left-0 before:top-0 before:bottom-0 before:w-[2px] before:bg-transparent before:transition-colors",
         "hover:bg-[rgba(255,255,255,0.02)] hover:before:bg-[var(--accent)]",
-        isSelected && "bg-[var(--surface-base)] before:bg-[var(--accent)]",
+        isSelected &&
+          "bg-[rgba(255,255,255,0.03)] before:bg-[var(--accent)] shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]",
         className
       )}
     >
       {/* 1. Status Column & Title */}
       <div className="flex items-center gap-3 min-w-0 flex-1">
-        {/* Status Symbol (No repeating noisy pills) */}
+        {/* Status Symbol (Color-coded developer glyph) */}
         <div className="w-12 shrink-0 flex items-center justify-center">
-          <StatusSymbol status={problem.masteryLevel === "mastered" && problem.status === "solved" ? "mastered" : problem.status} />
+          <StatusSymbol
+            status={
+              problem.masteryLevel === "mastered" && problem.status === "solved"
+                ? "mastered"
+                : problem.status
+            }
+          />
         </div>
 
         {/* Title & Topic Context */}
         <div className="min-w-0 flex-1">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap">
             {href ? (
               <Link
                 data-problem-link
@@ -155,6 +158,9 @@ export function ProblemRow({
               </span>
             )}
 
+            {/* Priority Badge */}
+            <PriorityBadge priority={problem.primePriority} />
+
             {/* Revision Due Badge */}
             <RevisionBadge
               isDue={problem.isRevisionDue}
@@ -175,7 +181,7 @@ export function ProblemRow({
         </div>
       </div>
 
-      {/* 2. Monochromatic Difficulty & Company Relevance */}
+      {/* 2. Difficulty Badge & Company Relevance */}
       <div className="hidden sm:flex items-center gap-6 shrink-0 text-xs font-mono">
         {/* Company Relevance if active */}
         {problem.companyRelevance && (
@@ -187,15 +193,10 @@ export function ProblemRow({
           </div>
         )}
 
-        {/* Difficulty */}
-        <span
-          className={cn(
-            "uppercase tracking-wider min-w-[65px] text-right",
-            difficultyStyle[problem.difficulty] || "text-[var(--text-secondary)]"
-          )}
-        >
-          {problem.difficulty}
-        </span>
+        {/* Colored Difficulty Badge with glowing beacon dot */}
+        <div className="min-w-[76px] flex justify-end">
+          <DifficultyBadge difficulty={problem.difficulty} />
+        </div>
       </div>
 
       {/* 3. External Action Button */}
@@ -207,13 +208,13 @@ export function ProblemRow({
             rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()}
             aria-label={`Open ${problem.title} on external practice platform`}
-            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-[var(--radius-sm)] text-xs font-mono text-[var(--text-secondary)] hover:text-white bg-[var(--surface-base)] border border-[var(--border-subtle)] hover:border-[var(--border-default)] transition-colors"
+            className="group/btn inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[var(--radius-sm)] text-xs font-mono text-[var(--text-secondary)] hover:text-white bg-[var(--surface-base)] hover:bg-[var(--surface-raised)] border border-[var(--border-subtle)] hover:border-[var(--border-default)] transition-all duration-150"
           >
             <span className="hidden md:inline">Open</span>
             <Icon
               icon={ArrowUpRight01Icon}
               size={12}
-              className="opacity-70 group-hover:opacity-100"
+              className="opacity-70 group-hover/btn:opacity-100 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform"
             />
           </a>
         ) : (
