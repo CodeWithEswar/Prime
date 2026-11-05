@@ -280,9 +280,8 @@ test("workspace renders Markdown and requires note confirmation", async ({ page 
   );
   await expect(page.getByRole("table")).toBeVisible();
   await expect(page.getByRole("button", { name: "Copy code" })).toBeVisible();
-  await expect(
-    page.locator(".shell-nav").getByRole("link", { name: "PRIME AI", exact: true })
-  ).toHaveAttribute("aria-current", "page");
+  await expect(page.locator(".ai-workspace")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "PRIME AI", exact: true })).toBeVisible();
   await page.getByRole("combobox", { name: "AI intent" }).click();
   await expect(page.getByRole("option", { name: "Correct", exact: true })).toBeVisible();
   await page.getByRole("option", { name: "Correct", exact: true }).click();
