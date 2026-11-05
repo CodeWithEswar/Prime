@@ -21,9 +21,10 @@
         "SUPABASE_URL": "https://irioygnezxaptppbfpqz.supabase.co"
       }
     }
+  },
+  "triggers": {
+    "crons": [
+      "0 0 * * *"
+    ]
   }
-  // Cron Triggers: Activated when daily planning algorithms are implemented in Phase 1+
-  // "triggers": {
-  //   "crons": ["0 0 * * *"] // Daily at midnight UTC
-  // }
 }

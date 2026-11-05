@@ -1,5 +1,6 @@
 import type { WorkerEnv } from "../../shared/types";
 import { workerLog } from "../../shared/logger";
+import { createWorkerSupabaseClient } from "../../shared/supabase";
 
 const worker = {
   /**
@@ -22,12 +23,35 @@ const worker = {
       );
     }
 
+    if (url.pathname === "/keep-alive" || url.pathname === "/ping") {
+      try {
+        const supabase = createWorkerSupabaseClient(env);
+        const { error } = await supabase.from("notifications").select("id").limit(1);
+        return new Response(
+          JSON.stringify({
+            status: !error ? "active" : "degraded",
+            service: "Supabase Keep-Alive (Planner)",
+            timestamp: new Date().toISOString(),
+            error: error?.message,
+          }),
+          {
+            status: !error ? 200 : 503,
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+      } catch (err: any) {
+        return new Response(
+          JSON.stringify({ status: "error", error: err?.message }),
+          { status: 500, headers: { "Content-Type": "application/json" } }
+        );
+      }
+    }
+
     return new Response("PRIME Planner Worker Foundation", { status: 200 });
   },
 
   /**
-   * Scheduled Cron Entrypoint (Foundation Skeleton)
-   * Real daily plan scheduling logic is deferred to feature phases.
+   * Scheduled Cron Entrypoint (Daily keep-alive and plan check)
    */
   async scheduled(
     event: { cron: string; scheduledTime: number },
@@ -38,6 +62,19 @@ const worker = {
       scheduledTime: event.scheduledTime,
       environment: env.ENVIRONMENT,
     });
+
+    try {
+      const supabase = createWorkerSupabaseClient(env);
+      const { error } = await supabase.from("notifications").select("id").limit(1);
+      workerLog("planner", "info", "Planner Supabase keep-alive pulse dispatched", {
+        success: !error,
+        error: error?.message,
+      });
+    } catch (err: any) {
+      workerLog("planner", "warn", "Planner Supabase keep-alive failed", {
+        error: err?.message,
+      });
+    }
   },
 };
 
