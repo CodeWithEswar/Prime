@@ -7,8 +7,9 @@ import { Icon } from "@/components/ui/icon";
 import { RevisionBadge } from "./revision-badge";
 import { PriorityBadge } from "./priority-badge";
 import { DifficultyBadge } from "./difficulty-badge";
+import { StatusIcon } from "./status-icon";
 import { cn, cleanProblemTitle } from "@/lib/utils";
-import type { CatalogProblemItem, UserProblemStatus } from "../types";
+import type { CatalogProblemItem } from "../types";
 
 interface ProblemMobileCardProps {
   problem: CatalogProblemItem;
@@ -17,62 +18,6 @@ interface ProblemMobileCardProps {
   href?: string;
   onNavigate?: () => void;
   className?: string;
-}
-
-function StatusSymbol({ status }: { status: UserProblemStatus }) {
-  switch (status) {
-    case "solved":
-      return (
-        <span
-          className="text-[#10B981] font-mono text-xs leading-none font-bold"
-          title="Solved"
-          aria-label="Status: Solved"
-        >
-          ✓
-        </span>
-      );
-    case "needs_revision":
-      return (
-        <span
-          className="text-[var(--accent)] font-mono text-xs leading-none font-bold animate-pulse"
-          title="Needs Revision"
-          aria-label="Status: Needs Revision"
-        >
-          ↻
-        </span>
-      );
-    case "mastered":
-      return (
-        <span
-          className="text-purple-400 font-mono text-[11px] leading-none font-bold shadow-[0_0_6px_rgba(168,85,247,0.4)]"
-          title="Mastered"
-          aria-label="Status: Mastered"
-        >
-          ◆
-        </span>
-      );
-    case "attempted":
-      return (
-        <span
-          className="text-[#F59E0B] font-mono text-xs leading-none"
-          title="Attempted"
-          aria-label="Status: Attempted"
-        >
-          ◐
-        </span>
-      );
-    case "not_started":
-    default:
-      return (
-        <span
-          className="text-[var(--text-disabled)] font-mono text-xs leading-none"
-          title="Not Started"
-          aria-label="Status: Not Started"
-        >
-          ○
-        </span>
-      );
-  }
 }
 
 export function ProblemMobileCard({
@@ -119,12 +64,13 @@ export function ProblemMobileCard({
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-start gap-2.5 min-w-0 flex-1">
           <div className="shrink-0 mt-0.5 w-5 flex items-center justify-center">
-            <StatusSymbol
+            <StatusIcon
               status={
                 problem.masteryLevel === "mastered" && problem.status === "solved"
                   ? "mastered"
                   : problem.status
               }
+              size={15}
             />
           </div>
           <div className="min-w-0 flex-1">

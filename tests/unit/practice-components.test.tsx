@@ -3,6 +3,7 @@ import { describe, it, expect, vi } from "vitest";
 import { RevisionBadge } from "@/features/problems/components/revision-badge";
 import { PriorityBadge } from "@/features/problems/components/priority-badge";
 import { DifficultyBadge } from "@/features/problems/components/difficulty-badge";
+import { StatusIcon } from "@/features/problems/components/status-icon";
 import { ProblemRow } from "@/features/problems/components/problem-row";
 import { AttemptHistoryList } from "@/features/problems/components/attempt-history-list";
 import { PracticeHeader } from "@/features/problems/components/practice-header";
@@ -106,6 +107,38 @@ describe("DSA Practice UI Components", () => {
       const badge = screen.getByText("hard");
       expect(badge).toBeInTheDocument();
       expect(badge).toHaveClass("text-[#EF4444]");
+    });
+  });
+
+  describe("StatusIcon", () => {
+    it("renders green checkmark icon for solved", () => {
+      const { container } = render(<StatusIcon status="solved" />);
+      expect(container.querySelector("svg")).toBeInTheDocument();
+      expect(container.querySelector("svg")).toHaveClass("text-[#10B981]");
+    });
+
+    it("renders red reload icon for needs_revision", () => {
+      const { container } = render(<StatusIcon status="needs_revision" />);
+      expect(container.querySelector("svg")).toBeInTheDocument();
+      expect(container.querySelector("svg")).toHaveClass("text-[var(--accent)]");
+    });
+
+    it("renders amber loading icon for attempted", () => {
+      const { container } = render(<StatusIcon status="attempted" />);
+      expect(container.querySelector("svg")).toBeInTheDocument();
+      expect(container.querySelector("svg")).toHaveClass("text-[#F59E0B]");
+    });
+
+    it("renders purple diamond icon for mastered", () => {
+      const { container } = render(<StatusIcon status="mastered" />);
+      expect(container.querySelector("svg")).toBeInTheDocument();
+      expect(container.querySelector("svg")).toHaveClass("text-purple-400");
+    });
+
+    it("renders muted circle icon for not_started or default", () => {
+      const { container } = render(<StatusIcon status="not_started" />);
+      expect(container.querySelector("svg")).toBeInTheDocument();
+      expect(container.querySelector("svg")).toHaveClass("text-[var(--text-disabled)]");
     });
   });
 
