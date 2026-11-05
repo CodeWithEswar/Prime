@@ -1,0 +1,700 @@
+{
+  "shopee": {
+    "src": "/brand/companies/shopee.svg",
+    "surface": "dark"
+  },
+  "sap": {
+    "src": "/brand/companies/sap.svg",
+    "surface": "light"
+  },
+  "asana": {
+    "src": "/brand/companies/asana.svg",
+    "surface": "light"
+  },
+  "dell": {
+    "src": "/brand/companies/dell.svg",
+    "surface": "dark"
+  },
+  "uipath": {
+    "src": "/brand/companies/uipath.svg",
+    "surface": "dark"
+  },
+  "zoho": {
+    "src": "/brand/companies/zoho.svg",
+    "surface": "light"
+  },
+  "garmin": {
+    "src": "/brand/companies/garmin.svg",
+    "surface": "light"
+  },
+  "cisco": {
+    "src": "/brand/companies/cisco.svg",
+    "surface": "dark"
+  },
+  "visa": {
+    "src": "/brand/companies/visa.svg",
+    "surface": "light"
+  },
+  "odoo": {
+    "src": "/brand/companies/odoo.svg",
+    "surface": "light"
+  },
+  "deliveroo": {
+    "src": "/brand/companies/deliveroo.svg",
+    "surface": "dark"
+  },
+  "mixpanel": {
+    "src": "/brand/companies/mixpanel.svg",
+    "surface": "light"
+  },
+  "veritas": {
+    "src": "/brand/companies/veritas.svg",
+    "surface": "light"
+  },
+  "revolut": {
+    "src": "/brand/companies/revolut.svg",
+    "surface": "light"
+  },
+  "doordash": {
+    "src": "/brand/companies/doordash.svg",
+    "surface": "dark"
+  },
+  "databricks": {
+    "src": "/brand/companies/databricks.svg",
+    "surface": "light"
+  },
+  "splunk": {
+    "src": "/brand/companies/splunk.svg",
+    "surface": "light"
+  },
+  "gusto": {
+    "src": "/brand/companies/gusto.svg",
+    "surface": "light"
+  },
+  "oyo": {
+    "src": "/brand/companies/oyo.svg",
+    "surface": "dark"
+  },
+  "tesla": {
+    "src": "/brand/companies/tesla.svg",
+    "surface": "light"
+  },
+  "zomato": {
+    "src": "/brand/companies/zomato.svg",
+    "surface": "dark"
+  },
+  "nokia": {
+    "src": "/brand/companies/nokia.svg",
+    "surface": "dark"
+  },
+  "tiktok": {
+    "src": "/brand/companies/tiktok.svg",
+    "surface": "light"
+  },
+  "tripadvisor": {
+    "src": "/brand/companies/tripadvisor.svg",
+    "surface": "dark"
+  },
+  "stripe": {
+    "src": "/brand/companies/stripe.svg",
+    "surface": "light"
+  },
+  "airbnb": {
+    "src": "/brand/companies/airbnb.svg",
+    "surface": "light"
+  },
+  "reddit": {
+    "src": "/brand/companies/reddit.svg",
+    "surface": "light"
+  },
+  "zendesk": {
+    "src": "/brand/companies/zendesk.svg",
+    "surface": "light"
+  },
+  "samsung": {
+    "src": "/brand/companies/samsung.svg",
+    "surface": "light"
+  },
+  "barclays": {
+    "src": "/brand/companies/barclays.svg",
+    "surface": "dark"
+  },
+  "bytedance": {
+    "src": "/brand/companies/bytedance.svg",
+    "surface": "dark"
+  },
+  "dropbox": {
+    "src": "/brand/companies/dropbox.svg",
+    "surface": "light"
+  },
+  "baidu": {
+    "src": "/brand/companies/baidu.svg",
+    "surface": "light"
+  },
+  "deutsche-bank": {
+    "src": "/brand/companies/deutsche-bank.svg",
+    "surface": "light"
+  },
+  "airtel": {
+    "src": "/brand/companies/airtel.svg",
+    "surface": "dark"
+  },
+  "twitch": {
+    "src": "/brand/companies/twitch.svg",
+    "surface": "light"
+  },
+  "mastercard": {
+    "src": "/brand/companies/mastercard.svg",
+    "surface": "dark"
+  },
+  "palo-alto-networks": {
+    "src": "/brand/companies/palo-alto-networks.svg",
+    "surface": "dark"
+  },
+  "zoom": {
+    "src": "/brand/companies/zoom.svg",
+    "surface": "light"
+  },
+  "duolingo": {
+    "src": "/brand/companies/duolingo.svg",
+    "surface": "dark"
+  },
+  "riot-games": {
+    "src": "/brand/companies/riot-games.svg",
+    "surface": "dark"
+  },
+  "airbus-se": {
+    "src": "/brand/companies/airbus-se.svg",
+    "surface": "light"
+  },
+  "nvidia": {
+    "src": "/brand/companies/nvidia.svg",
+    "surface": "light"
+  },
+  "robinhood": {
+    "src": "/brand/companies/robinhood.svg",
+    "surface": "dark"
+  },
+  "coinbase": {
+    "src": "/brand/companies/coinbase.svg",
+    "surface": "dark"
+  },
+  "wix": {
+    "src": "/brand/companies/wix.svg",
+    "surface": "light"
+  },
+  "okx": {
+    "src": "/brand/companies/okx.svg",
+    "surface": "light"
+  },
+  "unity": {
+    "src": "/brand/companies/unity.svg",
+    "surface": "light"
+  },
+  "akamai": {
+    "src": "/brand/companies/akamai.svg",
+    "surface": "light"
+  },
+  "rakuten": {
+    "src": "/brand/companies/rakuten.svg",
+    "surface": "light"
+  },
+  "houzz": {
+    "src": "/brand/companies/houzz.svg",
+    "surface": "dark"
+  },
+  "wise": {
+    "src": "/brand/companies/wise.svg",
+    "surface": "dark"
+  },
+  "netflix": {
+    "src": "/brand/companies/netflix.svg",
+    "surface": "light"
+  },
+  "openai": {
+    "src": "/brand/companies/openai.svg",
+    "surface": "light"
+  },
+  "hp": {
+    "src": "/brand/companies/hp.svg",
+    "surface": "dark"
+  },
+  "paytm": {
+    "src": "/brand/companies/paytm.svg",
+    "surface": "light"
+  },
+  "mongodb": {
+    "src": "/brand/companies/mongodb.svg",
+    "surface": "light"
+  },
+  "valve": {
+    "src": "/brand/companies/valve.svg",
+    "surface": "dark"
+  },
+  "toptal": {
+    "src": "/brand/companies/toptal.svg",
+    "surface": "light"
+  },
+  "okta": {
+    "src": "/brand/companies/okta.svg",
+    "surface": "light"
+  },
+  "general-motors": {
+    "src": "/brand/companies/general-motors.svg",
+    "surface": "dark"
+  },
+  "yelp": {
+    "src": "/brand/companies/yelp.svg",
+    "surface": "dark"
+  },
+  "groupon": {
+    "src": "/brand/companies/groupon.svg",
+    "surface": "dark"
+  },
+  "autodesk": {
+    "src": "/brand/companies/autodesk.svg",
+    "surface": "light"
+  },
+  "dunzo": {
+    "src": "/brand/companies/dunzo.svg",
+    "surface": "dark"
+  },
+  "western-digital": {
+    "src": "/brand/companies/western-digital.svg",
+    "surface": "dark"
+  },
+  "target": {
+    "src": "/brand/companies/target.svg",
+    "surface": "light"
+  },
+  "hubspot": {
+    "src": "/brand/companies/hubspot.svg",
+    "surface": "light"
+  },
+  "peloton": {
+    "src": "/brand/companies/peloton.svg",
+    "surface": "light"
+  },
+  "expedia": {
+    "src": "/brand/companies/expedia.svg",
+    "surface": "light"
+  },
+  "sumo-logic": {
+    "src": "/brand/companies/sumo-logic.svg",
+    "surface": "light"
+  },
+  "hsbc": {
+    "src": "/brand/companies/hsbc.svg",
+    "surface": "dark"
+  },
+  "intuit": {
+    "src": "/brand/companies/intuit.svg",
+    "surface": "dark"
+  },
+  "citrix": {
+    "src": "/brand/companies/citrix.svg",
+    "surface": "light"
+  },
+  "sony": {
+    "src": "/brand/companies/sony.svg",
+    "surface": "dark"
+  },
+  "box": {
+    "src": "/brand/companies/box.svg",
+    "surface": "light"
+  },
+  "lyft": {
+    "src": "/brand/companies/lyft.svg",
+    "surface": "dark"
+  },
+  "cognizant": {
+    "src": "/brand/companies/cognizant.svg",
+    "surface": "light"
+  },
+  "netapp": {
+    "src": "/brand/companies/netapp.svg",
+    "surface": "dark"
+  },
+  "shopify": {
+    "src": "/brand/companies/shopify.svg",
+    "surface": "light"
+  },
+  "warnermedia": {
+    "src": "/brand/companies/warnermedia.svg",
+    "surface": "light"
+  },
+  "paypal": {
+    "src": "/brand/companies/paypal.svg",
+    "surface": "light"
+  },
+  "wells-fargo": {
+    "src": "/brand/companies/wells-fargo.svg",
+    "surface": "dark"
+  },
+  "bank-of-america": {
+    "src": "/brand/companies/bank-of-america.svg",
+    "surface": "light"
+  },
+  "sentry": {
+    "src": "/brand/companies/sentry.svg",
+    "surface": "light"
+  },
+  "goldman-sachs": {
+    "src": "/brand/companies/goldmansachs.svg",
+    "surface": "dark"
+  },
+  "juniper-networks": {
+    "src": "/brand/companies/juniper-networks.svg",
+    "surface": "dark"
+  },
+  "indeed": {
+    "src": "/brand/companies/indeed.svg",
+    "surface": "light"
+  },
+  "activision": {
+    "src": "/brand/companies/activision.svg",
+    "surface": "light"
+  },
+  "salesforce": {
+    "src": "/brand/companies/salesforce.svg",
+    "surface": "light"
+  },
+  "quora": {
+    "src": "/brand/companies/quora.svg",
+    "surface": "light"
+  },
+  "grab": {
+    "src": "/brand/companies/grab.svg",
+    "surface": "dark"
+  },
+  "tinder": {
+    "src": "/brand/companies/tinder.svg",
+    "surface": "dark"
+  },
+  "amazon": {
+    "src": "/brand/companies/amazon.svg",
+    "surface": "dark"
+  },
+  "razorpay": {
+    "src": "/brand/companies/razorpay.svg",
+    "surface": "light"
+  },
+  "fiverr": {
+    "src": "/brand/companies/fiverr.svg",
+    "surface": "dark"
+  },
+  "spotify": {
+    "src": "/brand/companies/spotify.svg",
+    "surface": "light"
+  },
+  "bosch": {
+    "src": "/brand/companies/bosch.svg",
+    "surface": "dark"
+  },
+  "twilio": {
+    "src": "/brand/companies/twilio.svg",
+    "surface": "light"
+  },
+  "swiggy": {
+    "src": "/brand/companies/swiggy.svg",
+    "surface": "dark"
+  },
+  "nextdoor": {
+    "src": "/brand/companies/nextdoor.svg",
+    "surface": "dark"
+  },
+  "line": {
+    "src": "/brand/companies/line.svg",
+    "surface": "dark"
+  },
+  "apple": {
+    "src": "/brand/companies/apple.svg",
+    "surface": "light"
+  },
+  "canonical": {
+    "src": "/brand/companies/canonical.svg",
+    "surface": "dark"
+  },
+  "tesco": {
+    "src": "/brand/companies/tesco.svg",
+    "surface": "light"
+  },
+  "roblox": {
+    "src": "/brand/companies/roblox.svg",
+    "surface": "light"
+  },
+  "instacart": {
+    "src": "/brand/companies/instacart.svg",
+    "surface": "dark"
+  },
+  "vk": {
+    "src": "/brand/companies/vk.svg",
+    "surface": "dark"
+  },
+  "patreon": {
+    "src": "/brand/companies/patreon.svg",
+    "surface": "light"
+  },
+  "cloudflare": {
+    "src": "/brand/companies/cloudflare.svg",
+    "surface": "light"
+  },
+  "wipro": {
+    "src": "/brand/companies/wipro.svg",
+    "surface": "light"
+  },
+  "atlassian": {
+    "src": "/brand/companies/atlassian.svg",
+    "surface": "dark"
+  },
+  "x": {
+    "src": "/brand/companies/x.svg",
+    "surface": "light"
+  },
+  "huawei": {
+    "src": "/brand/companies/huawei.svg",
+    "surface": "dark"
+  },
+  "nutanix": {
+    "src": "/brand/companies/nutanix.svg",
+    "surface": "light"
+  },
+  "ge-healthcare": {
+    "src": "/brand/companies/ge-healthcare.svg",
+    "surface": "dark"
+  },
+  "lucid": {
+    "src": "/brand/companies/lucid.svg",
+    "surface": "light"
+  },
+  "coursera": {
+    "src": "/brand/companies/coursera.svg",
+    "surface": "light"
+  },
+  "wish": {
+    "src": "/brand/companies/wish.svg",
+    "surface": "dark"
+  },
+  "snowflake": {
+    "src": "/brand/companies/snowflake.svg",
+    "surface": "light"
+  },
+  "qualcomm": {
+    "src": "/brand/companies/qualcomm.svg",
+    "surface": "light"
+  },
+  "postmates": {
+    "src": "/brand/companies/postmates.svg",
+    "surface": "dark"
+  },
+  "fortinet": {
+    "src": "/brand/companies/fortinet.svg",
+    "surface": "dark"
+  },
+  "walmart-labs": {
+    "src": "/brand/companies/walmart-labs.svg",
+    "surface": "dark"
+  },
+  "squarespace": {
+    "src": "/brand/companies/squarespace.svg",
+    "surface": "light"
+  },
+  "uber": {
+    "src": "/brand/companies/uber.svg",
+    "surface": "light"
+  },
+  "infosys": {
+    "src": "/brand/companies/infosys.svg",
+    "surface": "dark"
+  },
+  "american-express": {
+    "src": "/brand/companies/american-express.svg",
+    "surface": "light"
+  },
+  "zalando": {
+    "src": "/brand/companies/zalando.svg",
+    "surface": "dark"
+  },
+  "vimeo": {
+    "src": "/brand/companies/vimeo.svg",
+    "surface": "light"
+  },
+  "audible": {
+    "src": "/brand/companies/audible.svg",
+    "surface": "dark"
+  },
+  "accenture": {
+    "src": "/brand/companies/accenture.svg",
+    "surface": "dark"
+  },
+  "amd": {
+    "src": "/brand/companies/amd.svg",
+    "surface": "light"
+  },
+  "flipkart": {
+    "src": "/brand/companies/flipkart.svg",
+    "surface": "dark"
+  },
+  "hcl": {
+    "src": "/brand/companies/hcl.svg",
+    "surface": "dark"
+  },
+  "grammarly": {
+    "src": "/brand/companies/grammarly.svg",
+    "surface": "light"
+  },
+  "ge-digital": {
+    "src": "/brand/companies/ge-digital.svg",
+    "surface": "dark"
+  },
+  "godaddy": {
+    "src": "/brand/companies/godaddy.svg",
+    "surface": "dark"
+  },
+  "ripple": {
+    "src": "/brand/companies/ripple.svg",
+    "surface": "dark"
+  },
+  "microstrategy": {
+    "src": "/brand/companies/microstrategy.svg",
+    "surface": "dark"
+  },
+  "pinterest": {
+    "src": "/brand/companies/pinterest.svg",
+    "surface": "light"
+  },
+  "jio": {
+    "src": "/brand/companies/jio.svg",
+    "surface": "light"
+  },
+  "snap": {
+    "src": "/brand/companies/snap.svg",
+    "surface": "dark"
+  },
+  "ebay": {
+    "src": "/brand/companies/ebay.svg",
+    "surface": "dark"
+  },
+  "mapbox": {
+    "src": "/brand/companies/mapbox.svg",
+    "surface": "light"
+  },
+  "opentext": {
+    "src": "/brand/companies/opentext.svg",
+    "surface": "light"
+  },
+  "intel": {
+    "src": "/brand/companies/intel.svg",
+    "surface": "light"
+  },
+  "kakao": {
+    "src": "/brand/companies/kakao.svg",
+    "surface": "dark"
+  },
+  "grubhub": {
+    "src": "/brand/companies/grubhub.svg",
+    "surface": "dark"
+  },
+  "roku": {
+    "src": "/brand/companies/roku.svg",
+    "surface": "light"
+  },
+  "vmware": {
+    "src": "/brand/companies/vmware.svg",
+    "surface": "light"
+  },
+  "datadog": {
+    "src": "/brand/companies/datadog.svg",
+    "surface": "light"
+  },
+  "meta": {
+    "src": "/brand/companies/meta.svg",
+    "surface": "light"
+  },
+  "siemens": {
+    "src": "/brand/companies/siemens.svg",
+    "surface": "dark"
+  },
+  "qualtrics": {
+    "src": "/brand/companies/qualtrics.svg",
+    "surface": "dark"
+  },
+  "teradata": {
+    "src": "/brand/companies/teradata.svg",
+    "surface": "dark"
+  },
+  "phonepe": {
+    "src": "/brand/companies/phonepe.svg",
+    "surface": "light"
+  },
+  "cloudera": {
+    "src": "/brand/companies/cloudera.svg",
+    "surface": "dark"
+  },
+  "nike": {
+    "src": "/brand/companies/nike.svg",
+    "surface": "light"
+  },
+  "ibm": {
+    "src": "/brand/companies/ibm.svg",
+    "surface": "light"
+  },
+  "microsoft": {
+    "src": "/brand/companies/microsoft.svg",
+    "surface": "dark"
+  },
+  "harness": {
+    "src": "/brand/companies/harness.svg",
+    "surface": "light"
+  },
+  "yandex": {
+    "src": "/brand/companies/yandex.svg",
+    "surface": "light"
+  },
+  "oracle": {
+    "src": "/brand/companies/oracle.svg",
+    "surface": "light"
+  },
+  "braze": {
+    "src": "/brand/companies/braze.svg",
+    "surface": "light"
+  },
+  "appdynamics": {
+    "src": "/brand/companies/appdynamics.svg",
+    "surface": "light"
+  },
+  "linkedin": {
+    "src": "/brand/companies/linkedin.svg",
+    "surface": "light"
+  },
+  "yahoo": {
+    "src": "/brand/companies/yahoo.svg",
+    "surface": "light"
+  },
+  "adobe": {
+    "src": "/brand/companies/adobe.svg",
+    "surface": "dark"
+  },
+  "tcs": {
+    "src": "/brand/companies/tcs.svg",
+    "surface": "dark"
+  },
+  "google": {
+    "src": "/brand/providers/google-g.png",
+    "surface": "dark"
+  },
+  "wissen-technology": {
+    "src": "https://assets-global.website-files.com/6448bf6f0640203c982ca15f/6448bf6f0640204d942ca31c_Wissen%2520Logo-New-p-1600.png",
+    "surface": "light",
+    "wide": true
+  },
+  "works-applications": {
+    "src": "https://bizapp.worksap.co.jp/ebm/images/wap_logo_rgb_positive.png",
+    "surface": "light",
+    "wide": true
+  },
+  "goldmansachs": {
+    "src": "/brand/companies/goldmansachs.svg",
+    "surface": "dark"
+  }
+}

@@ -1,0 +1,228 @@
+.prime-code-frame {
+  --ai-code-bg: #030303;
+  --ai-code-border: #ffffff20;
+  max-width: 100%;
+  min-width: 0;
+  margin: 22px 0;
+  border: 1px solid var(--ai-code-border);
+  border-radius: 6px;
+  background: var(--ai-code-bg);
+  overflow: hidden;
+}
+.prime-code-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 44px;
+  padding: 5px 10px;
+  border-bottom: 1px solid #ffffff16;
+  background: #000;
+}
+.prime-code-caption {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  min-width: 0;
+  font:
+    10px/1.5 var(--font-geist-mono),
+    monospace;
+  letter-spacing: 0.06em;
+  color: #aaa;
+}
+.prime-code-caption strong {
+  font-weight: 400;
+  color: #ccc !important;
+  max-width: 240px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.prime-code-caption small {
+  color: #999;
+  font-size: 9px;
+  letter-spacing: 0;
+}
+.prime-code-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: none;
+}
+.prime-code-actions .ai-control {
+  height: 30px;
+  min-height: 30px;
+  font-size: 10px;
+  padding: 0 8px;
+  gap: 5px;
+  background: #090909;
+  border: 1px solid #ffffff25;
+  box-shadow: none;
+  transform: none !important;
+}
+.prime-code-frame pre {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  padding: 16px;
+  margin: 0;
+  overflow: auto;
+  overscroll-behavior-x: contain;
+  font:
+    13px/1.85 var(--font-geist-mono),
+    monospace;
+  white-space: pre;
+  tab-size: 2;
+  color: #eee;
+  text-align: left;
+  scrollbar-width: thin;
+  scrollbar-color: #444 #030303;
+  outline-offset: -3px;
+}
+.prime-code-frame pre:focus-visible {
+  outline: 1px solid #ff0000;
+}
+.prime-code-frame code {
+  font: inherit;
+  white-space: inherit;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  color: inherit;
+}
+.prime-code-line {
+  display: block;
+  position: relative;
+  min-height: 1.85em;
+  white-space: inherit;
+}
+.prime-code-frame pre[data-numbers="true"] .prime-code-line {
+  padding-inline-start: 3.6ch;
+}
+.prime-code-number {
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0;
+  width: 2.5ch;
+  color: #777;
+  user-select: none;
+  pointer-events: none;
+  font-variant-numeric: tabular-nums;
+}
+.prime-code-line-content {
+  white-space: inherit;
+}
+.prime-code-frame pre[data-wrap="true"] {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.prime-code-line[data-highlighted="true"] {
+  background: #ffffff08;
+  border-inline-start: 2px solid red;
+}
+.prime-code-frame[data-long="true"] pre {
+  max-height: 340px;
+}
+.prime-code-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 12px;
+  border-top: 1px solid #ffffff15;
+  color: #aaa;
+  font:
+    10px var(--font-geist-mono),
+    monospace;
+}
+.prime-code-frame .hljs-keyword,
+.prime-code-frame .hljs-built_in {
+  color: #fff;
+  font-weight: 650;
+}
+.prime-code-frame .hljs-comment,
+.prime-code-frame .hljs-quote {
+  color: #929292;
+  font-style: italic;
+}
+.prime-code-frame .hljs-string,
+.prime-code-frame .hljs-regexp {
+  color: #c7c7c7;
+}
+.prime-code-frame .hljs-number,
+.prime-code-frame .hljs-literal {
+  color: #b6b6b6;
+}
+.prime-code-frame .hljs-title,
+.prime-code-frame .hljs-type {
+  color: #e4e4e4;
+  font-weight: 550;
+}
+.prime-code-frame .hljs-property,
+.prime-code-frame .hljs-attr,
+.prime-code-frame .hljs-attribute {
+  color: #cfcfcf;
+}
+.prime-code-frame .hljs-punctuation,
+.prime-code-frame .hljs-operator {
+  color: #aaa;
+}
+.prime-code-frame .hljs-deletion {
+  color: #ff5353;
+  text-decoration: line-through;
+}
+.prime-code-frame .hljs-addition {
+  color: #fff;
+  text-decoration: underline;
+  text-decoration-color: #aaa;
+}
+.prime-code-frame .hljs-section {
+  color: #eee;
+  font-weight: 650;
+}
+@container prime-manuscript (max-width:420px) {
+  .prime-code-toolbar {
+    padding-inline: 8px;
+    gap: 8px;
+  }
+  .prime-code-caption {
+    font-size: 9px;
+    gap: 5px;
+  }
+  .prime-code-caption strong {
+    display: none;
+  }
+  .prime-code-caption small {
+    font-size: 8px;
+  }
+  .prime-code-actions {
+    gap: 6px;
+  }
+  .prime-code-actions .ai-control {
+    min-width: 44px;
+    padding: 0 7px;
+  }
+  .prime-code-frame pre {
+    font-size: 12.5px;
+    padding: 12px 10px;
+    line-height: 1.85;
+  }
+  .prime-code-frame pre[data-numbers="true"] .prime-code-line {
+    padding-inline-start: 3.1ch;
+  }
+}
+@media (pointer: coarse) {
+  .prime-code-actions .ai-control {
+    position: relative;
+  }
+  .prime-code-actions .ai-control:before {
+    content: "";
+    position: absolute;
+    inset: -7px 0;
+  }
+  .prime-code-frame pre {
+    scrollbar-width: auto;
+  }
+}

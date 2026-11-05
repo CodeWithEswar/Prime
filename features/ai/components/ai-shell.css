@@ -1,0 +1,37 @@
+.shell-ask-prime {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  height: 32px;
+  padding: 0 10px;
+  border: 1px solid #ffffff24;
+  border-radius: 6px;
+  background: #080808;
+  color: #eee;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.shell-ask-prime:hover,
+.shell-ask-prime[aria-expanded="true"] {
+  border-color: #ffffff55;
+  background: #111;
+}
+.shell-ask-prime:focus-visible {
+  outline: 2px solid red;
+  outline-offset: 3px;
+}
+@media (min-width: 1440px) {
+  .ai-shell-boundary[data-ai-open="true"] .shell-workspace {
+    padding-right: 440px;
+  }
+}
+@media (max-width: 767px) {
+  .shell-ask-prime {
+    width: 32px;
+    padding: 0;
+  }
+  .shell-ask-prime span {
+    display: none;
+  }
+}

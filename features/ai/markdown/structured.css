@@ -1,0 +1,121 @@
+.prime-technical-label {
+  display: block;
+  color: #aaa;
+  font:
+    10px/1.6 var(--font-geist-mono),
+    monospace;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.prime-hint-trace {
+  border-inline-start: 2px solid red;
+  padding: 4px 0 4px 16px;
+  margin: 10px 0 22px;
+  min-width: 0;
+}
+.prime-hint-trace > .ai-control {
+  margin-top: 16px;
+}
+.prime-hint-trace > .prime-technical-label {
+  color: #ccc;
+  margin-bottom: 14px;
+}
+.prime-complexity {
+  margin: 22px 0;
+  padding-block: 15px;
+  border-block: 1px solid #ffffff22;
+  min-width: 0;
+}
+.prime-complexity dl {
+  display: flex;
+  gap: 40px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+.prime-complexity dl > div {
+  display: flex;
+  gap: 14px;
+  align-items: baseline;
+}
+.prime-complexity dt {
+  font-size: 12px;
+  color: #aaa;
+}
+.prime-complexity dd {
+  font:
+    14px var(--font-geist-mono),
+    monospace;
+  color: #fff;
+}
+.prime-complexity > p {
+  font-size: 13px;
+  color: #aaa;
+  margin-top: 12px;
+}
+.prime-algorithm {
+  margin: 24px 0;
+}
+.prime-algorithm ol {
+  list-style-type: decimal-leading-zero;
+  padding-inline-start: 28px;
+  margin: 14px 0;
+}
+.prime-algorithm li {
+  padding-inline-start: 10px;
+  margin: 16px 0;
+  font-size: 15px;
+}
+.prime-algorithm li::marker {
+  font:
+    11px var(--font-geist-mono),
+    monospace;
+  color: #999;
+}
+.prime-algorithm strong {
+  font-weight: 550;
+  color: white;
+}
+.prime-algorithm p {
+  font-size: 13px;
+  color: #aaa;
+  margin-top: 5px;
+  line-height: 1.75;
+}
+.prime-correction {
+  border-inline-start: 2px solid red;
+  padding-inline-start: 16px;
+  margin: 24px 0;
+  min-width: 0;
+}
+.prime-correction dt {
+  font-size: 11px;
+  color: #999;
+  margin: 15px 0 5px;
+}
+.prime-correction dd {
+  font-size: 15px;
+  line-height: 1.75;
+  color: #ddd;
+  overflow-wrap: anywhere;
+}
+.prime-callout {
+  margin: 24px 0;
+  padding: 3px 0 3px 16px;
+  border-inline-start: 1px solid #ffffff66;
+  min-width: 0;
+}
+.prime-callout[data-tone="important"],
+.prime-callout[data-tone="warning"] {
+  border-color: red;
+}
+.prime-callout h3 {
+  font-size: 15px;
+  font-weight: 550;
+  margin: 10px 0;
+}
+.prime-callout p {
+  font-size: 14px;
+  color: #c5c5c5;
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+}

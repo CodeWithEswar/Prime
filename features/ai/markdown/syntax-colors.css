@@ -1,0 +1,112 @@
+.prime-code-frame .hljs-keyword,
+.prime-code-frame .hljs-selector-tag {
+  color: #c4a1ff;
+  font-weight: 550;
+}
+.prime-code-frame .hljs-built_in,
+.prime-code-frame .hljs-type,
+.prime-code-frame .hljs-title.class_ {
+  color: #87c8ff;
+  font-weight: 500;
+}
+.prime-code-frame .hljs-title,
+.prime-code-frame .hljs-title.function_,
+.prime-code-frame .hljs-function .hljs-title {
+  color: #f0d18a;
+  font-weight: 500;
+}
+.prime-code-frame .hljs-string,
+.prime-code-frame .hljs-regexp {
+  color: #abd899;
+}
+.prime-code-frame .hljs-number,
+.prime-code-frame .hljs-literal {
+  color: #f0b980;
+}
+.prime-code-frame .hljs-comment,
+.prime-code-frame .hljs-quote {
+  color: #89969f;
+  font-style: italic;
+}
+.prime-code-frame .hljs-property,
+.prime-code-frame .hljs-attr,
+.prime-code-frame .hljs-attribute {
+  color: #8fd5df;
+}
+.prime-code-frame .hljs-variable,
+.prime-code-frame .hljs-params {
+  color: #dce5ed;
+}
+.prime-code-frame .hljs-punctuation,
+.prime-code-frame .hljs-operator {
+  color: #aab6c3;
+}
+.prime-code-frame .hljs-meta,
+.prime-code-frame .hljs-symbol {
+  color: #b9a3dd;
+}
+.prime-code-frame .hljs-deletion {
+  color: #ff8585;
+  text-decoration: line-through;
+}
+.prime-code-frame .hljs-addition {
+  color: #abd899;
+  text-decoration: underline;
+  text-decoration-color: #abd899;
+}
+.prime-code-frame .prime-code-language {
+  height: 26px;
+  min-height: 26px;
+  width: 126px;
+  max-width: 126px;
+  min-width: 0;
+  padding: 0 6px;
+  border: 1px solid #ffffff1c;
+  background: #050505;
+  font:
+    10px/1.4 var(--font-geist-mono),
+    monospace;
+  letter-spacing: 0.04em;
+  color: #c8cfd5;
+  gap: 5px;
+}
+.prime-code-language > span {
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.prime-code-language > svg {
+  width: 12px;
+  height: 12px;
+  margin-left: 0;
+  flex: none;
+}
+.prime-code-language-menu {
+  max-height: min(340px, var(--radix-select-content-available-height));
+  max-width: calc(100vw - 24px);
+  background: #050505 !important;
+  z-index: 75 !important;
+}
+.prime-code-language-menu [role="option"] {
+  font:
+    11px var(--font-geist-mono),
+    monospace;
+  min-height: 30px;
+}
+@container prime-manuscript (max-width: 420px) {
+  .prime-code-frame .prime-code-language {
+    width: 106px;
+    max-width: 106px;
+    font-size: 9px;
+  }
+}
+@media (forced-colors: active) {
+  .prime-code-frame [class*="hljs-"] {
+    color: CanvasText !important;
+  }
+  .prime-code-frame .prime-code-language {
+    border-color: ButtonText;
+    color: ButtonText;
+  }
+}

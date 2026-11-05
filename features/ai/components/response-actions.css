@@ -1,0 +1,75 @@
+.ai-message-assistant {
+  container-type: inline-size;
+  container-name: ai-response;
+}
+.prime-response-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding-top: 6px;
+}
+.prime-response-secondary {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.prime-response-more {
+  display: none;
+}
+.prime-response-actions .ai-control {
+  height: 30px;
+  min-height: 30px;
+  position: relative;
+}
+.ai-latest-button {
+  align-self: center;
+  margin: 0 auto 10px;
+  flex: none;
+}
+.prime-response-actions + .sr-only {
+  position: absolute;
+}
+@container ai-response (max-width:520px) {
+  .prime-response-secondary {
+    display: none;
+  }
+  .prime-response-more {
+    display: block;
+  }
+  .prime-response-actions {
+    column-gap: 8px;
+    row-gap: 8px;
+  }
+  .prime-response-more .ai-control {
+    width: 32px;
+    height: 30px;
+    min-height: 30px;
+  }
+}
+@media (pointer: coarse) {
+  .prime-response-actions .ai-control:before {
+    content: "";
+    position: absolute;
+    inset: -7px 0;
+  }
+}
+.ai-tool-activity {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.ai-tool-activity > svg {
+  flex: none;
+}
+.ai-references .prime-entity-reference {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 6px;
+  border: 1px solid #ffffff20;
+  border-radius: 4px;
+  font-size: 10px;
+  color: #bbb;
+}

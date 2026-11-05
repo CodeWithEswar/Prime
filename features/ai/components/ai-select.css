@@ -1,0 +1,66 @@
+.ai-composer-footer {
+  min-width: 0;
+  flex-wrap: nowrap;
+}
+.ai-composer-footer .ai-intent-select {
+  width: clamp(148px, 42vw, 176px) !important;
+  max-width: calc(100% - 96px) !important;
+  min-width: 0 !important;
+  height: 32px !important;
+  flex: 0 1 176px;
+  display: flex !important;
+  align-items: center;
+  gap: 7px !important;
+  overflow: hidden;
+  padding: 0 9px !important;
+}
+.ai-composer-footer .ai-intent-select > span {
+  flex: 1;
+  min-width: 0;
+  display: block !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap !important;
+  line-height: 1.2;
+  text-align: left;
+}
+.ai-composer-footer .ai-intent-select > svg {
+  flex: 0 0 14px;
+  min-width: 14px;
+}
+.ai-composer-footer > .ai-control {
+  flex: none;
+}
+.ai-composer-footer .ai-intent-select > svg:last-child {
+  margin-left: 0;
+}
+.ai-select-item {
+  white-space: nowrap;
+  flex-wrap: nowrap;
+  min-width: 0;
+}
+.ai-intent-menu {
+  max-width: calc(100vw - 24px);
+  max-height: min(360px, var(--radix-select-content-available-height));
+  overflow: hidden;
+}
+.ai-intent-menu [role="option"] {
+  min-height: 30px;
+  white-space: nowrap;
+}
+.ai-character-count {
+  flex: 0 1 auto;
+  white-space: nowrap;
+}
+@media (max-width: 359px) {
+  .ai-composer-footer .ai-intent-select {
+    flex-basis: 158px;
+    width: 158px !important;
+    padding: 0 7px !important;
+    gap: 5px !important;
+    font-size: 10px !important;
+  }
+  .ai-composer-footer {
+    gap: 7px;
+  }
+}

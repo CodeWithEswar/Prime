@@ -1,0 +1,106 @@
+.ai-workspace[aria-label] {
+  height: calc(var(--ai-viewport-height, 100dvh) - 96px);
+  min-height: 0;
+}
+.ai-panel {
+  height: var(--ai-viewport-height, 100dvh);
+  bottom: auto;
+}
+.ai-panel-sheet[data-state] {
+  height: var(--ai-viewport-height, 100dvh) !important;
+}
+.ai-surface .ai-canvas-toolbar .ai-action-row {
+  gap: 8px;
+  column-gap: 8px;
+  row-gap: 8px;
+}
+.ai-surface .ai-message-actions {
+  gap: 8px;
+}
+.ai-surface .ai-confirmation .ai-action-row {
+  gap: 8px;
+}
+.ai-surface-panel .ai-action-row {
+  gap: 8px;
+}
+.ai-surface[data-compact-height="true"] .ai-canvas-toolbar {
+  padding-top: 9px;
+  padding-bottom: 9px;
+  min-height: 52px;
+}
+.ai-surface[data-compact-height="true"] .ai-composer textarea {
+  min-height: 36px;
+  max-height: 72px;
+}
+.ai-surface[data-compact-height="true"] .ai-composer {
+  padding: 7px 10px;
+}
+.ai-surface[data-compact-height="true"] .ai-composer-disclaimer {
+  display: none;
+}
+.ai-surface-panel[data-compact-height="true"] > .ai-context-trace {
+  max-height: 80px;
+  overflow: auto;
+  margin-top: 8px;
+  margin-bottom: 6px;
+  padding: 6px 10px;
+}
+.ai-surface-panel[data-compact-height="true"] > .ai-context-trace > .ai-control {
+  display: none;
+}
+.ai-surface[data-compact-height="true"] .ai-empty {
+  padding: 14px 0;
+}
+.ai-surface[data-compact-height="true"] .ai-message-column {
+  padding-top: 12px;
+}
+@media (max-width: 767px) {
+  .ai-workspace[aria-label] {
+    height: calc(
+      var(--ai-viewport-height, 100dvh) - 120px - env(safe-area-inset-bottom, 0px)
+    );
+    min-height: 0;
+  }
+  .ai-surface .ai-message-actions {
+    row-gap: 8px;
+    column-gap: 6px;
+  }
+  .ai-surface-panel .ai-prose pre {
+    max-width: 100%;
+  }
+  .ai-prose table {
+    font-size: 11px;
+  }
+  .ai-drawer {
+    max-height: var(--ai-viewport-height, 100dvh);
+  }
+}
+@media (max-width: 359px) {
+  .ai-surface .ai-canvas-toolbar .ai-action-row {
+    gap: 6px;
+  }
+  .ai-canvas-toolbar .ai-control {
+    width: 28px;
+    height: 28px;
+    min-height: 28px;
+  }
+  .ai-surface-panel .ai-canvas-toolbar {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  .ai-surface-panel .ai-canvas-toolbar h1 {
+    font-size: 15px;
+    gap: 5px;
+  }
+  .ai-surface-panel .ai-canvas-toolbar .ai-eyebrow {
+    font-size: 6px;
+  }
+  .ai-composer .ai-intent-select {
+    width: 132px !important;
+    max-width: 132px;
+  }
+  .ai-surface-panel .ai-message-column {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+}
