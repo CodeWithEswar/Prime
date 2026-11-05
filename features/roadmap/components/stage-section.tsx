@@ -32,7 +32,7 @@ export function StageSection({
     <section
       id={`stage-${stage.stageSlug}`}
       data-stage-id={stage.stageId}
-      className={`scroll-mt-24 rounded-lg border transition-all ${
+      className={`scroll-mt-24 rounded-lg border transition-all w-full max-w-full overflow-hidden ${
         stage.isCurrent
           ? "border-[#2A2A2A] bg-[#0A0A0A]/80 shadow-[0_4px_24px_rgba(0,0,0,0.6)]"
           : "border-[#161616] bg-[#070707]/60"
@@ -130,7 +130,7 @@ export function StageSection({
 
       {/* Stage Problem List with Learning Spine */}
       {isExpanded && (
-        <div className="border-t border-[#141414] p-3 sm:p-4 space-y-2">
+        <div className="border-t border-[#141414] p-2.5 sm:p-4 space-y-2 w-full max-w-full">
           {stage.items.map((item) => (
             <CurriculumProblemRow
               key={item.id}

@@ -39,18 +39,18 @@ export function CurriculumProblemRow({
 
   return (
     <div
-      className={`relative group flex items-start sm:items-center justify-between gap-3 p-3.5 sm:px-4 sm:py-3 rounded-md transition-all ${
+      className={`relative group flex items-center justify-between gap-2.5 sm:gap-4 p-3 sm:px-4 sm:py-3 rounded-lg border transition-all w-full max-w-full ${
         isNextUp
-          ? "bg-[#140808] border border-[#FF0000]/40 shadow-[0_0_12px_rgba(255,0,0,0.1)]"
+          ? "bg-[#140808] border-[#FF0000]/40 shadow-[0_0_12px_rgba(255,0,0,0.1)]"
           : isSolved
-            ? "bg-[#0A0A0A]/60 border border-[#161616] hover:border-[#262626] hover:bg-[#0D0D0D]"
-            : "bg-[#080808] border border-[#141414] hover:border-[#222222] hover:bg-[#0C0C0C]"
+            ? "bg-[#0A0A0A]/60 border-[#161616] hover:border-[#262626] hover:bg-[#0D0D0D]"
+            : "bg-[#080808] border-[#141414] hover:border-[#222222] hover:bg-[#0C0C0C]"
       }`}
     >
       {/* Left section: Spine Node + Sequence + Title + Badges */}
-      <div className="flex items-start gap-2.5 sm:gap-3 min-w-0 flex-1">
+      <div className="flex items-start sm:items-center gap-2.5 sm:gap-3 min-w-0 flex-1">
         {/* Node indicator */}
-        <div className="pt-1 sm:pt-1 shrink-0">
+        <div className="pt-0.5 sm:pt-0 shrink-0">
           {isNextUp ? (
             <span className="relative flex h-3 w-3">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF0000] opacity-75" />
@@ -74,12 +74,12 @@ export function CurriculumProblemRow({
 
         {/* Title, Badges & Prerequisites */}
         <div className="min-w-0 flex-1 space-y-1">
-          {/* Title Row: allows natural wrap on mobile, truncation on wide desktop */}
-          <div className="flex flex-col sm:flex-row sm:items-center sm:flex-wrap gap-1 sm:gap-2">
+          {/* Title Row */}
+          <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2.5 min-w-0">
             <Link
               href={`/practice/dsa/${item.problemSlug}?from=roadmap`}
               title={cleanProblemTitle(item.title)}
-              className={`text-xs sm:text-sm font-semibold transition-colors leading-snug line-clamp-2 sm:line-clamp-none sm:truncate sm:max-w-md break-words ${
+              className={`text-xs sm:text-sm font-semibold transition-colors leading-snug line-clamp-2 sm:line-clamp-1 min-w-0 break-words ${
                 isSolved
                   ? "text-[#CCCCCC] hover:text-white"
                   : isNextUp

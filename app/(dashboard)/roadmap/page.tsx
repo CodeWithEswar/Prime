@@ -137,7 +137,7 @@ async function RoadmapContent() {
   data.fundamentals = fundamentals;
 
   return (
-    <div className="w-full max-w-[1440px] mx-auto p-4 sm:p-6 lg:p-8">
+    <div className="w-full max-w-[1440px] mx-auto p-3 sm:p-6 lg:p-8 max-w-full overflow-hidden">
       <RoadmapView data={data} />
     </div>
   );
