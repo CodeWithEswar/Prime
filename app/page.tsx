@@ -6,25 +6,19 @@ import { Button } from "@/components/ui/button";
 import { LandingHeader } from "@/components/landing/landing-header";
 import {
   LandingCanvas,
-  Reveal,
   StoryGeometry,
 } from "@/components/landing/landing-motion";
 import { PreparationJourney } from "@/components/landing/preparation-journey";
-import { MasteryDiagnostic } from "@/components/landing/mastery-diagnostic";
-import {
-  RoadmapPreview,
-  DailyPlanPreview,
-  PracticePreview,
-  RevisionPreview,
-} from "@/components/landing/feature-previews";
-import {
-  ClaritySection,
-  ProgressStory,
-  ReadinessStory,
-  PreparationMethod,
-  QuietTransition,
-  CinematicFooter,
-} from "@/components/landing/editorial-sections";
+import { ProductIntroduction } from "@/components/landing/sections/product-introduction";
+import { CoreFeatures } from "@/components/landing/sections/core-features";
+import { InteractiveProductShowcase } from "@/components/landing/sections/product-showcase";
+import { LearningExperience } from "@/components/landing/sections/learning-experience";
+import { ProgressAnalytics } from "@/components/landing/sections/progress-analytics";
+import { AdaptiveRevisionSection } from "@/components/landing/sections/adaptive-revision";
+import { PricingSection } from "@/components/landing/sections/pricing-section";
+import { CinematicFinale } from "@/components/landing/cinematic-finale";
+import { CinematicFooter } from "@/components/landing/editorial-sections";
+import { CursorGlow } from "@/components/landing/effects/cursor-glow";
 import "./landing.css";
 
 export const metadata: Metadata = {
@@ -41,14 +35,17 @@ function StartButton({ children = "Start Preparing" }: { children?: React.ReactN
     </Button>
   );
 }
+
 export default function LandingPage() {
   return (
     <LandingCanvas>
+      <CursorGlow size={420} color="rgba(255, 0, 0, 0.05)" />
       <a href="#main" className="landing-skip">
         Skip to content
       </a>
       <LandingHeader />
       <main id="main">
+        {/* HERO SECTION — 100% STRICTLY PRESERVED */}
         <section className="landing-hero" aria-labelledby="hero-title">
           <StoryGeometry />
           <StoryGeometry side="left" />
@@ -86,158 +83,35 @@ export default function LandingPage() {
           </div>
         </section>
 
+        {/* SECTION 01 — PRODUCT INTRODUCTION */}
+        <ProductIntroduction />
+
+        {/* SECTION 02 — PREPARATION WORKFLOW */}
         <PreparationJourney />
 
-        <ClaritySection />
+        {/* SECTION 03 — CORE FEATURES & BENTO GRID */}
+        <CoreFeatures />
 
-        <section id="roadmap" className="landing-section story-section">
-          <div className="landing-container story-grid">
-            <Reveal className="story-copy">
-              <p className="section-index">01 / ROADMAP</p>
-              <h2>
-                KNOW WHAT
-                <br />
-                TO LEARN NEXT.
-              </h2>
-              <p className="section-copy">
-                Build understanding in a deliberate sequence. Move from fundamentals to
-                harder concepts with a roadmap that gives every session a purpose.
-              </p>
-              <p className="topic-list">
-                Programming · DSA · SQL · DBMS · OOP
-                <br />
-                Operating systems · Networks · Aptitude
-                <br />
-                System design · Interview preparation
-              </p>
-              <div className="mt-6">
-                <Button asChild variant="secondary" size="default">
-                  <a href="#roadmap">Explore the roadmap</a>
-                </Button>
-              </div>
-            </Reveal>
-            <Reveal>
-              <RoadmapPreview />
-            </Reveal>
-          </div>
-        </section>
+        {/* SECTION 04 — INTERACTIVE PRODUCT SHOWCASE */}
+        <InteractiveProductShowcase />
 
-        <section className="landing-section story-section daily-section">
-          <div className="landing-container story-grid reverse">
-            <Reveal>
-              <DailyPlanPreview />
-            </Reveal>
-            <Reveal className="story-copy">
-              <p className="section-index">02 / DAILY PLAN</p>
-              <h2>
-                TURN THE ROADMAP
-                <br />
-                INTO TODAY.
-              </h2>
-              <p className="section-copy">
-                A long-term goal becomes a manageable daily plan. Balance new learning,
-                practice, and revision around the time you have and the progress you’ve
-                made.
-              </p>
-              <span className="quiet-detail">
-                One day. A few deliberate steps. Forward.
-              </span>
-            </Reveal>
-          </div>
-        </section>
+        {/* SECTION 05 — LEARNING EXPERIENCE & SYLLABUS */}
+        <LearningExperience />
 
-        <section id="practice" className="landing-section practice-section">
-          <div className="landing-container">
-            <Reveal>
-              <div className="practice-heading">
-                <p className="section-index">03 / PRACTICE</p>
-                <h2>
-                  SOLVING IS ONLY
-                  <br />
-                  PART OF THE SIGNAL.
-                </h2>
-                <p className="section-copy">
-                  Independent solution or helpful hint? Reviewed approach or still
-                  difficult? Capture the quality of each attempt, so your next session
-                  starts with understanding.
-                </p>
-              </div>
-              <PracticePreview />
-            </Reveal>
-          </div>
-        </section>
+        {/* SECTION 06 — OBSERVABILITY & ANALYTICS */}
+        <ProgressAnalytics />
 
-        <section id="revision" className="landing-section story-section revision-section">
-          <StoryGeometry variant="revision" />
-          <div className="landing-container story-grid">
-            <Reveal className="story-copy">
-              <p className="section-index">04 / REVISION</p>
-              <h2>
-                REVIEW BEFORE
-                <br />
-                YOU FORGET.
-              </h2>
-              <p className="section-copy">
-                Learning something once is a beginning. Bring topics and problems back
-                when they need attention, so revision becomes part of your plan.
-              </p>
-              <p className="quiet-detail">
-                Less starting over. More building on what you know.
-              </p>
-            </Reveal>
-            <Reveal>
-              <RevisionPreview />
-            </Reveal>
-          </div>
-        </section>
+        {/* SECTION 07 — ADAPTIVE SPACED REVISION */}
+        <AdaptiveRevisionSection />
 
-        <section id="mastery" className="landing-section story-section mastery-section">
-          <div className="landing-container">
-            <MasteryDiagnostic>
-              <Reveal className="story-copy">
-                <p className="section-index">05 / MASTERY</p>
-                <h2>
-                  DONE IS A CHECK.
-                  <br />
-                  MASTERY IS
-                  <br />A DIFFERENCE.
-                </h2>
-                <p className="section-copy">
-                  Finishing a topic doesn’t mean it will stay with you. Bring practice
-                  quality, revision performance, and confidence together to understand
-                  what’s strong and what needs attention.
-                </p>
-              </Reveal>
-            </MasteryDiagnostic>
-          </div>
-        </section>
+        {/* SECTION 08 — HONEST TRANSPARENT ACCESS */}
+        <PricingSection />
 
-        <ProgressStory />
-        <ReadinessStory />
-
-        <PreparationMethod />
-
-        <QuietTransition />
-        <section className="landing-section final-section">
-          <StoryGeometry variant="terminal" />
-          <div className="landing-container">
-            <Reveal>
-              <p className="section-index">YOUR NEXT STEP STARTS HERE</p>
-              <h2>
-                MAKE YOUR PREPARATION
-                <br />
-                <span>DELIBERATE.</span>
-              </h2>
-              <p className="section-copy">
-                Build the roadmap. Do the work. Revise what matters.
-                <br />
-                Understand your preparation more clearly.
-              </p>
-              <StartButton>Start your preparation</StartButton>
-            </Reveal>
-          </div>
-        </section>
+        {/* SECTION 09 — CINEMATIC BRIDGE FINALE & DESTINATION */}
+        <CinematicFinale />
       </main>
+
+      {/* SECTION 10 — CINEMATIC FOOTER */}
       <CinematicFooter />
     </LandingCanvas>
   );

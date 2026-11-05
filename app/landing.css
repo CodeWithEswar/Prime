@@ -74,32 +74,25 @@ html:has(.prime-landing) {
   align-items: center;
 }
 .header-actions a {
-  height: 32px;
-  min-height: 32px;
+  height: var(--control-height);
+  min-height: var(--control-height);
   font-size: 12px;
   padding-inline: 14px;
 }
 .menu-toggle {
   display: none;
-  min-width: 32px;
-  min-height: 32px;
-  height: 32px;
+  min-width: 36px;
+  min-height: 36px;
+  height: 36px;
+  width: 36px;
 }
 .mobile-nav:not([hidden]) {
-  display: grid;
-  padding: 12px 24px 24px;
-  background: #000;
-  border-bottom: 1px solid #222;
-}
-.mobile-nav a {
-  padding: 12px;
-}
-.mobile-nav .mobile-sign-in {
-  margin-top: 8px;
-  padding-top: 14px;
-  border-top: 1px solid #222;
-  color: var(--accent);
-  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 20px 28px;
+  background: #030303;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.85);
 }
 .landing-hero {
   min-height: min(1000px, 100svh);
@@ -157,8 +150,8 @@ html:has(.prime-landing) {
 }
 .hero-actions > a,
 .final-section .btn-neumorphic-primary {
-  min-height: 38px;
-  height: 38px;
+  min-height: var(--control-height-lg);
+  height: var(--control-height-lg);
   font-size: 13px;
   padding-inline: 20px;
   gap: 16px;
@@ -785,7 +778,7 @@ html:has(.prime-landing) {
     display: none;
   }
   .menu-toggle {
-    display: block;
+    display: flex;
   }
   .header-actions {
     gap: 8px;
@@ -1641,5 +1634,41 @@ html:has(.prime-landing) {
   .mastery-detail-column .mastery-insight {
     order: 2;
     margin-top: 0;
+  }
+}
+
+/* Cinematic Finale Keyframes */
+@keyframes fogDrift {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(-6%); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes fogDriftSlow {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(5%); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes fogDriftReverse {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(8%); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes particleFloat {
+  0% {
+    transform: translateY(0) scale(0.9);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.8;
+  }
+  80% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-80px) scale(0.5);
+    opacity: 0;
   }
 }
