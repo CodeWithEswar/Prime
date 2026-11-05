@@ -1,6 +1,7 @@
 import "server-only";
 import { createClient as createSupabaseClient } from "@supabase/supabase-js";
 import { serverEnv } from "@/lib/validation/env.server";
+import type { Database } from "./database.types";
 
 /**
  * Privileged Admin / Service-Role Supabase Client.
@@ -10,7 +11,7 @@ import { serverEnv } from "@/lib/validation/env.server";
  * or trusted server operations. NEVER import into client-facing modules.
  */
 export function createAdminClient() {
-  return createSupabaseClient(
+  return createSupabaseClient<Database>(
     serverEnv.NEXT_PUBLIC_SUPABASE_URL,
     serverEnv.SUPABASE_SERVICE_ROLE_KEY,
     {

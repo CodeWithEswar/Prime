@@ -1,14 +1,37 @@
 "use client";
 
-import { useReducedMotion } from "motion/react";
+import { useSyncExternalStore } from "react";
 import type { Variants, Transition } from "motion/react";
 
 /**
  * Hook to check if reduced motion is requested.
  */
 export function usePrimeReducedMotion(): boolean {
-  const shouldReduce = useReducedMotion();
-  return Boolean(shouldReduce);
+  return useSyncExternalStore(
+    subscribeReducedMotion,
+    getReducedMotion,
+    getServerReducedMotion
+  );
+}
+
+const motionQuery = "(prefers-reduced-motion: reduce)";
+function subscribeReducedMotion(callback: () => void) {
+  const query = window.matchMedia(motionQuery);
+  query.addEventListener("change", callback);
+  window.addEventListener("prime:appearance", callback);
+  return () => {
+    query.removeEventListener("change", callback);
+    window.removeEventListener("prime:appearance", callback);
+  };
+}
+function getReducedMotion() {
+  const preference = document.documentElement.dataset.primeMotion;
+  if (preference === "reduced") return true;
+  if (preference === "standard") return false;
+  return window.matchMedia(motionQuery).matches;
+}
+function getServerReducedMotion() {
+  return false;
 }
 
 /**
