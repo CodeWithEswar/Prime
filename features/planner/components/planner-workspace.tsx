@@ -120,11 +120,22 @@ export function PlannerWorkspace({
   const [busy, start] = useTransition();
   const [customizingRunway, setCustomizingRunway] = useState(false);
   const totalDays = daysBetween(view.start, view.target);
-  const last =
-    view.target > addDays(view.today, 89) ? view.target : addDays(view.today, 89);
+  const last = view.target || addDays(view.today, 89);
   const day = view.days.find((d) => d.date === date);
   const monday = weekStart(date);
   const week = view.days.filter((d) => d.date >= monday && d.date <= addDays(monday, 6));
+  const weekDays = Array.from({ length: 7 }, (_, i) => {
+    const dStr = addDays(monday, i);
+    return (
+      view.days.find((d) => d.date === dStr) ?? {
+        date: dStr,
+        available: 0,
+        budget: 0,
+        planned: 0,
+        rest: false,
+      }
+    );
+  });
   const near = view.days.slice(0, 7).filter((d) => d.date <= view.target);
   const missed = view.tasks.filter((t) => t.date < view.today && t.status === "pending");
   const selected = view.tasks.filter(
@@ -177,16 +188,27 @@ export function PlannerWorkspace({
         : 0;
     const isToday = day.date === view.today;
     const isSelected = date === day.date;
+    const isPast = day.date < view.today;
+    const isAfterTarget = day.date > view.target;
     return (
       <Button
         key={day.date}
         variant="outline"
         aria-label={
           dateLabel(day.date, { weekday: "long", month: "long", day: "numeric" }) +
-          (day.rest ? ", rest day" : ", " + day.planned + " minutes planned")
+          (isPast
+            ? ", past day"
+            : isAfterTarget
+              ? ", after plan target"
+              : day.rest
+                ? ", rest day"
+                : ", " + day.planned + " minutes planned")
         }
         aria-pressed={isSelected}
-        title={dateLabel(day.date) + " · " + day.planned + " min"}
+        title={
+          dateLabel(day.date) +
+          (isPast ? " · Past day" : isAfterTarget ? " · After target" : " · " + day.planned + " min")
+        }
         onClick={() => {
           setDate(day.date);
           setTab("week");
@@ -197,17 +219,32 @@ export function PlannerWorkspace({
             : "relative h-12 min-w-0 flex-col gap-0.5 overflow-hidden px-0 ") +
           (isSelected
             ? "border-[#FF0000] ring-1 ring-[#FF0000] bg-[#161616] text-white shadow-[0_0_8px_rgba(255,0,0,0.3)] z-10"
-            : "border-[#1F1F1F] bg-[#0A0A0A] hover:border-[#333333]")
+            : isPast || isAfterTarget
+              ? "border-[#1A1A1A] bg-[#080808] opacity-60 text-[#777777] hover:border-[#333333] hover:opacity-100"
+              : "border-[#1F1F1F] bg-[#0A0A0A] hover:border-[#333333]")
         }
       >
         {compact ? (
           Number(day.date.slice(-2))
         ) : (
           <>
-            <span className={eyebrow + (isToday ? " text-[#FF0000]" : "")}>
+            <span
+              className={
+                eyebrow +
+                (isToday ? " text-[#FF0000]" : isPast ? " text-[#555555]" : "")
+              }
+            >
               {dateLabel(day.date, { weekday: "short" })}
             </span>
-            <span className={isToday ? "font-bold text-[#FF0000]" : ""}>
+            <span
+              className={
+                isToday
+                  ? "font-bold text-[#FF0000]"
+                  : isPast
+                    ? "text-[#666666]"
+                    : ""
+              }
+            >
               {Number(day.date.slice(-2))}
             </span>
           </>
@@ -607,7 +644,7 @@ export function PlannerWorkspace({
             </CardHeader>
             <CardContent className="grid gap-4">
               <div className="grid grid-cols-7 gap-2 sm:gap-2.5">
-                {week.map((d) => dayButton(d))}
+                {weekDays.map((d) => dayButton(d))}
               </div>
               <div className="flex flex-wrap items-center justify-between gap-3 pt-3.5 mt-1 border-t border-[#1F1F1F] text-xs font-mono">
                 <span className="text-[#AAAAAA]">
@@ -645,7 +682,11 @@ export function PlannerWorkspace({
                   )}
                 </div>
                 <CardDescription>
-                  {date > view.target ? "After your target · " : ""}
+                  {date > view.target
+                    ? "After your target · "
+                    : date < view.today
+                      ? "Past day · "
+                      : ""}
                   {day?.rest ? "Rest day · " : ""}
                   {day?.planned ?? 0} planned · {day?.budget ?? 0} budget ·{" "}
                   {day?.available ?? 0} available min
@@ -653,7 +694,7 @@ export function PlannerWorkspace({
               </div>
               <Button
                 size="sm"
-                disabled={date > view.target}
+                disabled={date > view.target || date < view.today}
                 onClick={() => planWork(true)}
               >
                 <Icon icon={Add01Icon} size={14} />

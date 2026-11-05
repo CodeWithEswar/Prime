@@ -75,7 +75,7 @@ export function capacityDays(
       totals.set(task.date, (totals.get(task.date) ?? 0) + task.minutes);
     }
   const span = target.targetDate ? daysBetween(today, target.targetDate) : 90;
-  const count = Math.max(90, span, horizonDays ?? 90);
+  const count = horizonDays ? Math.max(1, horizonDays) : Math.max(90, span);
   return Array.from({ length: count }, (_, index): CapacityDay => {
     const date = addDays(today, index);
     const capacity = getDailyCapacity(date, target, { utilizationTarget });
@@ -107,10 +107,9 @@ export function planControl(input: {
   utilizationTarget?: number;
 }): ControlPreview {
   const { today, target, tasks } = input;
-  const requiredSpan = Math.max(
-    target.targetDate ? daysBetween(today, target.targetDate) : 90,
-    input.end ? daysBetween(today, input.end) : 90
-  );
+  const targetSpan = target.targetDate ? daysBetween(today, target.targetDate) : 90;
+  const endSpan = input.end ? daysBetween(today, input.end) : targetSpan;
+  const requiredSpan = Math.max(targetSpan, endSpan);
   const days = capacityDays(today, target, tasks, input.utilizationTarget, requiredSpan);
   const byDate = new Map(days.map((day) => [day.date, day]));
   const eligible = days.filter(

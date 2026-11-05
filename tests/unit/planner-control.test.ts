@@ -216,4 +216,34 @@ describe("Planner control", () => {
     expect(result.placements).toHaveLength(1);
     expect(result.placements[0].date).toBe(horizon100);
   });
+
+  it("dynamically supports shorter preparation horizons such as a 30-day runway", () => {
+    const horizon30 = "2026-12-01"; // 30 days from 2026-11-02 (index 0 to 29)
+    const target30: PreparationTarget = {
+      ...target,
+      targetDate: horizon30,
+    };
+    const calendar = capacityDays(today, target30, [], undefined, 30);
+    expect(calendar).toHaveLength(30);
+    expect(calendar[29].date).toBe(horizon30);
+
+    const result = planControl({
+      today,
+      end: horizon30,
+      target: target30,
+      tasks: [],
+      work: [
+        {
+          title: "30-day sprint problem",
+          minutes: 30,
+          type: "dsa_problem",
+          priority: "P1",
+          source: "planner_generated",
+        },
+      ],
+      fixedDate: horizon30,
+    });
+    expect(result.placements).toHaveLength(1);
+    expect(result.placements[0].date).toBe(horizon30);
+  });
 });
