@@ -14,14 +14,21 @@ const CLOUDFLARE_WORKER_URL =
 
 async function getInitialSnapshot(): Promise<PublicStatusSnapshot | null> {
   try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 1500);
+
     const res = await fetch(`${CLOUDFLARE_WORKER_URL.replace(/\/+$/, "")}/api/status`, {
+      headers: { Accept: "application/json" },
+      signal: controller.signal,
       next: { revalidate: 30 },
     });
+    clearTimeout(timeout);
+
     if (res.ok) {
       return (await res.json()) as PublicStatusSnapshot;
     }
-  } catch (err) {
-    console.warn("Initial SSR status snapshot fetch failed:", err);
+  } catch {
+    // If upstream is slow or offline, render client directly without SSR block
   }
   return null;
 }
@@ -31,4 +38,3 @@ export default async function StatusPage() {
 
   return <StatusClient initialSnapshot={initialSnapshot} />;
 }
-
