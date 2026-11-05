@@ -1,0 +1,131 @@
+/**
+ * PRIME Cinematic Bridge Finale Styles
+ * Hardware-accelerated transforms, atmospheric fog animations, and cinematic lighting effects.
+ */
+
+.cinematicContainer {
+  position: relative;
+  width: 100%;
+  background-color: #000000;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.sceneViewport {
+  position: relative;
+  width: 100%;
+  height: 680px;
+  overflow: hidden;
+  user-select: none;
+  background-color: #000000;
+}
+
+@media (min-width: 640px) {
+  .sceneViewport {
+    height: 760px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .sceneViewport {
+    height: 860px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .sceneViewport {
+    height: 920px;
+  }
+}
+
+/* Atmospheric Volumetric Fog Drifts */
+.fogDriftSlow {
+  animation: fogDriftHorizontal 40s linear infinite;
+  will-change: transform;
+}
+
+.fogDriftReverse {
+  animation: fogDriftHorizontalRev 26s linear infinite;
+  will-change: transform;
+}
+
+@keyframes fogDriftHorizontal {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(-7%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fogDriftHorizontalRev {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(9%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Particle Embers */
+.particleItem {
+  animation: particleAscent linear infinite;
+  will-change: transform, opacity;
+}
+
+@keyframes particleAscent {
+  0% {
+    transform: translate3d(0, 0, 0) scale(0.9);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.85;
+  }
+  75% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translate3d(15px, -90px, 0) scale(0.4);
+    opacity: 0;
+  }
+}
+
+/* Metallic Edge Illumination */
+.metallicHighlight {
+  stroke: rgba(255, 255, 255, 0.35);
+  stroke-width: 1.2;
+}
+
+.metallicShadow {
+  fill: #060606;
+}
+
+/* Top and bottom transition fades */
+.topVignette {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, #000000 0%, rgba(0, 0, 0, 0.85) 45%, transparent 100%);
+  pointer-events: none;
+  z-index: 25;
+}
+
+.bottomVignette {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 180px;
+  background: linear-gradient(to top, #000000 0%, rgba(0, 0, 0, 0.9) 50%, transparent 100%);
+  pointer-events: none;
+  z-index: 25;
+}
+
