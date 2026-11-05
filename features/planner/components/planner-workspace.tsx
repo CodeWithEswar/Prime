@@ -297,8 +297,8 @@ export function PlannerWorkspace({
   return (
     <div className="grid min-w-0 gap-5 pb-8">
       <Card className="relative overflow-hidden border-[#222222] bg-[#0A0A0A]">
-        <CardContent className="flex flex-wrap items-end justify-between gap-5 p-4 sm:p-6">
-          <div className="min-w-0 space-y-2">
+        <CardContent className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-5 p-4 sm:p-6">
+          <div className="min-w-0 space-y-2 w-full sm:w-auto">
             <div className="flex flex-wrap items-center gap-2">
               <span className="font-mono text-xs uppercase tracking-wider text-[#888888]">
                 PREPARATION PLAN
@@ -331,11 +331,12 @@ export function PlannerWorkspace({
               · {view.timezone.replaceAll("_", " ")}
             </p>
           </div>
-          <div className="flex flex-wrap gap-2">
+          <div className="grid grid-cols-2 sm:flex sm:flex-wrap sm:items-center gap-2 w-full sm:w-auto">
             {ai?.enabled && (
               <Button
                 variant="secondary"
                 disabled={Boolean(aiBusy)}
+                className="w-full sm:w-auto justify-center"
                 onClick={(e) => {
                   const context = { type: "planner" as const, date };
                   if (ai.reference.type !== context.type || ai.reference.date !== date) {
@@ -350,6 +351,7 @@ export function PlannerWorkspace({
             )}
             <Button
               variant={ai?.enabled ? "outline" : "secondary"}
+              className={`${ai?.enabled ? "w-full" : "col-span-2"} sm:w-auto justify-center`}
               onClick={() =>
                 open({
                   kind: "automatic",
@@ -363,7 +365,7 @@ export function PlannerWorkspace({
               Automatic plan
             </Button>
             <Button
-              className="bg-[#FF0000] text-white hover:bg-[#CC0000] font-semibold"
+              className="col-span-2 sm:w-auto justify-center bg-[#FF0000] text-white hover:bg-[#CC0000] font-semibold"
               onClick={() => planWork(tab === "week" && date <= view.target)}
             >
               <Icon icon={Add01Icon} size={15} />
