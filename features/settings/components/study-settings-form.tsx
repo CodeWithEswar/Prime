@@ -2,6 +2,7 @@
 
 import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
+import { TimePicker } from "@/components/ui/time-picker";
 import {
   SettingsField,
   SettingsHeading,
@@ -145,32 +146,28 @@ export function StudySettingsForm({ study }: { study: StudyCommitment }) {
                           </SettingsField>
                         </div>
                         <SettingsField id={"study-start-" + day} label="Start time">
-                          <Input
+                          <TimePicker
                             id={"study-start-" + day}
-                            type="time"
                             value={rule.preferredStartTime?.slice(0, 5) ?? ""}
-                            onChange={(event) =>
+                            onChange={(val) =>
                               updateDay(day, {
-                                preferredStartTime: event.target.value
-                                  ? event.target.value + ":00"
-                                  : null,
+                                preferredStartTime: val ? val + ":00" : null,
                               })
                             }
+                            placeholder="--:-- --"
                             className="min-w-0 max-w-full"
                           />
                         </SettingsField>
                         <SettingsField id={"study-end-" + day} label="End time">
-                          <Input
+                          <TimePicker
                             id={"study-end-" + day}
-                            type="time"
                             value={rule.preferredEndTime?.slice(0, 5) ?? ""}
-                            onChange={(event) =>
+                            onChange={(val) =>
                               updateDay(day, {
-                                preferredEndTime: event.target.value
-                                  ? event.target.value + ":00"
-                                  : null,
+                                preferredEndTime: val ? val + ":00" : null,
                               })
                             }
+                            placeholder="--:-- --"
                             className="min-w-0 max-w-full"
                           />
                         </SettingsField>
