@@ -25,9 +25,9 @@
   gap: 8px;
 }
 .ai-surface[data-compact-height="true"] .ai-canvas-toolbar {
-  padding-top: 9px;
-  padding-bottom: 9px;
-  min-height: 52px;
+  height: 40px;
+  min-height: 40px;
+  padding: 0 12px;
 }
 .ai-surface[data-compact-height="true"] .ai-composer textarea {
   min-height: 22px;
@@ -73,10 +73,12 @@
     display: none !important;
   }
   .ai-canvas-toolbar {
-    padding: 12px 14px;
+    height: 44px;
+    min-height: 44px;
+    padding: 0 12px;
   }
   .ai-canvas-toolbar h1 {
-    font-size: 16px;
+    font-size: 13.5px;
   }
   .ai-composer-dock {
     padding: 8px 12px max(10px, env(safe-area-inset-bottom));
@@ -112,15 +114,17 @@
     min-height: 28px;
   }
   .ai-surface-panel .ai-canvas-toolbar {
-    padding-left: 12px;
-    padding-right: 12px;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 44px;
+    min-height: 44px;
   }
   .ai-surface-panel .ai-canvas-toolbar h1 {
-    font-size: 15px;
+    font-size: 13.5px;
     gap: 5px;
   }
   .ai-surface-panel .ai-canvas-toolbar .ai-eyebrow {
-    font-size: 6px;
+    font-size: 6.5px;
   }
   .ai-composer .ai-intent-select {
     width: 132px !important;

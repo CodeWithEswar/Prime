@@ -1,6 +1,7 @@
 "use client";
 import { useState, useRef, useEffect, useSyncExternalStore } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
 import {
   useInfiniteQuery,
@@ -204,9 +205,36 @@ export function ContextTrace() {
     </section>
   );
 }
+function useSafeBack() {
+  const router = useRouter();
+  return (event: React.MouseEvent<HTMLAnchorElement>) => {
+    if (
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey
+    )
+      return;
+    try {
+      if (typeof window !== "undefined" && window.history.length > 1 && document.referrer) {
+        const prev = new URL(document.referrer);
+        if (prev.origin === window.location.origin && prev.pathname !== "/ai") {
+          event.preventDefault();
+          router.back();
+          return;
+        }
+      }
+    } catch {
+      /* Fallback to normal Link href navigation */
+    }
+  };
+}
+
 export function ConversationRail({ onSelect }: { onSelect?: () => void }) {
   const ai = useAI()!,
     client = useQueryClient();
+  const handleBack = useSafeBack();
   const list = useInfiniteQuery({
     queryKey: queryKeys.ai.conversations(ai.userId),
     initialPageParam: null as string | null,
@@ -238,6 +266,7 @@ export function ConversationRail({ onSelect }: { onSelect?: () => void }) {
       <div className="ai-rail-header">
         <Link
           href="/roadmap"
+          onClick={handleBack}
           className="ai-rail-back-link"
           title="Return to PRIME Workspace"
         >
@@ -483,6 +512,7 @@ function Message({ message, lastUser }: { message: AIMessage; lastUser: boolean 
 }
 export function AISurface({ panel = false }: { panel?: boolean }) {
   const ai = useAI()!;
+  const handleBack = useSafeBack();
   const ready = useSyncExternalStore(
     subscribeHydration,
     () => true,
@@ -561,6 +591,18 @@ export function AISurface({ panel = false }: { panel?: boolean }) {
       <div className="ai-canvas-toolbar">
         <div className="ai-canvas-heading">
           {!panel && (
+            <Link
+              href="/roadmap"
+              onClick={handleBack}
+              className="ai-mobile-back-link"
+              title="Return to Workspace"
+              aria-label="Return to Workspace"
+            >
+              <Icon icon={ArrowLeft01Icon} size={15} />
+              <span className="ai-mobile-back-text">Workspace</span>
+            </Link>
+          )}
+          {!panel && (
             <AIControl
               icon={Menu01Icon}
               size="icon-sm"
@@ -570,10 +612,10 @@ export function AISurface({ panel = false }: { panel?: boolean }) {
               onClick={() => setHistoryOpen(true)}
             />
           )}
-          <div>
+          <div className="ai-title-block">
             <span className="ai-eyebrow">Preparation intelligence</span>
             <h1>
-              <Icon icon={AiChat01Icon} size={19} /> PRIME AI
+              <Icon icon={AiChat01Icon} size={16} /> PRIME AI
             </h1>
           </div>
         </div>
@@ -610,8 +652,8 @@ export function AISurface({ panel = false }: { panel?: boolean }) {
               aria-label="Return to Workspace"
               className="ai-exit-workspace-btn"
             >
-              <Link href="/roadmap">
-                <Icon icon={Layout01Icon} size={15} />
+              <Link href="/roadmap" onClick={handleBack}>
+                <Icon icon={Layout01Icon} size={14} />
                 <span className="sr-only">Return to Workspace</span>
               </Link>
             </AIControl>
