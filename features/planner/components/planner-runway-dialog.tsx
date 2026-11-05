@@ -2,11 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import {
-  Calendar03Icon,
-  CheckmarkCircle02Icon,
-  SparklesIcon,
-} from "@hugeicons/core-free-icons";
+import { Calendar03Icon } from "@hugeicons/core-free-icons";
 import {
   Dialog,
   DialogContent,
@@ -19,7 +15,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Icon } from "@/components/ui/icon";
 import { addDays, daysBetween } from "@/domain/planning/capacity";
-import { updatePlanDuration, updatePlanTarget } from "../server/actions";
+import { updatePlanTarget } from "../server/actions";
 import { PlannerDateField } from "./planner-date-field";
 
 interface PlannerRunwayDialogProps {
@@ -66,7 +62,7 @@ export function PlannerRunwayDialog({
   const initialDays = daysBetween(startDate, currentTargetDate);
   const [days, setDays] = useState<number>(initialDays);
   const [targetDate, setTargetDate] = useState<string>(currentTargetDate);
-  const [mode, setMode] = useState<"presets" | "custom_days" | "date">("presets");
+  const [, setMode] = useState<"presets" | "custom_days" | "date">("presets");
   const [error, setError] = useState<string>("");
   const [busy, startTransition] = useTransition();
 
@@ -123,7 +119,7 @@ export function PlannerRunwayDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-md border-[#262626] bg-[#0A0A0A] p-5 sm:p-6 text-white shadow-2xl">
+      <DialogContent className="w-[calc(100%-1.5rem)] sm:w-full max-w-md max-h-[92dvh] overflow-y-auto overscroll-contain border border-[#262626] bg-[#0A0A0A] p-4 sm:p-6 text-white shadow-2xl rounded-xl sm:rounded-xl">
         <DialogHeader className="space-y-1">
           <div className="flex items-center gap-2">
             <span className="flex h-6 w-6 items-center justify-center rounded bg-[#FF0000]/10 text-[#FF0000]">
@@ -152,7 +148,7 @@ export function PlannerRunwayDialog({
 
           {/* Preset Buttons */}
           <div className="space-y-2">
-            <label className="text-xs font-mono uppercase tracking-wider text-[#AAAAAA]">
+            <label className="text-[11px] sm:text-xs font-mono uppercase tracking-wider text-[#AAAAAA]">
               Quick Runway Presets
             </label>
             <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
@@ -167,7 +163,7 @@ export function PlannerRunwayDialog({
                       handleSelectPreset(preset.days);
                     }}
                     className={
-                      "flex flex-col items-start justify-between rounded-md border p-2.5 text-left transition-all " +
+                      "flex flex-col items-start justify-between rounded-md border p-2 sm:p-2.5 text-left transition-all min-w-0 " +
                       (isSelected
                         ? "border-[#FF0000] bg-[#FF0000]/10 text-white shadow-[0_0_10px_rgba(255,0,0,0.2)]"
                         : preset.highlight
@@ -175,30 +171,32 @@ export function PlannerRunwayDialog({
                           : "border-[#1F1F1F] bg-[#0E0E0E] hover:border-[#333333] text-[#CCCCCC]")
                     }
                   >
-                    <div className="flex w-full items-center justify-between">
-                      <span className="font-mono text-sm font-bold">
+                    <div className="flex w-full items-center justify-between gap-1">
+                      <span className="font-mono text-xs sm:text-sm font-bold truncate">
                         {preset.label}
                       </span>
                       {preset.highlight && (
-                        <span className="rounded bg-[#FF0000] px-1 py-0.2 text-[9px] font-bold text-white">
+                        <span className="shrink-0 rounded bg-[#FF0000] px-1 py-0.2 text-[8px] sm:text-[9px] font-bold text-white uppercase tracking-wider">
                           HOT
                         </span>
                       )}
                     </div>
-                    <span className="text-[10px] text-[#888888]">{preset.sub}</span>
+                    <span className="text-[10px] text-[#888888] truncate w-full mt-0.5">
+                      {preset.sub}
+                    </span>
                   </button>
                 );
               })}
             </div>
           </div>
 
-          {/* Custom Duration or Date Options */}
-          <div className="grid grid-cols-2 gap-3 pt-1 border-t border-[#1F1F1F]">
-            <div className="space-y-1.5">
-              <label className="text-xs font-mono uppercase tracking-wider text-[#888888]">
+          {/* Custom Duration or Date Options - Responsive & Perfectly Aligned */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-[#1F1F1F]">
+            <div className="space-y-1.5 flex flex-col justify-end">
+              <label className="text-[11px] sm:text-xs font-mono uppercase tracking-wider text-[#888888] flex items-center h-4">
                 Custom Days
               </label>
-              <div className="relative">
+              <div className="relative flex items-center h-9">
                 <Input
                   type="number"
                   min={7}
@@ -208,43 +206,46 @@ export function PlannerRunwayDialog({
                     setMode("custom_days");
                     handleCustomDaysChange(e.target.value);
                   }}
-                  className="h-9 border-[#262626] bg-[#0E0E0E] font-mono text-sm text-white pr-12 focus-visible:border-[#FF0000]"
+                  className="h-9 w-full rounded-md border border-[#262626] bg-[#0E0E0E] px-3 font-mono text-sm text-white pr-14 focus-visible:border-[#FF0000] focus-visible:ring-1 focus-visible:ring-[#FF0000]"
                   placeholder="e.g. 100"
                 />
-                <span className="pointer-events-none absolute right-2.5 top-2 text-xs font-mono text-[#666666]">
+                <span className="pointer-events-none absolute right-3 flex items-center text-xs font-mono text-[#666666]">
                   days
                 </span>
               </div>
             </div>
 
-            <div className="space-y-1.5">
-              <label className="text-xs font-mono uppercase tracking-wider text-[#888888]">
+            <div className="space-y-1.5 flex flex-col justify-end">
+              <label className="text-[11px] sm:text-xs font-mono uppercase tracking-wider text-[#888888] flex items-center h-4">
                 Target Date
               </label>
-              <PlannerDateField
-                label="Target date"
-                min={today}
-                max={maxSelectableDate}
-                value={targetDate}
-                onChange={(dateStr) => {
-                  setMode("date");
-                  handleDateChange(dateStr);
-                }}
-              />
+              <div className="h-9">
+                <PlannerDateField
+                  label="Target date"
+                  min={today}
+                  max={maxSelectableDate}
+                  value={targetDate}
+                  className="h-9 rounded-md border-[#262626] bg-[#0E0E0E] px-3 font-mono text-sm text-white hover:border-[#444444] hover:bg-[#141414] focus-visible:border-[#FF0000] focus-visible:ring-1 focus-visible:ring-[#FF0000]"
+                  onChange={(dateStr) => {
+                    setMode("date");
+                    handleDateChange(dateStr);
+                  }}
+                />
+              </div>
             </div>
           </div>
 
           {/* Live Preview Card */}
-          <div className="rounded-md border border-[#262626] bg-[#0E0E0E] p-3 text-xs space-y-1.5">
-            <div className="flex items-center justify-between text-[#888888]">
-              <span>Planned Duration:</span>
-              <span className="font-mono font-semibold text-white">
+          <div className="rounded-md border border-[#222222] bg-[#0E0E0E] p-3 text-xs space-y-1.5 font-mono">
+            <div className="flex items-center justify-between">
+              <span className="text-[#888888]">Planned Duration:</span>
+              <span className="font-semibold text-white">
                 {days} Total Days
               </span>
             </div>
-            <div className="flex items-center justify-between text-[#888888]">
-              <span>Start — Target:</span>
-              <span className="font-mono text-white">
+            <div className="flex items-center justify-between">
+              <span className="text-[#888888]">Start — Target:</span>
+              <span className="text-white">
                 {dateLabel(startDate, { month: "short", day: "numeric" })} —{" "}
                 {dateLabel(targetDate, {
                   month: "short",
@@ -253,9 +254,9 @@ export function PlannerRunwayDialog({
                 })}
               </span>
             </div>
-            <div className="flex items-center justify-between text-[#888888]">
-              <span>Runway Remaining:</span>
-              <span className="font-mono font-bold text-[#FF0000]">
+            <div className="flex items-center justify-between">
+              <span className="text-[#888888]">Runway Remaining:</span>
+              <span className="font-bold text-[#FF0000]">
                 {daysRemaining} Days remaining
               </span>
             </div>
@@ -268,13 +269,13 @@ export function PlannerRunwayDialog({
           )}
         </div>
 
-        <DialogFooter className="flex sm:justify-between gap-2 pt-2 border-t border-[#1F1F1F]">
+        <DialogFooter className="flex flex-col-reverse sm:flex-row sm:justify-between gap-2 pt-2 border-t border-[#1F1F1F]">
           <Button
             type="button"
             variant="outline"
             disabled={busy}
             onClick={() => onOpenChange(false)}
-            className="border-[#262626] text-[#888888] hover:text-white"
+            className="w-full sm:w-auto border-[#262626] text-[#888888] hover:text-white"
           >
             Cancel
           </Button>
@@ -282,7 +283,7 @@ export function PlannerRunwayDialog({
             type="button"
             disabled={busy || days < 7}
             onClick={handleSave}
-            className="bg-[#FF0000] text-white hover:bg-[#CC0000] font-semibold"
+            className="w-full sm:w-auto bg-[#FF0000] text-white hover:bg-[#CC0000] font-semibold"
           >
             {busy ? "Updating..." : `Save ${days}-Day Runway`}
           </Button>
@@ -291,4 +292,3 @@ export function PlannerRunwayDialog({
     </Dialog>
   );
 }
-
