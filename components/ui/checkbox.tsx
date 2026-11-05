@@ -6,11 +6,12 @@ export interface CheckboxProps extends Omit<
   "type"
 > {
   onCheckedChange?: (checked: boolean) => void;
+  containerClassName?: string;
 }
 
 export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
   (
-    { className, checked, defaultChecked, onChange, onCheckedChange, disabled, ...props },
+    { className, containerClassName, checked, defaultChecked, onChange, onCheckedChange, disabled, ...props },
     ref
   ) => {
     const [isChecked, setIsChecked] = React.useState<boolean>(
@@ -37,8 +38,9 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
     return (
       <label
         className={cn(
-          "relative inline-flex items-center justify-center select-none",
-          disabled ? "cursor-not-allowed opacity-40" : "cursor-pointer"
+          "relative inline-flex shrink-0 items-center justify-center select-none",
+          disabled ? "cursor-not-allowed opacity-40" : "cursor-pointer",
+          containerClassName
         )}
       >
         <input
@@ -52,9 +54,9 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
         />
         <div
           className={cn(
-            "flex h-4 w-4 shrink-0 items-center justify-center rounded-[var(--radius-xs)] border border-[var(--border-strong)] bg-[var(--prime-canvas)] text-white transition-all duration-100 peer-focus-visible:ring-2 peer-focus-visible:ring-[var(--accent)]/50 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-offset-[var(--background)]",
+            "flex h-4 w-4 shrink-0 items-center justify-center rounded-[var(--radius-xs)] border border-[var(--border-strong)] bg-[var(--prime-canvas)] text-white transition-all duration-100 peer-focus-visible:ring-2 peer-focus-visible:ring-[var(--accent)]/50 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-offset-[var(--background)] hover:border-[var(--border-default)]",
             currentChecked &&
-              "bg-[var(--accent)] border-[var(--accent)] shadow-[0_0_8px_rgba(255,0,0,0.35),inset_0_1px_0_rgba(255,255,255,0.3)]",
+              "bg-[var(--accent)] border-[var(--accent)] shadow-[0_0_8px_rgba(255,0,0,0.35),inset_0_1px_0_rgba(255,255,255,0.3)] hover:border-[var(--accent)]",
             className
           )}
         >

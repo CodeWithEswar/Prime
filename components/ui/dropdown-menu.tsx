@@ -77,7 +77,7 @@ export const DropdownMenuItem = React.forwardRef<
   <DropdownMenuPrimitive.Item
     ref={ref}
     className={cn(
-      "relative flex cursor-pointer select-none items-center rounded-[var(--radius-xs)] px-2 py-1.5 text-sm outline-none transition-colors focus:bg-[var(--surface-hover)] focus:text-white data-[disabled]:pointer-events-none data-[disabled]:opacity-40",
+      "relative flex min-h-[var(--control-row-height)] cursor-pointer select-none items-center rounded-[var(--radius-xs)] px-2 py-1 text-[13px] outline-none transition-colors focus:bg-[var(--surface-hover)] focus:text-white data-[disabled]:pointer-events-none data-[disabled]:opacity-40",
       inset && "pl-8",
       destructive && "text-red-400 focus:bg-[var(--destructive-soft)] focus:text-red-300",
       className
@@ -94,7 +94,7 @@ export const DropdownMenuCheckboxItem = React.forwardRef<
   <DropdownMenuPrimitive.CheckboxItem
     ref={ref}
     className={cn(
-      "relative flex cursor-pointer select-none items-center rounded-[var(--radius-xs)] py-1.5 pl-8 pr-2 text-sm outline-none transition-colors focus:bg-[var(--surface-hover)] focus:text-white data-[disabled]:pointer-events-none data-[disabled]:opacity-40",
+      "relative flex min-h-[var(--control-row-height)] cursor-pointer select-none items-center rounded-[var(--radius-xs)] py-1 pl-8 pr-2 text-[13px] outline-none transition-colors focus:bg-[var(--surface-hover)] focus:text-white data-[disabled]:pointer-events-none data-[disabled]:opacity-40",
       className
     )}
     checked={checked}

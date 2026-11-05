@@ -103,9 +103,9 @@ export const TabsTrigger = React.forwardRef<
       className={cn(
         "relative inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-colors duration-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]/50 disabled:pointer-events-none disabled:opacity-40 cursor-pointer select-none",
         variant === "line" &&
-          "pb-3 pt-2 text-[var(--text-secondary)] hover:text-white data-[state=active]:text-white",
+          "min-h-[var(--control-height)] pb-2 pt-1 text-[var(--text-secondary)] hover:text-white data-[state=active]:text-white",
         variant === "segmented" &&
-          "px-3 py-1.5 rounded-[var(--radius-xs)] text-xs text-[var(--text-secondary)] hover:text-white data-[state=active]:text-white z-10",
+          "min-h-[var(--control-height-sm)] px-2.5 py-1 rounded-[var(--radius-xs)] text-xs text-[var(--text-secondary)] hover:text-white data-[state=active]:text-white z-10",
         className
       )}
       {...props}

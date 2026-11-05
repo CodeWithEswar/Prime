@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Slot } from "@radix-ui/react-slot";
+import { Slot, Slottable } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
@@ -26,11 +26,12 @@ const buttonVariants = cva(
         link: "text-[var(--accent)] underline-offset-4 hover:underline p-0 h-auto font-normal",
       },
       size: {
-        sm: "h-8 px-3 text-xs",
-        default: "h-9 px-4 py-2",
-        lg: "h-10 px-5 text-base",
-        icon: "h-9 w-9 p-0",
-        "icon-sm": "h-7 w-7 p-0 text-xs",
+        sm: "h-[var(--control-height-sm)] px-2.5 text-xs",
+        default: "h-[var(--control-height)] px-3 py-1 text-[13px]",
+        lg: "h-[var(--control-height-lg)] px-4 text-sm",
+        icon: "h-[var(--control-height)] w-[var(--control-height)] p-0",
+        "icon-sm":
+          "h-[var(--control-height-sm)] w-[var(--control-height-sm)] p-0 text-xs",
       },
     },
     defaultVariants: {
@@ -93,7 +94,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             />
           </svg>
         )}
-        {children}
+        {asChild ? <Slottable>{children}</Slottable> : children}
       </Comp>
     );
   }

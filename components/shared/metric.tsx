@@ -51,7 +51,11 @@ export function Metric({
               trend.direction === "neutral" && "text-[var(--text-tertiary)]"
             )}
           >
-            {trend.direction === "up" ? "↑" : trend.direction === "down" ? "↓" : "—"}{" "}
+            {trend.direction === "up"
+              ? "Rising"
+              : trend.direction === "down"
+                ? "Falling"
+                : "—"}{" "}
             {trend.value}
           </span>
         )}

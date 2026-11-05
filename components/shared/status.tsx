@@ -2,7 +2,12 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 export type PreparationStatus =
-  "not_started" | "learning" | "solved" | "needs_revision" | "mastered";
+  | "not_started"
+  | "learning"
+  | "attempted"
+  | "solved"
+  | "needs_revision"
+  | "mastered";
 
 export interface StatusBadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
   status: PreparationStatus;
@@ -22,6 +27,13 @@ const statusConfig: Record<
   },
   learning: {
     label: "Learning",
+    symbol: "◐",
+    dotClass: "bg-[rgba(255,255,255,0.80)]",
+    containerClass:
+      "bg-[var(--surface-raised)] text-[rgba(255,255,255,0.80)] border-[var(--border-default)]",
+  },
+  attempted: {
+    label: "Attempted",
     symbol: "◐",
     dotClass: "bg-[rgba(255,255,255,0.80)]",
     containerClass:

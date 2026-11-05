@@ -12,6 +12,9 @@ export interface CalendarProps {
   completedDates?: Date[];
   revisionDates?: Date[];
   disabledDates?: Date[];
+  minDate?: Date;
+  maxDate?: Date;
+  today?: Date;
 }
 
 /**
@@ -25,9 +28,12 @@ export function Calendar({
   completedDates = [],
   revisionDates = [],
   disabledDates = [],
+  minDate,
+  maxDate,
+  today = new Date(),
 }: CalendarProps) {
   const [currentMonth, setCurrentMonth] = React.useState<Date>(
-    () => selected || new Date()
+    () => selected || minDate || today
   );
 
   const year = currentMonth.getFullYear();
@@ -64,8 +70,6 @@ export function Calendar({
     d1.getMonth() === d2.getMonth() &&
     d1.getDate() === d2.getDate();
 
-  const today = new Date();
-
   return (
     <div
       className={cn(
@@ -75,23 +79,25 @@ export function Calendar({
     >
       {/* Month Navigation */}
       <div className="flex items-center justify-between pb-3 mb-2 border-b border-[var(--border-subtle)]">
-        <h4 className="text-sm font-semibold text-white tracking-wide">
+        <h4 aria-live="polite" className="text-sm font-semibold text-white tracking-wide">
           {monthNames[month]}{" "}
           <span className="text-[var(--text-tertiary)] font-mono">{year}</span>
         </h4>
         <div className="flex items-center space-x-1">
           <button
             type="button"
+            disabled={!!minDate && new Date(year, month, 1) <= minDate}
             onClick={prevMonth}
-            className="p-1 rounded-[var(--radius-xs)] text-[var(--text-secondary)] hover:text-white hover:bg-[var(--surface-hover)] transition-colors"
+            className="p-1 rounded-[var(--radius-xs)] text-[var(--text-secondary)] hover:text-white hover:bg-[var(--surface-hover)] transition-colors disabled:pointer-events-none disabled:opacity-30"
             aria-label="Previous month"
           >
             <Icon icon={ArrowLeft01Icon} size={16} />
           </button>
           <button
             type="button"
+            disabled={!!maxDate && new Date(year, month + 1, 1) > maxDate}
             onClick={nextMonth}
-            className="p-1 rounded-[var(--radius-xs)] text-[var(--text-secondary)] hover:text-white hover:bg-[var(--surface-hover)] transition-colors"
+            className="p-1 rounded-[var(--radius-xs)] text-[var(--text-secondary)] hover:text-white hover:bg-[var(--surface-hover)] transition-colors disabled:pointer-events-none disabled:opacity-30"
             aria-label="Next month"
           >
             <Icon icon={ArrowRight01Icon} size={16} />
@@ -127,12 +133,18 @@ export function Calendar({
           const isToday = isSameDay(date, today);
           const isCompleted = completedDates.some((d) => isSameDay(d, date));
           const isRevision = revisionDates.some((d) => isSameDay(d, date));
-          const isDisabled = disabledDates.some((d) => isSameDay(d, date));
+          const isDisabled =
+            (!!minDate && date < minDate && !isSameDay(date, minDate)) ||
+            (!!maxDate && date > maxDate && !isSameDay(date, maxDate)) ||
+            disabledDates.some((d) => isSameDay(d, date));
 
           return (
             <button
               key={dayNumber}
               type="button"
+              aria-label={date.toLocaleDateString("en", { dateStyle: "full" })}
+              aria-pressed={Boolean(isSelected)}
+              aria-current={isToday ? "date" : undefined}
               disabled={isDisabled}
               onClick={() => onSelect?.(date)}
               className={cn(

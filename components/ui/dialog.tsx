@@ -41,7 +41,7 @@ export const DialogContent = React.forwardRef<
       {...props}
     >
       {children}
-      <DialogPrimitive.Close className="absolute right-4 top-4 rounded-[var(--radius-xs)] p-1 text-[var(--text-tertiary)] opacity-70 transition-opacity hover:opacity-100 hover:bg-[var(--surface-hover)] hover:text-white focus:outline-none focus-visible:shadow-[0_0_0_1px_#000000,0_0_0_3px_rgba(255,0,0,0.72)] disabled:pointer-events-none">
+      <DialogPrimitive.Close className="absolute right-4 top-4 rounded-[var(--radius-xs)] p-1 text-[var(--text-tertiary)] opacity-70 transition-opacity hover:opacity-100 hover:bg-[var(--surface-hover)] hover:text-white focus:outline-none focus-visible:shadow-[0_0_0_1px_#000000,0_0_0_3px_rgba(255,0,0,0.72)] disabled:pointer-events-none z-20">
         <Icon icon={Cancel01Icon} size={16} />
         <span className="sr-only">Close</span>
       </DialogPrimitive.Close>

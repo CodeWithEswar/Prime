@@ -61,6 +61,8 @@ export function DesignSystemSidebar({ className, onItemClick }: SidebarProps) {
       </div>
 
       {/* Main Groups: Foundations, Components, Patterns */}
+      {process.env.NODE_ENV!=="production"&&<Link href="/design-system/ai-markdown" onClick={onItemClick} className="mb-5 mx-2 rounded border border-white/10 bg-black px-3 py-2 text-white">AI / Markdown</Link>}
+      {process.env.NODE_ENV!=="production"&&<Link href="/design-system/algorithm-lab" onClick={onItemClick} className="mb-5 mx-2 rounded border border-white/10 bg-black px-3 py-2 text-white">Algorithm Lab</Link>}
       <div className="space-y-6">
         {groups.map((group) => (
           <div key={group.category} className="space-y-2">
