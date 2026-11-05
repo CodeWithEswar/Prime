@@ -102,16 +102,14 @@
   content: "";
   position: absolute;
   inset: 6px;
-  border: 1px solid transparent;
+  border: 0;
   border-radius: var(--radius-sm);
   pointer-events: none;
-  transition:
-    border-color 0.12s,
-    background 0.12s;
+  transition: background 0.12s;
 }
 .shell-collapse:hover::before {
-  border-color: var(--border-default);
-  background: #ffffff07;
+  border: 0;
+  background: #ffffff0e;
 }
 .shell-collapse:active {
   transform: scale(0.97);
@@ -622,7 +620,8 @@
   display: flex;
   flex-direction: column;
   gap: 0;
-  width: min(288px, calc(100% - 24px));
+  width: min(248px, 70vw) !important;
+  max-width: 256px !important;
   height: 100dvh;
   padding: 0;
   overflow: hidden;
@@ -633,8 +632,8 @@
   flex: none;
   display: flex;
   align-items: center;
-  min-height: 60px;
-  padding: 8px 58px 8px 18px;
+  min-height: 56px;
+  padding: 8px 48px 8px 16px;
   border-bottom: 1px solid var(--border-subtle);
 }
 .shell-sidebar-sheet-heading a {
@@ -643,45 +642,66 @@
   border-radius: var(--radius-sm);
 }
 .shell-sidebar-sheet > button {
-  width: 44px;
-  height: 44px;
-  min-width: 44px;
-  min-height: 44px;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
   display: grid;
   place-items: center;
-  top: 8px;
-  right: 8px;
+  top: 10px;
+  right: 10px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+}
+.shell-sidebar-sheet > button:hover {
+  background: var(--surface-hover);
+  color: white;
+  border: 0;
 }
 .shell-sidebar-sheet .shell-nav {
-  gap: 14px;
-  padding: 14px 12px;
+  gap: 12px;
+  padding: 12px 10px;
   overscroll-behavior: contain;
 }
 .shell-sidebar-sheet-account {
   flex: none;
   border-top: 1px solid var(--border-subtle);
-  padding: 12px 18px max(12px, env(safe-area-inset-bottom));
+  padding: 12px 14px max(12px, env(safe-area-inset-bottom));
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 4px;
 }
 .shell-sidebar-sheet-account > span {
   font-size: 12px;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .shell-sidebar-sheet-account > small {
   font-size: 10px;
   color: var(--text-tertiary);
-  overflow-wrap: anywhere;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .shell-sidebar-sheet-account button {
-  min-height: var(--control-height-lg);
+  min-height: 32px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   font-size: 12px;
   color: var(--text-secondary);
-  margin-top: 3px;
+  margin-top: 2px;
   cursor: pointer;
+  transition: color 0.15s;
+}
+.shell-sidebar-sheet-account button:hover {
+  color: white;
 }
 .shell-sidebar-sheet-account p,
 .shell-user-error {
@@ -754,7 +774,7 @@
 }
 @media (max-width: 767px) {
   .prime-shell {
-    --shell-topbar-height: 60px;
+    --shell-topbar-height: 54px;
     --shell-content-bottom: max(16px, env(safe-area-inset-bottom));
   }
   .shell-sidebar {
@@ -765,56 +785,121 @@
     transition: none;
   }
   .shell-topbar {
-    padding: 0 12px;
-    gap: 8px;
+    padding: 0 10px;
+    gap: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
   .shell-topbar-context {
     display: flex;
     align-items: center;
     gap: 8px;
+    min-width: 0;
+    flex: 1 1 auto;
+    overflow: hidden;
   }
   .shell-sidebar-trigger {
     display: grid;
     place-items: center;
     flex: none;
-    width: var(--control-height-lg);
-    height: var(--control-height-lg);
-    border: 1px solid var(--border-default);
+    width: 32px;
+    height: 32px;
+    border: 0;
     border-radius: var(--radius-sm);
+    background: transparent;
     color: var(--foreground);
     cursor: pointer;
+    transition: background-color 0.15s, color 0.15s;
   }
   .shell-sidebar-trigger:hover,
   .shell-sidebar-trigger[aria-expanded="true"] {
     background: var(--surface-hover);
+    color: white;
+    border: 0;
   }
   .shell-command-trigger {
-    width: var(--control-height-lg);
-    height: var(--control-height-lg);
+    width: 32px;
+    height: 32px;
+    flex: none;
+    display: flex;
+    align-items: center;
     justify-content: center;
-    border: 0;
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-secondary);
     padding: 0;
+    margin-left: auto;
+    cursor: pointer;
+    transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+  }
+  .shell-command-trigger:hover {
+    background: var(--surface-hover);
+    border-color: var(--border-strong);
+    color: white;
   }
   .shell-command-trigger > span,
   .shell-command-trigger kbd {
     display: none;
   }
+  .shell-context {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    overflow: hidden;
+  }
   .shell-context nav {
-    font-size: 10px;
-    gap: 7px;
+    font: 11px var(--font-geist-mono), monospace;
+    letter-spacing: 0.08em;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .shell-context-parent {
+    color: var(--text-tertiary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 75px;
+    flex-shrink: 1;
+  }
+  .shell-context-separator {
+    color: var(--text-tertiary);
+    opacity: 0.4;
+    flex-shrink: 0;
+  }
+  .shell-context-current {
+    color: var(--text-primary);
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 140px;
+    flex-shrink: 0;
   }
   .shell-context.is-deep .shell-context-parent,
   .shell-context.is-deep .shell-context-separator {
     display: none;
   }
   .shell-context.is-deep .shell-context-current {
-    max-width: 47vw;
+    max-width: 36vw;
   }
   .shell-back {
-    width: var(--control-height-lg);
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    border-radius: var(--radius-sm);
   }
   .shell-topbar-actions {
-    gap: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
   }
   .shell-day,
   .shell-due-label {
@@ -822,10 +907,24 @@
   }
   .shell-revision {
     gap: 5px;
+    min-height: 32px;
   }
   .shell-command-footer {
     font-size: 9px;
     gap: 12px;
+  }
+}
+@media (max-width: 360px) {
+  .shell-topbar {
+    padding: 0 8px;
+    gap: 4px;
+  }
+  .shell-topbar-actions {
+    gap: 4px;
+  }
+  .shell-context-parent,
+  .shell-context-separator {
+    display: none;
   }
 }
 @media (pointer: coarse) {
