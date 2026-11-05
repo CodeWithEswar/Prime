@@ -3,12 +3,13 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-} from "@/components/ui/sheet";
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import {
   computePlanHealth,
   dateLabel,
@@ -70,24 +71,26 @@ export function PlannerSheet({
   };
   const title = editor ? titles[editor.kind] : "Planner";
   return (
-    <Sheet
+    <Dialog
       open={Boolean(editor)}
       onOpenChange={(value) => {
         if (!value && !busy) onClose();
       }}
     >
-      <SheetContent className="left-0 right-auto flex h-dvh w-dvw flex-col gap-0 p-0 sm:left-auto sm:right-0 sm:w-full sm:max-w-lg">
-        <SheetHeader className="border-b border-white/10 px-4 py-4 pr-12 sm:px-6 sm:pr-12">
+      <DialogContent className="fixed z-50 flex flex-col gap-0 p-0 overflow-hidden bg-[#0A0A0A] border border-[#262626] shadow-2xl transition-all duration-200 ease-out max-sm:fixed max-sm:inset-0 max-sm:left-0 max-sm:right-0 max-sm:top-0 max-sm:bottom-0 max-sm:translate-x-0 max-sm:translate-y-0 max-sm:w-full max-sm:max-w-none max-sm:h-dvh max-sm:max-h-dvh max-sm:rounded-none sm:fixed sm:left-[50%] sm:top-[50%] sm:translate-x-[-50%] sm:translate-y-[-50%] sm:w-full sm:max-w-lg sm:h-auto sm:max-h-[88vh] sm:rounded-xl">
+        <DialogHeader className="border-b border-[#1F1F1F] bg-[#0E0E0E]/90 px-4 py-4 pr-12 sm:px-6">
           <p className={eyebrow}>Planner · {proposal ? "Review" : "Setup"}</p>
-          <SheetTitle>{proposal?.title ?? title}</SheetTitle>
-          <SheetDescription>
+          <DialogTitle className="text-base sm:text-lg font-bold text-white">
+            {proposal?.title ?? title}
+          </DialogTitle>
+          <DialogDescription className="text-xs text-[#888888]">
             {proposal
               ? "Review the impact before applying it to your schedule."
               : editor?.kind === "automatic"
                 ? "Set your target and choose how far ahead to plan."
                 : "Preview changes to your preparation schedule."}
-          </SheetDescription>
-        </SheetHeader>
+          </DialogDescription>
+        </DialogHeader>
         <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-4 sm:px-6">
           {proposal ? (
             <div className="grid gap-3">
@@ -282,13 +285,18 @@ export function PlannerSheet({
             </p>
           )}
         </div>
-        <div className="flex flex-wrap justify-end gap-2 border-t border-white/10 px-4 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:px-6">
+        <DialogFooter className="flex flex-row items-center justify-end gap-2 border-t border-[#1F1F1F] bg-[#0E0E0E]/90 px-4 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:px-6">
           {proposal ? (
             <>
               <Button variant="secondary" disabled={busy} onClick={onBack}>
                 Back to setup
               </Button>
-              <Button disabled={!proposal.id} loading={busy} onClick={onConfirm}>
+              <Button
+                disabled={!proposal.id}
+                loading={busy}
+                onClick={onConfirm}
+                className="bg-[#FF0000] text-white hover:bg-[#CC0000] font-semibold"
+              >
                 Confirm changes
               </Button>
             </>
@@ -299,13 +307,19 @@ export function PlannerSheet({
                   Save to backlog
                 </Button>
               )}
-              <Button loading={busy} onClick={onPreview}>
+              <Button
+                loading={busy}
+                onClick={onPreview}
+                className="bg-[#FF0000] text-white hover:bg-[#CC0000] font-semibold"
+              >
                 Preview changes
               </Button>
             </>
           )}
-        </div>
-      </SheetContent>
-    </Sheet>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 }
+
+export { PlannerSheet as PlannerDialog };
