@@ -1,6 +1,7 @@
 "use client";
 
 import { Icon } from "@/components/ui/icon";
+import { cn } from "@/lib/utils";
 import { FilterIcon, ArrowDown01Icon } from "@hugeicons/core-free-icons";
 import {
   DropdownMenu,
@@ -37,9 +38,9 @@ export function RevisionTabs({
     : "All Topics";
 
   return (
-    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-[#1F1F1F]">
+    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-[#1F1F1F] pb-1 sm:pb-0">
       {/* Navigation Tabs */}
-      <div className="flex items-center gap-6 overflow-x-auto no-scrollbar">
+      <div className="flex items-center gap-4 sm:gap-6 overflow-x-auto no-scrollbar -mx-1 px-1">
         {tabs.map((tab) => {
           const isActive = activeTab === tab.id;
           return (
@@ -47,9 +48,10 @@ export function RevisionTabs({
               key={tab.id}
               type="button"
               onClick={() => onSelectTab(tab.id)}
-              className={`relative py-3 text-sm font-semibold whitespace-nowrap transition-colors ${
+              className={cn(
+                "relative py-2.5 sm:py-3 text-xs sm:text-sm font-semibold whitespace-nowrap transition-colors cursor-pointer",
                 isActive ? "text-white" : "text-[#777777] hover:text-[#CCCCCC]"
-              }`}
+              )}
             >
               {tab.label}
               {isActive && (
@@ -61,25 +63,27 @@ export function RevisionTabs({
       </div>
 
       {/* Topic Filter Dropdown */}
-      <div className="self-end sm:self-center pb-2 sm:pb-0">
+      <div className="w-full sm:w-auto pb-2 sm:pb-0">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <button
               type="button"
-              className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-[#C2C2C2] hover:text-white bg-[#0A0A0A] border border-[#262626] hover:border-[#383838] rounded transition-colors"
+              className="w-full sm:w-auto justify-between sm:justify-start inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-[#C2C2C2] hover:text-white bg-[#0A0A0A] border border-[#262626] hover:border-[#383838] rounded-md transition-colors cursor-pointer"
             >
-              <Icon icon={FilterIcon} size={14} className="text-[#888888]" />
-              <span>{currentTopicName}</span>
-              <Icon icon={ArrowDown01Icon} size={12} className="text-[#666666]" />
+              <span className="flex items-center gap-1.5 truncate">
+                <Icon icon={FilterIcon} size={14} className="text-[#888888] shrink-0" />
+                <span className="truncate">{currentTopicName}</span>
+              </span>
+              <Icon icon={ArrowDown01Icon} size={12} className="text-[#666666] shrink-0" />
             </button>
           </DropdownMenuTrigger>
           <DropdownMenuContent
             align="end"
-            className="w-56 bg-[#0A0A0A] border-[#222222] text-[#E0E0E0]"
+            className="w-56 bg-[#0A0A0A] border-[#222222] text-[#E0E0E0] shadow-2xl p-1 rounded-lg"
           >
             <DropdownMenuItem
               onClick={() => onSelectTopic(null)}
-              className="flex items-center justify-between text-xs py-2 cursor-pointer focus:bg-[#1A1A1A] focus:text-white"
+              className="flex items-center justify-between text-xs py-2 cursor-pointer focus:bg-[#1A1A1A] focus:text-white rounded-md"
             >
               <span>All Topics</span>
               {!selectedTopic && (
@@ -90,7 +94,7 @@ export function RevisionTabs({
               <DropdownMenuItem
                 key={t.id}
                 onClick={() => onSelectTopic(t.id)}
-                className="flex items-center justify-between text-xs py-2 cursor-pointer focus:bg-[#1A1A1A] focus:text-white"
+                className="flex items-center justify-between text-xs py-2 cursor-pointer focus:bg-[#1A1A1A] focus:text-white rounded-md"
               >
                 <span className="truncate">{t.name}</span>
                 <span className="font-mono text-[10px] text-[#777777] ml-2">

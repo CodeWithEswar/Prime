@@ -37,7 +37,7 @@ export function RevisionCommandCenter({ initialData }: RevisionCommandCenterProp
   };
 
   return (
-    <div className="w-full max-w-[1440px] mx-auto p-4 sm:p-6 lg:p-8 space-y-6">
+    <div className="w-full max-w-[1440px] mx-auto p-3.5 sm:p-6 lg:p-8 space-y-5 sm:space-y-6 min-w-0">
       {/* 1. Header */}
       <RevisionHeader />
 
@@ -71,7 +71,7 @@ export function RevisionCommandCenter({ initialData }: RevisionCommandCenterProp
         </div>
 
         {/* Right Column: Visual Workload & Retention Rail */}
-        <div className="lg:col-span-4 space-y-4">
+        <div className="lg:col-span-4 space-y-4 min-w-0">
           <RevisionLoadChart workload={data.workload} />
           <RetentionTrendChart trend={data.retentionTrend} />
           <HowRevisionWorksCard onLearnMore={() => setHowItWorksOpen(true)} />
