@@ -107,22 +107,35 @@ export function ResponseActions({ message }: { message: AIMessage }) {
                 title="More response actions"
               />
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" side="top">
+            <DropdownMenuContent
+              align="start"
+              side="top"
+              sideOffset={6}
+              collisionPadding={12}
+              className="w-44 bg-[#0A0A0A] border border-[#262626] shadow-2xl p-1.5 rounded-lg z-50 select-none animate-in fade-in-0 zoom-in-95"
+            >
               {canRetry && (
                 <DropdownMenuItem
                   onSelect={() => void ai.send("", message.intent, "retry")}
+                  className="cursor-pointer gap-2.5 px-2.5 py-2 text-xs font-mono text-[#D4D4D4] hover:text-white focus:bg-[#1A1A1A] focus:text-white rounded-md transition-colors"
                 >
-                  <Icon icon={RotateRight01Icon} size={15} />
-                  Retry response
+                  <Icon icon={RotateRight01Icon} size={15} className="text-[#AAAAAA] shrink-0" />
+                  <span>Retry response</span>
                 </DropdownMenuItem>
               )}
-              <DropdownMenuItem onSelect={() => feedback.mutate("helpful")}>
-                <Icon icon={ThumbsUpIcon} size={15} />
-                Helpful
+              <DropdownMenuItem
+                onSelect={() => feedback.mutate("helpful")}
+                className="cursor-pointer gap-2.5 px-2.5 py-2 text-xs font-mono text-[#D4D4D4] hover:text-white focus:bg-[#1A1A1A] focus:text-white rounded-md transition-colors"
+              >
+                <Icon icon={ThumbsUpIcon} size={15} className="text-[#AAAAAA] shrink-0" />
+                <span>Helpful</span>
               </DropdownMenuItem>
-              <DropdownMenuItem onSelect={() => feedback.mutate("not_helpful")}>
-                <Icon icon={ThumbsDownIcon} size={15} />
-                Not helpful
+              <DropdownMenuItem
+                onSelect={() => feedback.mutate("not_helpful")}
+                className="cursor-pointer gap-2.5 px-2.5 py-2 text-xs font-mono text-[#D4D4D4] hover:text-white focus:bg-[#1A1A1A] focus:text-white rounded-md transition-colors"
+              >
+                <Icon icon={ThumbsDownIcon} size={15} className="text-[#AAAAAA] shrink-0" />
+                <span>Not helpful</span>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
