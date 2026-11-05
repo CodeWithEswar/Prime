@@ -458,7 +458,7 @@
   width: 100%;
   position: relative;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.85) 20%, #000000 38%);
-  padding: 12px 24px max(14px, env(safe-area-inset-bottom));
+  padding: 6px 20px max(8px, env(safe-area-inset-bottom));
   z-index: 10;
 }
 .ai-composer-dock .ai-composer {
@@ -466,37 +466,38 @@
   width: 100%;
   max-width: 760px;
   margin: 0 auto;
-  border: 1px solid #ffffff28;
-  border-radius: 10px;
+  border: 1px solid #ffffff24;
+  border-radius: 9px;
   background: #090909;
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
-  padding: 10px 14px;
+  box-shadow: 0 -4px 18px rgba(0, 0, 0, 0.45);
+  padding: 8px 12px 6px;
 }
 .ai-composer-dock .ai-composer:focus-within {
-  border-color: #ffffff50;
-  box-shadow: 0 -6px 28px rgba(0, 0, 0, 0.7), 0 0 0 1px #ffffff1a;
+  border-color: #ffffff48;
+  box-shadow: 0 -4px 22px rgba(0, 0, 0, 0.65), 0 0 0 1px #ffffff14;
 }
 .ai-composer {
   flex: none;
   width: calc(100% - 56px);
   max-width: 740px;
   margin: 0 auto;
-  border: 1px solid #ffffff30;
+  border: 1px solid #ffffff24;
   border-radius: 9px;
-  background: #070707;
+  background: #090909;
   box-shadow: 0 -10px 35px #0008;
-  padding: 10px 12px;
+  padding: 8px 12px 6px;
 }
 .ai-composer:focus-within {
-  border-color: #ffffff55;
+  border-color: #ffffff48;
 }
 .ai-composer-context {
   display: flex;
   justify-content: space-between;
   gap: 8px;
-  font-size: 9px;
-  color: #777;
-  margin-bottom: 5px;
+  font-size: 8.5px;
+  color: #6a6a6a;
+  margin-bottom: 2px;
+  line-height: 1.2;
 }
 .ai-composer textarea,
 .ai-message textarea {
@@ -508,10 +509,10 @@
   background: transparent;
   color: #eee;
   font-size: 13px;
-  line-height: 1.65;
-  min-height: 48px;
-  max-height: 160px;
-  padding: 4px 0;
+  line-height: 1.45;
+  min-height: 24px;
+  max-height: 140px;
+  padding: 2px 0 3px;
   outline: 0;
 }
 .ai-composer textarea:focus-visible {
@@ -520,11 +521,11 @@
 .ai-composer-footer {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-top: 5px;
+  gap: 8px;
+  margin-top: 3px;
 }
 .ai-composer select {
-  height: 28px;
+  height: 26px;
   max-width: 150px;
   background: #0b0b0b;
   border: 1px solid #ffffff15;
@@ -537,6 +538,10 @@
 .ai-composer-footer .ai-primary,
 .ai-composer-footer .ai-secondary {
   margin-left: auto;
+  min-height: 28px !important;
+  height: 28px !important;
+  width: 28px !important;
+  padding: 0 !important;
 }
 .ai-character-count {
   color: #555;

@@ -497,6 +497,13 @@ export function AISurface({ panel = false }: { panel?: boolean }) {
     scroller = useRef<HTMLDivElement>(null),
     autoScroll = useRef(true);
   const surface = useRef<HTMLDivElement>(null);
+  const promptTextarea = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    if (!draft && promptTextarea.current) {
+      promptTextarea.current.style.height = "24px";
+    }
+  }, [draft]);
   useEffect(() => {
     const viewport = window.visualViewport;
     const sync = () => {
@@ -772,6 +779,9 @@ export function AISurface({ panel = false }: { panel?: boolean }) {
             if (!draft.trim() || running) return;
             const text = draft;
             setDraft("");
+            if (promptTextarea.current) {
+              promptTextarea.current.style.height = "24px";
+            }
             autoScroll.current = true;
             setFollowing(true);
             void ai.send(text, intent).then((accepted) => {
@@ -793,13 +803,18 @@ export function AISurface({ panel = false }: { panel?: boolean }) {
             Ask PRIME
           </label>
           <textarea
+            ref={promptTextarea}
             disabled={!ready}
             id={panel ? "ai-panel-prompt" : "ai-workspace-prompt"}
             placeholder="Ask PRIME…"
-            rows={2}
+            rows={1}
             maxLength={6000}
             value={draft}
-            onChange={(e) => setDraft(e.target.value)}
+            onChange={(e) => {
+              setDraft(e.target.value);
+              e.target.style.height = "auto";
+              e.target.style.height = `${Math.min(Math.max(e.target.scrollHeight, 24), 140)}px`;
+            }}
             onKeyDown={(e) => {
               if (e.key === "Enter" && !e.shiftKey && !e.nativeEvent.isComposing) {
                 e.preventDefault();

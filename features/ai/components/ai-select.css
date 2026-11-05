@@ -3,16 +3,17 @@
   flex-wrap: nowrap;
 }
 .ai-composer-footer .ai-intent-select {
-  width: clamp(148px, 42vw, 176px) !important;
-  max-width: calc(100% - 96px) !important;
+  width: clamp(140px, 38vw, 168px) !important;
+  max-width: calc(100% - 80px) !important;
   min-width: 0 !important;
-  height: 32px !important;
-  flex: 0 1 176px;
+  height: 28px !important;
+  flex: 0 1 168px;
   display: flex !important;
   align-items: center;
-  gap: 7px !important;
+  gap: 6px !important;
   overflow: hidden;
-  padding: 0 9px !important;
+  padding: 0 8px !important;
+  font-size: 11px !important;
 }
 .ai-composer-footer .ai-intent-select > span {
   flex: 1;
