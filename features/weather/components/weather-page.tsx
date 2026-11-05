@@ -389,7 +389,6 @@ export function WeatherPage() {
           </p>
           <div className="weather-welcome-actions">
             <Button
-              className="weather-action-btn weather-action-locate"
               onClick={(event) => void locate(event.currentTarget)}
               disabled={locating}
               aria-label={locating ? "Finding your location…" : "Use current location"}
@@ -403,8 +402,7 @@ export function WeatherPage() {
               <span>{locating ? "Locating…" : "My location"}</span>
             </Button>
             <Button
-              variant="outline"
-              className="weather-action-btn weather-action-search"
+              variant="secondary"
               onClick={(event) => openSelector(event.currentTarget)}
             >
               <Icon icon={Search01Icon} size={16} aria-hidden="true" />
@@ -447,15 +445,13 @@ export function WeatherPage() {
           <p>Unable to refresh weather. Your selected location is still saved.</p>
           <div className="weather-welcome-actions">
             <Button
-              className="weather-action-btn weather-action-locate"
               onClick={() => void query.refetch()}
             >
               <Icon icon={RefreshIcon} size={16} aria-hidden="true" />
               <span>Retry</span>
             </Button>
             <Button
-              variant="outline"
-              className="weather-action-btn weather-action-search"
+              variant="secondary"
               onClick={(event) => openSelector(event.currentTarget)}
             >
               <span>Change location</span>

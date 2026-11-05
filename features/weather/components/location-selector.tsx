@@ -59,10 +59,10 @@ export function LocationSelector({
           not saved.
         </DialogDescription>
         <Button
-          variant="outline"
+          variant="secondary"
           onClick={() => void locate()}
           disabled={locating}
-          className="weather-dialog-locate-btn"
+          className="w-full"
         >
           <Icon
             icon={locating ? LoaderIcon : Navigation03Icon}
