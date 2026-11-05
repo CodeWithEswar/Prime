@@ -1,22 +1,10 @@
-import type { TopicPerformanceSignal } from "./types";
-
 /**
- * Pure Weakness Detection Classifier
- * Flags areas requiring immediate revision or conceptual review.
+ * PRIME Weakness Intelligence Engine — Domain Entry Point
  */
-export function isWeakTopic(signal: TopicPerformanceSignal): boolean {
-  // If failure rate exceeds 40% or there are multiple consecutive recent failures
-  if (signal.failureRate >= 0.4 || signal.recentFailuresCount >= 3) {
-    return true;
-  }
-  // Significantly exceeding expected time to solve with a moderate failure rate
-  if (
-    signal.averageAttemptDurationMinutes > signal.expectedDurationMinutes * 1.5 &&
-    signal.failureRate >= 0.25
-  ) {
-    return true;
-  }
-  return false;
-}
 
 export * from "./types";
+export * from "./policy";
+export * from "./problem-weakness";
+export * from "./topic-weakness";
+export * from "./stage-weakness";
+export * from "./recommendations";
