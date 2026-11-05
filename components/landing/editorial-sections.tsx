@@ -8,6 +8,7 @@ import {
 import { Icon } from "@/components/ui/icon";
 import { PrimeWordmark } from "@/components/branding";
 import { Reveal } from "./landing-motion";
+import { FooterLiveStatus } from "./footer-live-status";
 import {
   ProgressSignals,
   ReadinessPreview,
@@ -272,6 +273,7 @@ export function CinematicFooter() {
                 ["Revision", "#revision"],
                 ["Progress", "#progress"],
                 ["Method", "#method"],
+                ["System Status", "/status"],
               ].map(([name, href], index) => (
                 <li key={href}>
                   <a href={href}>
@@ -286,6 +288,13 @@ export function CinematicFooter() {
         </div>
         <div className="cinematic-footer-bottom">
           <span>© 2026 PRIME</span>
+          <a
+            href="/status"
+            className="footer-status-pill inline-flex items-center gap-2 text-xs text-neutral-400 transition-colors hover:text-white"
+          >
+            <FooterLiveStatus />
+            <span>System Status</span>
+          </a>
           <a href="/login" className="footer-sign-in">
             Sign in to PRIME
           </a>
