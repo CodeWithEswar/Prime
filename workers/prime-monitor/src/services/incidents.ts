@@ -126,3 +126,4 @@ export function syncIncidentsWithState(
 
   return { active, history };
 }
+

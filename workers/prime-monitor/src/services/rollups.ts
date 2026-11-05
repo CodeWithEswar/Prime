@@ -137,3 +137,4 @@ export function calculateWindowUptime(
   if (valid === 0) return 0;
   return Number(((successful / valid) * 100).toFixed(2));
 }
+

@@ -38,3 +38,4 @@ as $$
 $$;
 
 grant execute on function public.probe_system_health() to anon, authenticated, service_role;
+

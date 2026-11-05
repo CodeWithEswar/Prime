@@ -107,3 +107,4 @@ export interface MonitorWorkerEnv {
   APP_URL?: string;
   ALERT_EMAIL_RECIPIENT?: string;
 }
+
