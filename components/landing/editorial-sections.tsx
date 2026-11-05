@@ -8,7 +8,6 @@ import {
 import { Icon } from "@/components/ui/icon";
 import { PrimeWordmark } from "@/components/branding";
 import { Reveal } from "./landing-motion";
-import { FooterLiveStatus } from "./footer-live-status";
 import {
   ProgressSignals,
   ReadinessPreview,
@@ -292,7 +291,10 @@ export function CinematicFooter() {
             href="/status"
             className="footer-status-pill inline-flex items-center gap-2 text-xs text-neutral-400 transition-colors hover:text-white"
           >
-            <FooterLiveStatus />
+            <span
+              className="inline-block h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_6px_rgba(34,197,94,0.6)] animate-pulse"
+              aria-hidden="true"
+            />
             <span>System Status</span>
           </a>
           <a href="/login" className="footer-sign-in">
