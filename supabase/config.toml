@@ -59,6 +59,15 @@ enable_confirmations = false
 max_frequency = "1m0s"
 otp_length = 8
 
+[auth.email.smtp]
+enabled = true
+host = "smtp.gmail.com"
+port = 587
+user = "env(GMAIL_USER)"
+pass = "env(GMAIL_PASS)"
+admin_email = "env(GMAIL_USER)"
+sender_name = "PRIME"
+
 [auth.external.google]
 client_id = "736606455987-mlj5derj4jt1r0u8peb0kt85ljcovvqb.apps.googleusercontent.com"
 enabled = true

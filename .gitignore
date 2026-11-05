@@ -10,6 +10,9 @@
 
 # Next.js
 /.next/
+/.next-shell-qa/
+/.next-problem-qa/
+/.next-weather-qa/
 /out/
 
 # Production
@@ -28,6 +31,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+debug.log
+*.log
 
 # Environment files
 .env*
@@ -43,3 +48,9 @@ worker-configuration.d.ts
 
 # Supabase
 supabase/.temp/
+
+# Offline DSA source caches, staging, and local reports
+/.generated/
+/.next-ai-qa/
+/.next-lab-qa/
+.next-planner-qa/
