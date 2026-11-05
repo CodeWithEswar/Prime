@@ -8,24 +8,30 @@ describe("Status Page Charts (Developer-Grade Architecture)", () => {
   const mockObservations: HealthObservation[] = [
     {
       serviceId: "backend-db",
+      scheduledAt: "2026-11-05T01:00:00Z",
       checkedAt: "2026-11-05T01:00:00Z",
       status: "up",
       responseTimeMs: 210,
-      statusCode: 200,
+      httpStatus: 200,
+      errorCode: null,
     },
     {
       serviceId: "backend-db",
+      scheduledAt: "2026-11-05T01:10:00Z",
       checkedAt: "2026-11-05T01:10:00Z",
       status: "up",
       responseTimeMs: 340,
-      statusCode: 200,
+      httpStatus: 200,
+      errorCode: null,
     },
     {
       serviceId: "backend-db",
+      scheduledAt: "2026-11-05T01:20:00Z",
       checkedAt: "2026-11-05T01:20:00Z",
       status: "up",
       responseTimeMs: 420,
-      statusCode: 200,
+      httpStatus: 200,
+      errorCode: null,
     },
   ];
 
