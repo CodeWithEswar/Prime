@@ -52,7 +52,7 @@ describe("PRIME Design System Components (Pure Black × Pure Red)", () => {
       expect(screen.getByText("Problems Solved")).toBeInTheDocument();
       expect(screen.getByText("142")).toBeInTheDocument();
       expect(screen.getByText("/ 450")).toBeInTheDocument();
-      expect(screen.getByText(/↑ \+12/)).toBeInTheDocument();
+      expect(screen.getByText(/Rising \+12/)).toBeInTheDocument();
     });
 
     it("renders metric strip with all elements", () => {
@@ -155,7 +155,7 @@ describe("PRIME Design System Components (Pure Black × Pure Red)", () => {
       const handleSelect = vi.fn();
       const testDate = new Date(2026, 9, 1);
       render(<Calendar selected={testDate} onSelect={handleSelect} />);
-      const dayButton = screen.getByRole("button", { name: "15" });
+      const dayButton = screen.getByRole("button", { name: /October 15, 2026/ });
       fireEvent.click(dayButton);
       expect(handleSelect).toHaveBeenCalled();
     });
