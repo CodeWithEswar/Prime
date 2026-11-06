@@ -92,6 +92,42 @@ export async function pauseStudySessionAction(
   return { success: true };
 }
 
+export async function resumeStudySessionAction(
+  sessionId: string
+): Promise<{ success: boolean; error?: string }> {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return { success: false, error: "Unauthorized" };
+
+  const nowIso = new Date().toISOString();
+
+  // Close any other open active sessions for this user
+  await supabase
+    .from("study_sessions")
+    .update({ ended_at: nowIso })
+    .eq("user_id", user.id)
+    .neq("id", sessionId)
+    .is("ended_at", null);
+
+  // Resume this session: clear ended_at, set started_at to now
+  const { error } = await supabase
+    .from("study_sessions")
+    .update({
+      started_at: nowIso,
+      ended_at: null,
+    })
+    .eq("id", sessionId)
+    .eq("user_id", user.id);
+
+  if (error) return { success: false, error: error.message };
+
+  revalidatePath("/today");
+  revalidatePath("/analytics");
+  return { success: true };
+}
+
 export async function finishStudySessionAction(
   sessionId: string,
   options: { markComplete?: boolean } = {}
