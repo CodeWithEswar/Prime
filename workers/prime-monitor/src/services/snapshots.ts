@@ -89,11 +89,14 @@ export async function executeMonitoringCycle(
     nowStr
   );
 
-  await saveIncidents(
-    env.STATUS_KV,
-    incidentResult.active,
-    incidentResult.history
-  );
+  // Optimization: Only write to incidents KV when state actually changes
+  if (incidentResult.newIncidentCreated || incidentResult.incidentResolved) {
+    await saveIncidents(
+      env.STATUS_KV,
+      incidentResult.active,
+      incidentResult.history
+    );
+  }
 
   // 6. Handle alerts on state transitions
   if (incidentResult.newIncidentCreated) {
@@ -122,7 +125,13 @@ export async function executeMonitoringCycle(
     recentObservations,
     90
   );
-  await saveDailyRollups(env.STATUS_KV, dailyRollups);
+  
+  // Optimization: Daily rollups are already embedded in the public snapshot.
+  // Only write to standalone rollups:daily key during the midnight run or on cold start.
+  const isDailyRun = scheduledTime && new Date(scheduledTime).getUTCHours() === 0 && new Date(scheduledTime).getUTCMinutes() < 15;
+  if (isDailyRun || !previousSnapshot?.dailyRollups?.length) {
+    await saveDailyRollups(env.STATUS_KV, dailyRollups);
+  }
 
   // 8. Calculate rolling uptime metrics
   const uptime24h = calculateWindowUptime(recentObservations, "backend-db", 24);

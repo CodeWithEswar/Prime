@@ -66,7 +66,11 @@ const worker = {
 
     // 90-day Daily Uptime History
     if (url.pathname === "/api/status/history") {
-      const rollups = await getDailyRollups(env.STATUS_KV);
+      let rollups = await getDailyRollups(env.STATUS_KV);
+      if (!rollups || rollups.length === 0) {
+        const snapshot = await getLatestSnapshot(env.STATUS_KV);
+        rollups = snapshot?.dailyRollups || [];
+      }
       return jsonResponse({ dailyRollups: rollups }, 200, 60);
     }
 
