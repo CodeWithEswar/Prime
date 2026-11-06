@@ -335,19 +335,24 @@ export function NotificationInboxView() {
                 </span>
               )}
             </div>
-            {inbox.isLoading ? (
+            {inbox.isLoading || (inbox.isFetching && !inbox.notifications.length) ? (
               <div
                 role="status"
-                aria-label="Loading notifications"
-                className="divide-y divide-[var(--border-subtle)]"
+                aria-label="Loading messages"
+                className="flex flex-col items-center justify-center py-20 px-4 space-y-3 text-center"
               >
-                {[0, 1, 2, 3].map((i) => (
-                  <div className="space-y-3 p-5" key={i}>
-                    <Skeleton className="h-3 w-28" />
-                    <Skeleton className="h-4 w-3/4" />
-                    <Skeleton className="h-3 w-1/2" />
-                  </div>
-                ))}
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/[0.04] border border-white/[0.08]">
+                  <Icon
+                    icon={Loading03Icon}
+                    size={22}
+                    className="animate-spin text-[#FF0000]"
+                  />
+                </div>
+                <p className="text-xs font-mono text-neutral-400">Loading messages…</p>
+                <div className="w-full max-w-md space-y-2 pt-3 opacity-30">
+                  <Skeleton className="h-3 w-32 mx-auto" />
+                  <Skeleton className="h-3 w-64 mx-auto" />
+                </div>
               </div>
             ) : inbox.isError && !inbox.notifications.length ? (
               <div role="alert" className="space-y-3 px-5 py-12 text-center">
