@@ -20,6 +20,7 @@ import {
   Brain02Icon,
   Notification01Icon,
   VideoReplayIcon,
+  CourseIcon,
 } from "@hugeicons/core-free-icons";
 import type { NavGroup, PrimeNavItem } from "./types";
 // Future destinations stay defined but their placeholder screens are not advertised.
@@ -90,6 +91,14 @@ export const NAVIGATION_GROUPS: NavGroup[] = [
         icon: VideoReplayIcon,
         group: "practice",
         matchPrefixes: ["/practice/dsa/playlists", "/dsa/playlists"],
+      },
+      {
+        id: "striver-a2z",
+        label: "Striver A2Z Sheet",
+        href: "/practice/dsa/sheets/striver-a2z",
+        icon: CourseIcon,
+        group: "practice",
+        matchPrefixes: ["/practice/dsa/sheets/striver-a2z", "/dsa/sheets/striver-a2z", "/app/dsa/sheets/striver-a2z"],
       },
       {
         id: "aptitude",

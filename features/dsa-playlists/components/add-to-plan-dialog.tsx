@@ -17,17 +17,26 @@ import {
 import { scheduleLessonPlanAction } from "../server/playlist-actions";
 import type { DSALessonItem } from "../types";
 
-interface AddToPlanDialogProps {
-  lesson: DSALessonItem | null;
+export interface AddToPlanDialogProps {
+  lesson?: { title: string; durationSeconds?: number } | null;
+  videoId?: string;
+  title?: string;
+  durationSeconds?: number;
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }
 
 export function AddToPlanDialog({
   lesson,
+  videoId: propVideoId,
+  title: propTitle,
+  durationSeconds: propDuration,
   open,
   onOpenChange,
 }: AddToPlanDialogProps) {
+  const itemTitle = propTitle || lesson?.title || "DSA Study Item";
+  const itemDuration = propDuration || lesson?.durationSeconds || 1800;
+
   const todayStr = new Date().toISOString().split("T")[0];
   const tomorrowDate = new Date();
   tomorrowDate.setDate(tomorrowDate.getDate() + 1);
@@ -35,20 +44,22 @@ export function AddToPlanDialog({
 
   const [date, setDate] = useState(todayStr);
   const [minutes, setMinutes] = useState(
-    lesson ? Math.max(15, Math.round(lesson.durationSeconds / 60)) : 30
+    Math.max(15, Math.round(itemDuration / 60))
   );
   const [isPending, setIsPending] = useState(false);
 
-  if (!lesson) return null;
+  if (!open) return null;
+
+  const targetVideoId = propVideoId || (lesson as { videoDbId?: string })?.videoDbId || "custom";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsPending(true);
     try {
       const res = await scheduleLessonPlanAction(
-        lesson.videoDbId,
+        targetVideoId,
         date,
-        lesson.title,
+        itemTitle,
         minutes
       );
       if (res.success) {
@@ -76,7 +87,7 @@ export function AddToPlanDialog({
               </DialogTitle>
             </div>
             <DialogDescription className="text-xs text-neutral-400 line-clamp-1">
-              {lesson.title}
+              {itemTitle}
             </DialogDescription>
           </DialogHeader>
 
