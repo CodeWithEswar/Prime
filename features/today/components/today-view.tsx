@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -10,7 +10,7 @@ import { Icon } from "@/components/ui/icon";
 import { Add01Icon } from "@hugeicons/core-free-icons";
 import { toast } from "sonner";
 
-import type { TodaySnapshot, TodayTaskItem, TodayNextAction } from "../types";
+import type { TodaySnapshot, TodayTaskItem, TodayNextAction, ActiveStudySession } from "../types";
 import { TodayHeader } from "./today-header";
 import { DailyLoadStrip } from "./daily-load-strip";
 import { NextActionCard } from "./next-action-card";
@@ -20,7 +20,8 @@ import { DayCompleteView } from "./day-complete-view";
 import { RestDayView } from "./rest-day-view";
 import { EmptyPlanView } from "./empty-plan-view";
 import { TomorrowPreviewSection } from "./tomorrow-preview";
-import { FocusDock } from "./focus-dock";
+import { FocusScreen } from "@/features/focus/components/focus-screen";
+import { focusMutationCoordinator } from "@/features/focus/lib/mutation-coordinator";
 import { WhyTodayDialog } from "./why-today-dialog";
 import { RecordRevisionDialog } from "@/features/revision/components/record-revision-dialog";
 import type { RevisionProblemItem } from "@/features/revision/types";
@@ -50,6 +51,15 @@ export function TodayView({ initialSnapshot }: TodayViewProps) {
   const isComplete = snapshot.plan.status === "complete";
   const isRestDay = snapshot.plan.status === "rest_day";
   const isEmpty = snapshot.plan.status === "empty";
+
+  // Optimistic focus session state for instant (<50ms) visual launch
+  const [activeSession, setActiveSession] = useState<ActiveStudySession | null>(
+    snapshot.activeSession
+  );
+
+  useEffect(() => {
+    setActiveSession(snapshot.activeSession);
+  }, [snapshot.activeSession]);
 
   // Handle Ask PRIME
   const handleOpenAI = () => {
@@ -87,44 +97,56 @@ export function TodayView({ initialSnapshot }: TodayViewProps) {
     }
   };
 
-  // Study Session Handlers
-  const handleStartSession = async (task: TodayTaskItem | TodayNextAction) => {
+  // Instant Optimistic Study Session Start (<50ms)
+  const handleStartSession = (task: TodayTaskItem | TodayNextAction) => {
     const taskId = "id" in task ? task.id : task.taskId;
-    try {
-      const res = await startStudySessionAction(taskId);
-      if (res.success) {
-        toast.success(`Focus session started for ${task.title}`);
-        router.refresh();
-      } else {
-        toast.error(res.error || "Failed to start session");
-      }
-    } catch {
-      toast.error("Failed to start session");
+
+    if (typeof performance !== "undefined") {
+      performance.mark("focus-start-click");
     }
+
+    // 1. Immediately mount FocusScreen on current frame
+    const optimistic: ActiveStudySession = {
+      id: "optimistic-" + Date.now(),
+      taskId,
+      taskTitle: task.title,
+      problemSlug: "problemSlug" in task ? task.problemSlug : undefined,
+      startedAt: new Date().toISOString(),
+      durationSeconds: 0,
+      status: "running",
+    };
+
+    setActiveSession(optimistic);
+
+    if (typeof performance !== "undefined") {
+      performance.mark("focus-start-ui-updated");
+      try {
+        performance.measure("focus-start-response", "focus-start-click", "focus-start-ui-updated");
+      } catch {}
+    }
+
+    // 2. Asynchronously persist session without blocking user
+    focusMutationCoordinator.enqueue({
+      type: "start",
+      taskId,
+      execute: () => startStudySessionAction(taskId),
+      onSuccess: (res) => {
+        if (res.success && res.sessionId) {
+          setActiveSession((prev) => (prev ? { ...prev, id: res.sessionId! } : null));
+        } else {
+          toast.error(res.error || "Failed to sync session with server");
+        }
+      },
+      onError: (err) => {
+        toast.error("Network error starting session. Operating in local focus mode.");
+        console.error("Start focus sync error:", err);
+      },
+    });
   };
 
-  const handlePauseSession = async (sessionId: string) => {
-    try {
-      const res = await pauseStudySessionAction(sessionId);
-      if (res.success) {
-        toast.info("Session paused.");
-        router.refresh();
-      }
-    } catch {
-      toast.error("Failed to pause session");
-    }
-  };
-
-  const handleFinishSession = async (sessionId: string) => {
-    try {
-      const res = await finishStudySessionAction(sessionId, { markComplete: true });
-      if (res.success) {
-        toast.success("Focus session finished and task marked complete.");
-        router.refresh();
-      }
-    } catch {
-      toast.error("Failed to finish session");
-    }
+  const handleExitFocus = () => {
+    setActiveSession(null);
+    router.refresh();
   };
 
   // Handle Review opening for a revision task
@@ -244,16 +266,12 @@ export function TodayView({ initialSnapshot }: TodayViewProps) {
         </div>
       )}
 
-      {/* Floating Focus Dock (active timer) */}
-      {snapshot.activeSession && (
-        <FocusDock
-          session={snapshot.activeSession}
-          onPause={handlePauseSession}
-          onResume={(taskId) => {
-            const task = snapshot.tasks.find((t) => t.id === taskId);
-            if (task) handleStartSession(task);
-          }}
-          onFinish={handleFinishSession}
+      {/* Immersive Full-Window Focus Mode */}
+      {activeSession && (
+        <FocusScreen
+          session={activeSession}
+          task={snapshot.tasks.find((t) => t.id === activeSession.taskId)}
+          onExit={handleExitFocus}
         />
       )}
 

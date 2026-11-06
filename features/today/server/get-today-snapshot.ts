@@ -192,6 +192,28 @@ export async function getTodaySnapshot(
     .limit(1)
     .maybeSingle();
 
+  let sessionRow = activeSessionRow;
+  let sessionStatus: "running" | "paused" = "running";
+
+  if (!sessionRow) {
+    const inProgressTask = taskRows.find((t) => t.status === "in_progress");
+    if (inProgressTask) {
+      const { data: pausedSessionRow } = await supabase
+        .from("study_sessions")
+        .select("*")
+        .eq("user_id", userId)
+        .eq("task_id", inProgressTask.id)
+        .order("ended_at", { ascending: false })
+        .limit(1)
+        .maybeSingle();
+
+      if (pausedSessionRow) {
+        sessionRow = pausedSessionRow;
+        sessionStatus = "paused";
+      }
+    }
+  }
+
   // 5. Query active revision counts for context
   const { data: revisionCounts } = await supabase
     .from("revision_items")
@@ -448,7 +470,7 @@ export async function getTodaySnapshot(
     status = "rest_day";
   } else if (totalTaskCount > 0 && completedTaskCount === totalTaskCount) {
     status = "complete";
-  } else if (completedTaskCount > 0 || activeSessionRow !== null) {
+  } else if (completedTaskCount > 0 || sessionRow !== null) {
     status = "in_progress";
   }
 
@@ -456,16 +478,16 @@ export async function getTodaySnapshot(
 
   // 12. Active Session Data
   let activeSession: ActiveStudySession | null = null;
-  if (activeSessionRow) {
-    const task = tasks.find((t) => t.id === activeSessionRow.task_id);
+  if (sessionRow) {
+    const task = tasks.find((t) => t.id === sessionRow.task_id);
     activeSession = {
-      id: activeSessionRow.id,
-      taskId: activeSessionRow.task_id ?? "",
+      id: sessionRow.id,
+      taskId: sessionRow.task_id ?? "",
       taskTitle: task?.title || "Focus Session",
       problemSlug: task?.problemSlug,
-      startedAt: activeSessionRow.started_at,
-      durationSeconds: activeSessionRow.duration_seconds || 0,
-      status: "running",
+      startedAt: sessionRow.started_at,
+      durationSeconds: sessionRow.duration_seconds || 0,
+      status: sessionStatus,
     };
   }
 
