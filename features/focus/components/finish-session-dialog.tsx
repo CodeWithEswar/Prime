@@ -11,6 +11,7 @@ import {
   AlertDialogCancel,
   AlertDialogAction,
 } from "@/components/ui/alert-dialog";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Icon } from "@/components/ui/icon";
 import { CheckmarkCircle02Icon } from "@hugeicons/core-free-icons";
 
@@ -59,15 +60,20 @@ export function FinishSessionDialog({
         </div>
 
         {/* Option to mark task complete */}
-        <label className="flex items-center gap-2.5 text-xs text-neutral-300 cursor-pointer select-none py-1">
-          <input
-            type="checkbox"
+        <div className="flex items-center gap-3 py-1 select-none">
+          <Checkbox
+            id="mark-task-complete"
             checked={markComplete}
-            onChange={(e) => setMarkComplete(e.target.checked)}
-            className="w-4 h-4 rounded border-white/20 bg-neutral-900 text-[#FF0000] focus:ring-0 cursor-pointer"
+            onCheckedChange={setMarkComplete}
+            aria-label="Mark task complete in daily plan"
           />
-          <span>Mark task complete in daily plan</span>
-        </label>
+          <label
+            htmlFor="mark-task-complete"
+            className="text-xs text-neutral-300 hover:text-white cursor-pointer font-sans leading-none transition-colors"
+          >
+            Mark task complete in daily plan
+          </label>
+        </div>
 
         <AlertDialogFooter className="pt-3 gap-2">
           <AlertDialogCancel
