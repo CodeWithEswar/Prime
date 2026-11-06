@@ -137,7 +137,24 @@ export async function getStriverAnalytics(): Promise<StriverAnalyticsData> {
   const solvedCount = solvedProblemMap.size;
   const completedVideosCount = completedVideos.length;
 
-  // 4. Learning Completion Trend (Past 30 Days)
+  // 4. Learning Completion Trend & Activity Maps
+  const allVideoMap = new Map<string, number>();
+  const allProblemMap = new Map<string, number>();
+
+  for (const vp of completedVideos) {
+    const dateStr = (vp.completed_at || vp.updated_at || "").slice(0, 10);
+    if (dateStr) {
+      allVideoMap.set(dateStr, (allVideoMap.get(dateStr) || 0) + 1);
+    }
+  }
+
+  for (const item of solvedProblemMap.values()) {
+    const dateStr = item.solvedAt.slice(0, 10);
+    if (dateStr) {
+      allProblemMap.set(dateStr, (allProblemMap.get(dateStr) || 0) + 1);
+    }
+  }
+
   const now = new Date();
   const past30Days: string[] = [];
   for (let i = 29; i >= 0; i--) {
@@ -146,32 +163,11 @@ export async function getStriverAnalytics(): Promise<StriverAnalyticsData> {
     past30Days.push(d.toISOString().slice(0, 10)); // YYYY-MM-DD
   }
 
-  const dailyVideoMap = new Map<string, number>();
-  const dailyProblemMap = new Map<string, number>();
-  past30Days.forEach((day) => {
-    dailyVideoMap.set(day, 0);
-    dailyProblemMap.set(day, 0);
-  });
-
-  for (const vp of completedVideos) {
-    const dateStr = (vp.completed_at || vp.updated_at || "").slice(0, 10);
-    if (dailyVideoMap.has(dateStr)) {
-      dailyVideoMap.set(dateStr, (dailyVideoMap.get(dateStr) || 0) + 1);
-    }
-  }
-
-  for (const item of solvedProblemMap.values()) {
-    const dateStr = item.solvedAt.slice(0, 10);
-    if (dailyProblemMap.has(dateStr)) {
-      dailyProblemMap.set(dateStr, (dailyProblemMap.get(dateStr) || 0) + 1);
-    }
-  }
-
   let runningVideos = 0;
   let runningProblems = 0;
   const videoCompletionTrend = past30Days.map((day) => {
-    const vids = dailyVideoMap.get(day) || 0;
-    const probs = dailyProblemMap.get(day) || 0;
+    const vids = allVideoMap.get(day) || 0;
+    const probs = allProblemMap.get(day) || 0;
     runningVideos += vids;
     runningProblems += probs;
     return {
@@ -320,17 +316,17 @@ export async function getStriverAnalytics(): Promise<StriverAnalyticsData> {
     problemsSolved: weeklyMap.get(day)?.probs || 0,
   }));
 
-  // 8. 12-Week Activity Heatmap (84 Days)
+  // 8. 26-Week Extended Activity Heatmap (182 Days for full desktop span)
   const heatmapDays: StriverHeatmapDay[] = [];
   const activeDatesSet = new Set<string>();
 
-  for (let i = 83; i >= 0; i--) {
+  for (let i = 181; i >= 0; i--) {
     const d = new Date(now);
     d.setDate(d.getDate() - i);
     const dateStr = d.toISOString().slice(0, 10);
 
-    const vids = dailyVideoMap.get(dateStr) || 0;
-    const probs = dailyProblemMap.get(dateStr) || 0;
+    const vids = allVideoMap.get(dateStr) || 0;
+    const probs = allProblemMap.get(dateStr) || 0;
     const total = vids + probs;
 
     if (total > 0) {
