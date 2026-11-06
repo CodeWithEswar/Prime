@@ -8,8 +8,10 @@ import {
   computeInwardProgress,
   computeInwardAcceleration,
   computeRayAlpha,
+  computeEmberAlpha,
 } from "@/features/focus/lib/ray-geometry";
 import { RayEngine } from "@/features/focus/lib/ray-engine";
+import { magneticBlazeConfig } from "@/features/focus/types";
 
 describe("PRIME Focus Mode — State Machine & Performance", () => {
   beforeEach(() => {
@@ -365,26 +367,52 @@ describe("PRIME Focus Mode — State Machine & Performance", () => {
       expect(computeRayAlpha(baseOpacity, 0.85)).toBeLessThan(0.8);
       expect(computeRayAlpha(baseOpacity, 1.0)).toBe(0);
     });
+
+    it("fades flaming ember alpha before entering the timer exclusion zone", () => {
+      const baseOpacity = 0.9;
+
+      // Outer entry: fades in from 0
+      expect(computeEmberAlpha(baseOpacity, 0.0)).toBe(0);
+      expect(computeEmberAlpha(baseOpacity, 0.075)).toBeCloseTo(0.45);
+
+      // Mid vortex: full warmth
+      expect(computeEmberAlpha(baseOpacity, 0.4)).toBe(0.9);
+      expect(computeEmberAlpha(baseOpacity, 0.65)).toBe(0.9);
+
+      // Exclusion zone: drops smoothly to 0
+      expect(computeEmberAlpha(baseOpacity, 0.85)).toBeLessThan(0.9);
+      expect(computeEmberAlpha(baseOpacity, 1.0)).toBe(0);
+    });
   });
 
-  describe("RayEngine Simulation Lifecycle & Adaptive Scaling", () => {
-    it("scales ray count adaptively based on device width", () => {
+  describe("RayEngine Simulation Lifecycle & Adaptive Scaling (V2)", () => {
+    it("uses calibrated ~35% slower speed multiplier config", () => {
+      expect(magneticBlazeConfig.speedMultiplier).toBe(0.65);
+      expect(magneticBlazeConfig.attractionStrength).toBe(0.8);
+      expect(magneticBlazeConfig.angularDrift).toBe(0.12);
+      expect(magneticBlazeConfig.trailLengthMultiplier).toBe(1.25);
+    });
+
+    it("scales dense ray and flaming ember counts adaptively based on device width", () => {
       const engine = new RayEngine();
 
       // Mobile viewport (<640px)
       engine.resize(375, 667);
-      expect(engine.getRayCount()).toBe(75);
+      expect(engine.getRayCount()).toBe(105);
+      expect(engine.getEmberCount()).toBe(28);
 
       // Tablet viewport (640-1024px)
       engine.resize(768, 1024);
-      expect(engine.getRayCount()).toBe(120);
+      expect(engine.getRayCount()).toBe(160);
+      expect(engine.getEmberCount()).toBe(45);
 
       // Desktop viewport (>1024px)
       engine.resize(1920, 1080);
-      expect(engine.getRayCount()).toBe(185);
+      expect(engine.getRayCount()).toBe(250);
+      expect(engine.getEmberCount()).toBe(68);
     });
 
-    it("moves rays strictly inward toward the center", () => {
+    it("moves rays and embers strictly inward toward the center", () => {
       const engine = new RayEngine();
       engine.resize(1200, 800);
 
