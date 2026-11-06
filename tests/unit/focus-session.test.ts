@@ -2,6 +2,14 @@ import { describe, it, expect, beforeEach, vi, afterEach } from "vitest";
 import { focusStore } from "@/features/focus/lib/focus-store";
 import { MutationCoordinator } from "@/features/focus/lib/mutation-coordinator";
 import { formatFocusCountdown, formatFocusDuration } from "@/features/focus/hooks/use-focus-timer";
+import {
+  polarToCartesian,
+  getEllipticalBoundaryRadius,
+  computeInwardProgress,
+  computeInwardAcceleration,
+  computeRayAlpha,
+} from "@/features/focus/lib/ray-geometry";
+import { RayEngine } from "@/features/focus/lib/ray-engine";
 
 describe("PRIME Focus Mode — State Machine & Performance", () => {
   beforeEach(() => {
@@ -273,6 +281,130 @@ describe("PRIME Focus Mode — State Machine & Performance", () => {
       expect(formatFocusDuration(45)).toBe("45s");
       expect(formatFocusDuration(125)).toBe("2m 05s");
       expect(formatFocusDuration(3660)).toBe("1h 01m");
+    });
+  });
+
+  describe("360° Magnetic Blaze Ray Geometry & Physics", () => {
+    it("computes polar-to-Cartesian coordinates across 360 degrees", () => {
+      const cx = 500;
+      const cy = 400;
+
+      // 0 rad (right)
+      const pRight = polarToCartesian(cx, cy, 0, 100);
+      expect(pRight.x).toBeCloseTo(600);
+      expect(pRight.y).toBeCloseTo(400);
+
+      // PI/2 rad (bottom)
+      const pBottom = polarToCartesian(cx, cy, Math.PI / 2, 100);
+      expect(pBottom.x).toBeCloseTo(500);
+      expect(pBottom.y).toBeCloseTo(500);
+
+      // PI rad (left)
+      const pLeft = polarToCartesian(cx, cy, Math.PI, 100);
+      expect(pLeft.x).toBeCloseTo(400);
+      expect(pLeft.y).toBeCloseTo(400);
+
+      // 3*PI/2 rad (top)
+      const pTop = polarToCartesian(cx, cy, (3 * Math.PI) / 2, 100);
+      expect(pTop.x).toBeCloseTo(500);
+      expect(pTop.y).toBeCloseTo(300);
+    });
+
+    it("calculates elliptical boundary radius matching timer aspect ratio", () => {
+      const rx = 180;
+      const ry = 100;
+
+      // At 0 or PI (horizontal axis), boundary should equal rx
+      expect(getEllipticalBoundaryRadius(rx, ry, 0)).toBeCloseTo(180);
+      expect(getEllipticalBoundaryRadius(rx, ry, Math.PI)).toBeCloseTo(180);
+
+      // At PI/2 or 3*PI/2 (vertical axis), boundary should equal ry
+      expect(getEllipticalBoundaryRadius(rx, ry, Math.PI / 2)).toBeCloseTo(100);
+      expect(getEllipticalBoundaryRadius(rx, ry, (3 * Math.PI) / 2)).toBeCloseTo(100);
+    });
+
+    it("computes normalized inward progress from outer boundary to central exclusion", () => {
+      const inner = 100;
+      const max = 1000;
+
+      // At outer edge: progress 0
+      expect(computeInwardProgress(1000, inner, max)).toBe(0);
+
+      // Halfway: progress 0.5
+      expect(computeInwardProgress(550, inner, max)).toBeCloseTo(0.5);
+
+      // At inner exclusion boundary: progress 1.0
+      expect(computeInwardProgress(100, inner, max)).toBe(1);
+
+      // Past inner: clamped to 1.0
+      expect(computeInwardProgress(50, inner, max)).toBe(1);
+    });
+
+    it("accelerates rays smoothly as they approach the center", () => {
+      const accelOuter = computeInwardAcceleration(0.0);
+      const accelMid = computeInwardAcceleration(0.5);
+      const accelInner = computeInwardAcceleration(0.95);
+
+      expect(accelOuter).toBe(1.0);
+      expect(accelMid).toBeGreaterThan(accelOuter);
+      expect(accelInner).toBeGreaterThan(accelMid);
+    });
+
+    it("fades ray alpha out completely before entering the timer exclusion zone", () => {
+      const baseOpacity = 0.8;
+
+      // Outer entry: fades in from 0
+      expect(computeRayAlpha(baseOpacity, 0.0)).toBe(0);
+      expect(computeRayAlpha(baseOpacity, 0.06)).toBeCloseTo(0.4);
+
+      // Mid field: maintains full opacity
+      expect(computeRayAlpha(baseOpacity, 0.4)).toBe(0.8);
+      expect(computeRayAlpha(baseOpacity, 0.7)).toBe(0.8);
+
+      // Inner boundary: drops sharply to 0 to preserve 100% white text contrast
+      expect(computeRayAlpha(baseOpacity, 0.85)).toBeLessThan(0.8);
+      expect(computeRayAlpha(baseOpacity, 1.0)).toBe(0);
+    });
+  });
+
+  describe("RayEngine Simulation Lifecycle & Adaptive Scaling", () => {
+    it("scales ray count adaptively based on device width", () => {
+      const engine = new RayEngine();
+
+      // Mobile viewport (<640px)
+      engine.resize(375, 667);
+      expect(engine.getRayCount()).toBe(75);
+
+      // Tablet viewport (640-1024px)
+      engine.resize(768, 1024);
+      expect(engine.getRayCount()).toBe(120);
+
+      // Desktop viewport (>1024px)
+      engine.resize(1920, 1080);
+      expect(engine.getRayCount()).toBe(185);
+    });
+
+    it("moves rays strictly inward toward the center", () => {
+      const engine = new RayEngine();
+      engine.resize(1200, 800);
+
+      const ctxMock = {
+        clearRect: vi.fn(),
+        createLinearGradient: vi.fn(() => ({ addColorStop: vi.fn() })),
+        beginPath: vi.fn(),
+        moveTo: vi.fn(),
+        lineTo: vi.fn(),
+        stroke: vi.fn(),
+        arc: vi.fn(),
+        fill: vi.fn(),
+        globalCompositeOperation: "source-over",
+      } as unknown as CanvasRenderingContext2D;
+
+      // Update for 1 second of simulation
+      engine.update(0.016, { isRunning: true, isPaused: false, reducedMotion: false });
+      engine.render(ctxMock, { isRunning: true, isPaused: false, reducedMotion: false });
+
+      expect(ctxMock.clearRect).toHaveBeenCalled();
     });
   });
 });

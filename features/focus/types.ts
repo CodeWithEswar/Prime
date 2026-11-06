@@ -37,6 +37,24 @@ export interface FocusSessionMetadata {
   targetMinutes: number;
 }
 
+export type RayLayer = "outer" | "mid" | "inner";
+
+export interface MagneticRay {
+  id: number;
+  angle: number;
+  radius: number;
+  baseLength: number;
+  length: number;
+  baseSpeed: number;
+  speed: number;
+  width: number;
+  opacity: number;
+  energy: number;
+  phase: number;
+  angularDrift: number;
+  layer: RayLayer;
+}
+
 export interface MagneticParticle {
   id: number;
   x: number;
