@@ -10,6 +10,7 @@ import {
   Calendar03Icon,
   Delete02Icon,
   MoreHorizontalIcon,
+  Loading03Icon,
 } from "@hugeicons/core-free-icons";
 import { Icon } from "@/components/ui/icon";
 import { Button } from "@/components/ui/button";
@@ -177,13 +178,22 @@ export function NotificationInboxView() {
               <h2 className="text-base font-semibold">
                 {inboxTabs.find((t) => t.id === tab)?.label}
               </h2>
-              <p className="mt-0.5 text-xs text-[var(--text-secondary)]">
-                {inbox.countAvailable
-                  ? `${inbox.unreadCount} unread notification${inbox.unreadCount === 1 ? "" : "s"}`
-                  : inbox.isError
-                    ? "Inbox unavailable"
-                    : "Loading your inbox…"}
-              </p>
+              <div className="mt-0.5 flex items-center gap-1.5 text-xs text-[var(--text-secondary)]">
+                {inbox.countAvailable ? (
+                  <span>{`${inbox.unreadCount} unread notification${inbox.unreadCount === 1 ? "" : "s"}`}</span>
+                ) : inbox.isError ? (
+                  <span>Inbox unavailable</span>
+                ) : (
+                  <span className="inline-flex items-center gap-1.5">
+                    <Icon
+                      icon={Loading03Icon}
+                      size={12}
+                      className="animate-spin text-[var(--text-secondary)] shrink-0"
+                    />
+                    <span>Loading your inbox…</span>
+                  </span>
+                )}
+              </div>
             </div>
             <div className="flex gap-2">
               <Button
