@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import { redirect } from "next/navigation";
 import { PageFrame } from "@/components/shell";
 import { getDSAPlaylistDetail } from "@/features/dsa-playlists/server/get-playlist-detail";
 import { PlaylistDetailView } from "@/features/dsa-playlists/components/playlist-detail-view";
@@ -11,6 +12,13 @@ interface PageProps {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
+  if (slug === "kunal-java-dsa" || slug === "kunal-kushwaha") {
+    return {
+      title: "Java + DSA Bootcamp — Kunal Kushwaha — PRIME",
+      description:
+        "Complete Java and DSA Bootcamp by Kunal Kushwaha with 19 modules, 69 verified master lectures, timestamp chapters, assignments, and FAANG interview preparation.",
+    };
+  }
   try {
     const detail = await getDSAPlaylistDetail(slug);
     return {
@@ -55,6 +63,10 @@ function PlaylistDetailSkeleton() {
 async function DSAPlaylistDetailContent({ params, searchParams }: PageProps) {
   const { slug } = await params;
   const { v: preferredVideoId } = await searchParams;
+
+  if (slug === "kunal-java-dsa" || slug === "kunal-kushwaha") {
+    redirect(`/practice/dsa/playlists/kunal-kushwaha${preferredVideoId ? `?v=${preferredVideoId}` : ""}`);
+  }
 
   const detail = await getDSAPlaylistDetail(slug, preferredVideoId);
 

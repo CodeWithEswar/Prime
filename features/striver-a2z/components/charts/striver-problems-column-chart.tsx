@@ -150,10 +150,7 @@ export function StriverProblemsColumnChart({ data }: StriverProblemsColumnChartP
                 cursor={
                   <PrimeSlimBarCursor
                     layoutMode={layoutMode}
-                    maxWidth={layoutMode === "stacked" ? 42 : 72}
-                    barWidth={18}
-                    barGap={4}
-                    totalSlots={3}
+                    maxWidth={layoutMode === "stacked" ? 28 : 52}
                   />
                 }
                 content={(props) => (

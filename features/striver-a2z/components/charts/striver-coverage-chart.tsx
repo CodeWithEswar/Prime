@@ -67,15 +67,7 @@ export function StriverCoverageChart({ data }: StriverCoverageChartProps) {
               />
 
               <Tooltip
-                cursor={
-                  <PrimeSlimBarCursor
-                    layoutMode="grouped"
-                    maxWidth={56}
-                    barWidth={22}
-                    barGap={4}
-                    totalSlots={2}
-                  />
-                }
+                cursor={<PrimeSlimBarCursor layoutMode="grouped" maxWidth={44} />}
                 content={(props) => (
                   <PrimeChartTooltip
                     active={props.active}
