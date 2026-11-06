@@ -589,7 +589,7 @@ export async function buildProposal(
       return [
         {
           title: name,
-          minutes: command.minutes,
+          minutes: day.estimatedMinutes ?? command.minutes ?? 60,
           priority: "P2",
           type: "custom",
           source: "user_created",
