@@ -51,3 +51,4 @@ describe("FinishSessionDialog — Design System Checkbox Integration", () => {
     expect(handleConfirm).toHaveBeenCalledWith({ markComplete: true });
   });
 });
+
