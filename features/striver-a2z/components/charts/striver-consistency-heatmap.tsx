@@ -8,6 +8,13 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { Icon } from "@/components/ui/icon";
+import {
+  FireIcon,
+  FlashIcon,
+  Calendar01Icon,
+  Activity01Icon,
+} from "@hugeicons/core-free-icons";
 import { cn } from "@/lib/utils";
 import type { StriverHeatmapDay } from "../../types";
 
@@ -15,118 +22,362 @@ interface StriverConsistencyHeatmapProps {
   data: StriverHeatmapDay[];
 }
 
+const MONTH_NAMES = [
+  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+];
+
 export function StriverConsistencyHeatmap({ data }: StriverConsistencyHeatmapProps) {
-  // Organize 84 days into 12 weeks (columns) of 7 days (rows)
+  // Range selection (12W, 26W, or all available data)
+  const availableWeeks = Math.ceil(data.length / 7);
+  const [selectedRange, setSelectedRange] = React.useState<"12w" | "26w" | "all">(() => {
+    if (availableWeeks >= 26) return "26w";
+    return "all";
+  });
+
+  // Filter data based on selected range
+  const activeData = React.useMemo(() => {
+    if (selectedRange === "12w") {
+      return data.slice(-84); // Past 12 weeks (84 days)
+    }
+    if (selectedRange === "26w") {
+      return data.slice(-182); // Past 26 weeks (182 days)
+    }
+    return data;
+  }, [data, selectedRange]);
+
+  // Organize days into columns of 7 days (weeks)
   const weeks = React.useMemo(() => {
     const cols: StriverHeatmapDay[][] = [];
     let currentWeek: StriverHeatmapDay[] = [];
 
-    data.forEach((day, index) => {
+    activeData.forEach((day, index) => {
       currentWeek.push(day);
-      if (currentWeek.length === 7 || index === data.length - 1) {
+      if (currentWeek.length === 7 || index === activeData.length - 1) {
         cols.push(currentWeek);
         currentWeek = [];
       }
     });
 
     return cols;
-  }, [data]);
+  }, [activeData]);
 
-  const totalActions = data.reduce((s, d) => s + d.count, 0);
-  const activeDays = data.filter((d) => d.count > 0).length;
+  // Calculate streaks & metrics
+  const { currentStreak, longestStreak, activeDays, totalActions, consistencyRate } =
+    React.useMemo(() => {
+      let current = 0;
+      let longest = 0;
+      let temp = 0;
+      let active = 0;
+      let total = 0;
+
+      // Chronological order for streak calculation
+      const sorted = [...activeData].sort((a, b) => a.date.localeCompare(b.date));
+
+      for (const d of sorted) {
+        total += d.count;
+        if (d.count > 0) {
+          active++;
+          temp++;
+          if (temp > longest) longest = temp;
+        } else {
+          temp = 0;
+        }
+      }
+
+      // Current active streak ending today or yesterday
+      for (let i = sorted.length - 1; i >= 0; i--) {
+        if (sorted[i].count > 0) {
+          current++;
+        } else {
+          // If latest entry is today and empty, user may study later today; check yesterday
+          if (i === sorted.length - 1) {
+            continue;
+          }
+          break;
+        }
+      }
+
+      const rate = sorted.length > 0 ? Math.round((active / sorted.length) * 100) : 0;
+
+      return {
+        currentStreak: current,
+        longestStreak: longest,
+        activeDays: active,
+        totalActions: total,
+        consistencyRate: rate,
+      };
+    }, [activeData]);
+
+  // Determine which columns display a month label
+  const monthLabels = React.useMemo(() => {
+    let lastMonth = -1;
+    return weeks.map((week) => {
+      if (!week[0]) return "";
+      const d = new Date(week[0].date);
+      const m = d.getMonth();
+      if (m !== lastMonth) {
+        lastMonth = m;
+        return MONTH_NAMES[m];
+      }
+      return "";
+    });
+  }, [weeks]);
 
   const getIntensityColor = (level: number) => {
     switch (level) {
       case 4:
-        return "bg-[#FF0000] border-[#FF4D4D]";
+        return "bg-[#FF0000] border-[#FF6666] shadow-[0_0_12px_rgba(255,0,0,0.5)]";
       case 3:
-        return "bg-[#C00000] border-[#E00000]";
+        return "bg-[#C00000] border-[#E00000] shadow-[0_0_8px_rgba(255,0,0,0.3)]";
       case 2:
-        return "bg-[#7A0000] border-[#990000]";
+        return "bg-[#7A0000] border-[#990000] shadow-[0_0_6px_rgba(255,0,0,0.18)]";
       case 1:
-        return "bg-[#3D0A0A] border-[#551010]";
+        return "bg-[#3D0A0A] border-[#661111]";
       default:
-        return "bg-[#121212] border-white/[0.04]";
+        return "bg-white/[0.03] border-white/[0.05] hover:border-white/20";
     }
   };
 
   return (
     <PrimeChartContainer
       title="Learning Activity & Momentum Heatmap"
-      subtitle="12-week calendar tracking daily lecture watching and coding problem submissions."
+      subtitle="Engineering contribution calendar tracking daily video lectures, problem solving, and practice velocity."
       badge={`${activeDays} Active Days (${totalActions} Actions)`}
-      minHeight={240}
+      minHeight={320}
+      controls={
+        data.length > 84 ? (
+          <div className="inline-flex items-center gap-0.5 border border-white/[0.08] rounded-lg p-0.5 bg-black/60 font-mono text-[10px]">
+            <button
+              type="button"
+              onClick={() => setSelectedRange("12w")}
+              className={cn(
+                "px-2.5 py-1 rounded-md transition-all select-none",
+                selectedRange === "12w"
+                  ? "bg-white/[0.15] text-white font-bold shadow-xs"
+                  : "text-neutral-400 hover:text-white"
+              )}
+            >
+              12 Weeks
+            </button>
+            <button
+              type="button"
+              onClick={() => setSelectedRange("26w")}
+              className={cn(
+                "px-2.5 py-1 rounded-md transition-all select-none",
+                selectedRange === "26w"
+                  ? "bg-white/[0.15] text-white font-bold shadow-xs"
+                  : "text-neutral-400 hover:text-white"
+              )}
+            >
+              26 Weeks
+            </button>
+            <button
+              type="button"
+              onClick={() => setSelectedRange("all")}
+              className={cn(
+                "px-2.5 py-1 rounded-md transition-all select-none",
+                selectedRange === "all"
+                  ? "bg-white/[0.15] text-white font-bold shadow-xs"
+                  : "text-neutral-400 hover:text-white"
+              )}
+            >
+              All
+            </button>
+          </div>
+        ) : undefined
+      }
     >
-      <div className="pt-2 space-y-4">
-        <TooltipProvider delayDuration={150}>
-          <div className="overflow-x-auto pb-2 scrollbar-none">
-            <div className="inline-flex gap-1.5 items-start select-none">
-              {/* Day-of-week labels */}
-              <div className="flex flex-col gap-1.5 text-[9px] font-mono text-neutral-500 pt-0.5 pr-2">
-                <span className="h-3.5 leading-none">Mon</span>
-                <span className="h-3.5 leading-none opacity-0">Tue</span>
-                <span className="h-3.5 leading-none">Wed</span>
-                <span className="h-3.5 leading-none opacity-0">Thu</span>
-                <span className="h-3.5 leading-none">Fri</span>
-                <span className="h-3.5 leading-none opacity-0">Sat</span>
-                <span className="h-3.5 leading-none">Sun</span>
+      <div className="space-y-6 pt-2">
+        {/* 1. Four Momentum KPI Ribbon Cards (Full Width) */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 font-mono">
+          <div className="p-3 sm:p-3.5 rounded-lg border border-white/[0.07] bg-white/[0.02] flex items-center justify-between">
+            <div className="space-y-0.5">
+              <span className="text-[10px] uppercase text-neutral-500 font-semibold">
+                Current Streak
+              </span>
+              <div className="text-base sm:text-lg font-bold text-white flex items-baseline gap-1">
+                <span className="text-[#FF0000]">{currentStreak}</span>
+                <span className="text-xs text-neutral-400 font-normal">
+                  {currentStreak === 1 ? "day" : "days"}
+                </span>
               </div>
+            </div>
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#FF0000]/10 border border-[#FF0000]/20 text-[#FF0000]">
+              <Icon icon={FireIcon} size={16} />
+            </div>
+          </div>
 
-              {/* 12 Weekly Columns */}
-              {weeks.map((week, wIndex) => (
-                <div key={wIndex} className="flex flex-col gap-1.5">
-                  {week.map((day) => (
-                    <Tooltip key={day.date}>
-                      <TooltipTrigger asChild>
-                        <div
-                          tabIndex={0}
-                          className={cn(
-                            "h-3.5 w-3.5 rounded-xs border transition-all duration-150 cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white",
-                            getIntensityColor(day.level),
-                            "hover:scale-110 hover:border-white/40"
-                          )}
-                          aria-label={`${day.date}: ${day.count} activities`}
-                        />
-                      </TooltipTrigger>
-                      <TooltipContent side="top" className="text-xs font-mono p-2.5 space-y-1">
-                        <div className="font-bold text-white border-b border-white/10 pb-1">
-                          {day.date}
-                        </div>
-                        <div className="text-[11px] text-neutral-300">
-                          {day.count === 0 ? (
-                            <span className="text-neutral-500">No study activity recorded</span>
-                          ) : (
-                            <span>
-                              <strong className="text-white">{day.count}</strong> total actions:{" "}
-                              <span className="text-[#FF4D4D]">{day.videos} lectures</span>,{" "}
-                              <span className="text-emerald-400">{day.problems} problems</span>
-                            </span>
-                          )}
-                        </div>
-                      </TooltipContent>
-                    </Tooltip>
+          <div className="p-3 sm:p-3.5 rounded-lg border border-white/[0.07] bg-white/[0.02] flex items-center justify-between">
+            <div className="space-y-0.5">
+              <span className="text-[10px] uppercase text-neutral-500 font-semibold">
+                Longest Streak
+              </span>
+              <div className="text-base sm:text-lg font-bold text-white flex items-baseline gap-1">
+                <span>{longestStreak}</span>
+                <span className="text-xs text-neutral-400 font-normal">
+                  {longestStreak === 1 ? "day" : "days"}
+                </span>
+              </div>
+            </div>
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/[0.04] border border-white/[0.08] text-neutral-300">
+              <Icon icon={FlashIcon} size={16} />
+            </div>
+          </div>
+
+          <div className="p-3 sm:p-3.5 rounded-lg border border-white/[0.07] bg-white/[0.02] flex items-center justify-between">
+            <div className="space-y-0.5">
+              <span className="text-[10px] uppercase text-neutral-500 font-semibold">
+                Active Study Days
+              </span>
+              <div className="text-base sm:text-lg font-bold text-white flex items-baseline gap-1">
+                <span>{activeDays}</span>
+                <span className="text-xs text-neutral-400 font-normal">
+                  / {activeData.length}d
+                </span>
+              </div>
+            </div>
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/[0.04] border border-white/[0.08] text-neutral-300">
+              <Icon icon={Calendar01Icon} size={16} />
+            </div>
+          </div>
+
+          <div className="p-3 sm:p-3.5 rounded-lg border border-white/[0.07] bg-white/[0.02] flex items-center justify-between">
+            <div className="space-y-0.5">
+              <span className="text-[10px] uppercase text-neutral-500 font-semibold">
+                Study Velocity
+              </span>
+              <div className="text-base sm:text-lg font-bold text-white flex items-baseline gap-1">
+                <span>{totalActions}</span>
+                <span className="text-xs text-neutral-400 font-normal">
+                  actions ({consistencyRate}%)
+                </span>
+              </div>
+            </div>
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/[0.04] border border-white/[0.08] text-neutral-300">
+              <Icon icon={Activity01Icon} size={16} />
+            </div>
+          </div>
+        </div>
+
+        {/* 2. Expanded Heatmap Calendar Grid with Month Headers */}
+        <TooltipProvider delayDuration={100}>
+          <div className="overflow-x-auto pb-2 pt-1 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
+            <div className="inline-flex flex-col gap-1.5 select-none min-w-full">
+              {/* Month Labels Row */}
+              <div className="flex items-center text-[10px] font-mono text-neutral-400 h-4">
+                {/* Spacer matching day-of-week label width */}
+                <div className="w-8 shrink-0" />
+
+                {/* Month labels aligned with week columns */}
+                <div className="flex gap-1.5 sm:gap-2 flex-1">
+                  {weeks.map((week, idx) => (
+                    <div
+                      key={idx}
+                      className="w-4 sm:w-5 md:w-6 shrink-0 text-left font-semibold"
+                    >
+                      {monthLabels[idx] && (
+                        <span className="text-neutral-300 text-[10px]">
+                          {monthLabels[idx]}
+                        </span>
+                      )}
+                    </div>
                   ))}
                 </div>
-              ))}
+              </div>
+
+              {/* Day-of-week labels + Weekly Grid Columns */}
+              <div className="flex items-start">
+                {/* Day-of-week vertical labels */}
+                <div className="w-8 shrink-0 flex flex-col gap-1.5 sm:gap-2 text-[10px] font-mono text-neutral-500 pt-0.5">
+                  <span className="h-4 sm:h-5 md:h-6 leading-none flex items-center">Mon</span>
+                  <span className="h-4 sm:h-5 md:h-6 leading-none flex items-center opacity-0">Tue</span>
+                  <span className="h-4 sm:h-5 md:h-6 leading-none flex items-center">Wed</span>
+                  <span className="h-4 sm:h-5 md:h-6 leading-none flex items-center opacity-0">Thu</span>
+                  <span className="h-4 sm:h-5 md:h-6 leading-none flex items-center">Fri</span>
+                  <span className="h-4 sm:h-5 md:h-6 leading-none flex items-center opacity-0">Sat</span>
+                  <span className="h-4 sm:h-5 md:h-6 leading-none flex items-center">Sun</span>
+                </div>
+
+                {/* Weekly Columns (Expanded & Styled) */}
+                <div className="flex gap-1.5 sm:gap-2 flex-1">
+                  {weeks.map((week, wIndex) => (
+                    <div key={wIndex} className="flex flex-col gap-1.5 sm:gap-2 shrink-0">
+                      {week.map((day) => (
+                        <Tooltip key={day.date}>
+                          <TooltipTrigger asChild>
+                            <div
+                              tabIndex={0}
+                              className={cn(
+                                "h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 rounded-xs border transition-all duration-150 cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white",
+                                getIntensityColor(day.level),
+                                "hover:scale-115 hover:z-10 hover:border-white/60"
+                              )}
+                              aria-label={`${day.date}: ${day.count} activities`}
+                            />
+                          </TooltipTrigger>
+                          <TooltipContent
+                            side="top"
+                            className="text-xs font-mono p-3 space-y-1.5 bg-[#0D0D0D] border-white/10 shadow-xl"
+                          >
+                            <div className="font-bold text-white border-b border-white/10 pb-1 flex items-center justify-between gap-4">
+                              <span>{day.date}</span>
+                              {day.count > 0 && (
+                                <span className="text-[10px] px-1.5 py-0.2 rounded bg-[#FF0000]/15 text-[#FF0000] border border-[#FF0000]/30 font-semibold">
+                                  {day.count} {day.count === 1 ? "action" : "actions"}
+                                </span>
+                              )}
+                            </div>
+                            <div className="text-[11px] text-neutral-300">
+                              {day.count === 0 ? (
+                                <span className="text-neutral-500">No practice or lecture activity</span>
+                              ) : (
+                                <div className="space-y-0.5">
+                                  <div className="flex items-center justify-between gap-3 text-neutral-300">
+                                    <span>Verified Lectures:</span>
+                                    <strong className="text-[#FF4D4D]">{day.videos}</strong>
+                                  </div>
+                                  <div className="flex items-center justify-between gap-3 text-neutral-300">
+                                    <span>Coding Problems:</span>
+                                    <strong className="text-white">{day.problems}</strong>
+                                  </div>
+                                </div>
+                              )}
+                            </div>
+                          </TooltipContent>
+                        </Tooltip>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </TooltipProvider>
 
-        {/* Heatmap Legend */}
-        <div className="flex items-center justify-between font-mono text-[10px] text-neutral-500 border-t border-white/[0.05] pt-3">
-          <span>84-Day Window</span>
-          <div className="flex items-center gap-1.5">
-            <span>Less</span>
-            <span className="h-2.5 w-2.5 rounded-xs bg-[#121212] border border-white/[0.04]" />
-            <span className="h-2.5 w-2.5 rounded-xs bg-[#3D0A0A] border border-[#551010]" />
-            <span className="h-2.5 w-2.5 rounded-xs bg-[#7A0000] border border-[#990000]" />
-            <span className="h-2.5 w-2.5 rounded-xs bg-[#C00000] border border-[#E00000]" />
-            <span className="h-2.5 w-2.5 rounded-xs bg-[#FF0000] border-[#FF4D4D]" />
-            <span>More</span>
+        {/* 3. Heatmap Footer & Intensity Scale */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 font-mono text-[11px] text-neutral-400 border-t border-white/[0.06] pt-3.5">
+          <div className="flex items-center gap-2">
+            <span className="font-semibold text-neutral-300">
+              {activeData.length}-Day Window
+            </span>
+            <span className="text-neutral-600">•</span>
+            <span className="text-neutral-500">
+              {weeks.length} Weeks of Tracked Activity
+            </span>
+          </div>
+
+          <div className="flex items-center gap-2 self-start sm:self-auto">
+            <span className="text-neutral-500 text-[10px]">Less</span>
+            <span className="h-3 w-3 rounded-xs bg-white/[0.03] border border-white/[0.05]" title="0 actions" />
+            <span className="h-3 w-3 rounded-xs bg-[#3D0A0A] border border-[#661111]" title="1 action" />
+            <span className="h-3 w-3 rounded-xs bg-[#7A0000] border border-[#990000]" title="2-3 actions" />
+            <span className="h-3 w-3 rounded-xs bg-[#C00000] border border-[#E00000]" title="4-6 actions" />
+            <span className="h-3 w-3 rounded-xs bg-[#FF0000] border border-[#FF6666] shadow-[0_0_8px_rgba(255,0,0,0.5)]" title="7+ actions" />
+            <span className="text-neutral-500 text-[10px]">More</span>
           </div>
         </div>
       </div>
     </PrimeChartContainer>
   );
 }
-
