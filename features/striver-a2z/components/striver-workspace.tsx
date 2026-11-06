@@ -343,16 +343,19 @@ export function StriverWorkspace({
               onValueChange={(v) => setActiveTab(v as typeof activeTab)}
               className="w-full"
             >
-              <TabsList variant="line" className="w-full justify-start border-b border-white/[0.08] pb-px">
+              <TabsList
+                variant="line"
+                className="w-full justify-start border-b border-white/[0.08] pb-px overflow-x-auto scrollbar-none flex-nowrap"
+              >
                 <TabsTrigger
                   value="problems"
-                  className="gap-2 text-xs font-mono py-2.5"
+                  className="gap-2 text-xs font-mono py-2.5 shrink-0"
                 >
-                  <Icon icon={CodeCircleIcon} size={14} />
+                  <Icon icon={CodeCircleIcon} size={15} className="text-[#FF0000]" />
                   <span>Practice Problems</span>
                   <Badge
                     variant="outline"
-                    className="ml-1 text-[10px] px-1.5 py-0 bg-white/[0.04] border-white/[0.08] text-neutral-400"
+                    className="ml-0.5 text-[10px] px-1.5 py-0 bg-white/[0.04] border-white/[0.08] text-neutral-400 font-mono"
                   >
                     {activeTopic.problems.length}
                   </Badge>
@@ -360,25 +363,25 @@ export function StriverWorkspace({
 
                 <TabsTrigger
                   value="notes"
-                  className="gap-2 text-xs font-mono py-2.5"
+                  className="gap-2 text-xs font-mono py-2.5 shrink-0"
                 >
-                  <Icon icon={Note01Icon} size={14} />
+                  <Icon icon={Note01Icon} size={15} className="text-amber-400" />
                   <span>Lesson Notes</span>
                 </TabsTrigger>
 
                 <TabsTrigger
                   value="progress"
-                  className="gap-2 text-xs font-mono py-2.5"
+                  className="gap-2 text-xs font-mono py-2.5 shrink-0"
                 >
-                  <Icon icon={ChartLineData02Icon} size={14} />
+                  <Icon icon={ChartLineData02Icon} size={15} className="text-emerald-400" />
                   <span>Curriculum Progress</span>
                 </TabsTrigger>
 
                 <TabsTrigger
                   value="resources"
-                  className="gap-2 text-xs font-mono py-2.5"
+                  className="gap-2 text-xs font-mono py-2.5 shrink-0"
                 >
-                  <Icon icon={BookOpen01Icon} size={14} />
+                  <Icon icon={BookOpen01Icon} size={15} className="text-blue-400" />
                   <span>Resources & Overview</span>
                 </TabsTrigger>
               </TabsList>

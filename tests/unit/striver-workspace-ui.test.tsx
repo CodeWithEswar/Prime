@@ -225,4 +225,36 @@ describe("Striver A2Z Learning Workspace Redesign", () => {
       expect(screen.getByRole("tab", { name: /resources & overview/i })).toBeInTheDocument();
     });
   });
+
+  describe("StriverProblemsTable", () => {
+    it("renders un-truncated header, solved badge, search bar, and filter buttons", async () => {
+      const { StriverProblemsTable } = await import(
+        "@/features/striver-a2z/components/striver-problems-table"
+      );
+
+      render(
+        <StriverProblemsTable
+          problems={mockModules[0].topics[0].problems}
+          topicTitle="Things to Know in C++ / Java / Python / JavaScript"
+        />
+      );
+
+      // Verify header and badge
+      expect(screen.getByText("Target Practice Problems")).toBeInTheDocument();
+      expect(screen.getByText(/Solved \(50%\)/i)).toBeInTheDocument();
+
+      // Verify problem titles
+      expect(screen.getByText("User Input / Output")).toBeInTheDocument();
+      expect(screen.getByText("Data Types and Memory Sizes")).toBeInTheDocument();
+
+      // Verify filter by difficulty
+      const easyBtn = screen.getByRole("button", { name: "EASY" });
+      fireEvent.click(easyBtn);
+      expect(screen.getByText("User Input / Output")).toBeInTheDocument();
+
+      const hardBtn = screen.getByRole("button", { name: "HARD" });
+      fireEvent.click(hardBtn);
+      expect(screen.getByText(/no practice problems match the current filter/i)).toBeInTheDocument();
+    });
+  });
 });

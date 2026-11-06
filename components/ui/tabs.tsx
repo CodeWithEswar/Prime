@@ -12,9 +12,9 @@ export const Tabs = TabsPrimitive.Root;
 const tabsListVariants = cva("inline-flex items-center justify-center relative", {
   variants: {
     variant: {
-      line: "border-b border-[var(--border-subtle)] w-full justify-start gap-6 bg-transparent p-0 rounded-none",
+      line: "border-b border-[var(--border-subtle)] w-full justify-start gap-4 sm:gap-6 bg-transparent p-0 rounded-none overflow-x-auto scrollbar-none flex-nowrap",
       segmented:
-        "bg-[var(--surface-raised)] p-1 rounded-[var(--radius-sm)] border border-[var(--border-subtle)] gap-1",
+        "bg-[var(--surface-raised)] p-1 rounded-[var(--radius-sm)] border border-[var(--border-subtle)] gap-1 overflow-x-auto scrollbar-none flex-nowrap",
     },
   },
   defaultVariants: {
@@ -110,7 +110,7 @@ export const TabsTrigger = React.forwardRef<
       )}
       {...props}
     >
-      <span className="relative z-10">{children}</span>
+      <span className="relative z-10 inline-flex items-center gap-2 shrink-0">{children}</span>
 
       {/* Shared Gliding Active Indicator */}
       {isActive && variant === "line" && (
