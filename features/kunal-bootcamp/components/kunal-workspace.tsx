@@ -23,6 +23,8 @@ import {
   Task01Icon,
   Tick02Icon,
   PlayIcon,
+  MoreHorizontalIcon,
+  Copy01Icon,
 } from "@hugeicons/core-free-icons";
 import { Icon } from "@/components/ui/icon";
 import { Button } from "@/components/ui/button";
@@ -31,6 +33,13 @@ import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+} from "@/components/ui/dropdown-menu";
 import {
   Sheet,
   SheetContent,
@@ -342,13 +351,13 @@ export function KunalWorkspace({ initialDetail }: KunalWorkspaceProps) {
         </div>
 
         {/* Global Toolbar Controls */}
-        <div className="grid grid-cols-3 sm:flex sm:items-center gap-2 w-full sm:w-auto">
+        <div className="flex items-center gap-2 w-full sm:w-auto">
           {/* Mobile Syllabus Sheet Trigger */}
           <Button
             variant="outline"
             size="sm"
             onClick={() => setIsMobileSheetOpen(true)}
-            className="lg:hidden h-8 px-2.5 sm:px-3 text-xs font-mono border-white/10 bg-white/[0.04] text-neutral-200 hover:text-white gap-1.5 justify-center"
+            className="lg:hidden flex-1 sm:flex-initial h-8 px-2.5 sm:px-3 text-xs font-mono border-white/10 bg-white/[0.04] text-neutral-200 hover:text-white gap-1.5 justify-center"
             aria-label="Open syllabus navigation"
           >
             <Icon icon={Menu01Icon} size={14} />
@@ -379,7 +388,7 @@ export function KunalWorkspace({ initialDetail }: KunalWorkspaceProps) {
             variant="outline"
             size="sm"
             asChild
-            className="h-8 px-2.5 sm:px-3 text-xs font-mono border-white/10 bg-white/[0.04] text-neutral-300 hover:text-white hover:bg-white/[0.08] gap-1.5 justify-center"
+            className="flex-1 sm:flex-initial h-8 px-2.5 sm:px-3 text-xs font-mono border-white/10 bg-white/[0.04] text-neutral-300 hover:text-white hover:bg-white/[0.08] gap-1.5 justify-center"
           >
             <Link href="/practice/dsa/playlists/kunal-kushwaha/analytics">
               <Icon icon={ChartLineData02Icon} size={13} className="text-[#FF0000]" />
@@ -390,7 +399,7 @@ export function KunalWorkspace({ initialDetail }: KunalWorkspaceProps) {
           <Button
             size="sm"
             onClick={handleResumeNext}
-            className="h-8 px-3 sm:px-3.5 text-xs font-mono font-medium bg-[#FF0000] hover:bg-[#CC0000] text-white gap-1.5 shadow-sm justify-center"
+            className="flex-1 sm:flex-initial h-8 px-3 sm:px-3.5 text-xs font-mono font-medium bg-[#FF0000] hover:bg-[#CC0000] text-white gap-1.5 shadow-sm justify-center"
           >
             <span>Resume</span>
             <Icon icon={ArrowRight01Icon} size={13} />
@@ -438,76 +447,144 @@ export function KunalWorkspace({ initialDetail }: KunalWorkspaceProps) {
         {/* Main Column: Full-Width Workspace (expands to 100% when sidebar collapsed) */}
         <main className="flex-1 min-w-0 w-full space-y-4 sm:space-y-6">
           {/* Structured Current Lecture Header */}
-          <div className="rounded-xl border border-white/[0.08] bg-[#0A0A0A]/90 p-3.5 sm:p-5 backdrop-blur-md space-y-2.5 sm:space-y-3">
-            {/* Breadcrumb Hierarchy */}
-            <div className="flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-[11px] font-mono text-neutral-400 uppercase tracking-wider flex-wrap">
-              <span className="text-white font-medium">
-                Module {activeModule.stepNumber.toString().padStart(2, "0")}: {activeModule.title}
-              </span>
-              <span className="text-neutral-600">/</span>
-              <span className="text-neutral-300">
-                Lecture {activeVideo.position.toString().padStart(2, "0")}
-              </span>
-            </div>
+          <div className="rounded-xl border border-white/[0.08] bg-[#0A0A0A]/90 p-3.5 sm:p-5 backdrop-blur-md space-y-3">
+            {/* Top Row: Breadcrumb Hierarchy + Action Controls */}
+            <div className="flex items-center justify-between gap-2">
+              <div className="flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-[11px] font-mono text-neutral-400 uppercase tracking-wider min-w-0">
+                <span className="text-white font-medium truncate">
+                  Module {activeModule.stepNumber.toString().padStart(2, "0")}: {activeModule.title}
+                </span>
+                <span className="text-neutral-600 shrink-0">/</span>
+                <span className="text-neutral-300 shrink-0">
+                  Lecture {activeVideo.position.toString().padStart(2, "0")}
+                </span>
+              </div>
 
-            {/* Topic Title + Quick Actions */}
-            <div className="flex flex-col sm:flex-row sm:items-start items-start justify-between gap-2.5 sm:gap-3">
-              <h2 className="font-sans text-lg sm:text-xl lg:text-2xl font-bold text-white tracking-tight leading-snug break-words">
-                {activeVideo.title}
-              </h2>
+              {/* Header Action Controls */}
+              <div className="flex items-center gap-1.5 shrink-0">
+                {/* 1-click Bookmark Button */}
+                <TooltipProvider delayDuration={200}>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={handleToggleBookmark}
+                        className={cn(
+                          "h-8 w-8 p-0 border-white/10 bg-white/[0.04] transition-colors",
+                          isCurrentVideoBookmarked
+                            ? "text-[#FF0000] border-[#FF0000]/30 bg-[#FF0000]/10"
+                            : "text-neutral-400 hover:text-white"
+                        )}
+                        aria-label={isCurrentVideoBookmarked ? "Remove bookmark" : "Bookmark lecture"}
+                      >
+                        <Icon icon={Bookmark01Icon} size={14} />
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent side="top" className="text-xs font-mono">
+                      {isCurrentVideoBookmarked ? "Remove bookmark" : "Bookmark lecture"}
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
 
-              <div className="flex items-center gap-1.5 font-mono text-xs shrink-0 self-start">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={handleToggleBookmark}
-                  className={cn(
-                    "h-8 px-2.5 text-xs border-white/10 bg-white/[0.04]",
-                    isCurrentVideoBookmarked ? "text-[#FF0000] border-[#FF0000]/30" : "text-neutral-400 hover:text-white"
-                  )}
-                  title="Bookmark lecture"
-                >
-                  <Icon icon={Bookmark01Icon} size={14} />
-                </Button>
+                {/* Three dots dropdown menu (All Devices) */}
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="h-8 w-8 p-0 border-white/10 bg-white/[0.04] text-neutral-300 hover:text-white"
+                      aria-label="More actions"
+                    >
+                      <Icon icon={MoreHorizontalIcon} size={15} />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent
+                    align="end"
+                    className="w-52 bg-[#0C0C0C]/95 border-white/10 text-neutral-200 font-mono text-xs backdrop-blur-md shadow-xl"
+                  >
+                    <DropdownMenuItem
+                      onClick={handleToggleBookmark}
+                      className="gap-2.5 cursor-pointer py-2 focus:bg-white/[0.08] focus:text-white"
+                    >
+                      <Icon
+                        icon={Bookmark01Icon}
+                        size={14}
+                        className={isCurrentVideoBookmarked ? "text-[#FF0000]" : "text-neutral-400"}
+                      />
+                      <span>{isCurrentVideoBookmarked ? "Remove Bookmark" : "Bookmark Lesson"}</span>
+                    </DropdownMenuItem>
 
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setScheduleModalOpen(true)}
-                  className="h-8 px-2.5 text-xs border-white/10 bg-white/[0.04] text-neutral-300 hover:text-white gap-1"
-                >
-                  <Icon icon={Calendar01Icon} size={13} className="text-[#FF0000]" />
-                  <span>Add to Plan</span>
-                </Button>
+                    <DropdownMenuItem
+                      onClick={() => setScheduleModalOpen(true)}
+                      className="gap-2.5 cursor-pointer py-2 focus:bg-white/[0.08] focus:text-white"
+                    >
+                      <Icon icon={Calendar01Icon} size={14} className="text-[#FF0000]" />
+                      <span>Add to Daily Plan</span>
+                    </DropdownMenuItem>
 
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setRevisionModalOpen(true)}
-                  className="h-8 px-2.5 text-xs border-white/10 bg-white/[0.04] text-neutral-300 hover:text-white gap-1"
-                >
-                  <Icon icon={Time02Icon} size={13} className="text-[#FF0000]" />
-                  <span>Revision</span>
-                </Button>
+                    <DropdownMenuItem
+                      onClick={() => setRevisionModalOpen(true)}
+                      className="gap-2.5 cursor-pointer py-2 focus:bg-white/[0.08] focus:text-white"
+                    >
+                      <Icon icon={Time02Icon} size={14} className="text-[#FF0000]" />
+                      <span>Schedule Revision</span>
+                    </DropdownMenuItem>
+
+                    <DropdownMenuSeparator className="bg-white/[0.08]" />
+
+                    <DropdownMenuItem
+                      asChild
+                      className="gap-2.5 cursor-pointer py-2 focus:bg-white/[0.08] focus:text-white"
+                    >
+                      <a
+                        href={`https://www.youtube.com/watch?v=${activeVideo.youtubeVideoId}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <Icon icon={LinkSquare02Icon} size={14} className="text-neutral-400" />
+                        <span>Watch on YouTube</span>
+                      </a>
+                    </DropdownMenuItem>
+
+                    <DropdownMenuItem
+                      onClick={() => {
+                        if (typeof navigator !== "undefined" && navigator.clipboard) {
+                          navigator.clipboard.writeText(window.location.href);
+                          toast.success("Lesson link copied to clipboard");
+                        }
+                      }}
+                      className="gap-2.5 cursor-pointer py-2 focus:bg-white/[0.08] focus:text-white"
+                    >
+                      <Icon icon={Copy01Icon} size={14} className="text-neutral-400" />
+                      <span>Copy Lesson Link</span>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </div>
             </div>
 
+            {/* Topic Title */}
+            <h2 className="font-sans text-base sm:text-xl lg:text-2xl font-bold text-white tracking-tight leading-snug break-words">
+              {activeVideo.title}
+            </h2>
+
             {/* Metadata Summary Pill */}
-            <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs font-mono text-neutral-400 pt-1 border-t border-white/[0.05]">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[11px] sm:text-xs font-mono text-neutral-400 pt-2 border-t border-white/[0.05]">
               <div className="flex items-center gap-1.5">
                 <Icon icon={VideoReplayIcon} size={13} className="text-[#FF0000]" />
                 <span>
                   <strong className="text-white">{activeVideo.durationFormatted}</strong> Duration
                 </span>
               </div>
-              <span className="text-neutral-700">•</span>
+              <span className="text-neutral-700 hidden xs:inline sm:inline">•</span>
               <div className="flex items-center gap-1.5">
                 <Icon icon={CodeCircleIcon} size={13} className="text-[#FF0000]" />
                 <span>
                   <strong className="text-white">{activeModule.stats.solvedProblems}</strong> / {activeModule.problems.length} Solved
                 </span>
               </div>
-              <span className="text-neutral-700">•</span>
+              <span className="text-neutral-700 hidden xs:inline sm:inline">•</span>
               <div className="flex items-center gap-1.5">
                 <Icon icon={Task01Icon} size={13} className="text-[#FF0000]" />
                 <span>
@@ -518,14 +595,14 @@ export function KunalWorkspace({ initialDetail }: KunalWorkspaceProps) {
           </div>
 
           {/* Controls Bar above video */}
-          <div className="flex items-center justify-between gap-2 p-2.5 rounded-lg bg-[#080808] border border-white/[0.08]">
+          <div className="flex items-center justify-between gap-2 p-2 sm:p-2.5 rounded-lg bg-[#080808] border border-white/[0.08]">
             {/* Mobile Sheet Trigger + Desktop collapse */}
             <div className="flex items-center gap-2">
               <Button
                 variant="outline"
                 size="sm"
                 onClick={() => setIsMobileSheetOpen(true)}
-                className="lg:hidden h-7 px-2 text-xs font-mono border-white/10 bg-white/[0.04] text-neutral-300 gap-1.5"
+                className="lg:hidden h-8 px-2.5 text-xs font-mono border-white/10 bg-white/[0.04] text-neutral-300 gap-1.5 shrink-0"
               >
                 <Icon icon={Menu01Icon} size={14} />
                 <span>Syllabus</span>
@@ -535,7 +612,7 @@ export function KunalWorkspace({ initialDetail }: KunalWorkspaceProps) {
                 variant="ghost"
                 size="sm"
                 onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
-                className="hidden lg:flex h-7 px-2 text-xs font-mono text-neutral-400 hover:text-white gap-1.5"
+                className="hidden lg:flex h-8 px-2 text-xs font-mono text-neutral-400 hover:text-white gap-1.5"
                 title={isSidebarCollapsed ? "Expand syllabus" : "Collapse syllabus"}
               >
                 <Icon icon={SidebarLeftIcon} size={14} />
@@ -544,13 +621,14 @@ export function KunalWorkspace({ initialDetail }: KunalWorkspaceProps) {
             </div>
 
             {/* Video Prev / Next / Complete Actions */}
-            <div className="flex items-center gap-1.5 font-mono text-xs">
+            <div className="flex items-center gap-1.5 font-mono text-xs shrink-0">
               <Button
                 variant="outline"
                 size="sm"
                 onClick={handlePrevious}
                 disabled={!hasPrevious}
-                className="h-7 px-2.5 text-xs border-white/10 bg-white/[0.04] text-neutral-300 hover:text-white disabled:opacity-30"
+                className="h-8 px-2 sm:px-2.5 text-xs border-white/10 bg-white/[0.04] text-neutral-300 hover:text-white disabled:opacity-30"
+                aria-label="Previous lecture"
               >
                 <Icon icon={ArrowLeft01Icon} size={13} />
                 <span className="hidden sm:inline ml-1">Previous</span>
@@ -561,7 +639,7 @@ export function KunalWorkspace({ initialDetail }: KunalWorkspaceProps) {
                 size="sm"
                 onClick={handleToggleWatched}
                 className={cn(
-                  "h-7 px-3 text-xs border transition-all gap-1.5 font-semibold",
+                  "h-8 px-3 text-xs border transition-all gap-1.5 font-semibold shrink-0",
                   isCurrentVideoCompleted
                     ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/20"
                     : "bg-[#FF0000] border-[#FF0000] text-white hover:bg-[#CC0000]"
@@ -576,7 +654,8 @@ export function KunalWorkspace({ initialDetail }: KunalWorkspaceProps) {
                 size="sm"
                 onClick={handleNext}
                 disabled={!hasNext}
-                className="h-7 px-2.5 text-xs border-white/10 bg-white/[0.04] text-neutral-300 hover:text-white disabled:opacity-30"
+                className="h-8 px-2 sm:px-2.5 text-xs border-white/10 bg-white/[0.04] text-neutral-300 hover:text-white disabled:opacity-30"
+                aria-label="Next lecture"
               >
                 <span className="hidden sm:inline mr-1">Next</span>
                 <Icon icon={ArrowRight01Icon} size={13} />
