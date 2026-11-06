@@ -14,6 +14,7 @@ import {
 import { PrimeChartContainer } from "./prime-chart-container";
 import { PrimeChartTooltip, PrimeSlimBarCursor } from "./prime-chart-tooltip";
 import { primeChartColors, primeChartFont } from "./prime-chart-theme";
+import { useMounted } from "../../hooks/use-mounted";
 import { cn } from "@/lib/utils";
 
 interface StriverProblemsColumnChartProps {
@@ -27,12 +28,8 @@ interface StriverProblemsColumnChartProps {
 }
 
 export function StriverProblemsColumnChart({ data }: StriverProblemsColumnChartProps) {
-  const [mounted, setMounted] = React.useState(false);
+  const mounted = useMounted();
   const [layoutMode, setLayoutMode] = React.useState<"stacked" | "grouped">("stacked");
-
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
 
   return (
     <PrimeChartContainer

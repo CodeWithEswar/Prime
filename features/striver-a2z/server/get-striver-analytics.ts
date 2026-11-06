@@ -112,12 +112,6 @@ export async function getStriverAnalytics(): Promise<StriverAnalyticsData> {
     .eq("user_id", user.id)
     .order("attempted_at", { ascending: true });
 
-  // 3. User Topic Mastery records
-  const { data: masteryRecords } = await supabase
-    .from("dsa_topic_mastery")
-    .select("topic_id, mastery_level, solved_count, total_problems, videos_watched, total_videos, last_activity_at")
-    .eq("user_id", user.id);
-
   // Group solved problems by distinct problem_id
   const solvedProblemMap = new Map<string, { difficulty: string; title: string; solvedAt: string }>();
   for (const att of attempts || []) {

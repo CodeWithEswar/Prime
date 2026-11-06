@@ -9,7 +9,6 @@ import {
   RepeatIcon,
   Award01Icon,
   PlayIcon,
-  CheckmarkCircle01Icon,
 } from "@hugeicons/core-free-icons";
 import { Icon } from "@/components/ui/icon";
 import { Button } from "@/components/ui/button";
@@ -19,13 +18,11 @@ import type { StriverSheetDetail } from "../types";
 
 interface StriverProgressRailProps {
   sheetDetail: StriverSheetDetail;
-  onOpenAnalytics?: () => void;
   onContinueNext: () => void;
 }
 
 export function StriverProgressRail({
   sheetDetail,
-  onOpenAnalytics,
   onContinueNext,
 }: StriverProgressRailProps) {
   const { overallStats } = sheetDetail;

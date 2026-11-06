@@ -52,14 +52,16 @@ export function StriverTopicNavigator({
   });
 
   // Ensure active topic's module is expanded whenever activeTopicId changes
-  React.useEffect(() => {
+  const [prevActiveTopicId, setPrevActiveTopicId] = React.useState(activeTopicId);
+  if (prevActiveTopicId !== activeTopicId) {
+    setPrevActiveTopicId(activeTopicId);
     for (const m of modules) {
       if (m.topics.some((t) => t.id === activeTopicId)) {
         setExpandedModuleIds((prev) => new Set([...prev, m.id]));
         break;
       }
     }
-  }, [activeTopicId, modules]);
+  }
 
   const toggleModule = (moduleId: string) => {
     setExpandedModuleIds((prev) => {

@@ -96,6 +96,8 @@ describe("PRIME Command Frame — Shell Unit Tests", () => {
         "/calendar",
         "/revision",
         "/practice/dsa",
+        "/practice/dsa/playlists",
+        "/practice/dsa/sheets/striver-a2z",
         "/aptitude",
         "/lab",
         "/roadmap/dbms",

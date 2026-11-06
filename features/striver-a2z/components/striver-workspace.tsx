@@ -2,9 +2,8 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import {
-  Folder01Icon,
   VideoReplayIcon,
   CodeCircleIcon,
   Note01Icon,
@@ -87,10 +86,8 @@ function getMasteryBadge(level: string) {
 
 export function StriverWorkspace({
   initialDetail,
-  analytics,
 }: StriverWorkspaceProps) {
   const router = useRouter();
-  const searchParams = useSearchParams();
 
   // Active topic & video selection
   const [activeTopicId, setActiveTopicId] = React.useState(initialDetail.activeTopicId);
@@ -133,10 +130,9 @@ export function StriverWorkspace({
   }, [initialDetail.modules, activeTopic]);
 
   // Clean module title if it already contains "Step XX:" prefix to avoid duplicate prefixes
-  const cleanModuleTitle = React.useMemo(() => {
-    if (!activeModule?.title) return "Module";
-    return activeModule.title.replace(/^Step\s+\d+\s*:\s*/i, "");
-  }, [activeModule?.title]);
+  const cleanModuleTitle = activeModule?.title
+    ? activeModule.title.replace(/^Step\s+\d+\s*:\s*/i, "")
+    : "Module";
 
   const handleSelectTopic = (topic: StriverTopicDetail) => {
     setActiveTopicId(topic.id);

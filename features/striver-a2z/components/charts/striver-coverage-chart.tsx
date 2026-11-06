@@ -14,6 +14,7 @@ import {
 import { PrimeChartContainer } from "./prime-chart-container";
 import { PrimeChartTooltip, PrimeSlimBarCursor } from "./prime-chart-tooltip";
 import { primeChartColors, primeChartFont } from "./prime-chart-theme";
+import { useMounted } from "../../hooks/use-mounted";
 
 interface StriverCoverageChartProps {
   data: {
@@ -24,11 +25,7 @@ interface StriverCoverageChartProps {
 }
 
 export function StriverCoverageChart({ data }: StriverCoverageChartProps) {
-  const [mounted, setMounted] = React.useState(false);
-
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useMounted();
 
   return (
     <PrimeChartContainer

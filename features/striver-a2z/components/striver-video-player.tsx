@@ -71,14 +71,14 @@ export function StriverVideoPlayer({
   // Local optimistic state for video completion & bookmark
   const [isCompleted, setIsCompleted] = React.useState(activeVideo?.isCompleted || false);
   const [isBookmarked, setIsBookmarked] = React.useState(activeVideo?.isBookmarked || false);
+  const [prevVideoId, setPrevVideoId] = React.useState(activeVideo?.id);
   const [isPending, startTransition] = React.useTransition();
 
-  React.useEffect(() => {
-    if (activeVideo) {
-      setIsCompleted(activeVideo.isCompleted);
-      setIsBookmarked(activeVideo.isBookmarked);
-    }
-  }, [activeVideo]);
+  if (activeVideo && activeVideo.id !== prevVideoId) {
+    setPrevVideoId(activeVideo.id);
+    setIsCompleted(activeVideo.isCompleted);
+    setIsBookmarked(activeVideo.isBookmarked);
+  }
 
   if (!activeVideo) {
     return (
