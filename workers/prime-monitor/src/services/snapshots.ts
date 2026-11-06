@@ -23,6 +23,7 @@ import { recordObservationD1 } from "../storage/d1";
 import { dispatchOperationalAlert } from "./alerts";
 import type {
   HealthObservation,
+  Incident,
   MonitorService,
   MonitorWorkerEnv,
   PublicStatusSnapshot,
@@ -50,17 +51,20 @@ export async function executeMonitoringCycle(
     timeoutMs: 5000,
   });
 
-  // 2. Persist observation to KV (and optional D1)
-  await appendObservation(env.STATUS_KV, supabaseObs);
+  // 2. Persist to optional secondary D1 SQL store (if provisioned)
   if (env.DB) {
     await recordObservationD1(env.DB, supabaseObs);
   }
 
-  // 3. Load historical context from KV
-  const recentObservations = await getRecentObservations(env.STATUS_KV, 500);
-  const activeIncidents = await getActiveIncidents(env.STATUS_KV);
-  const historyIncidents = await getIncidentHistory(env.STATUS_KV);
+  // 3. Load previous snapshot from KV (Consolidated Single Read)
   const previousSnapshot = await getLatestSnapshot(env.STATUS_KV);
+
+  // Maintain rolling 24h observation window directly within the snapshot payload
+  // (Completely eliminates separate observations KV writes!)
+  const existingObs = previousSnapshot?.recentObservations || [];
+  const recentObservations = [...existingObs, supabaseObs].slice(-144);
+  const activeIncidents = previousSnapshot?.activeIncidents || [];
+  const historyIncidents: Incident[] = [];
 
   const prevDbService = previousSnapshot?.services.find(
     (s) => s.id === "backend-db"
@@ -190,10 +194,10 @@ export async function executeMonitoringCycle(
       totalChecks24h: last24hObs.length,
       successRate24h,
       isFresh: !dbEval.isStale,
-      windowMinutes: 5,
+      windowMinutes: 10,
     },
     activeIncidents: incidentResult.active,
-    recentObservations: recentObservations.slice(-60), // Return last 60 for chart
+    recentObservations: recentObservations.slice(-144), // Store rolling 24h of checks (144 points at 10m)
     dailyRollups,
     environment: env.ENVIRONMENT || "production",
     generatedAt: nowStr,
