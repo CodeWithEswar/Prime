@@ -10,6 +10,17 @@ import {
   CartesianGrid,
   Tooltip,
 } from "recharts";
+import { MoreHorizontalIcon, Tick02Icon } from "@hugeicons/core-free-icons";
+import { Icon } from "@/components/ui/icon";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+} from "@/components/ui/dropdown-menu";
 import { PrimeChartContainer } from "./prime-chart-container";
 import { PrimeChartTooltip } from "./prime-chart-tooltip";
 import { primeChartColors, primeChartFont } from "./prime-chart-theme";
@@ -112,6 +123,71 @@ export function StriverLearningTrendChart({ data }: StriverLearningTrendChartPro
             </button>
           </div>
         </div>
+      }
+      mobileControls={
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button
+              variant="outline"
+              size="sm"
+              className="h-7 w-7 p-0 border-white/10 bg-white/[0.04] text-neutral-300 hover:text-white hover:bg-white/[0.08]"
+              aria-label="Chart display options"
+            >
+              <Icon icon={MoreHorizontalIcon} size={15} />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="w-48 bg-[#0C0C0C] border-white/10 text-neutral-200 font-mono text-xs shadow-xl">
+            <DropdownMenuLabel className="text-[10px] uppercase text-neutral-500 tracking-wider px-2 py-1">
+              Display Mode
+            </DropdownMenuLabel>
+            <DropdownMenuItem
+              onClick={() => setViewMode("cumulative")}
+              className={cn(
+                "cursor-pointer justify-between text-xs px-2 py-1.5 focus:bg-white/[0.08]",
+                viewMode === "cumulative" ? "text-white font-bold bg-white/[0.06]" : "text-neutral-400"
+              )}
+            >
+              <span>Cumulative</span>
+              {viewMode === "cumulative" && <Icon icon={Tick02Icon} size={13} className="text-[#FF0000]" />}
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => setViewMode("daily")}
+              className={cn(
+                "cursor-pointer justify-between text-xs px-2 py-1.5 focus:bg-white/[0.08]",
+                viewMode === "daily" ? "text-white font-bold bg-white/[0.06]" : "text-neutral-400"
+              )}
+            >
+              <span>Daily Velocity</span>
+              {viewMode === "daily" && <Icon icon={Tick02Icon} size={13} className="text-[#FF0000]" />}
+            </DropdownMenuItem>
+
+            <DropdownMenuSeparator className="bg-white/10 my-1" />
+
+            <DropdownMenuLabel className="text-[10px] uppercase text-neutral-500 tracking-wider px-2 py-1">
+              Time Horizon
+            </DropdownMenuLabel>
+            <DropdownMenuItem
+              onClick={() => setDateRange("7d")}
+              className={cn(
+                "cursor-pointer justify-between text-xs px-2 py-1.5 focus:bg-white/[0.08]",
+                dateRange === "7d" ? "text-white font-bold bg-white/[0.06]" : "text-neutral-400"
+              )}
+            >
+              <span>Last 7 Days</span>
+              {dateRange === "7d" && <Icon icon={Tick02Icon} size={13} className="text-[#FF0000]" />}
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => setDateRange("30d")}
+              className={cn(
+                "cursor-pointer justify-between text-xs px-2 py-1.5 focus:bg-white/[0.08]",
+                dateRange === "30d" ? "text-white font-bold bg-white/[0.06]" : "text-neutral-400"
+              )}
+            >
+              <span>Last 30 Days</span>
+              {dateRange === "30d" && <Icon icon={Tick02Icon} size={13} className="text-[#FF0000]" />}
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       }
     >
       <div className="h-72 sm:h-80 w-full pt-2">
