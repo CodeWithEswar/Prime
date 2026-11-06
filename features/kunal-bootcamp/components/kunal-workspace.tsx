@@ -28,6 +28,7 @@ import { Icon } from "@/components/ui/icon";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import {
@@ -680,19 +681,12 @@ export function KunalWorkspace({ initialDetail }: KunalWorkspaceProps) {
                           className="py-2.5 flex items-center justify-between gap-3 text-xs font-mono group hover:bg-white/[0.02] px-2 rounded-lg transition-colors"
                         >
                           <div className="flex items-center gap-3 min-w-0 flex-1">
-                            <button
-                              type="button"
-                              onClick={() => handleToggleChapter(ch.id, isChDone)}
-                              className={cn(
-                                "h-4 w-4 rounded-xs border flex items-center justify-center text-[10px] transition-colors shrink-0",
-                                isChDone
-                                  ? "bg-emerald-500/20 border-emerald-500/50 text-emerald-400"
-                                  : "border-white/20 text-transparent hover:border-white/50"
-                              )}
-                              title={isChDone ? "Mark incomplete" : "Mark chapter done"}
-                            >
-                              ✓
-                            </button>
+                            <Checkbox
+                              checked={isChDone}
+                              onCheckedChange={() => handleToggleChapter(ch.id, isChDone)}
+                              aria-label={`Mark chapter ${ch.title} as ${isChDone ? "incomplete" : "complete"}`}
+                              containerClassName="shrink-0"
+                            />
 
                             <button
                               type="button"
@@ -818,19 +812,12 @@ export function KunalWorkspace({ initialDetail }: KunalWorkspaceProps) {
                                   className="p-2.5 rounded-lg bg-white/[0.02] border border-white/[0.06] flex items-center justify-between gap-2 hover:bg-white/[0.04] transition-colors"
                                 >
                                   <div className="flex items-center gap-2 min-w-0 flex-1">
-                                    <button
-                                      type="button"
-                                      onClick={() => handleToggleProblem(prob.slug, isSolved)}
-                                      className={cn(
-                                        "h-4 w-4 rounded-xs border flex items-center justify-center text-[10px] transition-colors shrink-0",
-                                        isSolved
-                                          ? "bg-emerald-500/20 border-emerald-500/50 text-emerald-400"
-                                          : "border-white/20 text-transparent hover:border-white/50"
-                                      )}
-                                      title={isSolved ? "Mark as unsolved" : "Mark as solved"}
-                                    >
-                                      ✓
-                                    </button>
+                                    <Checkbox
+                                      checked={isSolved}
+                                      onCheckedChange={() => handleToggleProblem(prob.slug, isSolved)}
+                                      aria-label={`Mark ${prob.title} as ${isSolved ? "unsolved" : "solved"}`}
+                                      containerClassName="shrink-0"
+                                    />
                                     <a
                                       href={prob.leetcodeUrl}
                                       target="_blank"
@@ -900,19 +887,12 @@ export function KunalWorkspace({ initialDetail }: KunalWorkspaceProps) {
                           className="p-3 rounded-lg bg-white/[0.02] border border-white/[0.06] flex items-center justify-between gap-3 hover:bg-white/[0.04] transition-colors"
                         >
                           <div className="flex items-center gap-2.5 min-w-0 flex-1">
-                            <button
-                              type="button"
-                              onClick={() => handleToggleProblem(prob.slug, isSolved)}
-                              className={cn(
-                                "h-4 w-4 rounded-xs border flex items-center justify-center text-[10px] transition-colors shrink-0",
-                                isSolved
-                                  ? "bg-emerald-500/20 border-emerald-500/50 text-emerald-400"
-                                  : "border-white/20 text-transparent hover:border-white/50"
-                              )}
-                              title={isSolved ? "Mark unsolved" : "Mark solved"}
-                            >
-                              ✓
-                            </button>
+                            <Checkbox
+                              checked={isSolved}
+                              onCheckedChange={() => handleToggleProblem(prob.slug, isSolved)}
+                              aria-label={`Mark problem ${prob.title} as ${isSolved ? "unsolved" : "solved"}`}
+                              containerClassName="shrink-0"
+                            />
                             <a
                               href={prob.leetcodeUrl}
                               target="_blank"
