@@ -105,11 +105,73 @@ export interface StriverSheetDetail {
   };
 }
 
+export interface StriverAnalyticsOverview {
+  totalLectures: number;
+  completedLectures: number;
+  lecturePct: number;
+  totalProblems: number;
+  solvedProblems: number;
+  problemPct: number;
+  activeStudyDays: number;
+  masteryPct: number;
+}
+
+export interface StriverMilestoneItem {
+  id: string;
+  title: string;
+  category: "video" | "problem" | "topic" | "revision" | "track";
+  timestamp: string;
+  description: string;
+}
+
+export interface StriverRadarDimension {
+  domain: string;
+  score: number; // 0 - 100
+  solved: number;
+  total: number;
+  level: string;
+}
+
+export interface StriverHeatmapDay {
+  date: string;
+  count: number;
+  videos: number;
+  problems: number;
+  level: 0 | 1 | 2 | 3 | 4;
+}
+
 export interface StriverAnalyticsData {
-  videoCompletionTrend: { date: string; completed: number; cumulative: number }[];
-  problemsByTopic: { topic: string; easy: number; medium: number; hard: number; total: number }[];
-  topicCoverage: { topic: string; videoPct: number; practicePct: number }[];
-  weeklyConsistency: { day: string; videosWatched: number; problemsSolved: number }[];
-  learningVsPractice: { category: string; value: number }[];
+  overview: StriverAnalyticsOverview;
+  videoCompletionTrend: {
+    date: string;
+    completed: number;
+    cumulative: number;
+    problemsSolved: number;
+    cumulativeProblems: number;
+  }[];
+  problemsByTopic: {
+    topic: string;
+    easy: number;
+    medium: number;
+    hard: number;
+    total: number;
+  }[];
+  topicCoverage: {
+    topic: string;
+    videoPct: number;
+    practicePct: number;
+  }[];
+  weeklyConsistency: {
+    day: string;
+    videosWatched: number;
+    problemsSolved: number;
+  }[];
+  learningVsPractice: {
+    category: string;
+    value: number;
+  }[];
+  activityHeatmap: StriverHeatmapDay[];
+  radarMastery: StriverRadarDimension[];
+  milestones: StriverMilestoneItem[];
 }
 
