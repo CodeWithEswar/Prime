@@ -452,7 +452,8 @@ export function KunalWorkspace({ initialDetail }: KunalWorkspaceProps) {
             <div className="flex items-center justify-between gap-2">
               <div className="flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-[11px] font-mono text-neutral-400 uppercase tracking-wider min-w-0">
                 <span className="text-white font-medium truncate">
-                  Module {activeModule.stepNumber.toString().padStart(2, "0")}: {activeModule.title}
+                  Module {activeModule.stepNumber.toString().padStart(2, "0")}
+                  <span className="hidden sm:inline">: {activeModule.title}</span>
                 </span>
                 <span className="text-neutral-600 shrink-0">/</span>
                 <span className="text-neutral-300 shrink-0">
@@ -571,21 +572,21 @@ export function KunalWorkspace({ initialDetail }: KunalWorkspaceProps) {
 
             {/* Metadata Summary Pill */}
             <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[11px] sm:text-xs font-mono text-neutral-400 pt-2 border-t border-white/[0.05]">
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-1.5 shrink-0">
                 <Icon icon={VideoReplayIcon} size={13} className="text-[#FF0000]" />
                 <span>
                   <strong className="text-white">{activeVideo.durationFormatted}</strong> Duration
                 </span>
               </div>
               <span className="text-neutral-700 hidden xs:inline sm:inline">•</span>
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-1.5 shrink-0">
                 <Icon icon={CodeCircleIcon} size={13} className="text-[#FF0000]" />
                 <span>
                   <strong className="text-white">{activeModule.stats.solvedProblems}</strong> / {activeModule.problems.length} Solved
                 </span>
               </div>
               <span className="text-neutral-700 hidden xs:inline sm:inline">•</span>
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-1.5 shrink-0">
                 <Icon icon={Task01Icon} size={13} className="text-[#FF0000]" />
                 <span>
                   <strong className="text-white">{activeModule.assignments.length}</strong> {activeModule.assignments.length === 1 ? "Assignment" : "Assignments"}
@@ -594,15 +595,16 @@ export function KunalWorkspace({ initialDetail }: KunalWorkspaceProps) {
             </div>
           </div>
 
-          {/* Controls Bar above video */}
-          <div className="flex items-center justify-between gap-2 p-2 sm:p-2.5 rounded-lg bg-[#080808] border border-white/[0.08]">
-            {/* Mobile Sheet Trigger + Desktop collapse */}
-            <div className="flex items-center gap-2">
+          {/* Controls Bar above video (Fully Responsive, Zero Overflow) */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 p-2.5 rounded-lg bg-[#080808] border border-white/[0.08]">
+            {/* Left Section on desktop / Top Row on mobile: Syllabus Drawer Toggle + Desktop collapse + Stepper info */}
+            <div className="flex items-center justify-between sm:justify-start gap-2 min-w-0">
               <Button
                 variant="outline"
                 size="sm"
                 onClick={() => setIsMobileSheetOpen(true)}
                 className="lg:hidden h-8 px-2.5 text-xs font-mono border-white/10 bg-white/[0.04] text-neutral-300 gap-1.5 shrink-0"
+                aria-label="Open syllabus navigation"
               >
                 <Icon icon={Menu01Icon} size={14} />
                 <span>Syllabus</span>
@@ -612,26 +614,31 @@ export function KunalWorkspace({ initialDetail }: KunalWorkspaceProps) {
                 variant="ghost"
                 size="sm"
                 onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
-                className="hidden lg:flex h-8 px-2 text-xs font-mono text-neutral-400 hover:text-white gap-1.5"
+                className="hidden lg:flex h-8 px-2 text-xs font-mono text-neutral-400 hover:text-white gap-1.5 shrink-0"
                 title={isSidebarCollapsed ? "Expand syllabus" : "Collapse syllabus"}
               >
                 <Icon icon={SidebarLeftIcon} size={14} />
                 <span>{isSidebarCollapsed ? "Show Syllabus" : "Hide"}</span>
               </Button>
+
+              <span className="font-mono text-[11px] text-neutral-400 sm:hidden shrink-0">
+                Lesson <strong className="text-white">{currentGlobalIndex >= 0 ? currentGlobalIndex + 1 : activeVideo.position}</strong> of {allVideos.length}
+              </span>
             </div>
 
-            {/* Video Prev / Next / Complete Actions */}
-            <div className="flex items-center gap-1.5 font-mono text-xs shrink-0">
+            {/* Right Section on desktop / Bottom Row on mobile: Prev / Next & Mark Watched */}
+            <div className="flex items-center gap-1.5 font-mono text-xs w-full sm:w-auto">
               <Button
                 variant="outline"
                 size="sm"
                 onClick={handlePrevious}
                 disabled={!hasPrevious}
-                className="h-8 px-2 sm:px-2.5 text-xs border-white/10 bg-white/[0.04] text-neutral-300 hover:text-white disabled:opacity-30"
+                className="h-8 px-2.5 text-xs border-white/10 bg-white/[0.04] text-neutral-300 hover:text-white disabled:opacity-30 shrink-0"
                 aria-label="Previous lecture"
+                title="Previous lecture"
               >
                 <Icon icon={ArrowLeft01Icon} size={13} />
-                <span className="hidden sm:inline ml-1">Previous</span>
+                <span className="hidden md:inline ml-1">Previous</span>
               </Button>
 
               <Button
@@ -639,14 +646,14 @@ export function KunalWorkspace({ initialDetail }: KunalWorkspaceProps) {
                 size="sm"
                 onClick={handleToggleWatched}
                 className={cn(
-                  "h-8 px-3 text-xs border transition-all gap-1.5 font-semibold shrink-0",
+                  "h-8 px-3 text-xs border transition-all gap-1.5 font-semibold flex-1 sm:flex-initial justify-center min-w-0",
                   isCurrentVideoCompleted
                     ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/20"
                     : "bg-[#FF0000] border-[#FF0000] text-white hover:bg-[#CC0000]"
                 )}
               >
-                <Icon icon={isCurrentVideoCompleted ? CheckmarkCircle01Icon : PlayIcon} size={13} />
-                <span>{isCurrentVideoCompleted ? "Completed" : "Mark Watched"}</span>
+                <Icon icon={isCurrentVideoCompleted ? CheckmarkCircle01Icon : PlayIcon} size={13} className="shrink-0" />
+                <span className="truncate">{isCurrentVideoCompleted ? "Completed" : "Mark Watched"}</span>
               </Button>
 
               <Button
@@ -654,10 +661,11 @@ export function KunalWorkspace({ initialDetail }: KunalWorkspaceProps) {
                 size="sm"
                 onClick={handleNext}
                 disabled={!hasNext}
-                className="h-8 px-2 sm:px-2.5 text-xs border-white/10 bg-white/[0.04] text-neutral-300 hover:text-white disabled:opacity-30"
+                className="h-8 px-2.5 text-xs border-white/10 bg-white/[0.04] text-neutral-300 hover:text-white disabled:opacity-30 shrink-0"
                 aria-label="Next lecture"
+                title="Next lecture"
               >
-                <span className="hidden sm:inline mr-1">Next</span>
+                <span className="hidden md:inline mr-1">Next</span>
                 <Icon icon={ArrowRight01Icon} size={13} />
               </Button>
             </div>
@@ -741,9 +749,9 @@ export function KunalWorkspace({ initialDetail }: KunalWorkspaceProps) {
             {/* TAB 1: Timestamp-Level Chapters */}
             <TabsContent value="chapters" className="space-y-2">
               <div className="p-4 rounded-xl bg-[#080808] border border-white/[0.08] space-y-3">
-                <div className="flex items-center justify-between text-xs font-mono text-neutral-400 border-b border-white/[0.06] pb-2">
-                  <span>Timestamp-Level Lesson Chapters</span>
-                  <span className="text-[#FF0000]">{activeVideo.chapters.length} Verified Segments</span>
+                <div className="flex items-center justify-between gap-2 text-xs font-mono text-neutral-400 border-b border-white/[0.06] pb-2">
+                  <span className="text-white font-medium">Lesson Chapters</span>
+                  <span className="text-[#FF0000] text-[11px] shrink-0 font-semibold">{activeVideo.chapters.length} Verified Segments</span>
                 </div>
 
                 {activeVideo.chapters.length === 0 ? (
@@ -944,9 +952,9 @@ export function KunalWorkspace({ initialDetail }: KunalWorkspaceProps) {
             {/* TAB 3: Shared Canonical Problems */}
             <TabsContent value="problems" className="space-y-3">
               <div className="p-4 rounded-xl bg-[#080808] border border-white/[0.08] space-y-3">
-                <div className="flex items-center justify-between text-xs font-mono text-neutral-400 border-b border-white/[0.06] pb-2">
-                  <span>Canonical Practice Problems for {activeModule.title}</span>
-                  <span className="text-[#FF0000]">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 text-xs font-mono text-neutral-400 border-b border-white/[0.06] pb-2">
+                  <span className="font-medium text-white truncate">Practice Problems · {activeModule.title}</span>
+                  <span className="text-[#FF0000] text-[11px] shrink-0 font-semibold">
                     {activeModule.problems.filter((p) => solvedProblemSlugs.has(p.slug)).length} /{" "}
                     {activeModule.problems.length} Solved
                   </span>
