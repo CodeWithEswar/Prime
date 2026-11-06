@@ -36,13 +36,10 @@ export function StriverMasteryRadar({ data }: StriverMasteryRadarProps) {
   const mounted = useMounted();
   const [viewMode, setViewMode] = React.useState<"radar" | "table">("radar");
 
-  const avgScore = Math.round(data.reduce((s, d) => s + d.score, 0) / data.length);
-
   return (
     <PrimeChartContainer
       title="Algorithmic Mastery Radar"
       subtitle="Evaluated proficiency across six primary data structure and algorithm domains."
-      badge={`${avgScore}% Overall Track Mastery`}
       minHeight={280}
       controls={
         <div className="inline-flex items-center gap-0.5 border border-white/[0.08] rounded-lg p-0.5 bg-black/60 font-mono text-[10px]">

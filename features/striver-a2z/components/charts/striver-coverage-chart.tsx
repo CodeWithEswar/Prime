@@ -31,7 +31,6 @@ export function StriverCoverageChart({ data }: StriverCoverageChartProps) {
     <PrimeChartContainer
       title="Topic Coverage Comparison"
       subtitle="Side-by-side progression: Lecture Comprehension % vs Problem Practice % across topics."
-      badge="Curriculum Sync"
       minHeight={280}
     >
       <div className="h-64 sm:h-72 w-full pt-2">

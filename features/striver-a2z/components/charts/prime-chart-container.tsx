@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
 interface PrimeChartContainerProps {
@@ -19,8 +18,6 @@ interface PrimeChartContainerProps {
 export function PrimeChartContainer({
   title,
   subtitle,
-  badge,
-  badgeVariant = "outline",
   controls,
   mobileControls,
   children,
@@ -34,22 +31,12 @@ export function PrimeChartContainer({
         className
       )}
     >
-      {/* Chart Header Bar - Anchors title on left and controls/dropdown on top-right */}
+      {/* Chart Header Bar - Clean heading & subtitle on left, controls on top-right */}
       <div className="flex items-start justify-between gap-2.5 sm:gap-4 border-b border-white/[0.06] pb-3">
         <div className="space-y-1 min-w-0 flex-1">
-          <div className="flex items-center gap-2 flex-wrap">
-            <h3 className="font-mono text-xs sm:text-sm font-bold uppercase tracking-tight sm:tracking-wider text-white break-words leading-snug">
-              {title}
-            </h3>
-            {badge && (
-              <Badge
-                variant={badgeVariant}
-                className="font-mono text-[9px] sm:text-[10px] px-1.5 py-0 bg-white/[0.04] text-neutral-300 border-white/[0.1] shrink-0"
-              >
-                {badge}
-              </Badge>
-            )}
-          </div>
+          <h3 className="font-mono text-xs sm:text-sm font-bold uppercase tracking-tight sm:tracking-wider text-white break-words leading-snug">
+            {title}
+          </h3>
           {subtitle && (
             <p className="text-[10px] sm:text-[11px] text-neutral-400 font-sans leading-relaxed break-words">
               {subtitle}

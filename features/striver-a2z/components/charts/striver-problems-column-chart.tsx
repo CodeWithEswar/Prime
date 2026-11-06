@@ -45,7 +45,6 @@ export function StriverProblemsColumnChart({ data }: StriverProblemsColumnChartP
     <PrimeChartContainer
       title="Coding Problems Solved by Category"
       subtitle="Vertical column breakdown across Easy, Medium, and Hard difficulty levels."
-      badge="Difficulty Grouped"
       minHeight={280}
       controls={
         <div className="inline-flex items-center gap-0.5 border border-white/[0.08] rounded-lg p-0.5 bg-black/60 font-mono text-[10px]">
