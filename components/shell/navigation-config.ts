@@ -21,6 +21,7 @@ import {
   Notification01Icon,
   VideoReplayIcon,
   CourseIcon,
+  Playlist01Icon,
 } from "@hugeicons/core-free-icons";
 import type { NavGroup, PrimeNavItem } from "./types";
 // Future destinations stay defined but their placeholder screens are not advertised.
@@ -91,6 +92,20 @@ export const NAVIGATION_GROUPS: NavGroup[] = [
         icon: VideoReplayIcon,
         group: "practice",
         matchPrefixes: ["/practice/dsa/playlists", "/dsa/playlists"],
+      },
+      {
+        id: "kunal-bootcamp",
+        label: "Kunal Java + DSA",
+        href: "/practice/dsa/playlists/kunal-kushwaha",
+        icon: Playlist01Icon,
+        group: "practice",
+        matchPrefixes: [
+          "/practice/dsa/playlists/kunal-kushwaha",
+          "/dsa/playlists/kunal-kushwaha",
+          "/app/dsa/playlists/kunal-kushwaha",
+          "/practice/dsa/playlists/kunal-java-dsa",
+          "/dsa/playlists/kunal-java-dsa",
+        ],
       },
       {
         id: "striver-a2z",
@@ -259,12 +274,42 @@ export function isRouteActive(
   ].some((fPath) => pathname === fPath || pathname.startsWith(`${fPath}/`));
   if (item.id === "roadmap" && isFundamentalsRoute) return false;
 
+  const isKunalRoute = [
+    "/practice/dsa/playlists/kunal-kushwaha",
+    "/practice/dsa/playlists/kunal-java-dsa",
+    "/dsa/playlists/kunal-kushwaha",
+    "/dsa/playlists/kunal-java-dsa",
+    "/app/dsa/playlists/kunal-kushwaha",
+  ].some((kPath) => pathname === kPath || pathname.startsWith(`${kPath}/`));
+  if (item.id === "dsa-playlists" && isKunalRoute) return false;
+
+  const isStriverRoute = [
+    "/practice/dsa/sheets/striver-a2z",
+    "/dsa/sheets/striver-a2z",
+    "/app/dsa/sheets/striver-a2z",
+  ].some((sPath) => pathname === sPath || pathname.startsWith(`${sPath}/`));
+  if (item.id === "practice" && (isStriverRoute || isKunalRoute)) return false;
+
   if (item.exact) return pathname === item.href;
   return (item.matchPrefixes?.length ? item.matchPrefixes : [item.href]).some(
     (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`)
   );
 }
 export function getShellRoute(pathname: string, query?: ShellSearchParams) {
+  if (
+    pathname === "/practice/dsa/playlists/kunal-kushwaha" ||
+    pathname.startsWith("/practice/dsa/playlists/kunal-kushwaha/") ||
+    pathname === "/practice/dsa/playlists/kunal-java-dsa" ||
+    pathname.startsWith("/practice/dsa/playlists/kunal-java-dsa/")
+  ) {
+    const isAnalytics = pathname.endsWith("/analytics");
+    return {
+      section: "Practice",
+      label: isAnalytics ? "Kunal DSA Analytics" : "Kunal Java + DSA",
+      parent: isAnalytics ? "/practice/dsa/playlists/kunal-kushwaha" : "/practice/dsa/playlists",
+      id: "kunal-bootcamp",
+    };
+  }
   if (pathname === "/aptitude" || pathname.startsWith("/aptitude/"))
     return {
       section: "Practice",
