@@ -90,7 +90,8 @@ const worker = {
 
     // Latency Distribution / Time-series
     if (url.pathname === "/api/status/latency") {
-      const observations = await getRecentObservations(env.STATUS_KV, 100);
+      const snapshot = await getLatestSnapshot(env.STATUS_KV);
+      const observations = snapshot?.recentObservations || [];
       const points = observations.map((o) => ({
         timestamp: o.checkedAt,
         responseTimeMs: o.responseTimeMs,

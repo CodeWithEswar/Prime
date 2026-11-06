@@ -16,7 +16,7 @@ let memoryCache: {
   cachedAt: number;
 } | null = null;
 
-const CACHE_TTL_MS = 45000; // 45 seconds fresh
+const CACHE_TTL_MS = 60000; // 60 seconds hot in-memory cache
 let isRefreshing = false;
 
 export function getFallbackSnapshot(): PublicStatusSnapshot {
@@ -155,3 +155,4 @@ export async function getPublicStatusSnapshot(): Promise<PublicStatusSnapshot> {
   // 4. Return cached snapshot if available, or graceful fallback
   return memoryCache ? memoryCache.snapshot : getFallbackSnapshot();
 }
+
