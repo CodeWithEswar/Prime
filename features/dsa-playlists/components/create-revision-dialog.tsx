@@ -16,28 +16,38 @@ import {
 import { createLessonRevisionAction } from "../server/playlist-actions";
 import type { DSALessonItem } from "../types";
 
-interface CreateRevisionDialogProps {
-  lesson: DSALessonItem | null;
+export interface CreateRevisionDialogProps {
+  lesson?: { videoDbId?: string; canonicalTopicSlug?: string; title: string } | null;
+  videoId?: string;
+  topicSlug?: string;
+  title?: string;
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }
 
 export function CreateRevisionDialog({
   lesson,
+  videoId: propVideoId,
+  topicSlug: propTopicSlug,
+  title: propTitle,
   open,
   onOpenChange,
 }: CreateRevisionDialogProps) {
   const [isPending, setIsPending] = useState(false);
 
-  if (!lesson) return null;
+  const targetVideoId = propVideoId || lesson?.videoDbId || "custom";
+  const targetTopic = propTopicSlug || lesson?.canonicalTopicSlug || "dsa";
+  const targetTitle = propTitle || lesson?.title || "DSA Revision Item";
+
+  if (!open) return null;
 
   const handleCreate = async () => {
     setIsPending(true);
     try {
       const res = await createLessonRevisionAction(
-        lesson.videoDbId,
-        lesson.canonicalTopicSlug,
-        lesson.title
+        targetVideoId,
+        targetTopic,
+        targetTitle
       );
       if (res.success) {
         toast.success("Added to spaced repetition revision queue!");
@@ -68,10 +78,9 @@ export function CreateRevisionDialog({
         </DialogHeader>
 
         <div className="py-3 px-3.5 my-2 rounded-lg bg-black/50 border border-white/[0.08] text-xs space-y-1">
-          <span className="text-[#FF4D4D] font-bold">Lesson #{lesson.position}</span>
-          <p className="text-white font-medium line-clamp-2">{lesson.title}</p>
+          <p className="text-white font-medium line-clamp-2">{targetTitle}</p>
           <span className="text-[10px] text-neutral-500 uppercase">
-            Topic: #{lesson.canonicalTopicSlug}
+            Topic: #{targetTopic}
           </span>
         </div>
 

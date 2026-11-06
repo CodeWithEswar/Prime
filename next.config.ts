@@ -101,6 +101,11 @@ const nextConfig: NextConfig = {
         destination: "/analytics",
         permanent: false,
       },
+      {
+        source: "/app/dsa/sheets/striver-a2z",
+        destination: "/practice/dsa/sheets/striver-a2z",
+        permanent: false,
+      },
     ];
   },
   async headers() {
