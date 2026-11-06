@@ -136,23 +136,23 @@ export function StriverAnalyticsView({ analytics }: StriverAnalyticsViewProps) {
       {/* 3. Centerpiece Chart: Large Interactive Area Chart (Learning Completion Trend) */}
       <StriverLearningTrendChart data={analytics.videoCompletionTrend} />
 
-      {/* 4. Two-Column Grid: Problems by Category & Learning vs Practice Ratio */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <StriverProblemsColumnChart data={analytics.problemsByTopic} />
-        <StriverBalanceChart data={analytics.weeklyConsistency} />
-      </div>
+      {/* 4. Coding Problems Solved by Category (One Chart Per Row) */}
+      <StriverProblemsColumnChart data={analytics.problemsByTopic} />
 
-      {/* 5. Two-Column Grid: Topic Coverage Comparison & 12-Week Consistency Heatmap */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <StriverCoverageChart data={analytics.topicCoverage} />
-        <StriverConsistencyHeatmap data={analytics.activityHeatmap} />
-      </div>
+      {/* 5. Learning vs Practice Ratio (One Chart Per Row) */}
+      <StriverBalanceChart data={analytics.weeklyConsistency} />
 
-      {/* 6. Two-Column Grid: Algorithmic Mastery Radar & Chronological Milestones Timeline */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <StriverMasteryRadar data={analytics.radarMastery} />
-        <StriverMilestonesTimeline milestones={analytics.milestones} />
-      </div>
+      {/* 6. Topic Coverage Comparison (One Chart Per Row) */}
+      <StriverCoverageChart data={analytics.topicCoverage} />
+
+      {/* 7. 12-Week Consistency Heatmap (One Chart Per Row) */}
+      <StriverConsistencyHeatmap data={analytics.activityHeatmap} />
+
+      {/* 8. Algorithmic Mastery Radar & Data Table (One Chart Per Row) */}
+      <StriverMasteryRadar data={analytics.radarMastery} />
+
+      {/* 9. Chronological Learning Milestones Timeline (One Chart Per Row) */}
+      <StriverMilestonesTimeline milestones={analytics.milestones} />
     </div>
   );
 }

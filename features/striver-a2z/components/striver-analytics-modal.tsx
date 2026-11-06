@@ -51,8 +51,8 @@ export function StriverAnalyticsModal({
           </DialogDescription>
         </DialogHeader>
 
-        {/* 2x2 Recharts Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+        {/* One Chart In One Row Stack */}
+        <div className="grid grid-cols-1 gap-6 pt-2">
           {/* Chart A: Video Completion Trend */}
           <div className="p-4 rounded-xl border border-white/[0.08] bg-[#0E0E0E] space-y-3">
             <div className="flex items-center justify-between">
