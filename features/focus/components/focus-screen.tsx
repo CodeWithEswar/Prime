@@ -22,10 +22,16 @@ import {
   finishStudySessionAction,
 } from "@/features/today/server/session-actions";
 
+export interface FocusScreenExitResult {
+  markComplete?: boolean;
+  taskId?: string;
+  elapsedMinutes?: number;
+}
+
 interface FocusScreenProps {
   session: ActiveStudySession;
   task?: FocusSessionTask | null;
-  onExit?: () => void;
+  onExit?: (result?: FocusScreenExitResult) => void;
 }
 
 export function FocusScreen({ session, task, onExit }: FocusScreenProps) {
@@ -43,6 +49,7 @@ export function FocusScreen({ session, task, onExit }: FocusScreenProps) {
     state,
     countdownFormatted,
     elapsedFormatted,
+    elapsedSeconds,
     targetMinutes,
     pause,
     resume,
@@ -89,7 +96,7 @@ export function FocusScreen({ session, task, onExit }: FocusScreenProps) {
     focusMutationCoordinator.enqueue({
       type: "pause",
       sessionId: session.id,
-      execute: () => pauseStudySessionAction(session.id),
+      execute: () => pauseStudySessionAction(session.id, { taskId: session.taskId }),
       onError: (err) => {
         toast.error("Failed to sync pause state with server. Timer will keep local state.");
         console.error("Pause sync failure:", err);
@@ -123,7 +130,7 @@ export function FocusScreen({ session, task, onExit }: FocusScreenProps) {
     focusMutationCoordinator.enqueue({
       type: "resume",
       sessionId: session.id,
-      execute: () => resumeStudySessionAction(session.id),
+      execute: () => resumeStudySessionAction(session.id, { taskId: session.taskId }),
       onError: (err) => {
         toast.error("Failed to sync resume state with server. Timer will keep local state.");
         console.error("Resume sync failure:", err);
@@ -145,10 +152,12 @@ export function FocusScreen({ session, task, onExit }: FocusScreenProps) {
     // Freeze timer visually immediately
     pause();
 
+    const elapsedMins = Math.max(1, Math.round(elapsedSeconds / 60));
+
     focusMutationCoordinator.enqueue({
       type: "finish",
       sessionId: session.id,
-      execute: () => finishStudySessionAction(session.id, { markComplete }),
+      execute: () => finishStudySessionAction(session.id, { markComplete, taskId: session.taskId }),
       onSuccess: () => {
         setIsFinishingAsync(false);
         if (typeof performance !== "undefined") {
@@ -163,7 +172,7 @@ export function FocusScreen({ session, task, onExit }: FocusScreenProps) {
         }
         toast.success(`Session finished. Recorded ${elapsedFormatted} of focused study.`);
         if (onExit) {
-          onExit();
+          onExit({ markComplete, taskId: session.taskId, elapsedMinutes: elapsedMins });
         } else {
           router.push("/today");
           router.refresh();
@@ -199,14 +208,16 @@ export function FocusScreen({ session, task, onExit }: FocusScreenProps) {
     setShowExitDialog(false);
     pause();
 
+    const elapsedMins = Math.max(1, Math.round(elapsedSeconds / 60));
+
     focusMutationCoordinator.enqueue({
       type: "pause",
       sessionId: session.id,
-      execute: () => pauseStudySessionAction(session.id),
+      execute: () => pauseStudySessionAction(session.id, { taskId: session.taskId }),
     });
 
     if (onExit) {
-      onExit();
+      onExit({ markComplete: false, taskId: session.taskId, elapsedMinutes: elapsedMins });
     } else {
       router.push("/today");
     }

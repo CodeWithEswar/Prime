@@ -57,7 +57,7 @@ export const plannerCommand = z.discriminatedUnion("kind", [
     kind: z.literal("course"),
     course: z.enum(Object.keys(fundamentalsCourses) as FundamentalsCourse[]),
     start: z.iso.date().optional(),
-    minutes: minutes.default(45),
+    minutes: minutes.optional(),
   }),
   z.object({
     kind: z.literal("work"),

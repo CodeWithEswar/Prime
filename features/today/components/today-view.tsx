@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -20,7 +20,7 @@ import { DayCompleteView } from "./day-complete-view";
 import { RestDayView } from "./rest-day-view";
 import { EmptyPlanView } from "./empty-plan-view";
 import { TomorrowPreviewSection } from "./tomorrow-preview";
-import { FocusScreen } from "@/features/focus/components/focus-screen";
+import { FocusScreen, type FocusScreenExitResult } from "@/features/focus/components/focus-screen";
 import { focusMutationCoordinator } from "@/features/focus/lib/mutation-coordinator";
 import { WhyTodayDialog } from "./why-today-dialog";
 import { RecordRevisionDialog } from "@/features/revision/components/record-revision-dialog";
@@ -38,6 +38,33 @@ interface TodayViewProps {
   initialSnapshot: TodaySnapshot;
 }
 
+function deriveNextAction(tasks: TodayTaskItem[]): TodayNextAction | null {
+  const candidate =
+    tasks.find((t) => t.status !== "completed" && t.status !== "skipped" && t.taskType === "revision" && t.isOverdue) ||
+    tasks.find((t) => t.status !== "completed" && t.status !== "skipped" && t.taskType === "revision") ||
+    tasks.find((t) => t.status !== "completed" && t.status !== "skipped" && t.isLocked) ||
+    tasks.find((t) => t.status !== "completed" && t.status !== "skipped" && (t.carryCount ?? 0) > 0) ||
+    tasks.find((t) => t.status !== "completed" && t.status !== "skipped" && t.taskType === "dsa_problem") ||
+    tasks.find((t) => t.status !== "completed" && t.status !== "skipped");
+
+  if (!candidate) return null;
+
+  return {
+    taskId: candidate.id,
+    taskType: candidate.taskType,
+    title: candidate.title,
+    problemSlug: candidate.problemSlug,
+    difficulty: candidate.problemDifficulty,
+    topicName: candidate.topicName,
+    stageName: candidate.stageName,
+    stageSequence: candidate.stageSequence,
+    targetMinutes: candidate.plannedMinutes,
+    reasonExplanation: candidate.reasonExplanation,
+    actionType: candidate.taskType === "revision" ? "review" : "start",
+    isOverdue: candidate.isOverdue,
+  };
+}
+
 export function TodayView({ initialSnapshot }: TodayViewProps) {
   const router = useRouter();
   const ai = useAI();
@@ -48,10 +75,137 @@ export function TodayView({ initialSnapshot }: TodayViewProps) {
   // State for recording revision review
   const [reviewItem, setReviewItem] = useState<RevisionProblemItem | null>(null);
 
-  const snapshot = initialSnapshot;
+  // Local authoritative snapshot for instantaneous optimistic updates (<50ms)
+  const [snapshot, setSnapshot] = useState<TodaySnapshot>(initialSnapshot);
+
+  useEffect(() => {
+    setSnapshot(initialSnapshot);
+  }, [initialSnapshot]);
+
   const isComplete = snapshot.plan.status === "complete";
   const isRestDay = snapshot.plan.status === "rest_day";
   const isEmpty = snapshot.plan.status === "empty";
+
+  // Optimistic task completion handler: immediately recalculates runway, load strip, and next action
+  const applyOptimisticTaskCompletion = useCallback(
+    (taskId: string, elapsedMinutes?: number) => {
+      setSnapshot((current) => {
+        const targetTask = current.tasks.find((t) => t.id === taskId);
+        if (!targetTask || targetTask.status === "completed") return current;
+
+        const effectiveActualMinutes = Math.max(
+          targetTask.actualMinutes || 0,
+          elapsedMinutes ?? targetTask.plannedMinutes
+        );
+
+        const updatedTasks = current.tasks.map((t) =>
+          t.id === taskId
+            ? {
+                ...t,
+                status: "completed" as const,
+                completedMinutes: t.plannedMinutes,
+                actualMinutes: effectiveActualMinutes,
+              }
+            : t
+        );
+
+        const completedTasks = updatedTasks.filter((t) => t.status === "completed");
+        const completedTaskCount = completedTasks.length;
+        const totalTaskCount = updatedTasks.length;
+        const percentage =
+          totalTaskCount > 0 ? Math.round((completedTaskCount / totalTaskCount) * 100) : 100;
+
+        const completedMinutes = completedTasks.reduce((sum, t) => sum + t.plannedMinutes, 0);
+        const remainingMinutes = Math.max(0, current.capacity.plannedMinutes - completedMinutes);
+        const focusedMinutes = updatedTasks.reduce((sum, t) => sum + (t.actualMinutes || 0), 0);
+
+        const updatedGroups = current.groups.map((group) => {
+          const groupTasks = updatedTasks.filter((t) => group.tasks.some((gt) => gt.id === t.id));
+          return {
+            ...group,
+            tasks: groupTasks,
+            completedCount: groupTasks.filter((t) => t.status === "completed").length,
+          };
+        });
+
+        const allFinished =
+          updatedTasks.length > 0 &&
+          updatedTasks.every((t) => t.status === "completed" || t.status === "skipped");
+
+        const updatedNextAction = deriveNextAction(updatedTasks);
+
+        return {
+          ...current,
+          plan: {
+            ...current.plan,
+            status: allFinished ? ("complete" as const) : ("in_progress" as const),
+          },
+          capacity: {
+            ...current.capacity,
+            completedMinutes,
+            remainingMinutes,
+            focusedMinutes,
+          },
+          progress: {
+            ...current.progress,
+            completedTaskCount,
+            percentage,
+          },
+          tasks: updatedTasks,
+          groups: updatedGroups,
+          nextAction: updatedNextAction,
+        };
+      });
+    },
+    []
+  );
+
+  const applyOptimisticTaskSkip = useCallback((taskId: string) => {
+    setSnapshot((current) => {
+      const targetTask = current.tasks.find((t) => t.id === taskId);
+      if (!targetTask || targetTask.status === "skipped") return current;
+
+      const updatedTasks = current.tasks.map((t) =>
+        t.id === taskId ? { ...t, status: "skipped" as const } : t
+      );
+
+      const completedTasks = updatedTasks.filter((t) => t.status === "completed");
+      const completedTaskCount = completedTasks.length;
+      const totalTaskCount = updatedTasks.length;
+      const percentage =
+        totalTaskCount > 0 ? Math.round((completedTaskCount / totalTaskCount) * 100) : 100;
+
+      const updatedGroups = current.groups.map((group) => {
+        const groupTasks = updatedTasks.filter((t) => group.tasks.some((gt) => gt.id === t.id));
+        return {
+          ...group,
+          tasks: groupTasks,
+          completedCount: groupTasks.filter((t) => t.status === "completed").length,
+        };
+      });
+
+      const allFinished =
+        updatedTasks.length > 0 &&
+        updatedTasks.every((t) => t.status === "completed" || t.status === "skipped");
+
+      const updatedNextAction = deriveNextAction(updatedTasks);
+
+      return {
+        ...current,
+        plan: {
+          ...current.plan,
+          status: allFinished ? ("complete" as const) : current.plan.status,
+        },
+        progress: {
+          ...current.progress,
+          percentage,
+        },
+        tasks: updatedTasks,
+        groups: updatedGroups,
+        nextAction: updatedNextAction,
+      };
+    });
+  }, []);
 
   // Optimistic focus session state for instant (<50ms) visual launch
   const [activeSession, setActiveSession] = useState<ActiveStudySession | null>(
@@ -69,31 +223,41 @@ export function TodayView({ initialSnapshot }: TodayViewProps) {
     }
   };
 
-  // Task Action Handlers
+  // Task Action Handlers with Instant Optimistic Response
   const handleCompleteTask = async (taskId: string) => {
+    const previousSnapshot = snapshot;
+    applyOptimisticTaskCompletion(taskId);
+    toast.success("Task completed.");
+
     try {
       const res = await completeTaskAction(taskId);
       if (res.success) {
-        toast.success("Task completed.");
         router.refresh();
       } else {
+        setSnapshot(previousSnapshot);
         toast.error(res.error || "Failed to complete task");
       }
     } catch {
+      setSnapshot(previousSnapshot);
       toast.error("Failed to complete task");
     }
   };
 
   const handleSkipTask = async (taskId: string) => {
+    const previousSnapshot = snapshot;
+    applyOptimisticTaskSkip(taskId);
+    toast.info("Task skipped.");
+
     try {
       const res = await skipTaskAction(taskId);
       if (res.success) {
-        toast.info("Task skipped.");
         router.refresh();
       } else {
+        setSnapshot(previousSnapshot);
         toast.error(res.error || "Failed to skip task");
       }
     } catch {
+      setSnapshot(previousSnapshot);
       toast.error("Failed to skip task");
     }
   };
@@ -145,7 +309,10 @@ export function TodayView({ initialSnapshot }: TodayViewProps) {
     });
   };
 
-  const handleExitFocus = () => {
+  const handleExitFocus = (result?: FocusScreenExitResult) => {
+    if (result?.markComplete && result.taskId) {
+      applyOptimisticTaskCompletion(result.taskId, result.elapsedMinutes);
+    }
     setActiveSession(null);
     router.refresh();
   };

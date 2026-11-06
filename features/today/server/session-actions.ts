@@ -55,20 +55,43 @@ export async function startStudySessionAction(
 }
 
 export async function pauseStudySessionAction(
-  sessionId: string
+  sessionId: string,
+  options: { taskId?: string } = {}
 ): Promise<{ success: boolean; error?: string }> {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return { success: false, error: "Unauthorized" };
 
-  const { data: session } = await supabase
-    .from("study_sessions")
-    .select("started_at, duration_seconds")
-    .eq("id", sessionId)
-    .eq("user_id", user.id)
-    .single();
+  const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(sessionId);
+  let session: { id: string; started_at: string; duration_seconds: number | null } | null = null;
 
-  if (!session) return { success: false, error: "Session not found" };
+  if (isUuid) {
+    const { data } = await supabase
+      .from("study_sessions")
+      .select("id, started_at, duration_seconds")
+      .eq("id", sessionId)
+      .eq("user_id", user.id)
+      .maybeSingle();
+    session = data;
+  }
+
+  if (!session) {
+    let query = supabase
+      .from("study_sessions")
+      .select("id, started_at, duration_seconds")
+      .eq("user_id", user.id)
+      .is("ended_at", null)
+      .order("started_at", { ascending: false })
+      .limit(1);
+
+    if (options.taskId) {
+      query = query.eq("task_id", options.taskId);
+    }
+    const { data: fallback } = await query.maybeSingle();
+    session = fallback;
+  }
+
+  if (!session) return { success: true };
 
   const now = Date.now();
   const startMs = Date.parse(session.started_at);
@@ -82,7 +105,7 @@ export async function pauseStudySessionAction(
       duration_seconds: newTotalSeconds,
       ended_at: new Date().toISOString(),
     })
-    .eq("id", sessionId)
+    .eq("id", session.id)
     .eq("user_id", user.id);
 
   if (error) return { success: false, error: error.message };
@@ -93,7 +116,8 @@ export async function pauseStudySessionAction(
 }
 
 export async function resumeStudySessionAction(
-  sessionId: string
+  sessionId: string,
+  options: { taskId?: string } = {}
 ): Promise<{ success: boolean; error?: string }> {
   const supabase = await createClient();
   const {
@@ -102,26 +126,41 @@ export async function resumeStudySessionAction(
   if (!user) return { success: false, error: "Unauthorized" };
 
   const nowIso = new Date().toISOString();
+  const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(sessionId);
 
   // Close any other open active sessions for this user
-  await supabase
+  let closeQuery = supabase
     .from("study_sessions")
     .update({ ended_at: nowIso })
     .eq("user_id", user.id)
-    .neq("id", sessionId)
     .is("ended_at", null);
 
-  // Resume this session: clear ended_at, set started_at to now
-  const { error } = await supabase
-    .from("study_sessions")
-    .update({
-      started_at: nowIso,
-      ended_at: null,
-    })
-    .eq("id", sessionId)
-    .eq("user_id", user.id);
+  if (isUuid) {
+    closeQuery = closeQuery.neq("id", sessionId);
+  }
+  await closeQuery;
 
-  if (error) return { success: false, error: error.message };
+  if (isUuid) {
+    // Resume this session: clear ended_at, set started_at to now
+    const { error } = await supabase
+      .from("study_sessions")
+      .update({
+        started_at: nowIso,
+        ended_at: null,
+      })
+      .eq("id", sessionId)
+      .eq("user_id", user.id);
+
+    if (error) return { success: false, error: error.message };
+  } else if (options.taskId) {
+    await supabase.from("study_sessions").insert({
+      user_id: user.id,
+      task_id: options.taskId,
+      session_type: "focus",
+      started_at: nowIso,
+      duration_seconds: 0,
+    });
+  }
 
   revalidatePath("/today");
   revalidatePath("/analytics");
@@ -130,45 +169,67 @@ export async function resumeStudySessionAction(
 
 export async function finishStudySessionAction(
   sessionId: string,
-  options: { markComplete?: boolean } = {}
+  options: { markComplete?: boolean; taskId?: string } = {}
 ): Promise<{ success: boolean; error?: string }> {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return { success: false, error: "Unauthorized" };
 
-  const { data: session } = await supabase
-    .from("study_sessions")
-    .select("task_id, started_at, duration_seconds, ended_at")
-    .eq("id", sessionId)
-    .eq("user_id", user.id)
-    .single();
+  const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(sessionId);
+  let session: { id: string; task_id: string | null; started_at: string; duration_seconds: number | null; ended_at: string | null } | null = null;
 
-  if (!session) return { success: false, error: "Session not found" };
-
-  const nowIso = new Date().toISOString();
-
-  // If session was still running, add elapsed time
-  let finalSeconds = session.duration_seconds || 0;
-  if (!session.ended_at) {
-    const startMs = Date.parse(session.started_at);
-    if (Number.isFinite(startMs)) {
-      finalSeconds += Math.max(0, Math.round((Date.now() - startMs) / 1000));
-    }
+  if (isUuid) {
+    const { data } = await supabase
+      .from("study_sessions")
+      .select("id, task_id, started_at, duration_seconds, ended_at")
+      .eq("id", sessionId)
+      .eq("user_id", user.id)
+      .maybeSingle();
+    session = data;
   }
 
-  // Close session
-  await supabase
-    .from("study_sessions")
-    .update({
-      ended_at: nowIso,
-      duration_seconds: finalSeconds,
-    })
-    .eq("id", sessionId)
-    .eq("user_id", user.id);
+  if (!session) {
+    let query = supabase
+      .from("study_sessions")
+      .select("id, task_id, started_at, duration_seconds, ended_at")
+      .eq("user_id", user.id)
+      .order("started_at", { ascending: false })
+      .limit(1);
+
+    if (options.taskId) {
+      query = query.eq("task_id", options.taskId);
+    }
+    const { data: fallback } = await query.maybeSingle();
+    session = fallback;
+  }
+
+  const nowIso = new Date().toISOString();
+  const targetTaskId = options.taskId || session?.task_id;
+
+  if (session) {
+    // If session was still running, add elapsed time
+    let finalSeconds = session.duration_seconds || 0;
+    if (!session.ended_at) {
+      const startMs = Date.parse(session.started_at);
+      if (Number.isFinite(startMs)) {
+        finalSeconds += Math.max(0, Math.round((Date.now() - startMs) / 1000));
+      }
+    }
+
+    // Close session
+    await supabase
+      .from("study_sessions")
+      .update({
+        ended_at: nowIso,
+        duration_seconds: finalSeconds,
+      })
+      .eq("id", session.id)
+      .eq("user_id", user.id);
+  }
 
   // If user requested marking task complete
-  if (options.markComplete && session.task_id) {
-    await completeTaskAction(session.task_id);
+  if (options.markComplete && targetTaskId) {
+    await completeTaskAction(targetTaskId);
   }
 
   revalidatePath("/today");
