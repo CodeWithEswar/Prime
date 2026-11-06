@@ -45,6 +45,7 @@ import {
 import { LessonNotesEditor } from "@/features/dsa-playlists/components/lesson-notes-editor";
 import { AddToPlanDialog } from "@/features/dsa-playlists/components/add-to-plan-dialog";
 import { CreateRevisionDialog } from "@/features/dsa-playlists/components/create-revision-dialog";
+import { KunalTopicNavigator } from "./kunal-topic-navigator";
 import { cn } from "@/lib/utils";
 import type {
   KunalBootcampDetail,
@@ -134,11 +135,23 @@ export function KunalWorkspace({ initialDetail }: KunalWorkspaceProps) {
   // UI state
   const [isSidebarCollapsed, setIsSidebarCollapsed] = React.useState(false);
   const [isMobileSheetOpen, setIsMobileSheetOpen] = React.useState(false);
-  const [searchQuery, setSearchQuery] = React.useState("");
+  const [activeTab, setActiveTab] = React.useState<"chapters" | "assignments" | "problems" | "notes">("chapters");
   const [scheduleModalOpen, setScheduleModalOpen] = React.useState(false);
   const [revisionModalOpen, setRevisionModalOpen] = React.useState(false);
   const [isEnrolled, setIsEnrolled] = React.useState(initialDetail.isEnrolled);
   const [isPending, startTransition] = React.useTransition();
+
+  // Keyboard shortcut Ctrl+B / Cmd+B to toggle syllabus sidebar
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "b") {
+        e.preventDefault();
+        setIsSidebarCollapsed((prev) => !prev);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   // Find active module & video
   const activeModule =
@@ -188,6 +201,18 @@ export function KunalWorkspace({ initialDetail }: KunalWorkspaceProps) {
     if (hasNext) {
       const next = allVideos[currentGlobalIndex + 1];
       handleSelectVideo(next.youtubeVideoId, next.moduleSlug);
+    }
+  };
+
+  const handleResumeNext = () => {
+    for (const v of allVideos) {
+      if (!completedVideoIds.has(v.youtubeVideoId)) {
+        handleSelectVideo(v.youtubeVideoId, v.moduleSlug);
+        return;
+      }
+    }
+    if (allVideos[0]) {
+      handleSelectVideo(allVideos[0].youtubeVideoId, allVideos[0].moduleSlug);
     }
   };
 
@@ -288,262 +313,209 @@ export function KunalWorkspace({ initialDetail }: KunalWorkspaceProps) {
     });
   };
 
-  // Filtered modules
-  const filteredModules = React.useMemo(() => {
-    if (!searchQuery.trim()) return initialDetail.modules;
-    const q = searchQuery.toLowerCase().trim();
-    return initialDetail.modules.filter(
-      (m) =>
-        m.title.toLowerCase().includes(q) ||
-        m.description.toLowerCase().includes(q) ||
-        m.videos.some((v) => v.title.toLowerCase().includes(q)) ||
-        m.problems.some((p) => p.title.toLowerCase().includes(q))
-    );
-  }, [initialDetail.modules, searchQuery]);
-
-  // Overall counts
-  const totalVids = initialDetail.course.videosCount;
-  const completedVidsCount = completedVideoIds.size;
-  const progressPct = totalVids > 0 ? Math.round((completedVidsCount / totalVids) * 100) : 0;
-
-  // Render Sidebar
-  const renderSidebar = () => (
-    <div className="flex flex-col h-full bg-[#080808] border-r border-white/[0.08] select-none">
-      {/* Search Bar */}
-      <div className="p-3 border-b border-white/[0.08] space-y-2">
-        <div className="relative">
-          <Icon
-            icon={Search01Icon}
-            size={14}
-            className="absolute left-2.5 top-1/2 -translate-y-1/2 text-neutral-500"
-          />
-          <Input
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Filter modules, lectures, problems..."
-            className="h-8 pl-8 text-xs font-mono bg-white/[0.03] border-white/10 text-white placeholder:text-neutral-500 rounded-lg focus-visible:ring-1 focus-visible:ring-[#FF0000]"
-          />
-        </div>
-        <div className="flex items-center justify-between text-[11px] font-mono text-neutral-400 px-1">
-          <span>{filteredModules.length} Modules</span>
-          <span className="text-[#FF0000]">{completedVidsCount} / {totalVids} Done</span>
-        </div>
-      </div>
-
-      {/* Modules & Lessons Scroll Area */}
-      <div className="flex-1 overflow-y-auto divide-y divide-white/[0.05] scrollbar-thin scrollbar-thumb-white/10">
-        {filteredModules.map((m) => {
-          const isModuleActive = m.slug === activeModule.slug;
-          const completedInMod = m.videos.filter((v) => completedVideoIds.has(v.youtubeVideoId)).length;
-          const isModFinished = m.videos.length > 0 && completedInMod === m.videos.length;
-
-          return (
-            <div key={m.slug} className="group/mod">
-              {/* Module Header */}
-              <button
-                type="button"
-                onClick={() => {
-                  setActiveModuleSlug(m.slug);
-                  if (m.videos[0]) {
-                    handleSelectVideo(m.videos[0].youtubeVideoId, m.slug);
-                  }
-                  setIsMobileSheetOpen(false);
-                }}
-                className={cn(
-                  "w-full text-left p-3 transition-colors flex items-start justify-between gap-2",
-                  isModuleActive
-                    ? "bg-white/[0.06] text-white"
-                    : "hover:bg-white/[0.02] text-neutral-300"
-                )}
-              >
-                <div className="space-y-0.5 min-w-0 flex-1">
-                  <div className="flex items-center gap-1.5 font-mono text-[10px] text-neutral-500 uppercase tracking-wider">
-                    <span>Step {m.stepNumber}</span>
-                    <span>•</span>
-                    <span>{m.videos.length} vids</span>
-                    {m.assignmentsCount > 0 && <span>• {m.assignmentsCount} assignments</span>}
-                  </div>
-                  <div className="font-semibold text-xs leading-snug truncate text-white">
-                    {m.title}
-                  </div>
-                </div>
-
-                <div className="shrink-0 flex items-center pt-0.5">
-                  {isModFinished ? (
-                    <Icon icon={CheckmarkCircle01Icon} size={15} className="text-emerald-500" />
-                  ) : (
-                    <span className="font-mono text-[10px] text-neutral-500">
-                      {completedInMod}/{m.videos.length}
-                    </span>
-                  )}
-                </div>
-              </button>
-
-              {/* Video List inside active or selected module */}
-              {(isModuleActive || searchQuery.trim().length > 0) && (
-                <div className="pl-4 pr-2 py-1 bg-black/40 border-t border-white/[0.04] space-y-0.5 font-mono text-xs">
-                  {m.videos.map((v) => {
-                    const isVidActive = v.youtubeVideoId === activeVideo.youtubeVideoId;
-                    const isVidCompleted = completedVideoIds.has(v.youtubeVideoId);
-
-                    return (
-                      <button
-                        key={v.youtubeVideoId}
-                        type="button"
-                        onClick={() => {
-                          handleSelectVideo(v.youtubeVideoId, m.slug);
-                          setIsMobileSheetOpen(false);
-                        }}
-                        className={cn(
-                          "w-full text-left px-2.5 py-1.5 rounded-md flex items-center justify-between gap-2 text-[11px] transition-all",
-                          isVidActive
-                            ? "bg-[#FF0000]/15 text-white font-semibold border border-[#FF0000]/30"
-                            : "text-neutral-400 hover:text-white hover:bg-white/[0.04]"
-                        )}
-                      >
-                        <div className="flex items-center gap-2 min-w-0 flex-1">
-                          <span className={cn("shrink-0", isVidCompleted ? "text-emerald-500" : "text-neutral-600")}>
-                            {isVidCompleted ? "✓" : `${v.position}.`}
-                          </span>
-                          <span className="truncate">{v.title}</span>
-                        </div>
-                        <span className="shrink-0 text-[10px] text-neutral-500">
-                          {v.durationFormatted}
-                        </span>
-                      </button>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  );
-
   return (
     <div className="space-y-6">
-      {/* 1. Course Header Banner */}
-      <div className="p-4 sm:p-6 rounded-xl bg-[#080808] border border-white/[0.08] space-y-4">
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-          <div className="space-y-1">
-            <div className="flex items-center gap-2 text-xs font-mono">
-              <Link
-                href="/practice/dsa/playlists"
-                className="text-neutral-400 hover:text-white flex items-center gap-1"
-              >
-                <Icon icon={ArrowLeft01Icon} size={14} className="text-[#FF0000]" />
-                <span>DSA Curated Tracks</span>
-              </Link>
-              <span className="text-neutral-600">/</span>
-              <span className="text-[#FF0000] font-bold">KUNAL KUSHWAHA</span>
-            </div>
-
-            <div className="flex items-center gap-2.5 flex-wrap pt-0.5">
-              <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
-                {initialDetail.course.title}
-              </h1>
-              <Badge variant="outline" className="text-[10px] font-mono border-white/10 text-neutral-400">
-                {initialDetail.course.programmingLanguage}
-              </Badge>
-              <Badge variant="outline" className="text-[10px] font-mono border-[#FF0000]/30 text-[#FF0000] bg-[#FF0000]/10">
-                Official Syllabus
-              </Badge>
-            </div>
-
-            <p className="text-xs sm:text-sm text-neutral-400 max-w-3xl leading-relaxed">
-              {initialDetail.course.description}
-            </p>
+      {/* 1. Global Sheet Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 pb-4 border-b border-white/[0.08]">
+        <div className="space-y-1">
+          <div className="flex items-center gap-2">
+            <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-[#FF0000]/10 text-[#FF0000] border border-[#FF0000]/20 font-bold">
+              Official Track
+            </span>
+            <span className="font-mono text-xs text-neutral-500">
+              Kunal Kushwaha
+            </span>
           </div>
-
-          {/* Header Action Buttons */}
-          <div className="flex items-center gap-2 flex-wrap">
-            {!isEnrolled ? (
-              <Button
-                variant="primary"
-                size="sm"
-                onClick={handleEnroll}
-                disabled={isPending}
-                className="h-8 px-4 text-xs font-mono bg-[#FF0000] hover:bg-[#CC0000] text-white shadow-lg shadow-red-950/40"
-              >
-                Enroll in Track
-              </Button>
-            ) : (
-              <Badge variant="outline" className="h-8 px-3 font-mono text-xs border-emerald-500/30 text-emerald-400 bg-emerald-500/10 gap-1.5">
-                <Icon icon={Tick02Icon} size={13} />
-                <span>Enrolled</span>
-              </Badge>
-            )}
-
-            <Button
-              variant="outline"
-              size="sm"
-              asChild
-              className="h-8 px-3 text-xs font-mono border-white/10 bg-white/[0.04] text-neutral-200 hover:text-white hover:bg-white/[0.08] gap-1.5"
-            >
-              <Link href="/practice/dsa/playlists/kunal-kushwaha/analytics">
-                <Icon icon={ChartLineData02Icon} size={14} className="text-[#FF0000]" />
-                <span>View Dedicated Analytics</span>
-              </Link>
-            </Button>
+          <h1 className="font-mono text-xl sm:text-2xl font-bold tracking-tight text-white">
+            Java + DSA Bootcamp
+          </h1>
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs text-neutral-400 font-mono">
+            <span>19 Modules</span>
+            <span className="text-neutral-600">•</span>
+            <span>69 Verified Lectures</span>
+            <span className="text-neutral-600">•</span>
+            <span>18 Assignments</span>
+            <span className="text-neutral-600">•</span>
+            <span>429 Problems</span>
           </div>
         </div>
 
-        {/* Progress Rail (Videos, Problems, Assignments) */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 border-t border-white/[0.06] font-mono text-xs">
-          <div className="space-y-1.5">
-            <div className="flex justify-between text-neutral-400 text-[11px]">
-              <span>Lectures Progress</span>
-              <span className="text-white font-bold">{completedVidsCount} / {totalVids} ({progressPct}%)</span>
-            </div>
-            <Progress value={progressPct} className="h-1 bg-white/[0.06] [&>div]:bg-[#FF0000]" />
-          </div>
+        {/* Global Toolbar Controls */}
+        <div className="grid grid-cols-3 sm:flex sm:items-center gap-2 w-full sm:w-auto">
+          {/* Mobile Syllabus Sheet Trigger */}
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setIsMobileSheetOpen(true)}
+            className="lg:hidden h-8 px-2.5 sm:px-3 text-xs font-mono border-white/10 bg-white/[0.04] text-neutral-200 hover:text-white gap-1.5 justify-center"
+            aria-label="Open syllabus navigation"
+          >
+            <Icon icon={Menu01Icon} size={14} />
+            <span>Syllabus</span>
+          </Button>
 
-          <div className="space-y-1.5">
-            <div className="flex justify-between text-neutral-400 text-[11px]">
-              <span>Problems Solved</span>
-              <span className="text-white font-bold">
-                {solvedProblemSlugs.size} / {initialDetail.course.totalProblemsCount}
-              </span>
-            </div>
-            <Progress
-              value={Math.round((solvedProblemSlugs.size / initialDetail.course.totalProblemsCount) * 100)}
-              className="h-1 bg-white/[0.06] [&>div]:bg-[#FF0000]"
-            />
-          </div>
+          {/* Desktop Sidebar Toggle Button */}
+          <TooltipProvider delayDuration={200}>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setIsSidebarCollapsed((prev) => !prev)}
+                  className="hidden lg:inline-flex h-8 w-8 p-0 border-white/10 bg-white/[0.04] text-neutral-300 hover:text-white hover:bg-white/[0.08]"
+                  aria-label="Toggle Syllabus Sidebar (Ctrl+B)"
+                >
+                  <Icon icon={SidebarLeftIcon} size={14} />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent side="bottom" className="text-xs font-mono">
+                {isSidebarCollapsed ? "Show Syllabus (Ctrl+B)" : "Hide Syllabus (Ctrl+B)"}
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
 
-          <div className="space-y-1.5">
-            <div className="flex justify-between text-neutral-400 text-[11px]">
-              <span>Assignments</span>
-              <span className="text-white font-bold">
-                {Array.from(assignmentStatuses.values()).filter((s) => s === "completed").length} /{" "}
-                {initialDetail.course.assignmentsCount}
-              </span>
-            </div>
-            <Progress
-              value={Math.round(
-                (Array.from(assignmentStatuses.values()).filter((s) => s === "completed").length /
-                  initialDetail.course.assignmentsCount) *
-                  100
-              )}
-              className="h-1 bg-white/[0.06] [&>div]:bg-[#FF0000]"
-            />
-          </div>
+          <Button
+            variant="outline"
+            size="sm"
+            asChild
+            className="h-8 px-2.5 sm:px-3 text-xs font-mono border-white/10 bg-white/[0.04] text-neutral-300 hover:text-white hover:bg-white/[0.08] gap-1.5 justify-center"
+          >
+            <Link href="/practice/dsa/playlists/kunal-kushwaha/analytics">
+              <Icon icon={ChartLineData02Icon} size={13} className="text-[#FF0000]" />
+              <span>Analytics</span>
+            </Link>
+          </Button>
+
+          <Button
+            size="sm"
+            onClick={handleResumeNext}
+            className="h-8 px-3 sm:px-3.5 text-xs font-mono font-medium bg-[#FF0000] hover:bg-[#CC0000] text-white gap-1.5 shadow-sm justify-center"
+          >
+            <span>Resume</span>
+            <Icon icon={ArrowRight01Icon} size={13} />
+          </Button>
         </div>
       </div>
 
-      {/* 2. Main Workspace Layout (Sidebar + Video & Tabs) */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        {/* Desktop Sidebar Toggle & Container */}
-        {!isSidebarCollapsed && (
-          <div className="hidden lg:block lg:col-span-4 xl:col-span-3 rounded-xl border border-white/[0.08] overflow-hidden h-[820px] sticky top-6">
-            {renderSidebar()}
-          </div>
-        )}
+      {/* 2. Adaptive Two-Column Workspace Layout */}
+      <div className="flex flex-col lg:flex-row items-start gap-6">
+        {/* Desktop Collapsible Left Column: Syllabus Navigator */}
+        <aside
+          className={cn(
+            "hidden lg:block shrink-0 transition-[width,opacity] duration-200 sticky top-20 h-[calc(100vh-140px)]",
+            isSidebarCollapsed ? "w-0 opacity-0 overflow-hidden pointer-events-none" : "w-[310px] xl:w-[340px] opacity-100"
+          )}
+        >
+          <KunalTopicNavigator
+            modules={initialDetail.modules}
+            activeModuleSlug={activeModule.slug}
+            activeVideoId={activeVideo.youtubeVideoId}
+            completedVideoIds={completedVideoIds}
+            onSelectVideo={handleSelectVideo}
+          />
+        </aside>
 
-        {/* Main Content Pane */}
-        <div className={cn("space-y-4", isSidebarCollapsed ? "lg:col-span-12" : "lg:col-span-8 xl:col-span-9")}>
+        {/* Mobile Slide-Over Sheet: Syllabus Navigator */}
+        <Sheet open={isMobileSheetOpen} onOpenChange={setIsMobileSheetOpen}>
+          <SheetContent side="left" className="w-[88vw] max-w-[360px] p-0 bg-[#090909] border-white/10 text-white">
+            <SheetHeader className="sr-only">
+              <SheetTitle>Kunal Kushwaha Syllabus Navigation</SheetTitle>
+            </SheetHeader>
+            <div className="h-full pt-12 pb-4 px-3">
+              <KunalTopicNavigator
+                modules={initialDetail.modules}
+                activeModuleSlug={activeModule.slug}
+                activeVideoId={activeVideo.youtubeVideoId}
+                completedVideoIds={completedVideoIds}
+                onSelectVideo={handleSelectVideo}
+                onCloseMobile={() => setIsMobileSheetOpen(false)}
+              />
+            </div>
+          </SheetContent>
+        </Sheet>
+
+        {/* Main Column: Full-Width Workspace (expands to 100% when sidebar collapsed) */}
+        <main className="flex-1 min-w-0 w-full space-y-4 sm:space-y-6">
+          {/* Structured Current Lecture Header */}
+          <div className="rounded-xl border border-white/[0.08] bg-[#0A0A0A]/90 p-3.5 sm:p-5 backdrop-blur-md space-y-2.5 sm:space-y-3">
+            {/* Breadcrumb Hierarchy */}
+            <div className="flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-[11px] font-mono text-neutral-400 uppercase tracking-wider flex-wrap">
+              <span className="text-white font-medium">
+                Module {activeModule.stepNumber.toString().padStart(2, "0")}: {activeModule.title}
+              </span>
+              <span className="text-neutral-600">/</span>
+              <span className="text-neutral-300">
+                Lecture {activeVideo.position.toString().padStart(2, "0")}
+              </span>
+            </div>
+
+            {/* Topic Title + Quick Actions */}
+            <div className="flex flex-col sm:flex-row sm:items-start items-start justify-between gap-2.5 sm:gap-3">
+              <h2 className="font-sans text-lg sm:text-xl lg:text-2xl font-bold text-white tracking-tight leading-snug break-words">
+                {activeVideo.title}
+              </h2>
+
+              <div className="flex items-center gap-1.5 font-mono text-xs shrink-0 self-start">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleToggleBookmark}
+                  className={cn(
+                    "h-8 px-2.5 text-xs border-white/10 bg-white/[0.04]",
+                    isCurrentVideoBookmarked ? "text-[#FF0000] border-[#FF0000]/30" : "text-neutral-400 hover:text-white"
+                  )}
+                  title="Bookmark lecture"
+                >
+                  <Icon icon={Bookmark01Icon} size={14} />
+                </Button>
+
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setScheduleModalOpen(true)}
+                  className="h-8 px-2.5 text-xs border-white/10 bg-white/[0.04] text-neutral-300 hover:text-white gap-1"
+                >
+                  <Icon icon={Calendar01Icon} size={13} className="text-[#FF0000]" />
+                  <span>Add to Plan</span>
+                </Button>
+
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setRevisionModalOpen(true)}
+                  className="h-8 px-2.5 text-xs border-white/10 bg-white/[0.04] text-neutral-300 hover:text-white gap-1"
+                >
+                  <Icon icon={Time02Icon} size={13} className="text-[#FF0000]" />
+                  <span>Revision</span>
+                </Button>
+              </div>
+            </div>
+
+            {/* Metadata Summary Pill */}
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs font-mono text-neutral-400 pt-1 border-t border-white/[0.05]">
+              <div className="flex items-center gap-1.5">
+                <Icon icon={VideoReplayIcon} size={13} className="text-[#FF0000]" />
+                <span>
+                  <strong className="text-white">{activeVideo.durationFormatted}</strong> Duration
+                </span>
+              </div>
+              <span className="text-neutral-700">•</span>
+              <div className="flex items-center gap-1.5">
+                <Icon icon={CodeCircleIcon} size={13} className="text-[#FF0000]" />
+                <span>
+                  <strong className="text-white">{activeModule.stats.solvedProblems}</strong> / {activeModule.problems.length} Solved
+                </span>
+              </div>
+              <span className="text-neutral-700">•</span>
+              <div className="flex items-center gap-1.5">
+                <Icon icon={Task01Icon} size={13} className="text-[#FF0000]" />
+                <span>
+                  <strong className="text-white">{activeModule.assignments.length}</strong> {activeModule.assignments.length === 1 ? "Assignment" : "Assignments"}
+                </span>
+              </div>
+            </div>
+          </div>
+
           {/* Controls Bar above video */}
           <div className="flex items-center justify-between gap-2 p-2.5 rounded-lg bg-[#080808] border border-white/[0.08]">
             {/* Mobile Sheet Trigger + Desktop collapse */}
@@ -625,75 +597,63 @@ export function KunalWorkspace({ initialDetail }: KunalWorkspaceProps) {
             />
           </div>
 
-          {/* Video Metadata & Tooling Row */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3.5 rounded-lg bg-[#080808] border border-white/[0.08]">
-            <div className="space-y-0.5">
-              <div className="flex items-center gap-2 font-mono text-[10px] text-neutral-500">
-                <span>Lecture {activeVideo.position} of {totalVids}</span>
-                <span>•</span>
-                <span>{activeVideo.durationFormatted}</span>
-                <span>•</span>
-                <span className="text-[#FF0000] uppercase font-semibold">{activeModule.title}</span>
-              </div>
-              <h2 className="text-sm sm:text-base font-bold text-white leading-snug">
-                {activeVideo.title}
-              </h2>
-            </div>
-
-            {/* Quick Actions (Bookmark, Add to Plan, Revision) */}
-            <div className="flex items-center gap-1.5 font-mono text-xs shrink-0">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={handleToggleBookmark}
-                className={cn(
-                  "h-7 px-2 text-xs border-white/10 bg-white/[0.04]",
-                  isCurrentVideoBookmarked ? "text-[#FF0000] border-[#FF0000]/30" : "text-neutral-400 hover:text-white"
-                )}
-                title="Bookmark lecture"
-              >
-                <Icon icon={Bookmark01Icon} size={13} />
-              </Button>
-
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setScheduleModalOpen(true)}
-                className="h-7 px-2.5 text-xs border-white/10 bg-white/[0.04] text-neutral-300 hover:text-white gap-1"
-              >
-                <Icon icon={Calendar01Icon} size={13} className="text-[#FF0000]" />
-                <span>Add to Plan</span>
-              </Button>
-
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setRevisionModalOpen(true)}
-                className="h-7 px-2.5 text-xs border-white/10 bg-white/[0.04] text-neutral-300 hover:text-white gap-1"
-              >
-                <Icon icon={Time02Icon} size={13} className="text-[#FF0000]" />
-                <span>Revision</span>
-              </Button>
-            </div>
-          </div>
-
           {/* 3. Workspace Interactive Tabs: Chapters, Assignments, Problems, Notes */}
-          <Tabs defaultValue="chapters" className="w-full space-y-4">
-            <TabsList className="bg-[#080808] border border-white/[0.08] p-1 font-mono text-xs w-full justify-start overflow-x-auto">
-              <TabsTrigger value="chapters" className="data-[state=active]:bg-white/[0.12] data-[state=active]:text-white text-neutral-400 gap-1.5 text-xs">
-                <Icon icon={PlayIcon} size={13} />
-                <span>Chapters ({activeVideo.chapters.length})</span>
+          <Tabs
+            value={activeTab}
+            onValueChange={(v) => setActiveTab(v as typeof activeTab)}
+            className="w-full space-y-4"
+          >
+            <TabsList
+              variant="line"
+              className="w-full justify-start border-b border-white/[0.08] pb-px overflow-x-auto scrollbar-none flex-nowrap gap-4 sm:gap-6"
+            >
+              <TabsTrigger
+                value="chapters"
+                className="gap-2 text-xs font-mono py-2.5 shrink-0"
+              >
+                <Icon icon={PlayIcon} size={15} className="text-[#FF0000]" />
+                <span>Chapters</span>
+                <Badge
+                  variant="outline"
+                  className="ml-0.5 text-[10px] px-1.5 py-0 bg-white/[0.04] border-white/[0.08] text-neutral-400 font-mono"
+                >
+                  {activeVideo.chapters.length}
+                </Badge>
               </TabsTrigger>
-              <TabsTrigger value="assignments" className="data-[state=active]:bg-white/[0.12] data-[state=active]:text-white text-neutral-400 gap-1.5 text-xs">
-                <Icon icon={Task01Icon} size={13} />
-                <span>Assignments ({activeModule.assignments.length})</span>
+
+              <TabsTrigger
+                value="assignments"
+                className="gap-2 text-xs font-mono py-2.5 shrink-0"
+              >
+                <Icon icon={Task01Icon} size={15} className="text-[#FF0000]" />
+                <span>Assignments</span>
+                <Badge
+                  variant="outline"
+                  className="ml-0.5 text-[10px] px-1.5 py-0 bg-white/[0.04] border-white/[0.08] text-neutral-400 font-mono"
+                >
+                  {activeModule.assignments.length}
+                </Badge>
               </TabsTrigger>
-              <TabsTrigger value="problems" className="data-[state=active]:bg-white/[0.12] data-[state=active]:text-white text-neutral-400 gap-1.5 text-xs">
-                <Icon icon={CodeCircleIcon} size={13} />
-                <span>Problems ({activeModule.problems.length})</span>
+
+              <TabsTrigger
+                value="problems"
+                className="gap-2 text-xs font-mono py-2.5 shrink-0"
+              >
+                <Icon icon={CodeCircleIcon} size={15} className="text-[#FF0000]" />
+                <span>Practice Problems</span>
+                <Badge
+                  variant="outline"
+                  className="ml-0.5 text-[10px] px-1.5 py-0 bg-white/[0.04] border-white/[0.08] text-neutral-400 font-mono"
+                >
+                  {activeModule.problems.length}
+                </Badge>
               </TabsTrigger>
-              <TabsTrigger value="notes" className="data-[state=active]:bg-white/[0.12] data-[state=active]:text-white text-neutral-400 gap-1.5 text-xs">
-                <Icon icon={Note01Icon} size={13} />
+
+              <TabsTrigger
+                value="notes"
+                className="gap-2 text-xs font-mono py-2.5 shrink-0"
+              >
+                <Icon icon={Note01Icon} size={15} className="text-[#FF0000]" />
                 <span>Lesson Notes</span>
               </TabsTrigger>
             </TabsList>
@@ -1001,23 +961,8 @@ export function KunalWorkspace({ initialDetail }: KunalWorkspaceProps) {
               />
             </TabsContent>
           </Tabs>
-        </div>
+        </main>
       </div>
-
-      {/* Mobile Syllabus Sheet */}
-      <Sheet open={isMobileSheetOpen} onOpenChange={setIsMobileSheetOpen}>
-        <SheetContent side="left" className="p-0 w-80 bg-[#080808] border-r border-white/10 text-white">
-          <SheetHeader className="p-4 border-b border-white/10">
-            <SheetTitle className="text-sm font-mono text-white flex items-center justify-between">
-              <span>Syllabus & Curriculum</span>
-              <span className="text-xs text-[#FF0000]">{completedVidsCount}/{totalVids}</span>
-            </SheetTitle>
-          </SheetHeader>
-          <div className="h-[calc(100vh-65px)]">
-            {renderSidebar()}
-          </div>
-        </SheetContent>
-      </Sheet>
 
       {/* Add To Plan Dialog */}
       <AddToPlanDialog
