@@ -196,7 +196,7 @@ export function StriverVideoPlayer({
         </div>
 
         {/* Right Section: Action Controls */}
-        <div className="flex items-center gap-2 shrink-0 self-end md:self-center">
+        <div className="flex items-center justify-between sm:justify-end gap-2 shrink-0 w-full sm:w-auto pt-2.5 sm:pt-0 border-t border-white/[0.05] sm:border-t-0">
           <TooltipProvider delayDuration={200}>
             {/* Desktop Action Icons */}
             <div className="hidden sm:flex items-center gap-1.5 border-r border-white/[0.08] pr-2">
@@ -291,13 +291,14 @@ export function StriverVideoPlayer({
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="h-8 w-8 p-0 border border-white/[0.08] text-neutral-400"
+                    className="h-8 px-2.5 border border-white/[0.08] text-neutral-300 gap-1.5"
                     aria-label="More actions"
                   >
                     <Icon icon={MoreHorizontalIcon} size={14} />
+                    <span className="text-xs font-mono">Options</span>
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="bg-[#101010] border-white/10 text-neutral-300">
+                <DropdownMenuContent align="start" className="bg-[#101010] border-white/10 text-neutral-300">
                   <DropdownMenuItem
                     onClick={handleToggleBookmark}
                     className="gap-2 cursor-pointer text-xs"
@@ -344,7 +345,7 @@ export function StriverVideoPlayer({
               onClick={handleToggleComplete}
               disabled={isPending}
               className={cn(
-                "h-8 px-3 text-xs font-mono font-semibold gap-1.5 transition-all shadow-sm",
+                "h-8 px-4 flex-1 sm:flex-initial text-xs font-mono font-semibold gap-1.5 transition-all shadow-sm justify-center",
                 isCompleted
                   ? "bg-emerald-600 hover:bg-emerald-700 text-white border border-emerald-500/40"
                   : "bg-[#FF0000] hover:bg-[#CC0000] text-white"

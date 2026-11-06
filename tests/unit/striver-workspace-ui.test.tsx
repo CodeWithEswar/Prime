@@ -217,9 +217,15 @@ describe("Striver A2Z Learning Workspace Redesign", () => {
         />
       );
 
-      // Breadcrumbs
+      // Breadcrumbs (without redundant duplicate Step prefix)
       expect(screen.getByText(/Step 01: Learn the Basics/i)).toBeInTheDocument();
+      expect(screen.queryByText(/Step 01: Step 01/i)).not.toBeInTheDocument();
       expect(screen.getByText(/Substep 1.1/i)).toBeInTheDocument();
+
+      // Mobile & desktop action buttons
+      expect(screen.getByRole("button", { name: /open syllabus navigation/i })).toBeInTheDocument();
+      expect(screen.getByRole("link", { name: /analytics/i })).toBeInTheDocument();
+      expect(screen.getByRole("button", { name: /resume/i })).toBeInTheDocument();
 
       // Untruncated topic header
       const headings = screen.getAllByRole("heading", { level: 2 });
