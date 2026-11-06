@@ -19,6 +19,7 @@ import {
   JavaIcon,
   Brain02Icon,
   Notification01Icon,
+  VideoReplayIcon,
 } from "@hugeicons/core-free-icons";
 import type { NavGroup, PrimeNavItem } from "./types";
 // Future destinations stay defined but their placeholder screens are not advertised.
@@ -81,6 +82,14 @@ export const NAVIGATION_GROUPS: NavGroup[] = [
         icon: SourceCodeIcon,
         group: "practice",
         matchPrefixes: ["/practice"],
+      },
+      {
+        id: "dsa-playlists",
+        label: "DSA Playlists",
+        href: "/practice/dsa/playlists",
+        icon: VideoReplayIcon,
+        group: "practice",
+        matchPrefixes: ["/practice/dsa/playlists", "/dsa/playlists"],
       },
       {
         id: "aptitude",

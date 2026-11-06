@@ -25,6 +25,7 @@ import { focusMutationCoordinator } from "@/features/focus/lib/mutation-coordina
 import { WhyTodayDialog } from "./why-today-dialog";
 import { RecordRevisionDialog } from "@/features/revision/components/record-revision-dialog";
 import type { RevisionProblemItem } from "@/features/revision/types";
+import { ContinueLearningWidget } from "@/features/dsa-playlists/components/continue-learning-widget";
 
 import { completeTaskAction, skipTaskAction } from "../server/actions";
 import {
@@ -205,6 +206,11 @@ export function TodayView({ initialSnapshot }: TodayViewProps) {
               totalTaskCount={snapshot.progress.totalTaskCount}
               isExceeded={snapshot.capacity.isExceeded}
             />
+
+            {/* DSA Continue Learning strip (if enrolled) */}
+            {snapshot.dsaCoursePreview && (
+              <ContinueLearningWidget playlist={snapshot.dsaCoursePreview} />
+            )}
 
             {/* 3. Next Action Card (if incomplete tasks exist) */}
             {snapshot.nextAction && !isComplete && (

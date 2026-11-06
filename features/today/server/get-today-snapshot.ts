@@ -18,6 +18,7 @@ import { daysBetween, addDays, getDailyCapacity, getDayOfWeekFromDate } from "@/
 import { countsTowardsPlan } from "@/domain/planning/control";
 import { DEFAULT_PLANNER_CONFIG } from "@/domain/planning/types";
 import { syncUserNotifications } from "@/features/notifications/server/sync-notifications";
+import { getDSAPlaylists } from "@/features/dsa-playlists/server/get-playlists";
 
 /**
  * Derives a calendar day key (YYYY-MM-DD) for a given date and timezone safely.
@@ -525,6 +526,16 @@ export async function getTodaySnapshot(
     };
   }
 
+  let dsaCoursePreview = null;
+  try {
+    const { continueLearning } = await getDSAPlaylists();
+    if (continueLearning?.isEnrolled) {
+      dsaCoursePreview = continueLearning;
+    }
+  } catch (err) {
+    console.error("Error fetching DSA playlist preview for Today:", err);
+  }
+
   return {
     date: todayDate,
     displayDate,
@@ -562,6 +573,7 @@ export async function getTodaySnapshot(
     nextAction,
     activeSession,
     tomorrowPreview,
+    dsaCoursePreview,
   };
 }
 
