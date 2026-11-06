@@ -18,10 +18,6 @@ import {
   DropdownMenuLabel,
 } from "@/components/ui/dropdown-menu";
 import {
-  FireIcon,
-  FlashIcon,
-  Calendar01Icon,
-  Activity01Icon,
   MoreHorizontalIcon,
   Tick02Icon,
 } from "@hugeicons/core-free-icons";
@@ -72,53 +68,6 @@ export function StriverConsistencyHeatmap({ data }: StriverConsistencyHeatmapPro
     return cols;
   }, [activeData]);
 
-  // Calculate streaks & metrics
-  const { currentStreak, longestStreak, activeDays, totalActions, consistencyRate } =
-    React.useMemo(() => {
-      let current = 0;
-      let longest = 0;
-      let temp = 0;
-      let active = 0;
-      let total = 0;
-
-      // Chronological order for streak calculation
-      const sorted = [...activeData].sort((a, b) => a.date.localeCompare(b.date));
-
-      for (const d of sorted) {
-        total += d.count;
-        if (d.count > 0) {
-          active++;
-          temp++;
-          if (temp > longest) longest = temp;
-        } else {
-          temp = 0;
-        }
-      }
-
-      // Current active streak ending today or yesterday
-      for (let i = sorted.length - 1; i >= 0; i--) {
-        if (sorted[i].count > 0) {
-          current++;
-        } else {
-          // If latest entry is today and empty, user may study later today; check yesterday
-          if (i === sorted.length - 1) {
-            continue;
-          }
-          break;
-        }
-      }
-
-      const rate = sorted.length > 0 ? Math.round((active / sorted.length) * 100) : 0;
-
-      return {
-        currentStreak: current,
-        longestStreak: longest,
-        activeDays: active,
-        totalActions: total,
-        consistencyRate: rate,
-      };
-    }, [activeData]);
-
   // Determine which columns display a month label
   const monthLabels = React.useMemo(() => {
     let lastMonth = -1;
@@ -153,7 +102,7 @@ export function StriverConsistencyHeatmap({ data }: StriverConsistencyHeatmapPro
     <PrimeChartContainer
       title="Learning Activity & Momentum Heatmap"
       subtitle="Engineering contribution calendar tracking daily video lectures, problem solving, and practice velocity."
-      minHeight={320}
+      minHeight={280}
       controls={
         data.length > 84 ? (
           <div className="inline-flex items-center gap-0.5 border border-white/[0.08] rounded-lg p-0.5 bg-black/60 font-mono text-[10px]">
@@ -248,93 +197,22 @@ export function StriverConsistencyHeatmap({ data }: StriverConsistencyHeatmapPro
         ) : undefined
       }
     >
-      <div className="space-y-6 pt-2">
-        {/* 1. Four Momentum KPI Ribbon Cards (Full Width) */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 font-mono">
-          <div className="p-3 sm:p-3.5 rounded-lg border border-white/[0.07] bg-white/[0.02] flex items-center justify-between">
-            <div className="space-y-0.5">
-              <span className="text-[10px] uppercase text-neutral-500 font-semibold">
-                Current Streak
-              </span>
-              <div className="text-base sm:text-lg font-bold text-white flex items-baseline gap-1">
-                <span className="text-[#FF0000]">{currentStreak}</span>
-                <span className="text-xs text-neutral-400 font-normal">
-                  {currentStreak === 1 ? "day" : "days"}
-                </span>
-              </div>
-            </div>
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#FF0000]/10 border border-[#FF0000]/20 text-[#FF0000]">
-              <Icon icon={FireIcon} size={16} />
-            </div>
-          </div>
-
-          <div className="p-3 sm:p-3.5 rounded-lg border border-white/[0.07] bg-white/[0.02] flex items-center justify-between">
-            <div className="space-y-0.5">
-              <span className="text-[10px] uppercase text-neutral-500 font-semibold">
-                Longest Streak
-              </span>
-              <div className="text-base sm:text-lg font-bold text-white flex items-baseline gap-1">
-                <span>{longestStreak}</span>
-                <span className="text-xs text-neutral-400 font-normal">
-                  {longestStreak === 1 ? "day" : "days"}
-                </span>
-              </div>
-            </div>
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/[0.04] border border-white/[0.08] text-neutral-300">
-              <Icon icon={FlashIcon} size={16} />
-            </div>
-          </div>
-
-          <div className="p-3 sm:p-3.5 rounded-lg border border-white/[0.07] bg-white/[0.02] flex items-center justify-between">
-            <div className="space-y-0.5">
-              <span className="text-[10px] uppercase text-neutral-500 font-semibold">
-                Active Study Days
-              </span>
-              <div className="text-base sm:text-lg font-bold text-white flex items-baseline gap-1">
-                <span>{activeDays}</span>
-                <span className="text-xs text-neutral-400 font-normal">
-                  / {activeData.length}d
-                </span>
-              </div>
-            </div>
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/[0.04] border border-white/[0.08] text-neutral-300">
-              <Icon icon={Calendar01Icon} size={16} />
-            </div>
-          </div>
-
-          <div className="p-3 sm:p-3.5 rounded-lg border border-white/[0.07] bg-white/[0.02] flex items-center justify-between">
-            <div className="space-y-0.5">
-              <span className="text-[10px] uppercase text-neutral-500 font-semibold">
-                Study Velocity
-              </span>
-              <div className="text-base sm:text-lg font-bold text-white flex items-baseline gap-1">
-                <span>{totalActions}</span>
-                <span className="text-xs text-neutral-400 font-normal">
-                  actions ({consistencyRate}%)
-                </span>
-              </div>
-            </div>
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/[0.04] border border-white/[0.08] text-neutral-300">
-              <Icon icon={Activity01Icon} size={16} />
-            </div>
-          </div>
-        </div>
-
-        {/* 2. Expanded Heatmap Calendar Grid with Month Headers */}
+      <div className="space-y-4 pt-1">
+        {/* Expanded Heatmap Calendar Grid with Month Headers (Full Width) */}
         <TooltipProvider delayDuration={100}>
           <div className="overflow-x-auto pb-2 pt-1 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
-            <div className="inline-flex flex-col gap-1.5 select-none min-w-full">
+            <div className="flex flex-col gap-1.5 select-none min-w-[560px] md:min-w-full w-full">
               {/* Month Labels Row */}
               <div className="flex items-center text-[10px] font-mono text-neutral-400 h-4">
                 {/* Spacer matching day-of-week label width */}
-                <div className="w-8 shrink-0" />
+                <div className="w-7 sm:w-8 shrink-0" />
 
-                {/* Month labels aligned with week columns */}
-                <div className="flex gap-1.5 sm:gap-2 flex-1">
+                {/* Month labels aligned with week columns across full width */}
+                <div className="grid grid-flow-col auto-cols-fr gap-1 sm:gap-1.5 md:gap-2 flex-1 w-full">
                   {weeks.map((week, idx) => (
                     <div
                       key={idx}
-                      className="w-4 sm:w-5 md:w-6 shrink-0 text-left font-semibold"
+                      className="truncate text-left font-semibold"
                     >
                       {monthLabels[idx] && (
                         <span className="text-neutral-300 text-[10px]">
@@ -347,29 +225,29 @@ export function StriverConsistencyHeatmap({ data }: StriverConsistencyHeatmapPro
               </div>
 
               {/* Day-of-week labels + Weekly Grid Columns */}
-              <div className="flex items-start">
-                {/* Day-of-week vertical labels */}
-                <div className="w-8 shrink-0 flex flex-col gap-1.5 sm:gap-2 text-[10px] font-mono text-neutral-500 pt-0.5">
-                  <span className="h-4 sm:h-5 md:h-6 leading-none flex items-center">Mon</span>
-                  <span className="h-4 sm:h-5 md:h-6 leading-none flex items-center opacity-0">Tue</span>
-                  <span className="h-4 sm:h-5 md:h-6 leading-none flex items-center">Wed</span>
-                  <span className="h-4 sm:h-5 md:h-6 leading-none flex items-center opacity-0">Thu</span>
-                  <span className="h-4 sm:h-5 md:h-6 leading-none flex items-center">Fri</span>
-                  <span className="h-4 sm:h-5 md:h-6 leading-none flex items-center opacity-0">Sat</span>
-                  <span className="h-4 sm:h-5 md:h-6 leading-none flex items-center">Sun</span>
+              <div className="flex items-stretch w-full">
+                {/* Day-of-week vertical labels synchronized with 7 rows */}
+                <div className="w-7 sm:w-8 shrink-0 grid grid-rows-7 gap-1 sm:gap-1.5 md:gap-2 text-[10px] font-mono text-neutral-500 pr-1 select-none">
+                  <div className="flex items-center leading-none">Mon</div>
+                  <div className="flex items-center leading-none opacity-0" aria-hidden="true">Tue</div>
+                  <div className="flex items-center leading-none">Wed</div>
+                  <div className="flex items-center leading-none opacity-0" aria-hidden="true">Thu</div>
+                  <div className="flex items-center leading-none">Fri</div>
+                  <div className="flex items-center leading-none opacity-0" aria-hidden="true">Sat</div>
+                  <div className="flex items-center leading-none">Sun</div>
                 </div>
 
-                {/* Weekly Columns (Expanded & Styled) */}
-                <div className="flex gap-1.5 sm:gap-2 flex-1">
+                {/* Weekly Columns (Auto-expanding 100% full width) */}
+                <div className="grid grid-flow-col auto-cols-fr gap-1 sm:gap-1.5 md:gap-2 flex-1 w-full">
                   {weeks.map((week, wIndex) => (
-                    <div key={wIndex} className="flex flex-col gap-1.5 sm:gap-2 shrink-0">
+                    <div key={wIndex} className="grid grid-rows-7 gap-1 sm:gap-1.5 md:gap-2">
                       {week.map((day) => (
                         <Tooltip key={day.date}>
                           <TooltipTrigger asChild>
                             <div
                               tabIndex={0}
                               className={cn(
-                                "h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 rounded-xs border transition-all duration-150 cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white",
+                                "w-full aspect-square rounded-xs border transition-all duration-150 cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white",
                                 getIntensityColor(day.level),
                                 "hover:scale-115 hover:z-10 hover:border-white/60"
                               )}
