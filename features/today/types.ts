@@ -155,4 +155,5 @@ export interface TodaySnapshot {
   nextAction: TodayNextAction | null;
   activeSession: ActiveStudySession | null;
   tomorrowPreview: TomorrowPreview | null;
+  dsaCoursePreview?: import("@/features/dsa-playlists/types").DSAPlaylistSummary | null;
 }
