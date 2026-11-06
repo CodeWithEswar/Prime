@@ -12,7 +12,7 @@ import {
   Legend,
 } from "recharts";
 import { PrimeChartContainer } from "./prime-chart-container";
-import { PrimeChartTooltip } from "./prime-chart-tooltip";
+import { PrimeChartTooltip, PrimeSlimBarCursor } from "./prime-chart-tooltip";
 import { primeChartColors, primeChartFont } from "./prime-chart-theme";
 
 interface StriverBalanceChartProps {
@@ -70,7 +70,7 @@ export function StriverBalanceChart({ data }: StriverBalanceChartProps) {
               />
 
               <Tooltip
-                cursor={{ fill: "rgba(255, 255, 255, 0.04)" }}
+                cursor={<PrimeSlimBarCursor maxWidth={56} />}
                 content={(props) => (
                   <PrimeChartTooltip
                     active={props.active}
@@ -98,6 +98,7 @@ export function StriverBalanceChart({ data }: StriverBalanceChartProps) {
                 dataKey="videosWatched"
                 name="Lectures Watched"
                 fill={primeChartColors.primary}
+                maxBarSize={24}
                 radius={[3, 3, 0, 0]}
               />
 
@@ -105,6 +106,7 @@ export function StriverBalanceChart({ data }: StriverBalanceChartProps) {
                 dataKey="problemsSolved"
                 name="Problems Solved"
                 fill={primeChartColors.practice}
+                maxBarSize={24}
                 radius={[3, 3, 0, 0]}
               />
             </BarChart>

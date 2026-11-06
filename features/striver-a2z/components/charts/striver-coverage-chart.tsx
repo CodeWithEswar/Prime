@@ -12,7 +12,7 @@ import {
   Legend,
 } from "recharts";
 import { PrimeChartContainer } from "./prime-chart-container";
-import { PrimeChartTooltip } from "./prime-chart-tooltip";
+import { PrimeChartTooltip, PrimeSlimBarCursor } from "./prime-chart-tooltip";
 import { primeChartColors, primeChartFont } from "./prime-chart-theme";
 
 interface StriverCoverageChartProps {
@@ -71,7 +71,7 @@ export function StriverCoverageChart({ data }: StriverCoverageChartProps) {
               />
 
               <Tooltip
-                cursor={{ fill: "rgba(255, 255, 255, 0.04)" }}
+                cursor={<PrimeSlimBarCursor maxWidth={56} />}
                 content={(props) => (
                   <PrimeChartTooltip
                     active={props.active}
@@ -99,6 +99,7 @@ export function StriverCoverageChart({ data }: StriverCoverageChartProps) {
                 dataKey="videoPct"
                 name="Lectures Watched %"
                 fill={primeChartColors.primary}
+                maxBarSize={22}
                 radius={[3, 3, 0, 0]}
               />
 
@@ -106,6 +107,7 @@ export function StriverCoverageChart({ data }: StriverCoverageChartProps) {
                 dataKey="practicePct"
                 name="Problems Solved %"
                 fill={primeChartColors.practice}
+                maxBarSize={22}
                 radius={[3, 3, 0, 0]}
               />
             </BarChart>

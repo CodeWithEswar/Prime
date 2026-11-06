@@ -12,7 +12,7 @@ import {
   Legend,
 } from "recharts";
 import { PrimeChartContainer } from "./prime-chart-container";
-import { PrimeChartTooltip } from "./prime-chart-tooltip";
+import { PrimeChartTooltip, PrimeSlimBarCursor } from "./prime-chart-tooltip";
 import { primeChartColors, primeChartFont } from "./prime-chart-theme";
 import { cn } from "@/lib/utils";
 
@@ -102,7 +102,7 @@ export function StriverProblemsColumnChart({ data }: StriverProblemsColumnChartP
               />
 
               <Tooltip
-                cursor={{ fill: "rgba(255, 255, 255, 0.04)" }}
+                cursor={<PrimeSlimBarCursor maxWidth={layoutMode === "stacked" ? 42 : 58} />}
                 content={(props) => (
                   <PrimeChartTooltip
                     active={props.active}
@@ -131,6 +131,7 @@ export function StriverProblemsColumnChart({ data }: StriverProblemsColumnChartP
                 name="Easy"
                 stackId={layoutMode === "stacked" ? "a" : undefined}
                 fill={primeChartColors.easy}
+                maxBarSize={layoutMode === "stacked" ? 32 : 18}
                 radius={layoutMode === "stacked" ? [0, 0, 0, 0] : [3, 3, 0, 0]}
               />
 
@@ -139,6 +140,7 @@ export function StriverProblemsColumnChart({ data }: StriverProblemsColumnChartP
                 name="Medium"
                 stackId={layoutMode === "stacked" ? "a" : undefined}
                 fill={primeChartColors.medium}
+                maxBarSize={layoutMode === "stacked" ? 32 : 18}
                 radius={layoutMode === "stacked" ? [0, 0, 0, 0] : [3, 3, 0, 0]}
               />
 
@@ -147,6 +149,7 @@ export function StriverProblemsColumnChart({ data }: StriverProblemsColumnChartP
                 name="Hard"
                 stackId={layoutMode === "stacked" ? "a" : undefined}
                 fill={primeChartColors.hard}
+                maxBarSize={layoutMode === "stacked" ? 32 : 18}
                 radius={[3, 3, 0, 0]}
               />
             </BarChart>
