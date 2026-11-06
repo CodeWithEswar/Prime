@@ -1,16 +1,24 @@
 /**
- * PRIME Focus Mode — 360° Magnetic Blaze Ray Simulation Engine
- * Manages the ray pool, inward gravitational acceleration, smooth pause/resume
- * deceleration/acceleration physics, and high-performance Canvas 2D rendering.
+ * PRIME Focus Mode — 360° Magnetic Blaze V2 Simulation Engine
+ * Dense energy rays, slow-burning inward magnetic attraction, and realistic
+ * flaming embers with tapered flame trails and heat-drift trajectories.
  */
 
-import type { MagneticRay, RayLayer } from "../types";
+import type {
+  MagneticRay,
+  RayType,
+  FlamingEmber,
+  EmberColorType,
+  MagneticBlazeConfig,
+} from "../types";
+import { magneticBlazeConfig } from "../types";
 import {
   polarToCartesian,
   getEllipticalBoundaryRadius,
   computeInwardProgress,
   computeInwardAcceleration,
   computeRayAlpha,
+  computeEmberAlpha,
 } from "./ray-geometry";
 
 export interface RayEngineState {
@@ -31,22 +39,26 @@ export interface RayEngineDimensions {
 
 export class RayEngine {
   private rays: MagneticRay[] = [];
+  private embers: FlamingEmber[] = [];
+
   private dimensions: RayEngineDimensions = {
     width: 0,
     height: 0,
     centerX: 0,
     centerY: 0,
     maxRadius: 0,
-    innerRadiusX: 180,
-    innerRadiusY: 110,
+    innerRadiusX: 190,
+    innerRadiusY: 120,
   };
 
-  // Speed and glow smoothing factors for 60fps interpolation (<300ms transitions)
+  private config: MagneticBlazeConfig = { ...magneticBlazeConfig };
+
+  // Speed and glow smoothing factors for 60fps interpolation (250–350ms transitions)
   private currentSpeedFactor = 1.0;
   private currentGlowFactor = 1.0;
 
   /**
-   * Initializes or updates viewport dimensions and scales ray count adaptively
+   * Initializes or updates viewport dimensions and scales ray & ember pools adaptively
    */
   public resize(width: number, height: number): void {
     const isMobile = width < 640;
@@ -70,12 +82,19 @@ export class RayEngine {
       innerRadiusY,
     };
 
-    const targetRayCount = isMobile ? 75 : isTablet ? 120 : 185;
+    // V2: Dense energy rays (+50-70% higher density)
+    // Mobile: 105 rays, 28 embers
+    // Tablet: 160 rays, 45 embers
+    // Desktop: 250 rays, 68 embers
+    const targetRayCount = isMobile ? 105 : isTablet ? 160 : 250;
+    const targetEmberCount = isMobile ? 28 : isTablet ? 45 : 68;
+
     this.syncRayCount(targetRayCount);
+    this.syncEmberCount(targetEmberCount);
   }
 
   /**
-   * Adjusts ray pool size without unnecessary garbage collection
+   * Synchronizes ray pool size without memory leaks or repeated GC
    */
   private syncRayCount(count: number): void {
     if (this.rays.length === count) return;
@@ -91,51 +110,68 @@ export class RayEngine {
   }
 
   /**
-   * Instantiates a single ray with deterministic layer distribution across 360°
+   * Synchronizes flaming ember pool size
+   */
+  private syncEmberCount(count: number): void {
+    if (this.embers.length === count) return;
+
+    if (this.embers.length < count) {
+      const startIndex = this.embers.length;
+      for (let i = startIndex; i < count; i++) {
+        this.embers.push(this.createEmber(i, true));
+      }
+    } else {
+      this.embers.length = count;
+    }
+  }
+
+  /**
+   * Instantiates a single ray with 3 distinct categories:
+   * - Primary Blaze Rays (30%): Long, sharp crimson streaks, thin bright-red cores
+   * - Secondary Magnetic Rays (45%): Shorter, dimmer streaks with slight angular drift
+   * - Micro Energy Rays (25%): Very thin, faint streaks creating continuous veil
    */
   private createRay(id: number, randomStart = true): MagneticRay {
     const rand = Math.random();
-    let layer: RayLayer = "mid";
-    let baseLength = 90;
-    let baseSpeed = 340;
-    let width = 1.5;
-    let opacity = 0.65;
+    let type: RayType = "secondary";
+    let baseLength = 70;
+    let baseSpeed = 160;
+    let width = 1.2;
+    let opacity = 0.55;
 
-    if (rand < 0.35) {
-      // Outer field: dimmer, longer trails entering from all directions
-      layer = "outer";
-      baseLength = 70 + Math.random() * 55;
-      baseSpeed = 220 + Math.random() * 110;
-      width = 0.9 + Math.random() * 0.5;
-      opacity = 0.28 + Math.random() * 0.2;
-    } else if (rand < 0.8) {
-      // Mid field: clearly visible red rays accelerating inward
-      layer = "mid";
-      baseLength = 85 + Math.random() * 75;
-      baseSpeed = 310 + Math.random() * 140;
-      width = 1.3 + Math.random() * 0.7;
-      opacity = 0.55 + Math.random() * 0.25;
+    if (rand < 0.3) {
+      // Primary Blaze Rays: long, sharp, bright
+      type = "primary";
+      baseLength = (95 + Math.random() * 85) * this.config.trailLengthMultiplier;
+      baseSpeed = (170 + Math.random() * 110) * this.config.speedMultiplier;
+      width = 1.4 + Math.random() * 0.8;
+      opacity = 0.65 + Math.random() * 0.25;
+    } else if (rand < 0.75) {
+      // Secondary Magnetic Rays: mid-length, supporting depth
+      type = "secondary";
+      baseLength = (55 + Math.random() * 65) * this.config.trailLengthMultiplier;
+      baseSpeed = (130 + Math.random() * 90) * this.config.speedMultiplier;
+      width = 1.0 + Math.random() * 0.5;
+      opacity = 0.35 + Math.random() * 0.25;
     } else {
-      // Inner field: sharp, highly energized streaks plunging toward the exclusion boundary
-      layer = "inner";
-      baseLength = 45 + Math.random() * 45;
-      baseSpeed = 440 + Math.random() * 200;
-      width = 1.8 + Math.random() * 0.8;
-      opacity = 0.75 + Math.random() * 0.25;
+      // Micro Energy Rays: very thin, faint, ambient
+      type = "micro";
+      baseLength = (35 + Math.random() * 45) * this.config.trailLengthMultiplier;
+      baseSpeed = (100 + Math.random() * 70) * this.config.speedMultiplier;
+      width = 0.6 + Math.random() * 0.4;
+      opacity = 0.16 + Math.random() * 0.18;
     }
 
     const angle = Math.random() * Math.PI * 2;
-    const minInner = Math.min(this.dimensions.innerRadiusX, this.dimensions.innerRadiusY);
     const innerBoundary = getEllipticalBoundaryRadius(
       this.dimensions.innerRadiusX,
       this.dimensions.innerRadiusY,
       angle
     );
 
-    // Initial radial placement: distribute across the full field if initial, or at outer boundary
     const radius = randomStart
       ? innerBoundary + Math.random() * (this.dimensions.maxRadius - innerBoundary)
-      : this.dimensions.maxRadius + Math.random() * 90;
+      : this.dimensions.maxRadius + Math.random() * 100;
 
     return {
       id,
@@ -147,21 +183,84 @@ export class RayEngine {
       speed: baseSpeed,
       width,
       opacity,
-      energy: 0.8 + Math.random() * 0.4,
+      energy: 0.7 + Math.random() * 0.45,
       phase: Math.random() * Math.PI * 2,
-      angularDrift: (Math.random() - 0.5) * 0.04, // subtle natural curve
-      layer,
+      angularDrift: (Math.random() - 0.5) * this.config.angularDrift,
+      layer: type,
+      type,
     };
   }
 
   /**
-   * Re-spawns an existing ray object at the outer boundary (zero object allocations)
+   * Instantiates a single flaming ember with burning core, heat drift & flame trail
+   */
+  private createEmber(id: number, randomStart = true): FlamingEmber {
+    const colorRand = Math.random();
+    let colorType: EmberColorType = "hot_red";
+
+    if (colorRand < 0.15) {
+      colorType = "golden_ember"; // intense golden spark core
+    } else if (colorRand < 0.45) {
+      colorType = "orange_red"; // bright burning flame ember
+    } else if (colorRand < 0.8) {
+      colorType = "hot_red"; // signature vibrant scarlet ember
+    } else {
+      colorType = "crimson"; // deep smoldering crimson
+    }
+
+    const angle = Math.random() * Math.PI * 2;
+    const innerBoundary = getEllipticalBoundaryRadius(
+      this.dimensions.innerRadiusX,
+      this.dimensions.innerRadiusY,
+      angle
+    );
+
+    const radius = randomStart
+      ? innerBoundary + Math.random() * (this.dimensions.maxRadius - innerBoundary)
+      : this.dimensions.maxRadius + Math.random() * 120;
+
+    // Slower, deliberate inward speed (~35% slower)
+    const baseSpeed = (110 + Math.random() * 90) * this.config.speedMultiplier;
+    const size = 1.4 + Math.random() * 2.0;
+    const opacity = 0.65 + Math.random() * 0.35;
+    const trailLength = (16 + Math.random() * 28) * this.config.trailLengthMultiplier;
+    const hasTrail = Math.random() > 0.22;
+
+    return {
+      id,
+      angle,
+      radius,
+      size,
+      baseSpeed,
+      speed: baseSpeed,
+      swirlRate: (Math.random() - 0.5) * 0.16, // heat swirl rate
+      swirlPhase: Math.random() * Math.PI * 2,
+      opacity,
+      baseOpacity: opacity,
+      colorType,
+      trailLength,
+      hasTrail,
+    };
+  }
+
+  /**
+   * Respawns a ray object at the outer boundary in place
    */
   private respawnRay(ray: MagneticRay): void {
     ray.angle = Math.random() * Math.PI * 2;
-    ray.radius = this.dimensions.maxRadius + Math.random() * 80;
-    ray.angularDrift = (Math.random() - 0.5) * 0.04;
+    ray.radius = this.dimensions.maxRadius + Math.random() * 90;
+    ray.angularDrift = (Math.random() - 0.5) * this.config.angularDrift;
     ray.phase = Math.random() * Math.PI * 2;
+  }
+
+  /**
+   * Respawns a flaming ember object at the outer boundary in place
+   */
+  private respawnEmber(ember: FlamingEmber): void {
+    ember.angle = Math.random() * Math.PI * 2;
+    ember.radius = this.dimensions.maxRadius + Math.random() * 110;
+    ember.swirlRate = (Math.random() - 0.5) * 0.16;
+    ember.swirlPhase = Math.random() * Math.PI * 2;
   }
 
   /**
@@ -170,43 +269,59 @@ export class RayEngine {
   public update(dt: number, state: RayEngineState): void {
     if (state.reducedMotion) return;
 
-    // Smooth speed and glow interpolation for instant, non-jarring state transitions
-    const targetSpeedFactor = state.isPaused ? 0.03 : state.isRunning ? 1.0 : 0.0;
+    // Smooth speed and glow interpolation for graceful 250–350ms pause/resume easing
+    const targetSpeedFactor = state.isPaused ? 0.02 : state.isRunning ? 1.0 : 0.0;
     const targetGlowFactor = state.isPaused ? 0.45 : 1.0;
 
-    // Smooth 200-300ms transition curve
-    const lerpRate = Math.min(1, dt * 8);
+    const lerpRate = Math.min(1, dt * 7);
     this.currentSpeedFactor += (targetSpeedFactor - this.currentSpeedFactor) * lerpRate;
     this.currentGlowFactor += (targetGlowFactor - this.currentGlowFactor) * lerpRate;
 
     const { innerRadiusX, innerRadiusY, maxRadius } = this.dimensions;
 
+    // 1. Update Energy Rays
     for (let i = 0; i < this.rays.length; i++) {
       const ray = this.rays[i];
-
       const innerBoundary = getEllipticalBoundaryRadius(innerRadiusX, innerRadiusY, ray.angle);
       const progress = computeInwardProgress(ray.radius, innerBoundary, maxRadius);
-      const accel = computeInwardAcceleration(progress);
+      const accel = computeInwardAcceleration(progress) * this.config.attractionStrength;
 
-      // Inward movement: speed decreases radius (accelerating toward center)
       const effectiveVelocity = ray.speed * accel * this.currentSpeedFactor;
       ray.radius -= effectiveVelocity * dt;
 
-      // Small natural angular drift
+      // Subtle angular drift
       ray.angle += ray.angularDrift * this.currentSpeedFactor * dt;
 
       // Dynamic streak length with perspective stretch
       ray.length = ray.baseLength * (1 + 0.65 * progress);
 
-      // Respawn when ray reaches central exclusion boundary or drifts inside
       if (ray.radius <= innerBoundary) {
         this.respawnRay(ray);
+      }
+    }
+
+    // 2. Update Flaming Embers (vortex heat drift + curved trajectories)
+    for (let i = 0; i < this.embers.length; i++) {
+      const ember = this.embers[i];
+      const innerBoundary = getEllipticalBoundaryRadius(innerRadiusX, innerRadiusY, ember.angle);
+      const progress = computeInwardProgress(ember.radius, innerBoundary, maxRadius);
+      const accel = computeInwardAcceleration(progress) * this.config.attractionStrength;
+
+      const effectiveVelocity = ember.speed * accel * this.currentSpeedFactor;
+      ember.radius -= effectiveVelocity * dt;
+
+      // Realistic heat drift: subtle wave oscillation + radial magnetic swirl
+      const heatWave = Math.sin(ember.swirlPhase + progress * 6) * 0.08;
+      ember.angle += (ember.swirlRate + heatWave) * this.currentSpeedFactor * dt;
+
+      if (ember.radius <= innerBoundary) {
+        this.respawnEmber(ember);
       }
     }
   }
 
   /**
-   * Renders the 360° Magnetic Blaze ray field onto the canvas
+   * Renders the 360° Magnetic Blaze ray and ember field onto the canvas
    */
   public render(ctx: CanvasRenderingContext2D, state: RayEngineState): void {
     const { width, height, centerX, centerY, innerRadiusX, innerRadiusY, maxRadius } =
@@ -216,42 +331,44 @@ export class RayEngine {
 
     ctx.clearRect(0, 0, width, height);
 
-    // Additive screen blend mode produces brilliant neon light overlaps without expensive shadowBlur
+    // Screen blend mode creates rich optical overlaps and neon glows without expensive shadowBlur
     ctx.globalCompositeOperation = "screen";
 
+    const glowMul = this.currentGlowFactor * this.config.glowIntensity;
+
+    // -------------------------------------------------------------
+    // LAYER 1: Background & Midground — 360° Energy Rays
+    // -------------------------------------------------------------
     for (let i = 0; i < this.rays.length; i++) {
       const ray = this.rays[i];
-
       const innerBoundary = getEllipticalBoundaryRadius(innerRadiusX, innerRadiusY, ray.angle);
       const progress = computeInwardProgress(ray.radius, innerBoundary, maxRadius);
-      const alpha = computeRayAlpha(ray.opacity, progress) * this.currentGlowFactor;
+      const alpha = computeRayAlpha(ray.opacity, progress) * glowMul;
 
       if (alpha <= 0.01) continue;
 
-      // Inward direction: Head is closer to center (at ray.radius), Tail trails behind (at ray.radius + ray.length)
       const head = polarToCartesian(centerX, centerY, ray.angle, ray.radius);
       const tail = polarToCartesian(centerX, centerY, ray.angle, ray.radius + ray.length);
 
-      // Gradient along the ray stroke: Brilliant hot red at the leading head, fading crimson at the tail
       const grad = ctx.createLinearGradient(head.x, head.y, tail.x, tail.y);
 
-      if (ray.layer === "inner") {
-        // High-energy inner ray: brilliant red-white hot core
-        grad.addColorStop(0, `rgba(255, 120, 120, ${alpha * 0.95})`);
+      if (ray.type === "primary") {
+        // Primary Blaze Rays: vibrant scarlet core with bright white-red head
+        grad.addColorStop(0, `rgba(255, 140, 140, ${alpha * 0.95})`);
         grad.addColorStop(0.2, `rgba(255, 0, 0, ${alpha * 0.9})`);
         grad.addColorStop(0.7, `rgba(180, 0, 0, ${alpha * 0.35})`);
-        grad.addColorStop(1, "rgba(120, 0, 0, 0)");
-      } else if (ray.layer === "mid") {
-        // Mid-field blazing red streak
-        grad.addColorStop(0, `rgba(255, 20, 20, ${alpha * 0.9})`);
-        grad.addColorStop(0.3, `rgba(255, 0, 0, ${alpha * 0.75})`);
-        grad.addColorStop(0.8, `rgba(160, 0, 0, ${alpha * 0.25})`);
-        grad.addColorStop(1, "rgba(80, 0, 0, 0)");
+        grad.addColorStop(1, "rgba(100, 0, 0, 0)");
+      } else if (ray.type === "secondary") {
+        // Secondary Magnetic Rays: warm glowing crimson
+        grad.addColorStop(0, `rgba(255, 40, 40, ${alpha * 0.85})`);
+        grad.addColorStop(0.3, `rgba(230, 0, 0, ${alpha * 0.7})`);
+        grad.addColorStop(0.8, `rgba(150, 0, 0, ${alpha * 0.25})`);
+        grad.addColorStop(1, "rgba(70, 0, 0, 0)");
       } else {
-        // Outer darker crimson trail
-        grad.addColorStop(0, `rgba(230, 0, 0, ${alpha * 0.75})`);
-        grad.addColorStop(0.4, `rgba(180, 0, 0, ${alpha * 0.5})`);
-        grad.addColorStop(1, "rgba(60, 0, 0, 0)");
+        // Micro Energy Rays: faint atmospheric veil
+        grad.addColorStop(0, `rgba(210, 0, 0, ${alpha * 0.65})`);
+        grad.addColorStop(0.4, `rgba(160, 0, 0, ${alpha * 0.4})`);
+        grad.addColorStop(1, "rgba(50, 0, 0, 0)");
       }
 
       ctx.strokeStyle = grad;
@@ -261,16 +378,91 @@ export class RayEngine {
       ctx.lineTo(tail.x, tail.y);
       ctx.stroke();
 
-      // Sharp luminous spark on the leading tip of inner/mid rays near the center
-      if (ray.layer === "inner" && progress > 0.45 && alpha > 0.4) {
-        ctx.fillStyle = `rgba(255, 200, 200, ${alpha * 0.9})`;
+      // Sharp glowing tip on primary blaze rays near center
+      if (ray.type === "primary" && progress > 0.45 && alpha > 0.35) {
+        ctx.fillStyle = `rgba(255, 210, 210, ${alpha * 0.85})`;
         ctx.beginPath();
-        ctx.arc(head.x, head.y, ray.width * 0.8, 0, Math.PI * 2);
+        ctx.arc(head.x, head.y, ray.width * 0.85, 0, Math.PI * 2);
         ctx.fill();
       }
     }
 
-    // Reset composite operation
+    // -------------------------------------------------------------
+    // LAYER 2: Foreground — Flaming Embers & Flame Trails
+    // -------------------------------------------------------------
+    for (let i = 0; i < this.embers.length; i++) {
+      const ember = this.embers[i];
+      const innerBoundary = getEllipticalBoundaryRadius(innerRadiusX, innerRadiusY, ember.angle);
+      const progress = computeInwardProgress(ember.radius, innerBoundary, maxRadius);
+      const alpha = computeEmberAlpha(ember.opacity, progress) * glowMul;
+
+      if (alpha <= 0.01) continue;
+
+      const head = polarToCartesian(centerX, centerY, ember.angle, ember.radius);
+
+      // 1. Tapered Flame Trail behind the ember
+      if (ember.hasTrail) {
+        const trailLen = ember.trailLength * (0.9 + 0.5 * progress);
+        const trailTail = polarToCartesian(
+          centerX,
+          centerY,
+          ember.angle - ember.swirlRate * 0.05,
+          ember.radius + trailLen
+        );
+
+        const trailGrad = ctx.createLinearGradient(head.x, head.y, trailTail.x, trailTail.y);
+
+        if (ember.colorType === "golden_ember") {
+          trailGrad.addColorStop(0, `rgba(255, 215, 0, ${alpha * 0.85})`);
+          trailGrad.addColorStop(0.3, `rgba(255, 120, 0, ${alpha * 0.6})`);
+          trailGrad.addColorStop(1, "rgba(180, 0, 0, 0)");
+        } else if (ember.colorType === "orange_red") {
+          trailGrad.addColorStop(0, `rgba(255, 90, 30, ${alpha * 0.85})`);
+          trailGrad.addColorStop(0.4, `rgba(255, 0, 0, ${alpha * 0.55})`);
+          trailGrad.addColorStop(1, "rgba(120, 0, 0, 0)");
+        } else {
+          trailGrad.addColorStop(0, `rgba(255, 30, 30, ${alpha * 0.8})`);
+          trailGrad.addColorStop(0.4, `rgba(200, 0, 0, ${alpha * 0.5})`);
+          trailGrad.addColorStop(1, "rgba(80, 0, 0, 0)");
+        }
+
+        ctx.strokeStyle = trailGrad;
+        ctx.lineWidth = ember.size * 0.85;
+        ctx.beginPath();
+        ctx.moveTo(head.x, head.y);
+        ctx.lineTo(trailTail.x, trailTail.y);
+        ctx.stroke();
+      }
+
+      // 2. Burning Ember Spark Core & Soft Halo
+      const emberRadius = ember.size * (0.8 + 0.25 * Math.sin(ember.swirlPhase));
+
+      // Outer halo
+      let haloColor = `rgba(255, 0, 0, ${alpha * 0.25})`;
+      let coreColor = `rgba(255, 60, 60, ${alpha * 0.95})`;
+
+      if (ember.colorType === "golden_ember") {
+        haloColor = `rgba(255, 180, 0, ${alpha * 0.35})`;
+        coreColor = `rgba(255, 240, 150, ${alpha * 0.98})`;
+      } else if (ember.colorType === "orange_red") {
+        haloColor = `rgba(255, 80, 0, ${alpha * 0.3})`;
+        coreColor = `rgba(255, 170, 80, ${alpha * 0.95})`;
+      }
+
+      // Outer soft halo
+      ctx.fillStyle = haloColor;
+      ctx.beginPath();
+      ctx.arc(head.x, head.y, emberRadius * 2.2, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Bright incandescent core
+      ctx.fillStyle = coreColor;
+      ctx.beginPath();
+      ctx.arc(head.x, head.y, emberRadius, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // Reset composite operation to normal
     ctx.globalCompositeOperation = "source-over";
   }
 
@@ -286,5 +478,16 @@ export class RayEngine {
   public getRayCount(): number {
     return this.rays.length;
   }
-}
 
+  public getEmberCount(): number {
+    return this.embers.length;
+  }
+
+  public getConfig(): MagneticBlazeConfig {
+    return this.config;
+  }
+
+  public setConfig(custom: Partial<MagneticBlazeConfig>): void {
+    this.config = { ...this.config, ...custom };
+  }
+}

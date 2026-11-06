@@ -59,18 +59,39 @@ export function computeInwardAcceleration(progress: number): number {
 }
 
 /**
- * Calculates alpha opacity envelope across radial depth:
+ * Calculates alpha opacity envelope across radial depth for energy rays:
  * - Smooth fade-in at outer perimeter (progress 0 -> 0.12)
  * - Maximum luminous intensity through mid-field (progress 0.12 -> 0.72)
  * - Rapid, clean fade-out before entering inner exclusion radius (progress 0.72 -> 1.0)
  */
 export function computeRayAlpha(baseOpacity: number, progress: number): number {
+  if (progress <= 0 || progress >= 1) return 0;
   if (progress < 0.12) {
     return baseOpacity * (progress / 0.12);
   }
   if (progress > 0.72) {
-    const fadeOutProgress = (progress - 0.72) / 0.28;
+    const fadeOutProgress = Math.min(1, Math.max(0, (progress - 0.72) / 0.28));
+    if (fadeOutProgress >= 1) return 0;
     return baseOpacity * Math.max(0, 1 - Math.pow(fadeOutProgress, 1.4));
+  }
+  return baseOpacity;
+}
+
+/**
+ * Calculates alpha opacity envelope for flaming embers:
+ * - Enters smoothly from outer field (progress 0 -> 0.15)
+ * - High warmth and brightness through mid vortex (progress 0.15 -> 0.68)
+ * - Gradually incinerates / fades before the countdown exclusion zone (progress 0.68 -> 1.0)
+ */
+export function computeEmberAlpha(baseOpacity: number, progress: number): number {
+  if (progress <= 0 || progress >= 1) return 0;
+  if (progress < 0.15) {
+    return baseOpacity * (progress / 0.15);
+  }
+  if (progress > 0.68) {
+    const fade = Math.min(1, Math.max(0, (progress - 0.68) / 0.32));
+    if (fade >= 1) return 0;
+    return baseOpacity * Math.max(0, 1 - Math.pow(fade, 1.3));
   }
   return baseOpacity;
 }

@@ -37,7 +37,8 @@ export interface FocusSessionMetadata {
   targetMinutes: number;
 }
 
-export type RayLayer = "outer" | "mid" | "inner";
+export type RayType = "primary" | "secondary" | "micro";
+export type RayLayer = RayType;
 
 export interface MagneticRay {
   id: number;
@@ -53,7 +54,42 @@ export interface MagneticRay {
   phase: number;
   angularDrift: number;
   layer: RayLayer;
+  type: RayType;
 }
+
+export type EmberColorType = "crimson" | "hot_red" | "orange_red" | "golden_ember";
+
+export interface FlamingEmber {
+  id: number;
+  angle: number;
+  radius: number;
+  size: number;
+  baseSpeed: number;
+  speed: number;
+  swirlRate: number;
+  swirlPhase: number;
+  opacity: number;
+  baseOpacity: number;
+  colorType: EmberColorType;
+  trailLength: number;
+  hasTrail: boolean;
+}
+
+export interface MagneticBlazeConfig {
+  speedMultiplier: number;
+  attractionStrength: number;
+  angularDrift: number;
+  trailLengthMultiplier: number;
+  glowIntensity: number;
+}
+
+export const magneticBlazeConfig: MagneticBlazeConfig = {
+  speedMultiplier: 0.65,
+  attractionStrength: 0.8,
+  angularDrift: 0.12,
+  trailLengthMultiplier: 1.25,
+  glowIntensity: 0.7,
+};
 
 export interface MagneticParticle {
   id: number;
