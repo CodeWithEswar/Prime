@@ -321,7 +321,7 @@ export function StriverWorkspace({
               </div>
               <span className="text-neutral-700">•</span>
               <div className="flex items-center gap-1.5">
-                <Icon icon={CodeCircleIcon} size={13} className="text-emerald-400" />
+                <Icon icon={CodeCircleIcon} size={13} className="text-[#FF0000]" />
                 <span>
                   <strong className="text-white">{activeTopic.stats.solvedProblems}</strong> / {activeTopic.problems.length} Solved
                 </span>
@@ -366,7 +366,7 @@ export function StriverWorkspace({
                   value="notes"
                   className="gap-2 text-xs font-mono py-2.5 shrink-0"
                 >
-                  <Icon icon={Note01Icon} size={15} className="text-amber-400" />
+                  <Icon icon={Note01Icon} size={15} className="text-[#FF0000]" />
                   <span>Lesson Notes</span>
                 </TabsTrigger>
 
@@ -374,7 +374,7 @@ export function StriverWorkspace({
                   value="progress"
                   className="gap-2 text-xs font-mono py-2.5 shrink-0"
                 >
-                  <Icon icon={ChartLineData02Icon} size={15} className="text-emerald-400" />
+                  <Icon icon={ChartLineData02Icon} size={15} className="text-[#FF0000]" />
                   <span>Curriculum Progress</span>
                 </TabsTrigger>
 
@@ -382,7 +382,7 @@ export function StriverWorkspace({
                   value="resources"
                   className="gap-2 text-xs font-mono py-2.5 shrink-0"
                 >
-                  <Icon icon={BookOpen01Icon} size={15} className="text-blue-400" />
+                  <Icon icon={BookOpen01Icon} size={15} className="text-[#FF0000]" />
                   <span>Resources & Overview</span>
                 </TabsTrigger>
               </TabsList>
@@ -425,9 +425,9 @@ export function StriverWorkspace({
                 </div>
               </TabsContent>
 
-              {/* Tab 3: Curriculum Progress & Runway Rail */}
+              {/* Tab 3: Curriculum Progress & Runway Rail (Expanded to Full Width) */}
               <TabsContent value="progress" className="pt-4 focus-visible:outline-none">
-                <div className="max-w-3xl">
+                <div className="w-full">
                   <StriverProgressRail
                     sheetDetail={initialDetail}
                     onContinueNext={handleContinueNext}
