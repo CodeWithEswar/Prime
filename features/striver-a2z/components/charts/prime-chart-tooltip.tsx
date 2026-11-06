@@ -112,30 +112,8 @@ export interface PrimeSlimBarCursorProps {
   rx?: number;
 }
 
-export function PrimeSlimBarCursor({
-  x = 0,
-  y = 0,
-  width = 0,
-  height = 0,
-  maxWidth = 52,
-  fill = "rgba(255, 255, 255, 0.04)",
-  rx = 6,
-}: PrimeSlimBarCursorProps) {
-  if (width <= 0 || height <= 0) return null;
-  const slimWidth = Math.min(width, maxWidth);
-  const centeredX = x + (width - slimWidth) / 2;
-
-  return (
-    <rect
-      x={centeredX}
-      y={y}
-      width={slimWidth}
-      height={height}
-      fill={fill}
-      rx={rx}
-      ry={rx}
-      pointerEvents="none"
-    />
-  );
+export function PrimeSlimBarCursor() {
+  // Disabled: No background hover rectangle behind columns or bars
+  return null;
 }
 

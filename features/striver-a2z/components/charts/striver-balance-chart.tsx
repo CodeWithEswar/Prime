@@ -12,7 +12,7 @@ import {
   Legend,
 } from "recharts";
 import { PrimeChartContainer } from "./prime-chart-container";
-import { PrimeChartTooltip, PrimeSlimBarCursor } from "./prime-chart-tooltip";
+import { PrimeChartTooltip } from "./prime-chart-tooltip";
 import { primeChartColors, primeChartFont } from "./prime-chart-theme";
 import { useMounted } from "../../hooks/use-mounted";
 
@@ -67,7 +67,7 @@ export function StriverBalanceChart({ data }: StriverBalanceChartProps) {
               />
 
               <Tooltip
-                cursor={<PrimeSlimBarCursor maxWidth={56} />}
+                cursor={false}
                 content={(props) => (
                   <PrimeChartTooltip
                     active={props.active}
