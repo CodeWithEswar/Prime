@@ -58,26 +58,38 @@ export function TodayHeader({
   const totalPad = totalDays.toString().padStart(2, "0");
 
   return (
-    <header className="relative pb-5 border-b border-white/[0.08] space-y-4">
-      {/* Top row: Eyebrow + Live Indicator on left, Action cluster on right */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-        {/* Eyebrow Navigation Tag */}
-        <div className="flex items-center gap-2 flex-wrap">
-          <div className="inline-flex items-center gap-1.5 font-mono text-[11px] font-bold tracking-widest text-[#FF0000] uppercase bg-[#FF0000]/10 px-2 py-0.5 rounded border border-[#FF0000]/20">
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF0000] opacity-75" />
-              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#FF0000]" />
-            </span>
-            TODAY / {displayDate}
+    <header className="pb-4 sm:pb-5 border-b border-white/[0.08]">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
+        {/* Left: Eyebrow + Title */}
+        <div className="space-y-1">
+          <div className="flex items-center justify-between sm:justify-start gap-2">
+            <div className="flex items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 font-mono text-[11px] font-bold tracking-widest text-[#FF0000] uppercase bg-[#FF0000]/10 px-2 py-0.5 rounded border border-[#FF0000]/20">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF0000] opacity-75" />
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#FF0000]" />
+                </span>
+                TODAY / {displayDate}
+              </span>
+              <span className="text-neutral-600 font-mono text-xs hidden xs:inline">·</span>
+              <span className="font-mono text-xs text-neutral-400 font-medium hidden xs:inline">
+                {dayOfWeek}
+              </span>
+            </div>
+
+            {/* Mobile-only compact day counter: right-aligned on the date row */}
+            <div className="sm:hidden font-mono text-[11px] px-2 py-0.5 rounded bg-[#0A0A0A] border border-white/[0.08] text-neutral-400">
+              DAY <span className="font-bold text-white">{dayPad}</span>/{totalPad}
+            </div>
           </div>
-          <span className="text-neutral-600 font-mono text-xs">·</span>
-          <span className="font-mono text-xs text-neutral-400 font-medium">
-            {dayOfWeek}
-          </span>
+
+          <h1 className="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight text-white font-sans pt-0.5">
+            Execute what matters.
+          </h1>
         </div>
 
-        {/* Right HUD Badges: Day Counter, Trajectory, Ask PRIME */}
-        <div className="flex items-center gap-2 flex-wrap self-start sm:self-auto">
+        {/* Desktop-only Right HUD Cluster: Day Counter, Trajectory, Ask PRIME */}
+        <div className="hidden sm:flex items-center gap-2.5 shrink-0 self-center">
           {/* Day Counter */}
           <div className="inline-flex items-center gap-1.5 font-mono text-xs px-2.5 py-1 rounded bg-[#0A0A0A] border border-white/[0.08] text-neutral-400">
             <span>DAY</span>
@@ -116,16 +128,6 @@ export function TodayHeader({
             </Button>
           )}
         </div>
-      </div>
-
-      {/* Main Title & Subtitle */}
-      <div className="space-y-1">
-        <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white font-sans">
-          Execute what matters.
-        </h1>
-        <p className="text-xs sm:text-sm text-neutral-400 font-sans leading-relaxed">
-          Daily deterministic execution runway · Retention reviews, focus sprints, and curriculum milestones.
-        </p>
       </div>
     </header>
   );

@@ -15,7 +15,7 @@ import { TodayHeader } from "./today-header";
 import { DailyLoadStrip } from "./daily-load-strip";
 import { NextActionCard } from "./next-action-card";
 import { TaskGroupSection } from "./task-group-section";
-import { DayContextRail, MobileDayContext } from "./day-context-rail";
+import { DayContextRail } from "./day-context-rail";
 import { DayCompleteView } from "./day-complete-view";
 import { RestDayView } from "./rest-day-view";
 import { EmptyPlanView } from "./empty-plan-view";
@@ -183,9 +183,6 @@ export function TodayView({ initialSnapshot }: TodayViewProps) {
               totalTaskCount={snapshot.progress.totalTaskCount}
               isExceeded={snapshot.capacity.isExceeded}
             />
-
-            {/* Mobile Context Telemetry HUD (visible only on mobile/tablet) */}
-            <MobileDayContext snapshot={snapshot} />
 
             {/* 3. Next Action Card (if incomplete tasks exist) */}
             {snapshot.nextAction && !isComplete && (
