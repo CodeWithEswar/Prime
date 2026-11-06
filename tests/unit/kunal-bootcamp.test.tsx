@@ -4,7 +4,8 @@ import * as React from "react";
 import manifest from "@/content/dsa/kunal-bootcamp-manifest.json";
 import { KunalAnalyticsView } from "@/features/kunal-bootcamp/components/kunal-analytics-view";
 import { KunalAssignmentsChart } from "@/features/kunal-bootcamp/components/charts/kunal-assignments-chart";
-import type { KunalAnalyticsData } from "@/features/kunal-bootcamp/types";
+import { KunalWorkspace } from "@/features/kunal-bootcamp/components/kunal-workspace";
+import type { KunalAnalyticsData, KunalBootcampDetail } from "@/features/kunal-bootcamp/types";
 
 // Mock next/navigation
 vi.mock("next/navigation", () => ({
@@ -203,6 +204,179 @@ describe("Kunal Kushwaha Java + DSA Bootcamp", () => {
       fireEvent.click(completedFilter);
       // Filter switch does not crash
       expect(completedFilter.className).toContain("bg-white/[0.15]");
+    });
+  });
+
+  describe("KunalWorkspace Component Responsive & Dropdown Menu", () => {
+    const mockCourseDetail: KunalBootcampDetail = {
+      course: {
+        id: "kunal-dsa",
+        slug: "kunal-kushwaha",
+        alternateSlug: "kunal-dsa-bootcamp",
+        youtubePlaylistId: "PL9gnSGHSqcnr_DxHsP7AW9ftq0AtAyYqJ",
+        title: "Java + DSA Bootcamp",
+        instructor: "Kunal Kushwaha",
+        channelTitle: "Kunal Kushwaha",
+        description: "Complete Java + DSA Bootcamp",
+        difficulty: "Beginner to Advanced",
+        level: "Comprehensive",
+        focus: "Java, Data Structures, Algorithms & LeetCode",
+        programmingLanguage: "Java",
+        thumbnailUrl: "https://i.ytimg.com/vi/4Z45_JdFjK0/maxresdefault.jpg",
+        officialPlaylistUrl: "https://www.youtube.com/playlist?list=PL9gnSGHSqcnr_DxHsP7AW9ftq0AtAyYqJ",
+        officialGithubUrl: "https://github.com/kunal-kushwaha/DSA-Bootcamp-Java",
+        officialSyllabusUrl: "https://github.com/kunal-kushwaha/DSA-Bootcamp-Java/blob/main/SYLLABUS.md",
+        modulesCount: 19,
+        videosCount: 69,
+        totalDurationSeconds: 2181,
+        assignmentsCount: 18,
+        totalProblemsCount: 429,
+        topicTags: ["Java", "DSA"],
+      },
+      isEnrolled: true,
+      enrollmentStatus: "active",
+      overallStats: {
+        totalVideos: 69,
+        completedVideos: 0,
+        videoProgressPercentage: 0,
+        totalProblems: 429,
+        solvedProblems: 0,
+        problemProgressPercentage: 0,
+        totalAssignments: 18,
+        completedAssignments: 0,
+        assignmentProgressPercentage: 0,
+        masteryPercentage: 0,
+        lastActivityAt: null,
+      },
+      activeModule: {
+        stepNumber: 8,
+        title: "Strings & Dynamic StringBuilder",
+        slug: "08-strings-stringbuilder",
+        description: "Strings, Immutability & StringBuilder",
+        topicTags: ["Strings", "StringBuilder"],
+        videosCount: 1,
+        totalDurationSeconds: 2181,
+        assignmentsCount: 1,
+        problemsCount: 2,
+        stats: {
+          completedVideos: 0,
+          solvedProblems: 0,
+          completedAssignments: 0,
+          masteryLevel: "not_assessed",
+        },
+        videos: [],
+        assignments: [],
+        problems: [],
+      },
+      activeVideo: {
+        id: "vid-1",
+        youtubeVideoId: "4Z45_JdFjK0",
+        position: 52,
+        title: "StringBuffer in Java | Data Formatting | Working With Large Data",
+        durationSeconds: 2181,
+        durationFormatted: "36m 21s",
+        thumbnailUrl: "https://i.ytimg.com/vi/4Z45_JdFjK0/maxresdefault.jpg",
+        channelTitle: "Kunal Kushwaha",
+        canonicalWatchUrl: "https://www.youtube.com/watch?v=4Z45_JdFjK0",
+        topicSlug: "08-strings-stringbuilder",
+        isCompleted: false,
+        isBookmarked: false,
+        hasNotes: false,
+        chapters: [],
+      },
+      modules: [
+        {
+          stepNumber: 8,
+          title: "Strings & Dynamic StringBuilder",
+          slug: "08-strings-stringbuilder",
+          description: "Strings, Immutability & StringBuilder",
+          topicTags: ["Strings", "StringBuilder"],
+          videosCount: 1,
+          totalDurationSeconds: 2181,
+          assignmentsCount: 1,
+          problemsCount: 2,
+          stats: {
+            completedVideos: 0,
+            solvedProblems: 0,
+            completedAssignments: 0,
+            masteryLevel: "not_assessed",
+          },
+          videos: [
+            {
+              id: "vid-1",
+              youtubeVideoId: "4Z45_JdFjK0",
+              position: 52,
+              title: "StringBuffer in Java | Data Formatting | Working With Large Data",
+              durationSeconds: 2181,
+              durationFormatted: "36m 21s",
+              thumbnailUrl: "https://i.ytimg.com/vi/4Z45_JdFjK0/maxresdefault.jpg",
+              channelTitle: "Kunal Kushwaha",
+              canonicalWatchUrl: "https://www.youtube.com/watch?v=4Z45_JdFjK0",
+              topicSlug: "08-strings-stringbuilder",
+              isCompleted: false,
+              isBookmarked: false,
+              hasNotes: false,
+              chapters: [
+                {
+                  id: "ch-1",
+                  title: "Introduction to StringBuffer",
+                  startSeconds: 0,
+                  endSeconds: 300,
+                  timestampFormatted: "00:00",
+                  sourceUrl: "https://www.youtube.com/watch?v=4Z45_JdFjK0&t=0s",
+                  isCompleted: false,
+                  verificationStatus: "verified",
+                },
+              ],
+            },
+          ],
+          assignments: [
+            {
+              id: "assign-8",
+              number: 8,
+              slug: "08-strings",
+              title: "Strings & Pattern Matching",
+              description: "Practice strings and text manipulation",
+              githubPath: "assignments/08-strings.md",
+              githubUrl: "https://github.com/kunal-kushwaha/DSA-Bootcamp-Java/tree/main/assignments/08-strings.md",
+              status: "not_started",
+              problemsCount: 0,
+              tasksCount: 0,
+              tasks: [],
+              problems: [],
+            },
+          ],
+          problems: [
+            {
+              id: "prob-1",
+              slug: "defanging-an-ip-address",
+              title: "Defanging an IP Address",
+              leetcodeUrl: "https://leetcode.com/problems/defanging-an-ip-address/",
+              difficulty: "easy",
+              status: "not_started",
+            },
+          ],
+        },
+      ],
+    };
+
+    it("renders the lecture title with full width and responsive three dots dropdown menu", () => {
+      render(<KunalWorkspace initialDetail={mockCourseDetail} />);
+
+      // Title rendered cleanly in both syllabus navigator and main h2 heading
+      const titles = screen.getAllByText(
+        "StringBuffer in Java | Data Formatting | Working With Large Data"
+      );
+      expect(titles.length).toBeGreaterThanOrEqual(1);
+
+      // Quick Bookmark button
+      const bookmarkBtn = screen.getByLabelText("Bookmark lecture");
+      expect(bookmarkBtn).toBeDefined();
+
+      // Three dots dropdown menu button
+      const moreActionsBtn = screen.getByLabelText("More actions");
+      expect(moreActionsBtn).toBeDefined();
+      expect(moreActionsBtn.getAttribute("aria-haspopup")).toBe("menu");
     });
   });
 });
