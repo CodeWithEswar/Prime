@@ -12,7 +12,7 @@ import {
   Legend,
 } from "recharts";
 import { PrimeChartContainer } from "./prime-chart-container";
-import { PrimeChartTooltip } from "./prime-chart-tooltip";
+import { PrimeChartTooltip, PrimeSlimBarCursor } from "./prime-chart-tooltip";
 import { primeChartColors, primeChartFont } from "./prime-chart-theme";
 import { useMounted } from "../../hooks/use-mounted";
 
@@ -68,7 +68,15 @@ export function StriverCoverageChart({ data }: StriverCoverageChartProps) {
               />
 
               <Tooltip
-                cursor={false}
+                cursor={
+                  <PrimeSlimBarCursor
+                    layoutMode="grouped"
+                    maxWidth={56}
+                    barWidth={22}
+                    barGap={4}
+                    totalSlots={2}
+                  />
+                }
                 content={(props) => (
                   <PrimeChartTooltip
                     active={props.active}

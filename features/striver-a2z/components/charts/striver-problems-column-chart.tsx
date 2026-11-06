@@ -22,7 +22,7 @@ import {
   DropdownMenuLabel,
 } from "@/components/ui/dropdown-menu";
 import { PrimeChartContainer } from "./prime-chart-container";
-import { PrimeChartTooltip } from "./prime-chart-tooltip";
+import { PrimeChartTooltip, PrimeSlimBarCursor } from "./prime-chart-tooltip";
 import { primeChartColors, primeChartFont } from "./prime-chart-theme";
 import { useMounted } from "../../hooks/use-mounted";
 import { cn } from "@/lib/utils";
@@ -148,7 +148,15 @@ export function StriverProblemsColumnChart({ data }: StriverProblemsColumnChartP
               />
 
               <Tooltip
-                cursor={false}
+                cursor={
+                  <PrimeSlimBarCursor
+                    layoutMode={layoutMode}
+                    maxWidth={layoutMode === "stacked" ? 42 : 72}
+                    barWidth={18}
+                    barGap={4}
+                    totalSlots={3}
+                  />
+                }
                 content={(props) => (
                   <PrimeChartTooltip
                     active={props.active}
