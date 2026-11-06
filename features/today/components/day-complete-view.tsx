@@ -3,7 +3,11 @@
 import Link from "next/link";
 import { Icon } from "@/components/ui/icon";
 import { Button } from "@/components/ui/button";
-import { CheckmarkCircle02Icon, ArrowRight01Icon, SourceCodeIcon } from "@hugeicons/core-free-icons";
+import {
+  CheckmarkCircle02Icon,
+  ArrowRight01Icon,
+  SourceCodeIcon,
+} from "@hugeicons/core-free-icons";
 import type { TomorrowPreview } from "../types";
 import { formatDuration } from "./daily-load-strip";
 
@@ -25,55 +29,65 @@ export function DayCompleteView({
   return (
     <div className="space-y-6">
       {/* Complete Banner */}
-      <div className="p-6 rounded-lg bg-[#0C0C0C] border border-[#222222] text-center space-y-3">
-        <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white text-black shadow-[0_0_12px_rgba(255,255,255,0.6)] mx-auto">
-          <Icon icon={CheckmarkCircle02Icon} size={22} />
+      <div className="p-8 rounded-lg bg-[#070707] border border-white/[0.08] text-center space-y-4 shadow-md">
+        <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500 text-black shadow-[0_0_16px_rgba(16,185,129,0.5)] mx-auto">
+          <Icon icon={CheckmarkCircle02Icon} size={24} className="stroke-[3]" />
         </div>
 
         <div className="space-y-1">
-          <h2 className="text-xl font-bold tracking-tight text-white">Day Complete.</h2>
-          <p className="text-xs text-[#888888] max-w-sm mx-auto leading-relaxed">
-            Everything planned for today is finished. Your retention ladder and curriculum progress are updated.
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-white">
+            Day Execution Complete.
+          </h2>
+          <p className="text-xs sm:text-sm text-neutral-400 max-w-sm mx-auto leading-relaxed">
+            Everything planned for today is finished. Your retention ladder and interview readiness trajectory are updated.
           </p>
         </div>
 
         {/* Telemetry Summary */}
         <div className="flex items-center justify-center gap-6 pt-2 font-mono text-xs">
           <div>
-            <span className="text-[#666666] uppercase text-[10px] block">Tasks Done</span>
-            <span className="font-bold text-white">
+            <span className="text-neutral-500 uppercase text-[10px] block font-bold">Tasks Finished</span>
+            <span className="font-bold text-white text-sm">
               {totalTasks} / {totalTasks}
             </span>
           </div>
-          <div className="w-[1px] h-6 bg-[#1F1F1F]" />
+          <div className="w-[1px] h-6 bg-white/[0.08]" />
           <div>
-            <span className="text-[#666666] uppercase text-[10px] block">Planned Time</span>
-            <span className="font-bold text-white">{formatDuration(plannedMinutes)}</span>
+            <span className="text-neutral-500 uppercase text-[10px] block font-bold">Planned Time</span>
+            <span className="font-bold text-white text-sm">{formatDuration(plannedMinutes)}</span>
           </div>
           {focusedMinutes > 0 && (
             <>
-              <div className="w-[1px] h-6 bg-[#1F1F1F]" />
+              <div className="w-[1px] h-6 bg-white/[0.08]" />
               <div>
-                <span className="text-[#666666] uppercase text-[10px] block">Focused Time</span>
-                <span className="font-bold text-white">{formatDuration(focusedMinutes)}</span>
+                <span className="text-neutral-500 uppercase text-[10px] block font-bold">Focused Time</span>
+                <span className="font-bold text-emerald-400 text-sm">{formatDuration(focusedMinutes)}</span>
               </div>
             </>
           )}
         </div>
 
         {/* Optional Practice Link */}
-        <div className="pt-3">
-          <Button asChild variant="secondary" size="sm">
-            <Link href={"/plan?optional=yes&date=" + date}><Icon icon={SourceCodeIcon} size={14} />Optional next practice</Link>
+        <div className="pt-2">
+          <Button
+            asChild
+            variant="outline"
+            size="sm"
+            className="h-9 px-4 text-xs font-mono font-medium text-neutral-300 hover:text-white bg-neutral-900 hover:bg-neutral-800 border-white/[0.1] gap-2 transition-all active:scale-[0.98]"
+          >
+            <Link href={"/plan?optional=yes&date=" + date}>
+              <Icon icon={SourceCodeIcon} size={14} className="text-[#FF0000]" />
+              <span>Optional extra practice</span>
+            </Link>
           </Button>
         </div>
       </div>
 
       {/* Tomorrow Preview */}
       {tomorrowPreview && (
-        <div className="p-4 rounded-lg bg-[#080808] border border-[#161616] flex items-center justify-between gap-4 text-xs">
+        <div className="p-4 rounded-lg bg-[#080808] border border-white/[0.08] flex items-center justify-between gap-4 text-xs shadow-sm">
           <div>
-            <span className="font-mono text-[10px] uppercase text-[#666666] tracking-wider block mb-0.5">
+            <span className="font-mono text-[10px] uppercase text-neutral-400 font-bold tracking-wider block mb-0.5">
               UP NEXT TOMORROW
             </span>
             <span className="font-semibold text-white">
@@ -84,9 +98,9 @@ export function DayCompleteView({
 
           <Link
             href="/plan"
-            className="inline-flex items-center gap-1 text-xs font-medium text-[#888888] hover:text-white transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-neutral-400 hover:text-white transition-colors"
           >
-            <span>View Full Plan</span>
+            <span>Open Planner</span>
             <Icon icon={ArrowRight01Icon} size={13} />
           </Link>
         </div>
@@ -94,4 +108,3 @@ export function DayCompleteView({
     </div>
   );
 }
-

@@ -7,26 +7,30 @@ import { TodayView } from "@/features/today/components/today-view";
 
 export const metadata: Metadata = {
   title: "Today — PRIME Execution Runway",
-  description: "Daily execution command center for technical interview preparation, retention reviews, and focus sessions.",
+  description:
+    "Daily execution command center for technical interview preparation, retention reviews, and focus sessions.",
 };
 
 function TodaySkeleton() {
   return (
-    <div className="w-full max-w-[1440px] mx-auto p-4 sm:p-6 lg:p-8 space-y-6 animate-pulse">
+    <div className="w-full max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8 space-y-6 animate-pulse">
       {/* Header Skeleton */}
-      <div className="h-16 bg-[#0A0A0A] rounded-md border border-[#161616]" />
+      <div className="h-20 bg-[#0A0A0A] rounded-lg border border-white/[0.06]" />
 
       {/* Load Rail Skeleton */}
-      <div className="h-20 bg-[#080808] rounded-md border border-[#141414]" />
+      <div className="h-28 bg-[#080808] rounded-lg border border-white/[0.06]" />
 
       {/* Next Action Skeleton */}
-      <div className="h-44 bg-[#0A0A0A] rounded-md border border-[#1A1A1A]" />
+      <div className="h-48 bg-[#070707] rounded-lg border border-white/[0.06]" />
 
       {/* Task Rows Skeletons */}
       <div className="space-y-3 pt-2">
-        <div className="h-4 w-32 bg-[#141414] rounded" />
+        <div className="h-4 w-36 bg-neutral-900 rounded" />
         {[1, 2, 3].map((i) => (
-          <div key={i} className="h-14 bg-[#080808] rounded-md border border-[#141414]" />
+          <div
+            key={i}
+            className="h-16 bg-[#080808] rounded-md border border-white/[0.05]"
+          />
         ))}
       </div>
     </div>
@@ -35,7 +39,9 @@ function TodaySkeleton() {
 
 async function TodayContent() {
   const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
   if (!user) {
     redirect("/login");
@@ -44,7 +50,7 @@ async function TodayContent() {
   const snapshot = await getTodaySnapshot(supabase, user.id);
 
   return (
-    <div className="w-full max-w-[1440px] mx-auto p-4 sm:p-6 lg:p-8">
+    <div className="w-full max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
       <TodayView initialSnapshot={snapshot} />
     </div>
   );

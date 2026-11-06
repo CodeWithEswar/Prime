@@ -2,7 +2,14 @@
 
 import Link from "next/link";
 import { Icon } from "@/components/ui/icon";
-import { ArrowRight01Icon, HelpCircleIcon } from "@hugeicons/core-free-icons";
+import { Button } from "@/components/ui/button";
+import {
+  ArrowRight01Icon,
+  HelpCircleIcon,
+  Clock01Icon,
+  PlayIcon,
+  BookOpen01Icon,
+} from "@hugeicons/core-free-icons";
 import type { TodayNextAction } from "../types";
 
 interface NextActionCardProps {
@@ -12,12 +19,16 @@ interface NextActionCardProps {
 }
 
 const difficultyColors = {
-  EASY: "text-[#22C55E] bg-[#22C55E]/10 border-[#22C55E]/30",
-  MEDIUM: "text-[#F59E0B] bg-[#F59E0B]/10 border-[#F59E0B]/30",
-  HARD: "text-[#EF4444] bg-[#EF4444]/10 border-[#EF4444]/30",
+  EASY: "text-emerald-400 bg-emerald-500/10 border-emerald-500/30",
+  MEDIUM: "text-amber-400 bg-amber-500/10 border-amber-500/30",
+  HARD: "text-rose-400 bg-rose-500/10 border-rose-500/30",
 };
 
-export function NextActionCard({ action, onWhyToday, onStartAction }: NextActionCardProps) {
+export function NextActionCard({
+  action,
+  onWhyToday,
+  onStartAction,
+}: NextActionCardProps) {
   const isContinue = action.actionType === "continue";
   const isReview = action.actionType === "review";
 
@@ -29,119 +40,134 @@ export function NextActionCard({ action, onWhyToday, onStartAction }: NextAction
         : undefined;
 
   return (
-    <div className="relative group p-5 sm:p-6 rounded-lg bg-[#0C0C0C] border border-[#222222] shadow-[0_4px_24px_rgba(0,0,0,0.5)] transition-all hover:border-[#333333]">
-      {/* Top row: Terminal beacon + Action Type + Target time */}
-      <div className="flex items-center justify-between gap-3 mb-3">
-        <div className="flex items-center gap-2">
-          {/* Pure Red terminal needle */}
-          <span className="relative flex h-3 w-3">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF0000] opacity-75" />
-            <span className="relative inline-flex rounded-full h-3 w-3 bg-[#FF0000] shadow-[0_0_8px_#FF0000]" />
-          </span>
+    <section
+      aria-label="Recommended next action"
+      className="relative group rounded-lg bg-[#070707] border border-white/[0.1] hover:border-white/[0.18] transition-all shadow-md overflow-hidden"
+    >
+      {/* Left Red Indicator Bar */}
+      <div className="absolute top-0 bottom-0 left-0 w-1 bg-[#FF0000] shadow-[0_0_12px_#FF0000]" />
 
-          <span className="font-mono text-[11px] font-bold uppercase tracking-wider text-[#FF0000]">
-            {isContinue
-              ? "CONTINUE ACTIVE SESSION"
-              : isReview
-                ? "PRIORITY REVIEW NOW"
-                : "START NEXT IN PREPARATION"}
-          </span>
+      <div className="p-5 sm:p-6 pl-6 sm:pl-7 space-y-4">
+        {/* Top row: Beacon + Action Type + Target Duration */}
+        <div className="flex items-center justify-between gap-3 flex-wrap">
+          <div className="flex items-center gap-2">
+            {/* Live pulsating beacon */}
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF0000] opacity-75" />
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#FF0000] shadow-[0_0_8px_#FF0000]" />
+            </span>
+
+            <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#FF0000]">
+              {isContinue
+                ? "Continue Active Session"
+                : isReview
+                  ? "Priority Spaced Review"
+                  : "Start Next in Preparation"}
+            </span>
+          </div>
+
+          {/* Target duration pill */}
+          <div className="inline-flex items-center gap-1.5 font-mono text-xs text-neutral-300 bg-[#121212] px-2.5 py-1 rounded border border-white/[0.08]">
+            <Icon icon={Clock01Icon} size={12} className="text-neutral-400" />
+            <span>{action.targetMinutes}m target</span>
+          </div>
         </div>
 
-        <span className="font-mono text-xs text-[#888888] font-medium bg-[#141414] px-2.5 py-1 rounded border border-[#222222]">
-          {action.targetMinutes}m target
-        </span>
-      </div>
+        {/* Main Title & Metadata strip */}
+        <div className="space-y-2">
+          <h2 className="text-lg sm:text-2xl font-bold text-white tracking-tight leading-snug">
+            {action.title}
+          </h2>
 
-      {/* Main Title & Context Strip */}
-      <div className="space-y-2 mb-4">
-        <h2 className="text-lg sm:text-xl font-bold text-white tracking-tight">
-          {action.title}
-        </h2>
+          {/* Badges strip: Difficulty, Topic, Stage, Overdue */}
+          <div className="flex items-center flex-wrap gap-2 text-xs">
+            {action.difficulty && (
+              <span
+                className={`font-mono text-[10px] font-bold px-2 py-0.5 rounded border uppercase tracking-wider ${
+                  difficultyColors[action.difficulty]
+                }`}
+              >
+                {action.difficulty}
+              </span>
+            )}
 
-        {/* Badges strip: Difficulty, Topic, Stage */}
-        <div className="flex items-center flex-wrap gap-2 text-xs">
-          {action.difficulty && (
-            <span
-              className={`font-mono text-[10px] font-bold px-2 py-0.5 rounded border uppercase tracking-wider ${
-                difficultyColors[action.difficulty]
-              }`}
-            >
-              {action.difficulty}
-            </span>
-          )}
+            {action.topicName && (
+              <span className="inline-flex items-center gap-1 text-neutral-300 font-mono text-[11px] bg-neutral-900/80 px-2 py-0.5 rounded border border-white/[0.06]">
+                <Icon icon={BookOpen01Icon} size={11} className="text-neutral-500" />
+                {action.topicName}
+              </span>
+            )}
 
-          {action.topicName && (
-            <span className="text-[#888888] font-mono text-[11px]">
-              {action.topicName}
-            </span>
-          )}
-
-          {action.stageName && (
-            <>
-              <span className="text-[#333333]">·</span>
-              <span className="text-[#AAAAAA] text-xs font-medium">
+            {action.stageName && (
+              <span className="text-neutral-400 text-xs font-medium">
                 {action.stageName}
               </span>
-            </>
-          )}
+            )}
 
-          {action.isOverdue && (
-            <>
-              <span className="text-[#333333]">·</span>
-              <span className="font-mono text-[10px] text-[#FF4D4D] font-bold uppercase tracking-wider">
+            {action.isOverdue && (
+              <span className="font-mono text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider text-[#FF4D4D] bg-[#2A0505] border border-[#FF0000]/30 animate-pulse">
                 OVERDUE
               </span>
-            </>
-          )}
+            )}
+          </div>
+
+          {/* Deterministic Reason line */}
+          <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed font-sans pt-0.5">
+            {action.reasonExplanation}
+          </p>
         </div>
 
-        {/* Deterministic Reason line */}
-        <p className="text-xs text-[#777777] leading-relaxed pt-1">
-          {action.reasonExplanation}
-        </p>
-      </div>
+        {/* Bottom CTA Bar & "Why today?" */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-3 border-t border-white/[0.06]">
+          {/* Action button cluster */}
+          <div className="flex items-center gap-3">
+            {href ? (
+              <Button
+                variant="primary"
+                size="default"
+                asChild
+                className="w-full sm:w-auto gap-2"
+              >
+                <Link href={href} onClick={() => onStartAction(action)}>
+                  <Icon icon={PlayIcon} size={14} />
+                  <span>
+                    {isContinue
+                      ? "Continue Session"
+                      : isReview
+                        ? "Start Revision"
+                        : "Start Next"}
+                  </span>
+                  <Icon icon={ArrowRight01Icon} size={15} />
+                </Link>
+              </Button>
+            ) : (
+              <Button
+                type="button"
+                variant="primary"
+                size="default"
+                className="w-full sm:w-auto gap-2"
+                onClick={() => onStartAction(action)}
+              >
+                <Icon icon={PlayIcon} size={14} />
+                <span>{isContinue ? "Continue Session" : "Start Next"}</span>
+                <Icon icon={ArrowRight01Icon} size={15} />
+              </Button>
+            )}
+          </div>
 
-      {/* Bottom CTA & "Why today?" */}
-      <div className="flex items-center justify-between gap-4 pt-3 border-t border-[#181818]">
-        {/* Primary Action Button */}
-        {href ? (
-          <Link
-            href={href}
-            onClick={() => onStartAction(action)}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md font-semibold text-xs text-white bg-[#FF0000] hover:bg-[#CC0000] transition-colors shadow-[0_0_16px_rgba(255,0,0,0.3)] active:scale-[0.98]"
-          >
-            <span>
-              {isContinue
-                ? "Continue Session"
-                : isReview
-                  ? "Start Revision"
-                  : "Start Problem"}
-            </span>
-            <Icon icon={ArrowRight01Icon} size={14} />
-          </Link>
-        ) : (
-          <button
+          {/* Why Today? trigger button */}
+          <Button
             type="button"
-            onClick={() => onStartAction(action)}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md font-semibold text-xs text-white bg-[#FF0000] hover:bg-[#CC0000] transition-colors shadow-[0_0_16px_rgba(255,0,0,0.3)] active:scale-[0.98]"
+            variant="ghost"
+            size="sm"
+            onClick={() => onWhyToday(action)}
+            className="gap-1.5 text-xs text-neutral-400 hover:text-white"
           >
-            <span>{isContinue ? "Continue Session" : "Start Next"}</span>
-            <Icon icon={ArrowRight01Icon} size={14} />
-          </button>
-        )}
-
-        {/* Why Today? trigger */}
-        <button
-          type="button"
-          onClick={() => onWhyToday(action)}
-          className="inline-flex items-center gap-1.5 text-xs text-[#888888] hover:text-white transition-colors"
-        >
-          <Icon icon={HelpCircleIcon} size={14} />
-          <span>Why today?</span>
-        </button>
+            <Icon icon={HelpCircleIcon} size={14} className="text-neutral-500" />
+            <span>Why is this scheduled today?</span>
+          </Button>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
-

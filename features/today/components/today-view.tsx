@@ -15,7 +15,7 @@ import { TodayHeader } from "./today-header";
 import { DailyLoadStrip } from "./daily-load-strip";
 import { NextActionCard } from "./next-action-card";
 import { TaskGroupSection } from "./task-group-section";
-import { DayContextRail } from "./day-context-rail";
+import { DayContextRail, MobileDayContext } from "./day-context-rail";
 import { DayCompleteView } from "./day-complete-view";
 import { RestDayView } from "./rest-day-view";
 import { EmptyPlanView } from "./empty-plan-view";
@@ -184,6 +184,9 @@ export function TodayView({ initialSnapshot }: TodayViewProps) {
               isExceeded={snapshot.capacity.isExceeded}
             />
 
+            {/* Mobile Context Telemetry HUD (visible only on mobile/tablet) */}
+            <MobileDayContext snapshot={snapshot} />
+
             {/* 3. Next Action Card (if incomplete tasks exist) */}
             {snapshot.nextAction && !isComplete && (
               <NextActionCard
@@ -219,9 +222,20 @@ export function TodayView({ initialSnapshot }: TodayViewProps) {
                   />
                 ))}
 
-                <Button variant="secondary" size="sm" asChild>
-                  <Link href={"/plan?work=new&date=" + snapshot.date}><Icon icon={Add01Icon} size={13} />Plan work</Link>
-                </Button>
+                <div className="pt-1">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="h-9 px-4 text-xs font-mono font-medium text-neutral-300 hover:text-white bg-[#0A0A0A] hover:bg-[#141414] border-white/[0.1] hover:border-white/[0.2] gap-2 transition-all shadow-sm active:scale-[0.98]"
+                    asChild
+                  >
+                    <Link href={"/plan?work=new&date=" + snapshot.date}>
+                      <Icon icon={Add01Icon} size={14} className="text-[#FF0000]" />
+                      <span>Plan additional work</span>
+                    </Link>
+                  </Button>
+                </div>
+
                 {/* 6. Tomorrow Preview (bottom of runway) */}
                 <TomorrowPreviewSection preview={snapshot.tomorrowPreview} />
               </div>
