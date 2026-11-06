@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
   Folder01Icon,
@@ -35,7 +36,6 @@ import { StriverTopicNavigator } from "./striver-topic-navigator";
 import { StriverVideoPlayer } from "./striver-video-player";
 import { StriverProblemsTable } from "./striver-problems-table";
 import { StriverProgressRail } from "./striver-progress-rail";
-import { StriverAnalyticsModal } from "./striver-analytics-modal";
 import { LessonNotesEditor } from "@/features/dsa-playlists/components/lesson-notes-editor";
 import { cn } from "@/lib/utils";
 import type {
@@ -101,7 +101,6 @@ export function StriverWorkspace({
   // Desktop sidebar collapse toggle + Mobile Sheet state
   const [isSidebarCollapsed, setIsSidebarCollapsed] = React.useState(false);
   const [isMobileSheetOpen, setIsMobileSheetOpen] = React.useState(false);
-  const [showAnalyticsModal, setShowAnalyticsModal] = React.useState(false);
 
   // Active contextual tab below video
   const [activeTab, setActiveTab] = React.useState<"problems" | "notes" | "progress" | "resources">("problems");
@@ -218,11 +217,13 @@ export function StriverWorkspace({
           <Button
             variant="outline"
             size="sm"
-            onClick={() => setShowAnalyticsModal(true)}
+            asChild
             className="h-8 px-3 text-xs font-mono border-white/10 bg-white/[0.04] text-neutral-300 hover:text-white hover:bg-white/[0.08] gap-1.5"
           >
-            <Icon icon={ChartLineData02Icon} size={13} />
-            <span className="hidden sm:inline">Analytics</span>
+            <Link href="/practice/dsa/sheets/striver-a2z/analytics">
+              <Icon icon={ChartLineData02Icon} size={13} />
+              <span className="hidden sm:inline">Analytics</span>
+            </Link>
           </Button>
 
           <Button
@@ -429,7 +430,6 @@ export function StriverWorkspace({
                 <div className="max-w-3xl">
                   <StriverProgressRail
                     sheetDetail={initialDetail}
-                    onOpenAnalytics={() => setShowAnalyticsModal(true)}
                     onContinueNext={handleContinueNext}
                   />
                 </div>
@@ -491,13 +491,6 @@ export function StriverWorkspace({
           </div>
         </main>
       </div>
-
-      {/* Analytics Modal */}
-      <StriverAnalyticsModal
-        open={showAnalyticsModal}
-        onOpenChange={setShowAnalyticsModal}
-        analytics={analytics}
-      />
     </div>
   );
 }

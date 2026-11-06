@@ -128,11 +128,24 @@ const mockDetail: StriverSheetDetail = {
 };
 
 const mockAnalytics: StriverAnalyticsData = {
+  overview: {
+    totalLectures: 100,
+    completedLectures: 25,
+    lecturePct: 25,
+    totalProblems: 200,
+    solvedProblems: 50,
+    problemPct: 25,
+    activeStudyDays: 14,
+    masteryPct: 30,
+  },
   videoCompletionTrend: [],
   problemsByTopic: [],
   topicCoverage: [],
   weeklyConsistency: [],
   learningVsPractice: [],
+  activityHeatmap: [],
+  radarMastery: [],
+  milestones: [],
 };
 
 describe("Striver A2Z Learning Workspace Redesign", () => {

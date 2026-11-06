@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Link from "next/link";
 import {
   ChartLineData02Icon,
   VideoReplayIcon,
@@ -18,7 +19,7 @@ import type { StriverSheetDetail } from "../types";
 
 interface StriverProgressRailProps {
   sheetDetail: StriverSheetDetail;
-  onOpenAnalytics: () => void;
+  onOpenAnalytics?: () => void;
   onContinueNext: () => void;
 }
 
@@ -78,11 +79,13 @@ export function StriverProgressRail({
           <Button
             variant="ghost"
             size="sm"
-            onClick={onOpenAnalytics}
+            asChild
             className="h-6 px-2 text-[10px] font-mono text-neutral-400 hover:text-white gap-1"
           >
-            <Icon icon={ChartLineData02Icon} size={12} />
-            <span>Charts</span>
+            <Link href="/practice/dsa/sheets/striver-a2z/analytics">
+              <Icon icon={ChartLineData02Icon} size={12} />
+              <span>Full Analytics</span>
+            </Link>
           </Button>
         </div>
 
