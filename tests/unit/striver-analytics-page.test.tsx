@@ -135,4 +135,17 @@ describe("PRIME Striver A2Z Dedicated Analytics Workspace", () => {
     expect(screen.getByText("Less")).toBeInTheDocument();
     expect(screen.getByText("More")).toBeInTheDocument();
   });
+
+  it("renders mobile three-dots dropdown options menu for charts", () => {
+    render(<StriverAnalyticsView analytics={mockAnalyticsData} />);
+
+    // Mobile three-dots dropdown triggers
+    const chartOptionButtons = screen.getAllByRole("button", { name: /chart display options|column chart layout options|heatmap window options|mastery view options/i });
+    expect(chartOptionButtons.length).toBeGreaterThanOrEqual(1);
+
+    // Verify aria attributes on mobile three-dots trigger
+    for (const btn of chartOptionButtons) {
+      expect(btn).toHaveAttribute("aria-haspopup", "menu");
+    }
+  });
 });
