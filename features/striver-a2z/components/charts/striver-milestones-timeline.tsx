@@ -36,7 +36,6 @@ export function StriverMilestonesTimeline({ milestones }: StriverMilestonesTimel
     <PrimeChartContainer
       title="Chronological Learning Milestones"
       subtitle="Verified timeline tracking course enrollment, first lecture, and problem completion milestones."
-      badge={`${milestones.length} Events Logged`}
       minHeight={280}
     >
       <div className="h-64 sm:h-72 overflow-y-auto pr-1 space-y-4 pt-1 scrollbar-thin scrollbar-thumb-white/10">

@@ -27,15 +27,10 @@ interface StriverBalanceChartProps {
 export function StriverBalanceChart({ data }: StriverBalanceChartProps) {
   const mounted = useMounted();
 
-  const totalVideos = data.reduce((s, d) => s + d.videosWatched, 0);
-  const totalProblems = data.reduce((s, d) => s + d.problemsSolved, 0);
-  const ratio = totalVideos > 0 ? (totalProblems / totalVideos).toFixed(1) : "0";
-
   return (
     <PrimeChartContainer
       title="Learning vs Practice Ratio"
       subtitle="Comparing lecture consumption against algorithmic implementation across weekdays."
-      badge={`${ratio}x Solve-to-Watch Ratio`}
       minHeight={280}
     >
       <div className="h-64 sm:h-72 w-full pt-2">

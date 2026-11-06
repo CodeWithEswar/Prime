@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { primeChartColors } from "./prime-chart-theme";
 
 interface TooltipPayloadItem {
   name: string;
@@ -146,7 +145,7 @@ export function PrimeSlimBarCursor(props: PrimeSlimBarCursorProps) {
     !props.fill.startsWith("#") &&
     !props.fill.includes("255, 255, 255")
       ? props.fill
-      : primeChartColors.barCursorBg;
+      : "rgba(0, 0, 0, 0.45)";
 
   let rectX = x;
   let rectWidth = maxWidth;

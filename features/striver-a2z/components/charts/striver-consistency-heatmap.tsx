@@ -153,7 +153,6 @@ export function StriverConsistencyHeatmap({ data }: StriverConsistencyHeatmapPro
     <PrimeChartContainer
       title="Learning Activity & Momentum Heatmap"
       subtitle="Engineering contribution calendar tracking daily video lectures, problem solving, and practice velocity."
-      badge={`${activeDays} Active Days (${totalActions} Actions)`}
       minHeight={320}
       controls={
         data.length > 84 ? (

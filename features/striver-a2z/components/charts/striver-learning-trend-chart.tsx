@@ -63,7 +63,6 @@ export function StriverLearningTrendChart({ data }: StriverLearningTrendChartPro
           ? "Cumulative lectures watched and problems solved over time."
           : "Daily count of completed video lectures and solved coding problems."
       }
-      badge={viewMode === "cumulative" ? "Cumulative Momentum" : "Daily Activity"}
       minHeight={320}
       controls={
         <div className="flex items-center gap-2 flex-wrap">
