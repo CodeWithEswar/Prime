@@ -97,6 +97,7 @@ describe("PRIME Command Frame — Shell Unit Tests", () => {
         "/revision",
         "/practice/dsa",
         "/practice/dsa/playlists",
+        "/practice/dsa/playlists/kunal-kushwaha",
         "/practice/dsa/sheets/striver-a2z",
         "/aptitude",
         "/lab",
@@ -113,6 +114,18 @@ describe("PRIME Command Frame — Shell Unit Tests", () => {
         "/settings",
         "/weather",
       ]);
+      expect(getShellRoute("/practice/dsa/playlists/kunal-kushwaha")).toMatchObject({
+        section: "Practice",
+        label: "Kunal Java + DSA",
+        parent: "/practice/dsa/playlists",
+        id: "kunal-bootcamp",
+      });
+      expect(getShellRoute("/practice/dsa/playlists/kunal-kushwaha/analytics")).toMatchObject({
+        section: "Practice",
+        label: "Kunal DSA Analytics",
+        parent: "/practice/dsa/playlists/kunal-kushwaha",
+        id: "kunal-bootcamp",
+      });
       expect(getShellRoute("/practice/dsa/lru-cache")).toMatchObject({
         label: "LRU Cache",
         parent: "/practice/dsa",
