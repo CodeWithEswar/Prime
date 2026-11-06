@@ -2,7 +2,7 @@
 
 import { useState, useSyncExternalStore } from "react";
 import Link from "next/link";
-import { Tick02Icon, Settings02Icon } from "@hugeicons/core-free-icons";
+import { Tick02Icon, Settings02Icon, Loading03Icon } from "@hugeicons/core-free-icons";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import {
   Sheet,
@@ -38,13 +38,22 @@ export function NotificationPopover({ children }: { children: React.ReactNode })
       <div className="flex items-center justify-between gap-3 border-b border-[var(--border-subtle)] px-4 py-4">
         <div>
           <h2 className="text-sm font-semibold">Notifications</h2>
-          <p className="mt-1 text-xs text-[var(--text-secondary)]">
-            {inbox.countAvailable
-              ? `${inbox.unreadCount} unread`
-              : inbox.isError
-                ? "Inbox unavailable"
-                : "Loading…"}
-          </p>
+          <div className="mt-1 flex items-center gap-1.5 text-xs text-[var(--text-secondary)]">
+            {inbox.countAvailable ? (
+              <span>{`${inbox.unreadCount} unread`}</span>
+            ) : inbox.isError ? (
+              <span>Inbox unavailable</span>
+            ) : (
+              <span className="inline-flex items-center gap-1.5">
+                <Icon
+                  icon={Loading03Icon}
+                  size={12}
+                  className="animate-spin text-[var(--text-secondary)] shrink-0"
+                />
+                <span>Loading…</span>
+              </span>
+            )}
+          </div>
         </div>
         <Button
           variant="outline"
