@@ -132,6 +132,12 @@ export function StriverWorkspace({
     return initialDetail.modules.find((m) => m.id === activeTopic.moduleId) || null;
   }, [initialDetail.modules, activeTopic]);
 
+  // Clean module title if it already contains "Step XX:" prefix to avoid duplicate prefixes
+  const cleanModuleTitle = React.useMemo(() => {
+    if (!activeModule?.title) return "Module";
+    return activeModule.title.replace(/^Step\s+\d+\s*:\s*/i, "");
+  }, [activeModule?.title]);
+
   const handleSelectTopic = (topic: StriverTopicDetail) => {
     setActiveTopicId(topic.id);
     setActiveVideoId(topic.videos[0]?.id ?? null);
@@ -162,7 +168,7 @@ export function StriverWorkspace({
   return (
     <div className="space-y-6">
       {/* 1. Global Sheet Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/[0.08]">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 pb-4 border-b border-white/[0.08]">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
             <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-[#FF0000]/10 text-[#FF0000] border border-[#FF0000]/20 font-bold">
@@ -175,19 +181,25 @@ export function StriverWorkspace({
           <h1 className="font-mono text-xl sm:text-2xl font-bold tracking-tight text-white">
             Striver&apos;s A2Z DSA Sheet
           </h1>
-          <p className="text-xs text-neutral-400 font-mono">
-            18 Steps • 299 Verified Lectures • 372 LeetCode Problems • Evidence-based Topic Mastery
-          </p>
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs text-neutral-400 font-mono">
+            <span>18 Steps</span>
+            <span className="text-neutral-600">•</span>
+            <span>299 Verified Lectures</span>
+            <span className="text-neutral-600">•</span>
+            <span>372 Problems</span>
+            <span className="text-neutral-600 hidden sm:inline">•</span>
+            <span className="hidden sm:inline">Evidence-based Topic Mastery</span>
+          </div>
         </div>
 
-        {/* Global Toolbar Controls */}
-        <div className="flex items-center gap-2">
+        {/* Global Toolbar Controls - Responsive segmented row on mobile, compact on desktop */}
+        <div className="grid grid-cols-3 sm:flex sm:items-center gap-2 w-full sm:w-auto">
           {/* Mobile Syllabus Sheet Trigger */}
           <Button
             variant="outline"
             size="sm"
             onClick={() => setIsMobileSheetOpen(true)}
-            className="lg:hidden h-8 px-3 text-xs font-mono border-white/10 bg-white/[0.04] text-neutral-200 hover:text-white gap-1.5"
+            className="lg:hidden h-8 px-2.5 sm:px-3 text-xs font-mono border-white/10 bg-white/[0.04] text-neutral-200 hover:text-white gap-1.5 justify-center"
             aria-label="Open syllabus navigation"
           >
             <Icon icon={Menu01Icon} size={14} />
@@ -218,18 +230,18 @@ export function StriverWorkspace({
             variant="outline"
             size="sm"
             asChild
-            className="h-8 px-3 text-xs font-mono border-white/10 bg-white/[0.04] text-neutral-300 hover:text-white hover:bg-white/[0.08] gap-1.5"
+            className="h-8 px-2.5 sm:px-3 text-xs font-mono border-white/10 bg-white/[0.04] text-neutral-300 hover:text-white hover:bg-white/[0.08] gap-1.5 justify-center"
           >
             <Link href="/practice/dsa/sheets/striver-a2z/analytics">
-              <Icon icon={ChartLineData02Icon} size={13} />
-              <span className="hidden sm:inline">Analytics</span>
+              <Icon icon={ChartLineData02Icon} size={13} className="text-[#FF0000]" />
+              <span>Analytics</span>
             </Link>
           </Button>
 
           <Button
             size="sm"
             onClick={handleContinueNext}
-            className="h-8 px-3.5 text-xs font-mono font-medium bg-[#FF0000] hover:bg-[#CC0000] text-white gap-1.5 shadow-sm"
+            className="h-8 px-3 sm:px-3.5 text-xs font-mono font-medium bg-[#FF0000] hover:bg-[#CC0000] text-white gap-1.5 shadow-sm justify-center"
           >
             <span>Resume</span>
             <Icon icon={ArrowRight01Icon} size={13} />
@@ -255,7 +267,7 @@ export function StriverWorkspace({
 
         {/* Mobile Slide-Over Sheet: Syllabus Navigator */}
         <Sheet open={isMobileSheetOpen} onOpenChange={setIsMobileSheetOpen}>
-          <SheetContent side="left" className="w-[320px] sm:w-[380px] p-0 bg-[#090909] border-white/10 text-white">
+          <SheetContent side="left" className="w-[88vw] max-w-[360px] p-0 bg-[#090909] border-white/10 text-white">
             <SheetHeader className="sr-only">
               <SheetTitle>Striver A2Z Syllabus Navigation</SheetTitle>
             </SheetHeader>
@@ -271,48 +283,50 @@ export function StriverWorkspace({
         </Sheet>
 
         {/* Main Column: Full-Width Workspace (expands to 100% when sidebar collapsed) */}
-        <main className="flex-1 min-w-0 w-full space-y-6">
+        <main className="flex-1 min-w-0 w-full space-y-4 sm:space-y-6">
           {/* Structured Current Topic Header */}
-          <div className="rounded-xl border border-white/[0.08] bg-[#0A0A0A]/90 p-4 sm:p-5 backdrop-blur-md space-y-3">
+          <div className="rounded-xl border border-white/[0.08] bg-[#0A0A0A]/90 p-3.5 sm:p-5 backdrop-blur-md space-y-2.5 sm:space-y-3">
             {/* Breadcrumb Hierarchy */}
-            <div className="flex items-center gap-2 text-[11px] font-mono text-neutral-400 uppercase tracking-wider flex-wrap">
+            <div className="flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-[11px] font-mono text-neutral-400 uppercase tracking-wider flex-wrap">
               <span className="text-white font-medium">
-                Step {activeModule?.stepNumber.toString().padStart(2, "0") || "01"}: {activeModule?.title || "Module"}
+                Step {activeModule?.stepNumber.toString().padStart(2, "0") || "01"}: {cleanModuleTitle}
               </span>
-              <span>/</span>
+              <span className="text-neutral-600">/</span>
               <span className="text-neutral-300">
                 Substep {activeTopic.substepNumber}
               </span>
             </div>
 
-            {/* Topic Title (Un-truncated, natural wrap up to 2 lines!) + Mastery Badge */}
-            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
-              <h2 className="font-sans text-xl sm:text-2xl font-bold text-white tracking-tight leading-snug break-words">
+            {/* Topic Title + Mastery Badge (Never stretches across mobile card) */}
+            <div className="flex flex-col sm:flex-row sm:items-start items-start justify-between gap-2.5 sm:gap-3">
+              <h2 className="font-sans text-lg sm:text-xl lg:text-2xl font-bold text-white tracking-tight leading-snug break-words">
                 {activeTopic.title}
               </h2>
 
-              <TooltipProvider delayDuration={200}>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Badge
-                      variant="outline"
-                      className={cn(
-                        "font-mono text-[10px] uppercase px-2.5 py-1 border shrink-0 cursor-default select-none transition-colors",
-                        mastery.color
-                      )}
-                    >
-                      {mastery.label}
-                    </Badge>
-                  </TooltipTrigger>
-                  <TooltipContent side="left" className="max-w-xs text-xs font-sans">
-                    {mastery.description}
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
+              <div className="shrink-0 w-fit self-start">
+                <TooltipProvider delayDuration={200}>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Badge
+                        variant="outline"
+                        className={cn(
+                          "font-mono text-[10px] uppercase px-2.5 py-1 border w-fit shrink-0 cursor-default select-none transition-colors",
+                          mastery.color
+                        )}
+                      >
+                        {mastery.label}
+                      </Badge>
+                    </TooltipTrigger>
+                    <TooltipContent side="left" className="max-w-xs text-xs font-sans">
+                      {mastery.description}
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              </div>
             </div>
 
             {/* Metadata Summary Pill */}
-            <div className="flex items-center gap-4 text-xs font-mono text-neutral-400 pt-1 border-t border-white/[0.05]">
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs font-mono text-neutral-400 pt-1 border-t border-white/[0.05]">
               <div className="flex items-center gap-1.5">
                 <Icon icon={VideoReplayIcon} size={13} className="text-[#FF0000]" />
                 <span>
