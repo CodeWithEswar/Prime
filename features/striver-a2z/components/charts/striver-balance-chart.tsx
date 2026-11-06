@@ -14,6 +14,7 @@ import {
 import { PrimeChartContainer } from "./prime-chart-container";
 import { PrimeChartTooltip, PrimeSlimBarCursor } from "./prime-chart-tooltip";
 import { primeChartColors, primeChartFont } from "./prime-chart-theme";
+import { useMounted } from "../../hooks/use-mounted";
 
 interface StriverBalanceChartProps {
   data: {
@@ -24,11 +25,7 @@ interface StriverBalanceChartProps {
 }
 
 export function StriverBalanceChart({ data }: StriverBalanceChartProps) {
-  const [mounted, setMounted] = React.useState(false);
-
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useMounted();
 
   const totalVideos = data.reduce((s, d) => s + d.videosWatched, 0);
   const totalProblems = data.reduce((s, d) => s + d.problemsSolved, 0);

@@ -13,6 +13,7 @@ import {
 import { PrimeChartContainer } from "./prime-chart-container";
 import { PrimeChartTooltip } from "./prime-chart-tooltip";
 import { primeChartColors, primeChartFont } from "./prime-chart-theme";
+import { useMounted } from "../../hooks/use-mounted";
 import { cn } from "@/lib/utils";
 
 interface StriverLearningTrendChartProps {
@@ -26,13 +27,9 @@ interface StriverLearningTrendChartProps {
 }
 
 export function StriverLearningTrendChart({ data }: StriverLearningTrendChartProps) {
-  const [mounted, setMounted] = React.useState(false);
+  const mounted = useMounted();
   const [dateRange, setDateRange] = React.useState<"7d" | "30d">("30d");
   const [viewMode, setViewMode] = React.useState<"cumulative" | "daily">("cumulative");
-
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
 
   // Filter slice based on date range
   const filteredData = React.useMemo(() => {

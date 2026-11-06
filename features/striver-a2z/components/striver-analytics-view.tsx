@@ -5,12 +5,9 @@ import Link from "next/link";
 import {
   ArrowLeft01Icon,
   Download01Icon,
-  ChartLineData02Icon,
-  RefreshIcon,
 } from "@hugeicons/core-free-icons";
 import { Icon } from "@/components/ui/icon";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { StriverOverviewKpiStrip } from "./charts/striver-overview-kpi-strip";
 import { StriverLearningTrendChart } from "./charts/striver-learning-trend-chart";
 import { StriverProblemsColumnChart } from "./charts/striver-problems-column-chart";

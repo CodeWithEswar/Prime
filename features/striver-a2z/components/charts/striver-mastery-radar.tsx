@@ -13,6 +13,7 @@ import {
 import { PrimeChartContainer } from "./prime-chart-container";
 import { PrimeChartTooltip } from "./prime-chart-tooltip";
 import { primeChartColors, primeChartFont } from "./prime-chart-theme";
+import { useMounted } from "../../hooks/use-mounted";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import type { StriverRadarDimension } from "../../types";
@@ -22,12 +23,8 @@ interface StriverMasteryRadarProps {
 }
 
 export function StriverMasteryRadar({ data }: StriverMasteryRadarProps) {
-  const [mounted, setMounted] = React.useState(false);
+  const mounted = useMounted();
   const [viewMode, setViewMode] = React.useState<"radar" | "table">("radar");
-
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const avgScore = Math.round(data.reduce((s, d) => s + d.score, 0) / data.length);
 
