@@ -102,7 +102,7 @@ export function StriverLearningTrendChart({ data }: StriverLearningTrendChartPro
               className={cn(
                 "px-2 py-1 rounded-md transition-all select-none",
                 dateRange === "7d"
-                  ? "bg-[#FF0000] text-white font-bold shadow-xs"
+                  ? "bg-white/[0.15] text-white font-bold shadow-xs"
                   : "text-neutral-400 hover:text-white"
               )}
             >
@@ -114,7 +114,7 @@ export function StriverLearningTrendChart({ data }: StriverLearningTrendChartPro
               className={cn(
                 "px-2 py-1 rounded-md transition-all select-none",
                 dateRange === "30d"
-                  ? "bg-[#FF0000] text-white font-bold shadow-xs"
+                  ? "bg-white/[0.15] text-white font-bold shadow-xs"
                   : "text-neutral-400 hover:text-white"
               )}
             >

@@ -106,6 +106,21 @@ const nextConfig: NextConfig = {
         destination: "/practice/dsa/sheets/striver-a2z",
         permanent: false,
       },
+      {
+        source: "/app/dsa/playlists/kunal-kushwaha",
+        destination: "/practice/dsa/playlists/kunal-kushwaha",
+        permanent: false,
+      },
+      {
+        source: "/app/dsa/playlists/kunal-kushwaha/analytics",
+        destination: "/practice/dsa/playlists/kunal-kushwaha/analytics",
+        permanent: false,
+      },
+      {
+        source: "/practice/dsa/playlists/kunal-java-dsa/analytics",
+        destination: "/practice/dsa/playlists/kunal-kushwaha/analytics",
+        permanent: false,
+      },
     ];
   },
   async headers() {

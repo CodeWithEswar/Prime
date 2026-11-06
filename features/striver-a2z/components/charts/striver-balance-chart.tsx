@@ -62,15 +62,7 @@ export function StriverBalanceChart({ data }: StriverBalanceChartProps) {
               />
 
               <Tooltip
-                cursor={
-                  <PrimeSlimBarCursor
-                    layoutMode="grouped"
-                    maxWidth={60}
-                    barWidth={24}
-                    barGap={4}
-                    totalSlots={2}
-                  />
-                }
+                cursor={<PrimeSlimBarCursor layoutMode="grouped" maxWidth={44} />}
                 content={(props) => (
                   <PrimeChartTooltip
                     active={props.active}
