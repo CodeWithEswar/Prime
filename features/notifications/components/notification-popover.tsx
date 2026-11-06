@@ -40,7 +40,16 @@ export function NotificationPopover({ children }: { children: React.ReactNode })
           <h2 className="text-sm font-semibold">Notifications</h2>
           <div className="mt-1 flex items-center gap-1.5 text-xs text-[var(--text-secondary)]">
             {inbox.countAvailable ? (
-              <span>{`${inbox.unreadCount} unread`}</span>
+              <span className="inline-flex items-center gap-1.5">
+                <span>{`${inbox.unreadCount} unread`}</span>
+                {inbox.isFetching && (
+                  <Icon
+                    icon={Loading03Icon}
+                    size={11}
+                    className="animate-spin text-[#FF0000] shrink-0"
+                  />
+                )}
+              </span>
             ) : inbox.isError ? (
               <span>Inbox unavailable</span>
             ) : (
@@ -48,7 +57,7 @@ export function NotificationPopover({ children }: { children: React.ReactNode })
                 <Icon
                   icon={Loading03Icon}
                   size={12}
-                  className="animate-spin text-[var(--text-secondary)] shrink-0"
+                  className="animate-spin text-[#FF0000] shrink-0"
                 />
                 <span>Loading…</span>
               </span>
@@ -89,14 +98,24 @@ export function NotificationPopover({ children }: { children: React.ReactNode })
         </p>
       )}
       <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
-        {inbox.isLoading ? (
-          <div role="status" aria-label="Loading notifications" className="space-y-4 p-5">
-            {[0, 1, 2].map((i) => (
-              <div key={i} className="space-y-2">
-                <Skeleton className="h-3 w-24" />
-                <Skeleton className="h-4 w-full" />
-              </div>
-            ))}
+        {inbox.isLoading || (inbox.isFetching && !inbox.notifications.length) ? (
+          <div
+            role="status"
+            aria-label="Loading messages"
+            className="flex flex-col items-center justify-center py-14 px-4 space-y-3 text-center"
+          >
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/[0.04] border border-white/[0.08]">
+              <Icon
+                icon={Loading03Icon}
+                size={20}
+                className="animate-spin text-[#FF0000]"
+              />
+            </div>
+            <p className="text-xs font-mono text-neutral-400">Loading messages…</p>
+            <div className="w-full max-w-xs space-y-2 pt-2 opacity-30">
+              <Skeleton className="h-3 w-28 mx-auto" />
+              <Skeleton className="h-3 w-48 mx-auto" />
+            </div>
           </div>
         ) : inbox.isError ? (
           <div role="alert" className="space-y-3 p-8 text-center">

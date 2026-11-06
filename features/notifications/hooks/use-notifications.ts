@@ -95,6 +95,7 @@ export function useNotifications(options: UseNotificationsOptions = {}) {
     unreadCount: unreadCount ?? 0,
     countAvailable: unreadCount !== undefined,
     isLoading: query.isLoading,
+    isFetching: query.isFetching,
     isError: query.isError,
     error: query.error,
     refetch: query.refetch,
