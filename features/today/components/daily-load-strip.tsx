@@ -37,9 +37,9 @@ export function DailyLoadStrip({
       : 0;
 
   return (
-    <div className="relative rounded-lg bg-[#080808] border border-white/[0.08] p-4 sm:p-5 space-y-4 shadow-sm">
+    <div className="relative rounded-lg bg-[#080808] border border-white/[0.08] p-4 sm:p-5 space-y-3.5 shadow-sm">
       {/* Top row: 3-column Telemetry Grid + Progress Summary */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
         {/* 3 Metric Pillars (Mobile: 3-column grid) */}
         <div className="grid grid-cols-3 gap-2 sm:gap-6 divide-x divide-white/[0.06] font-mono">
           {/* Planned */}
@@ -47,7 +47,7 @@ export function DailyLoadStrip({
             <span className="text-[10px] uppercase tracking-wider text-neutral-500 font-semibold block">
               Planned
             </span>
-            <span className="text-base sm:text-lg font-bold text-white tracking-tight">
+            <span className="text-sm sm:text-base font-bold text-white tracking-tight">
               {formatDuration(plannedMinutes)}
             </span>
           </div>
@@ -57,7 +57,7 @@ export function DailyLoadStrip({
             <span className="text-[10px] uppercase tracking-wider text-neutral-500 font-semibold block">
               Completed
             </span>
-            <span className="text-base sm:text-lg font-bold text-emerald-400 tracking-tight">
+            <span className="text-sm sm:text-base font-bold text-emerald-400 tracking-tight">
               {formatDuration(completedMinutes)}
             </span>
           </div>
@@ -68,7 +68,7 @@ export function DailyLoadStrip({
               Remaining
             </span>
             <span
-              className={`text-base sm:text-lg font-bold tracking-tight ${
+              className={`text-sm sm:text-base font-bold tracking-tight ${
                 remainingMinutes > 0 ? "text-[#FF4D4D]" : "text-neutral-400"
               }`}
             >
@@ -78,52 +78,34 @@ export function DailyLoadStrip({
         </div>
 
         {/* Task ratio + Percentage indicator */}
-        <div className="flex items-center justify-between sm:justify-end gap-3 pt-2 sm:pt-0 border-t sm:border-t-0 border-white/[0.05] font-mono text-xs text-neutral-400">
-          <div className="flex items-center gap-2">
-            <span className="px-2 py-0.5 rounded bg-neutral-900 border border-white/[0.06] text-white font-semibold">
-              {completedTaskCount} / {totalTaskCount} tasks
-            </span>
-            <span className="text-neutral-600">·</span>
-            <span className="text-neutral-300 font-semibold">
-              {percentComplete}% of daily load
-            </span>
-          </div>
+        <div className="flex items-center justify-between sm:justify-end gap-2 font-mono text-xs text-neutral-400 pt-1 sm:pt-0 border-t sm:border-t-0 border-white/[0.04]">
+          <span>
+            <strong className="text-white">{completedTaskCount}</strong> / {totalTaskCount} tasks
+          </span>
+          <span className="text-neutral-600">·</span>
+          <span className="text-neutral-300 font-medium">
+            {percentComplete}% of daily load
+          </span>
         </div>
       </div>
 
       {/* Precision Progress Track */}
-      <div className="space-y-1.5">
-        <div className="relative w-full h-2 bg-[#121212] rounded-full overflow-hidden border border-white/[0.04]">
-          {/* Optimal 85% Planning Buffer Guide Notch */}
+      <div className="relative w-full h-1.5 bg-[#121212] rounded-full overflow-hidden border border-white/[0.04]">
+        {/* Completed Bar */}
+        <div
+          className={`h-full transition-all duration-500 ease-out ${
+            percentComplete >= 100 ? "bg-emerald-400" : "bg-white"
+          }`}
+          style={{ width: `${percentComplete}%` }}
+        />
+
+        {/* Pure Red Active Leading Terminal Needle */}
+        {percentComplete > 0 && percentComplete < 100 && (
           <div
-            className="absolute top-0 bottom-0 w-[1px] bg-neutral-700/60 z-10"
-            style={{ left: "85%" }}
-            title="85% Optimal Planning Buffer"
+            className="absolute top-0 bottom-0 w-1.5 bg-[#FF0000] shadow-[0_0_6px_#FF0000] z-20 rounded-full"
+            style={{ left: `calc(${percentComplete}% - 3px)` }}
           />
-
-          {/* Completed Bar (Solid White / Emerald on 100%) */}
-          <div
-            className={`h-full transition-all duration-500 ease-out ${
-              percentComplete >= 100 ? "bg-emerald-400" : "bg-white"
-            }`}
-            style={{ width: `${percentComplete}%` }}
-          />
-
-          {/* Pure Red Active Leading Terminal Needle */}
-          {percentComplete > 0 && percentComplete < 100 && (
-            <div
-              className="absolute top-0 bottom-0 w-2 bg-[#FF0000] shadow-[0_0_8px_#FF0000] z-20 rounded-full"
-              style={{ left: `calc(${percentComplete}% - 4px)` }}
-            />
-          )}
-        </div>
-
-        {/* Mini Guide Label on bottom of track */}
-        <div className="flex items-center justify-between text-[10px] font-mono text-neutral-500 px-0.5">
-          <span>0%</span>
-          <span className="hidden sm:inline text-neutral-600">85% optimal buffer</span>
-          <span>100%</span>
-        </div>
+        )}
       </div>
 
       {/* Warning banner if today exceeds capacity */}
