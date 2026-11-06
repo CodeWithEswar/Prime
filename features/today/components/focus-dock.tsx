@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Icon } from "@/components/ui/icon";
+import { Button } from "@/components/ui/button";
 import {
   PlayIcon,
   PauseIcon,
@@ -67,33 +68,39 @@ export function FocusDock({ session, onPause, onResume, onFinish }: FocusDockPro
         {/* Right: Controls (Pause/Resume + Finish) */}
         <div className="flex items-center gap-2 shrink-0">
           {isRunning ? (
-            <button
+            <Button
               type="button"
+              variant="secondary"
+              size="sm"
               onClick={() => onPause(session.id)}
-              className="inline-flex items-center gap-1 px-2.5 py-1 rounded text-xs font-mono font-medium text-[#CCCCCC] hover:text-white bg-[#181818] hover:bg-[#222222] border border-[#2E2E2E] transition-colors"
+              className="gap-1.5 font-mono text-xs h-7 px-2.5"
             >
               <Icon icon={PauseIcon} size={12} />
               <span>Pause</span>
-            </button>
+            </Button>
           ) : (
-            <button
+            <Button
               type="button"
+              variant="primary"
+              size="sm"
               onClick={() => onResume(session.taskId)}
-              className="inline-flex items-center gap-1 px-2.5 py-1 rounded text-xs font-mono font-medium text-white bg-[#FF0000] hover:bg-[#CC0000] transition-colors"
+              className="gap-1.5 font-mono text-xs h-7 px-2.5"
             >
               <Icon icon={PlayIcon} size={12} />
               <span>Resume</span>
-            </button>
+            </Button>
           )}
 
-          <button
+          <Button
             type="button"
+            variant="secondary"
+            size="sm"
             onClick={() => onFinish(session.id)}
-            className="inline-flex items-center gap-1 px-2.5 py-1 rounded text-xs font-mono font-semibold text-white bg-[#141414] hover:bg-[#22C55E] hover:text-black border border-[#2E2E2E] hover:border-[#22C55E] transition-colors"
+            className="gap-1.5 font-mono text-xs h-7 px-2.5 hover:border-emerald-500/50 hover:text-emerald-400"
           >
             <Icon icon={CheckmarkCircle02Icon} size={12} />
             <span>Finish</span>
-          </button>
+          </Button>
         </div>
       </div>
     </aside>

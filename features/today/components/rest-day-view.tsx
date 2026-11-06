@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Icon } from "@/components/ui/icon";
+import { Button } from "@/components/ui/button";
 import { ArrowRight01Icon, SourceCodeIcon, Route01Icon } from "@hugeicons/core-free-icons";
 import type { TomorrowPreview } from "../types";
 import { formatDuration } from "./daily-load-strip";
@@ -13,42 +14,40 @@ interface RestDayViewProps {
 export function RestDayView({ tomorrowPreview }: RestDayViewProps) {
   return (
     <div className="space-y-6">
-      <div className="p-8 rounded-lg bg-[#0C0C0C] border border-[#222222] text-center space-y-3">
-        <span className="font-mono text-[11px] font-bold uppercase tracking-widest text-[#888888]">
+      <div className="p-8 sm:p-10 rounded-lg bg-[#070707] border border-white/[0.08] text-center space-y-4 shadow-md">
+        <span className="font-mono text-xs font-bold uppercase tracking-widest text-[#FF0000] bg-[#FF0000]/10 px-3 py-1 rounded border border-[#FF0000]/20 inline-block">
           SCHEDULED REST DAY
         </span>
 
-        <h2 className="text-xl font-bold tracking-tight text-white">
-          Recovery is part of the plan.
+        <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-white font-sans">
+          Recovery is a core part of the system.
         </h2>
 
-        <p className="text-xs text-[#888888] max-w-sm mx-auto leading-relaxed">
-          No new learning or heavy problem sets are scheduled for today. Rest allows neural memory consolidation of previous patterns.
+        <p className="text-xs sm:text-sm text-neutral-400 max-w-md mx-auto leading-relaxed font-sans">
+          No new learning or heavy problem sets are scheduled for today. Rest allows neural memory consolidation and ensures consistent high-performance execution.
         </p>
 
         <div className="flex items-center justify-center gap-3 pt-3 flex-wrap">
-          <Link
-            href="/roadmap"
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded text-xs font-semibold text-[#CCCCCC] hover:text-white bg-[#141414] hover:bg-[#1C1C1C] border border-[#222222] transition-colors"
-          >
-            <Icon icon={Route01Icon} size={14} />
-            <span>Review Roadmap</span>
-          </Link>
+          <Button variant="secondary" size="sm" asChild className="gap-2 font-mono">
+            <Link href="/roadmap">
+              <Icon icon={Route01Icon} size={15} />
+              <span>Review Roadmap</span>
+            </Link>
+          </Button>
 
-          <Link
-            href="/practice/dsa"
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded text-xs font-semibold text-[#888888] hover:text-white bg-[#0D0D0D] hover:bg-[#141414] border border-[#1A1A1A] transition-colors"
-          >
-            <Icon icon={SourceCodeIcon} size={14} />
-            <span>Optional Practice</span>
-          </Link>
+          <Button variant="outline" size="sm" asChild className="gap-2 font-mono">
+            <Link href="/practice/dsa">
+              <Icon icon={SourceCodeIcon} size={15} />
+              <span>Optional Practice</span>
+            </Link>
+          </Button>
         </div>
       </div>
 
       {tomorrowPreview && (
-        <div className="p-4 rounded-lg bg-[#080808] border border-[#161616] flex items-center justify-between gap-4 text-xs">
+        <div className="p-4 rounded-lg bg-[#080808] border border-white/[0.08] flex items-center justify-between gap-4 text-xs shadow-sm">
           <div>
-            <span className="font-mono text-[10px] uppercase text-[#666666] tracking-wider block mb-0.5">
+            <span className="font-mono text-[10px] uppercase text-neutral-400 font-bold tracking-wider block mb-0.5">
               PREPARATION RESUMES TOMORROW
             </span>
             <span className="font-semibold text-white">
@@ -59,9 +58,9 @@ export function RestDayView({ tomorrowPreview }: RestDayViewProps) {
 
           <Link
             href="/plan"
-            className="inline-flex items-center gap-1 text-xs font-medium text-[#888888] hover:text-white transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-neutral-400 hover:text-white transition-colors"
           >
-            <span>View Plan</span>
+            <span>Open Planner</span>
             <Icon icon={ArrowRight01Icon} size={13} />
           </Link>
         </div>
@@ -69,4 +68,3 @@ export function RestDayView({ tomorrowPreview }: RestDayViewProps) {
     </div>
   );
 }
-
