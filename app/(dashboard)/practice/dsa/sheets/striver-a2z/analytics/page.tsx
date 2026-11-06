@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 function StriverAnalyticsSkeleton() {
   return (
-    <PageFrame variant="workspace">
+    <PageFrame variant="wide-table">
       <div className="space-y-6 animate-pulse max-w-7xl mx-auto">
         <div className="space-y-2 border-b border-white/[0.08] pb-4">
           <div className="h-4 w-40 bg-neutral-900 rounded" />
@@ -37,7 +37,7 @@ async function StriverAnalyticsContent() {
   const analytics = await getStriverAnalytics();
 
   return (
-    <PageFrame variant="workspace">
+    <PageFrame variant="wide-table">
       <StriverAnalyticsView analytics={analytics} />
     </PageFrame>
   );

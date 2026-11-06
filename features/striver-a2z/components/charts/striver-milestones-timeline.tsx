@@ -22,13 +22,13 @@ export function StriverMilestonesTimeline({ milestones }: StriverMilestonesTimel
       case "video":
         return <Icon icon={VideoReplayIcon} size={13} className="text-[#FF0000]" />;
       case "problem":
-        return <Icon icon={CodeCircleIcon} size={13} className="text-emerald-400" />;
+        return <Icon icon={CodeCircleIcon} size={13} className="text-[#FF0000]" />;
       case "topic":
-        return <Icon icon={Award01Icon} size={13} className="text-amber-400" />;
+        return <Icon icon={Award01Icon} size={13} className="text-[#FF0000]" />;
       case "revision":
-        return <Icon icon={RepeatIcon} size={13} className="text-blue-400" />;
+        return <Icon icon={RepeatIcon} size={13} className="text-[#FF0000]" />;
       default:
-        return <Icon icon={Flag01Icon} size={13} className="text-purple-400" />;
+        return <Icon icon={Flag01Icon} size={13} className="text-[#FF0000]" />;
     }
   };
 
