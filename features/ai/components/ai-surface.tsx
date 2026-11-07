@@ -878,23 +878,27 @@ export function AISurface({ panel = false }: { panel?: boolean }) {
         </div>
       </div>
       {!following && ai.messages.length > 0 && (
-        <AIControl
-          className="ai-latest-button"
-          iconOnly
-          icon={ArrowDown01Icon}
-          onClick={() => {
-            autoScroll.current = true;
-            setFollowing(true);
-            if (scroller.current) {
-              scroller.current.scrollTo({
-                top: scroller.current.scrollHeight,
-                behavior: "smooth",
-              });
-            }
-          }}
-        >
-          Continue to latest
-        </AIControl>
+        <div className="ai-latest-floating-anchor" role="presentation">
+          <button
+            type="button"
+            className="ai-latest-button"
+            title="Scroll to latest message"
+            aria-label="Scroll to latest message"
+            onClick={() => {
+              autoScroll.current = true;
+              setFollowing(true);
+              if (scroller.current) {
+                scroller.current.scrollTo({
+                  top: scroller.current.scrollHeight,
+                  behavior: "smooth",
+                });
+              }
+            }}
+          >
+            <Icon icon={ArrowDown01Icon} size={15} />
+            <span className="sr-only">Scroll to latest</span>
+          </button>
+        </div>
       )}
       <div className="ai-composer-dock">
         <form

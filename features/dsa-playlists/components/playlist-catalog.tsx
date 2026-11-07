@@ -9,6 +9,7 @@ import {
   CourseIcon,
   Tick02Icon,
   PlayIcon,
+  Cancel01Icon,
 } from "@hugeicons/core-free-icons";
 import { Icon } from "@/components/ui/icon";
 import { Input } from "@/components/ui/input";
@@ -129,67 +130,83 @@ export function PlaylistCatalog({ playlists, continueLearning }: PlaylistCatalog
       )}
 
       {/* 3. Search & Filter Bar */}
-      <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 bg-[#0A0A0A] border border-white/[0.08] rounded-xl p-3">
+      <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3 bg-[#0A0A0A] border border-white/[0.08] rounded-xl p-3 shadow-sm">
         {/* Search Input */}
-        <div className="relative flex-1">
+        <div className="relative flex-1 min-w-[200px]">
           <Icon
             icon={Search01Icon}
-            size={16}
+            size={15}
             className="absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-500 pointer-events-none"
           />
           <Input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search playlist, topic, or instructor (e.g. Striver, Binary Search, DP)..."
-            className="pl-9 h-9 text-xs bg-black/50 border-white/[0.08] focus-visible:border-white/30 text-white placeholder:text-neutral-500 font-mono"
+            placeholder="Search playlists, topics, instructors…"
+            className="pl-9 pr-8 h-9 text-xs bg-black/60 border-white/[0.08] focus-visible:border-white/30 text-white placeholder:text-neutral-500 font-mono"
           />
+          {search && (
+            <button
+              type="button"
+              onClick={() => setSearch("")}
+              className="absolute right-2.5 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-white p-1 rounded-xs transition-colors"
+              aria-label="Clear search input"
+            >
+              <Icon icon={Cancel01Icon} size={12} />
+            </button>
+          )}
         </div>
 
-        {/* Dropdown Filters */}
-        <div className="flex flex-wrap items-center gap-2">
+        {/* Dropdown Filters: responsive grid on mobile, flex on desktop */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:flex lg:items-center gap-2 w-full lg:w-auto">
           {/* Instructor Filter */}
-          <Select value={instructor} onValueChange={setInstructor}>
-            <SelectTrigger className="h-9 text-xs w-[140px] bg-black/50 border-white/[0.08] text-neutral-300 font-mono">
-              <SelectValue placeholder="Instructor" />
-            </SelectTrigger>
-            <SelectContent className="bg-[#121212] border-white/10 text-neutral-200 font-mono text-xs">
-              <SelectItem value="all">All Instructors</SelectItem>
-              {instructors.map((ins) => (
-                <SelectItem key={ins} value={ins}>
-                  {ins}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          <div className="col-span-1 w-full lg:w-[155px]">
+            <Select value={instructor} onValueChange={setInstructor}>
+              <SelectTrigger className="h-9 text-xs w-full bg-black/60 border-white/[0.08] text-neutral-300 font-mono">
+                <SelectValue placeholder="Instructor" />
+              </SelectTrigger>
+              <SelectContent className="bg-[#121212] border-white/10 text-neutral-200 font-mono text-xs">
+                <SelectItem value="all">All Instructors</SelectItem>
+                {instructors.map((ins) => (
+                  <SelectItem key={ins} value={ins}>
+                    {ins}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
 
           {/* Topic Filter */}
-          <Select value={topic} onValueChange={setTopic}>
-            <SelectTrigger className="h-9 text-xs w-[140px] bg-black/50 border-white/[0.08] text-neutral-300 font-mono">
-              <SelectValue placeholder="Topic" />
-            </SelectTrigger>
-            <SelectContent className="bg-[#121212] border-white/10 text-neutral-200 font-mono text-xs">
-              <SelectItem value="all">All Topics</SelectItem>
-              {topics.map((t) => (
-                <SelectItem key={t} value={t}>
-                  #{t}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          <div className="col-span-1 w-full lg:w-[145px]">
+            <Select value={topic} onValueChange={setTopic}>
+              <SelectTrigger className="h-9 text-xs w-full bg-black/60 border-white/[0.08] text-neutral-300 font-mono">
+                <SelectValue placeholder="Topic" />
+              </SelectTrigger>
+              <SelectContent className="bg-[#121212] border-white/10 text-neutral-200 font-mono text-xs">
+                <SelectItem value="all">All Topics</SelectItem>
+                {topics.map((t) => (
+                  <SelectItem key={t} value={t}>
+                    #{t}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
 
           {/* Status Filter */}
-          <Select value={status} onValueChange={(val) => setStatus(val as PlaylistStatusFilter)}>
-            <SelectTrigger className="h-9 text-xs w-[130px] bg-black/50 border-white/[0.08] text-neutral-300 font-mono">
-              <SelectValue placeholder="Status" />
-            </SelectTrigger>
-            <SelectContent className="bg-[#121212] border-white/10 text-neutral-200 font-mono text-xs">
-              <SelectItem value="all">All Courses</SelectItem>
-              <SelectItem value="enrolled">Enrolled</SelectItem>
-              <SelectItem value="in_progress">In Progress</SelectItem>
-              <SelectItem value="completed">Completed</SelectItem>
-              <SelectItem value="not_started">Not Started</SelectItem>
-            </SelectContent>
-          </Select>
+          <div className="col-span-2 sm:col-span-1 w-full lg:w-[135px]">
+            <Select value={status} onValueChange={(val) => setStatus(val as PlaylistStatusFilter)}>
+              <SelectTrigger className="h-9 text-xs w-full bg-black/60 border-white/[0.08] text-neutral-300 font-mono">
+                <SelectValue placeholder="Status" />
+              </SelectTrigger>
+              <SelectContent className="bg-[#121212] border-white/10 text-neutral-200 font-mono text-xs">
+                <SelectItem value="all">All Courses</SelectItem>
+                <SelectItem value="enrolled">Enrolled</SelectItem>
+                <SelectItem value="in_progress">In Progress</SelectItem>
+                <SelectItem value="completed">Completed</SelectItem>
+                <SelectItem value="not_started">Not Started</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
 
           {/* Reset button if active filters */}
           {(search || instructor !== "all" || topic !== "all" || status !== "all") && (
@@ -202,9 +219,9 @@ export function PlaylistCatalog({ playlists, continueLearning }: PlaylistCatalog
                 setTopic("all");
                 setStatus("all");
               }}
-              className="h-9 px-2 text-xs font-mono text-neutral-400 hover:text-white"
+              className="col-span-2 sm:col-span-3 lg:col-span-auto h-9 px-3 text-xs font-mono text-neutral-400 hover:text-white border border-white/[0.08] lg:border-0 hover:bg-white/[0.06] transition-colors"
             >
-              Reset
+              Reset Filters
             </Button>
           )}
         </div>
@@ -213,7 +230,13 @@ export function PlaylistCatalog({ playlists, continueLearning }: PlaylistCatalog
       {/* 4. Playlists Grid */}
       <section className="space-y-4">
         <div className="flex items-center justify-between font-mono text-xs text-neutral-400">
-          <span>Showing {filteredPlaylists.length} of {playlists.length} Curated Courses</span>
+          <div className="flex items-center gap-2">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#10B981] animate-pulse" />
+            <span>Showing {filteredPlaylists.length} of {playlists.length} Curated Courses</span>
+          </div>
+          {(search || instructor !== "all" || topic !== "all" || status !== "all") && (
+            <span className="text-[11px] font-mono text-[#FF0000]">Filters applied</span>
+          )}
         </div>
 
         {filteredPlaylists.length > 0 ? (

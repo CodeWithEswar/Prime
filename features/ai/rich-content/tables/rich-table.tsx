@@ -13,9 +13,10 @@ export interface RichTableProps {
   children?: React.ReactNode;
   className?: string;
   defaultMode?: "records" | "table";
+  caption?: string;
 }
 
-export function RichTable({ children, className, defaultMode }: RichTableProps) {
+export function RichTable({ children, className, defaultMode, caption }: RichTableProps) {
   const { isNarrow, mode, isMobile: ctxIsMobile } = useRichContent();
   const hookIsMobile = useIsMobile();
   const isMobile = ctxIsMobile || hookIsMobile;
@@ -191,7 +192,7 @@ export function RichTable({ children, className, defaultMode }: RichTableProps) 
         onOpenChange={setExpandOpen}
         headers={parsed.headers}
         rows={parsed.rows}
-        title={parsed.headers[0]?.label ? `${parsed.headers[0].label} Table Analysis` : "Data Table"}
+        title={caption || (parsed.headers[0]?.label ? `${parsed.headers[0].label} Table Analysis` : "Data Table Analysis")}
       />
     </div>
   );
