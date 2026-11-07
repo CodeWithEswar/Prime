@@ -5,7 +5,6 @@ import Link from "next/link";
 import {
   Search01Icon,
   FilterIcon,
-  Analytics02Icon,
   CourseIcon,
   Tick02Icon,
   PlayIcon,
@@ -98,21 +97,6 @@ export function PlaylistCatalog({ playlists, continueLearning }: PlaylistCatalog
             10 verified placement curriculum tracks by Striver, Kunal Kushwaha, Aditya Verma & Abdul Bari.
             Track lessons in order, record notes, and link directly to LeetCode practice questions.
           </p>
-        </div>
-
-        {/* Analytics Action */}
-        <div className="flex items-center gap-2">
-          <Button
-            variant="outline"
-            size="sm"
-            className="h-9 px-3.5 text-xs font-mono font-medium text-neutral-300 hover:text-white bg-[#0A0A0A] hover:bg-[#141414] border-white/[0.1] hover:border-white/[0.2] gap-2 transition-all active:scale-[0.98]"
-            asChild
-          >
-            <Link href="/practice/dsa/playlists/analytics">
-              <Icon icon={Analytics02Icon} size={14} className="text-[#FF0000]" />
-              <span>Learning Analytics</span>
-            </Link>
-          </Button>
         </div>
       </div>
 
