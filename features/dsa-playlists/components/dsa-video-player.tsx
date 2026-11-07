@@ -11,9 +11,17 @@ import {
   Bookmark01Icon,
   CalendarAdd01Icon,
   RepeatIcon,
+  MoreHorizontalIcon,
 } from "@hugeicons/core-free-icons";
 import { Icon } from "@/components/ui/icon";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import type { DSALessonItem } from "../types";
 
 interface DSAVideoPlayerProps {
@@ -83,11 +91,11 @@ export function DSAVideoPlayer({
       {/* 3. Lesson Meta Header & Controls Bar */}
       <div className="p-4 sm:p-5 space-y-4">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
-          <div className="space-y-1">
-            <h2 className="text-base sm:text-lg font-bold text-white leading-snug">
+          <div className="space-y-1 min-w-0 flex-1">
+            <h2 className="text-base sm:text-lg font-bold text-white leading-snug break-words">
               {lesson.title}
             </h2>
-            <div className="flex items-center gap-2 font-mono text-xs text-neutral-400">
+            <div className="flex items-center gap-2 font-mono text-xs text-neutral-400 flex-wrap">
               <span className="rounded bg-white/[0.06] px-2 py-0.5 text-[10px]">
                 {lesson.durationFormatted}
               </span>
@@ -103,11 +111,11 @@ export function DSAVideoPlayer({
           </div>
 
           {/* Primary Complete Action */}
-          <div className="flex items-center gap-2 flex-shrink-0">
+          <div className="flex items-center gap-2 flex-shrink-0 w-full sm:w-auto">
             <Button
               onClick={onToggleComplete}
               disabled={isActionPending}
-              className={`h-9 px-4 text-xs font-mono font-medium gap-2 transition-all active:scale-[0.98] ${
+              className={`h-9 px-4 text-xs font-mono font-medium gap-2 transition-all active:scale-[0.98] w-full sm:w-auto justify-center ${
                 isCompleted
                   ? "bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/25"
                   : "bg-[#FF0000] hover:bg-[#D90000] text-white shadow-[0_2px_12px_rgba(255,0,0,0.25)]"
@@ -123,7 +131,7 @@ export function DSAVideoPlayer({
         </div>
 
         {/* 4. Action Strip: Prev/Next, Plan, Revision, Bookmark */}
-        <div className="flex flex-wrap items-center justify-between gap-2 pt-3 border-t border-white/[0.06]">
+        <div className="flex items-center justify-between gap-2 pt-3 border-t border-white/[0.06]">
           {/* Navigation controls */}
           <div className="flex items-center gap-1.5">
             <Button
@@ -131,7 +139,7 @@ export function DSAVideoPlayer({
               size="sm"
               onClick={onPrevious}
               disabled={!hasPrevious}
-              className="h-8 px-2.5 text-xs font-mono text-neutral-300 hover:text-white bg-[#111111] border-white/10 gap-1 disabled:opacity-30"
+              className="h-8 px-2.5 text-xs font-mono text-neutral-300 hover:text-white bg-[#111111] border-white/10 gap-1 disabled:opacity-30 active:scale-[0.98]"
             >
               <Icon icon={ArrowLeft01Icon} size={12} />
               <span>Previous</span>
@@ -142,15 +150,15 @@ export function DSAVideoPlayer({
               size="sm"
               onClick={onNext}
               disabled={!hasNext}
-              className="h-8 px-2.5 text-xs font-mono text-neutral-300 hover:text-white bg-[#111111] border-white/10 gap-1 disabled:opacity-30"
+              className="h-8 px-2.5 text-xs font-mono text-neutral-300 hover:text-white bg-[#111111] border-white/10 gap-1 disabled:opacity-30 active:scale-[0.98]"
             >
               <span>Next</span>
               <Icon icon={ArrowRight01Icon} size={12} />
             </Button>
           </div>
 
-          {/* Cross-module integrations */}
-          <div className="flex items-center gap-1.5">
+          {/* Desktop Actions (sm:flex) */}
+          <div className="hidden sm:flex items-center gap-1.5">
             {/* Bookmark button */}
             <Button
               variant="outline"
@@ -161,7 +169,7 @@ export function DSAVideoPlayer({
               }`}
             >
               <Icon icon={Bookmark01Icon} size={12} />
-              <span className="hidden sm:inline">{isBookmarked ? "Saved" : "Save"}</span>
+              <span>{isBookmarked ? "Saved" : "Save"}</span>
             </Button>
 
             {/* Schedule in Plan */}
@@ -172,7 +180,7 @@ export function DSAVideoPlayer({
               className="h-8 px-2.5 text-xs font-mono text-neutral-300 hover:text-white bg-[#111111] border-white/10 gap-1.5"
             >
               <Icon icon={CalendarAdd01Icon} size={12} className="text-[#FF4D4D]" />
-              <span className="hidden sm:inline">Add to Plan</span>
+              <span>Add to Plan</span>
             </Button>
 
             {/* Create Revision */}
@@ -183,8 +191,70 @@ export function DSAVideoPlayer({
               className="h-8 px-2.5 text-xs font-mono text-neutral-300 hover:text-white bg-[#111111] border-white/10 gap-1.5"
             >
               <Icon icon={RepeatIcon} size={12} className="text-[#FF4D4D]" />
-              <span className="hidden sm:inline">Revise</span>
+              <span>Revise</span>
             </Button>
+          </div>
+
+          {/* Mobile Actions: Three Dots Dropdown Menu (sm:hidden) */}
+          <div className="sm:hidden">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="h-8 w-8 p-0 bg-[#111111] border-white/10 text-neutral-300 hover:text-white hover:border-white/20 active:scale-[0.98]"
+                  aria-label="More lesson actions"
+                >
+                  <Icon icon={MoreHorizontalIcon} size={15} />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                align="end"
+                className="w-48 bg-[#0F0F0F] border border-white/10 text-neutral-200 font-mono text-xs shadow-xl rounded-lg p-1"
+              >
+                <DropdownMenuItem
+                  onClick={onToggleBookmark}
+                  className="flex items-center gap-2 px-2.5 py-2 cursor-pointer rounded-md hover:bg-white/[0.08] focus:bg-white/[0.08] transition-colors"
+                >
+                  <Icon
+                    icon={Bookmark01Icon}
+                    size={14}
+                    className={isBookmarked ? "text-amber-400" : "text-neutral-400"}
+                  />
+                  <span>{isBookmarked ? "Remove Bookmark" : "Save Bookmark"}</span>
+                </DropdownMenuItem>
+
+                <DropdownMenuItem
+                  onClick={onOpenScheduleDialog}
+                  className="flex items-center gap-2 px-2.5 py-2 cursor-pointer rounded-md hover:bg-white/[0.08] focus:bg-white/[0.08] transition-colors"
+                >
+                  <Icon icon={CalendarAdd01Icon} size={14} className="text-[#FF4D4D]" />
+                  <span>Schedule in Plan</span>
+                </DropdownMenuItem>
+
+                <DropdownMenuItem
+                  onClick={onOpenRevisionDialog}
+                  className="flex items-center gap-2 px-2.5 py-2 cursor-pointer rounded-md hover:bg-white/[0.08] focus:bg-white/[0.08] transition-colors"
+                >
+                  <Icon icon={RepeatIcon} size={14} className="text-[#FF4D4D]" />
+                  <span>Create Revision</span>
+                </DropdownMenuItem>
+
+                <DropdownMenuSeparator className="my-1 bg-white/[0.08]" />
+
+                <DropdownMenuItem asChild>
+                  <a
+                    href={watchUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-2.5 py-2 cursor-pointer rounded-md hover:bg-white/[0.08] focus:bg-white/[0.08] text-neutral-400 hover:text-white transition-colors"
+                  >
+                    <Icon icon={LinkSquare01Icon} size={14} className="text-[#FF4D4D]" />
+                    <span>Watch on YouTube</span>
+                  </a>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
       </div>

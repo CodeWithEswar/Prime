@@ -178,9 +178,9 @@ export function PlaylistDetailView({ initialDetail }: PlaylistDetailViewProps) {
         </div>
 
         {/* Enrollment & Global Course Progress */}
-        <div className="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end">
+        <div className="flex items-center gap-3 w-full sm:w-auto justify-start sm:justify-end">
           {isEnrolled ? (
-            <div className="flex items-center gap-3 bg-[#0A0A0A] border border-white/[0.08] px-3.5 py-1.5 rounded-lg font-mono text-xs">
+            <div className="flex items-center gap-3 bg-[#0A0A0A] border border-white/[0.08] px-3.5 py-1.5 rounded-lg font-mono text-xs w-full sm:w-auto justify-between sm:justify-start">
               <span className="text-neutral-400">Track Progress:</span>
               <span className="text-emerald-400 font-bold">
                 {detail.stats.progressPercentage}%
@@ -194,7 +194,7 @@ export function PlaylistDetailView({ initialDetail }: PlaylistDetailViewProps) {
             <Button
               onClick={handleEnroll}
               disabled={isPending}
-              className="bg-[#FF0000] hover:bg-[#D90000] text-white font-medium h-9 px-4 text-xs shadow-[0_2px_12px_rgba(255,0,0,0.3)]"
+              className="bg-[#FF0000] hover:bg-[#D90000] text-white font-medium h-9 px-4 text-xs shadow-[0_2px_12px_rgba(255,0,0,0.3)] w-full sm:w-auto justify-center"
             >
               {isPending ? "Enrolling..." : "Enroll in Track"}
             </Button>
@@ -222,24 +222,24 @@ export function PlaylistDetailView({ initialDetail }: PlaylistDetailViewProps) {
 
           {/* Context Tabs: Practice Questions, Notes, Course Info */}
           <Tabs defaultValue="practice" className="w-full">
-            <TabsList className="bg-[#0A0A0A] border border-white/[0.08] p-1 h-9 rounded-lg">
+            <TabsList className="bg-[#0A0A0A] border border-white/[0.08] p-1 h-9 rounded-lg w-full flex overflow-x-auto scrollbar-none justify-start">
               <TabsTrigger
                 value="practice"
-                className="text-xs font-mono data-[state=active]:bg-[#1A1A1A] data-[state=active]:text-white gap-1.5"
+                className="text-xs font-mono data-[state=active]:bg-[#1A1A1A] data-[state=active]:text-white gap-1.5 shrink-0"
               >
                 <Icon icon={CodeCircleIcon} size={13} className="text-[#FF4D4D]" />
                 <span>Practice ({activeLesson.linkedProblems.length})</span>
               </TabsTrigger>
               <TabsTrigger
                 value="notes"
-                className="text-xs font-mono data-[state=active]:bg-[#1A1A1A] data-[state=active]:text-white gap-1.5"
+                className="text-xs font-mono data-[state=active]:bg-[#1A1A1A] data-[state=active]:text-white gap-1.5 shrink-0"
               >
                 <Icon icon={NoteIcon} size={13} className="text-amber-400" />
                 <span>Notes {activeLesson.hasNotes && "•"}</span>
               </TabsTrigger>
               <TabsTrigger
                 value="info"
-                className="text-xs font-mono data-[state=active]:bg-[#1A1A1A] data-[state=active]:text-white gap-1.5"
+                className="text-xs font-mono data-[state=active]:bg-[#1A1A1A] data-[state=active]:text-white gap-1.5 shrink-0"
               >
                 <Icon icon={InformationCircleIcon} size={13} />
                 <span>Course Info</span>
