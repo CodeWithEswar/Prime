@@ -22,6 +22,7 @@ import { HintTrace, TechnicalContent } from "../markdown/structured";
 import { ResponseActions } from "./response-actions";
 import { AIControl } from "./ai-control";
 import { Icon, type IconSvgElement } from "@/components/ui/icon";
+import { cn } from "@/lib/utils";
 import {
   Select,
   SelectTrigger,
@@ -232,7 +233,13 @@ function useSafeBack() {
   };
 }
 
-export function ConversationRail({ onSelect }: { onSelect?: () => void }) {
+export function ConversationRail({
+  onSelect,
+  inDrawer = false,
+}: {
+  onSelect?: () => void;
+  inDrawer?: boolean;
+}) {
   const ai = useAI()!,
     client = useQueryClient();
   const handleBack = useSafeBack();
@@ -264,30 +271,48 @@ export function ConversationRail({ onSelect }: { onSelect?: () => void }) {
   });
   return (
     <div className="ai-history">
-      <div className="ai-rail-header">
-        <Link
-          href="/roadmap"
-          onClick={handleBack}
-          className="ai-rail-back-link"
-          title="Return to PRIME Workspace"
-        >
-          <Icon icon={ArrowLeft01Icon} size={14} />
-          <span>Workspace</span>
-        </Link>
-        <span className="ai-rail-badge">PRIME AI</span>
-      </div>
-      <AIControl
+      {!inDrawer && (
+        <div className="ai-rail-header">
+          <Link
+            href="/roadmap"
+            onClick={handleBack}
+            className="ai-rail-back-link"
+            title="Return to PRIME Workspace"
+          >
+            <Icon icon={ArrowLeft01Icon} size={14} />
+            <span>Workspace</span>
+          </Link>
+          <span className="ai-rail-badge">PRIME AI</span>
+        </div>
+      )}
+      <button
+        type="button"
         className="ai-rail-new-btn"
-        icon={Add01Icon}
         onClick={() => {
           ai.newConversation();
           onSelect?.();
         }}
       >
-        New conversation
-      </AIControl>
-      <h2 className="ai-eyebrow">Recent conversations</h2>
-      {list.isLoading && <p className="ai-muted">Loading conversations…</p>}
+        <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-[#FF0000]/15 border border-[#FF0000]/30 text-[#FF0000]">
+          <Icon icon={Add01Icon} size={12} />
+        </div>
+        <span>New conversation</span>
+      </button>
+
+      <div className="flex items-center justify-between mt-4 mb-2 px-1">
+        <h2 className="ai-eyebrow !m-0">Recent conversations</h2>
+        {list.data?.pages[0]?.conversations.length ? (
+          <span className="text-[10px] font-mono text-neutral-500">
+            {list.data.pages.flatMap((p) => p.conversations).length}
+          </span>
+        ) : null}
+      </div>
+
+      {list.isLoading && (
+        <div className="p-4 text-center font-mono text-xs text-neutral-500 animate-pulse">
+          Loading conversations…
+        </div>
+      )}
       {list.error && (
         <p className="ai-muted" role="status">
           {list.error.message}
@@ -297,33 +322,57 @@ export function ConversationRail({ onSelect }: { onSelect?: () => void }) {
         .flatMap((p) => p.conversations)
         .map((c) => (
           <div
-            className="ai-history-row"
+            className="ai-history-row group"
             key={c.id}
             data-active={ai.conversationId === c.id}
           >
-            <AIControl
+            <button
+              type="button"
+              className="ai-history-item-btn"
               onClick={() => {
                 void ai.select(c);
                 onSelect?.();
               }}
             >
-              <span>{c.title}</span>
-              <small>
-                {c.context.type} ·{" "}
-                {new Date(c.updated_at).toLocaleDateString(undefined, {
-                  month: "short",
-                  day: "numeric",
-                })}
-              </small>
-            </AIControl>
-            <AIControl
+              <div className="flex items-start gap-2.5 min-w-0 flex-1">
+                <div
+                  className={cn(
+                    "flex h-5 w-5 shrink-0 items-center justify-center rounded mt-0.5 transition-colors",
+                    ai.conversationId === c.id
+                      ? "bg-[#FF0000]/20 text-[#FF0000] border border-[#FF0000]/30"
+                      : "bg-white/[0.04] text-neutral-400 group-hover:text-white group-hover:bg-white/[0.08]"
+                  )}
+                >
+                  <Icon icon={AiChat01Icon} size={11} />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <span className="ai-history-title">{c.title}</span>
+                  <div className="flex items-center gap-1.5 mt-0.5">
+                    <span className="ai-history-context-tag">{c.context.type}</span>
+                    <span className="ai-history-dot">·</span>
+                    <span className="ai-history-date">
+                      {new Date(c.updated_at).toLocaleDateString(undefined, {
+                        month: "short",
+                        day: "numeric",
+                      })}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </button>
+            <button
+              type="button"
+              className="ai-history-archive-btn"
               aria-label={`Archive ${c.title}`}
-              icon={Archive01Icon}
-              size="icon-sm"
               title="Archive conversation"
               disabled={archive.isPending}
-              onClick={() => archive.mutate(c.id)}
-            ></AIControl>
+              onClick={(e) => {
+                e.stopPropagation();
+                archive.mutate(c.id);
+              }}
+            >
+              <Icon icon={Archive01Icon} size={13} />
+            </button>
           </div>
         ))}
       {!list.isLoading && !list.error && !list.data?.pages[0]?.conversations.length && (
@@ -957,11 +1006,15 @@ export function AISurface({ panel = false }: { panel?: boolean }) {
       </div>
       <Sheet open={historyOpen} onOpenChange={setHistoryOpen}>
         <SheetContent side="left" className="ai-drawer">
-          <SheetTitle>Conversations</SheetTitle>
-          <SheetDescription>
-            Continue an earlier preparation conversation.
-          </SheetDescription>
-          <ConversationRail onSelect={() => setHistoryOpen(false)} />
+          <div className="space-y-1 mb-4 pr-8">
+            <SheetTitle className="font-mono text-base font-bold text-white tracking-tight">
+              Conversations
+            </SheetTitle>
+            <SheetDescription className="text-xs text-neutral-400 font-sans leading-relaxed">
+              Continue an earlier preparation conversation.
+            </SheetDescription>
+          </div>
+          <ConversationRail onSelect={() => setHistoryOpen(false)} inDrawer />
         </SheetContent>
       </Sheet>
       <Sheet open={contextOpen} onOpenChange={setContextOpen}>
