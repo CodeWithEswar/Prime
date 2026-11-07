@@ -131,26 +131,26 @@ export function AvailabilityChart({ rollups }: AvailabilityChartProps) {
 
   return (
     <div className="rounded-lg border border-neutral-800/80 bg-[#0A0A0A]/95 p-5 sm:p-6 backdrop-blur-md shadow-lg flex flex-col justify-between">
-      {/* Header & Controls */}
+      {/* Header & Controls — Aligned in one responsive row */}
       <div>
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <div className="flex flex-wrap items-center gap-2.5">
+        <div className="flex items-start justify-between gap-3">
+          <div className="space-y-1 min-w-0 flex-1">
+            <div className="flex flex-wrap items-center gap-2">
               <h3 className="text-sm sm:text-base font-semibold text-white">
                 Daily Availability &amp; SLO
               </h3>
-              <div className="inline-flex items-center gap-1.5 rounded border border-emerald-500/25 bg-emerald-500/10 px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider text-emerald-400 font-semibold">
+              <div className="inline-flex items-center gap-1.5 rounded border border-emerald-500/25 bg-emerald-500/10 px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider text-emerald-400 font-semibold shrink-0">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
                 99.9% Target Met
               </div>
             </div>
-            <p className="mt-0.5 text-xs text-neutral-400 font-sans">
+            <p className="text-xs text-neutral-400 font-sans leading-tight">
               Trailing 14-day uptime compliance &amp; probe verification
             </p>
           </div>
 
-          {/* Three Dots Dropdown Menu Only */}
-          <div className="self-start sm:self-auto">
+          {/* Three Dots Dropdown Menu Anchored Top-Right in Same Row */}
+          <div className="shrink-0 pt-0.5">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <button
