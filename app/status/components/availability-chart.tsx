@@ -11,6 +11,17 @@ import {
   ResponsiveContainer,
   ReferenceLine,
 } from "recharts";
+import { MoreHorizontalIcon, Tick02Icon, Copy01Icon } from "@hugeicons/core-free-icons";
+import { Icon } from "@/components/ui/icon";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+} from "@/components/ui/dropdown-menu";
+import { cn } from "@/lib/utils";
 import type { DailyRollup } from "@/workers/prime-monitor/src/types/monitoring";
 
 interface AvailabilityChartProps {
@@ -20,10 +31,21 @@ interface AvailabilityChartProps {
 export function AvailabilityChart({ rollups }: AvailabilityChartProps) {
   const [viewMode, setViewMode] = useState<"timeline" | "curve">("timeline");
   const [mounted, setMounted] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  const handleCopyJson = () => {
+    try {
+      navigator.clipboard.writeText(JSON.stringify(rollups, null, 2));
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (e) {
+      console.error("Failed to copy rollups JSON:", e);
+    }
+  };
 
   // Build a complete 14-day rolling window
   const days = useMemo(() => {
@@ -89,7 +111,7 @@ export function AvailabilityChart({ rollups }: AvailabilityChartProps) {
       }
     }
     return result;
-  }, [rollups]);
+  }, [rollups, mounted]);
 
   // Default to selecting today (or the latest recorded day)
   const [selectedDayIndex, setSelectedDayIndex] = useState<number>(days.length - 1);
@@ -108,83 +130,141 @@ export function AvailabilityChart({ rollups }: AvailabilityChartProps) {
   }, [days]);
 
   return (
-    <div className="rounded-xl border border-neutral-800/80 bg-neutral-950/70 p-5 sm:p-6 backdrop-blur-md shadow-lg flex flex-col justify-between">
+    <div className="rounded-lg border border-neutral-800/80 bg-[#0A0A0A]/95 p-5 sm:p-6 backdrop-blur-md shadow-lg flex flex-col justify-between">
       {/* Header & Controls */}
       <div>
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <div className="flex flex-wrap items-center gap-2.5">
-              <h3 className="text-sm sm:text-base font-medium text-white">
+              <h3 className="text-sm sm:text-base font-semibold text-white">
                 Daily Availability &amp; SLO
               </h3>
-              <div className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider text-emerald-400">
+              <div className="inline-flex items-center gap-1.5 rounded border border-emerald-500/25 bg-emerald-500/10 px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider text-emerald-400 font-semibold">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
                 99.9% Target Met
               </div>
             </div>
-            <p className="mt-0.5 text-xs text-neutral-400">
+            <p className="mt-0.5 text-xs text-neutral-400 font-sans">
               Trailing 14-day uptime compliance &amp; probe verification
             </p>
           </div>
 
-          {/* View Mode Toggle */}
-          <div className="inline-flex rounded-lg border border-neutral-800 bg-neutral-900/60 p-0.5 text-xs self-start sm:self-auto font-mono">
-            <button
-              type="button"
-              onClick={() => setViewMode("timeline")}
-              className={`rounded-md px-2.5 py-1 text-xs transition-colors ${
-                viewMode === "timeline"
-                  ? "bg-neutral-800 font-medium text-white shadow-sm"
-                  : "text-neutral-400 hover:text-white"
-              }`}
-            >
-              14-Day Matrix
-            </button>
-            <button
-              type="button"
-              onClick={() => setViewMode("curve")}
-              className={`rounded-md px-2.5 py-1 text-xs transition-colors ${
-                viewMode === "curve"
-                  ? "bg-neutral-800 font-medium text-white shadow-sm"
-                  : "text-neutral-400 hover:text-white"
-              }`}
-            >
-              SLO Curve
-            </button>
+          {/* Precision Controls: Segmented Filter & Three-Dots Menu */}
+          <div className="flex items-center gap-2 self-start sm:self-auto">
+            {/* View Mode Toggle - Decreased border radius */}
+            <div className="inline-flex rounded border border-neutral-800 bg-neutral-900/80 p-0.5 text-xs font-mono shadow-xs">
+              <button
+                type="button"
+                onClick={() => setViewMode("timeline")}
+                className={`rounded-sm px-2.5 py-1 text-xs transition-colors ${
+                  viewMode === "timeline"
+                    ? "bg-neutral-800 font-semibold text-white shadow-xs"
+                    : "text-neutral-400 hover:text-white"
+                }`}
+              >
+                14-Day Matrix
+              </button>
+              <button
+                type="button"
+                onClick={() => setViewMode("curve")}
+                className={`rounded-sm px-2.5 py-1 text-xs transition-colors ${
+                  viewMode === "curve"
+                    ? "bg-neutral-800 font-semibold text-white shadow-xs"
+                    : "text-neutral-400 hover:text-white"
+                }`}
+              >
+                SLO Curve
+              </button>
+            </div>
+
+            {/* Three Dots Dropdown Menu */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button
+                  type="button"
+                  className="inline-flex h-7 w-7 items-center justify-center rounded border border-neutral-800 bg-neutral-900/80 text-neutral-400 hover:border-neutral-700 hover:text-white transition-colors"
+                  aria-label="Chart display options"
+                >
+                  <Icon icon={MoreHorizontalIcon} size={15} />
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-52 rounded border border-neutral-800 bg-[#0C0C0C] p-1 text-xs font-mono text-neutral-200 shadow-2xl">
+                <DropdownMenuLabel className="px-2 py-1 text-[10px] uppercase tracking-wider text-neutral-500 font-bold">
+                  View Mode
+                </DropdownMenuLabel>
+                <DropdownMenuItem
+                  onClick={() => setViewMode("timeline")}
+                  className={cn(
+                    "flex cursor-pointer items-center justify-between rounded-sm px-2 py-1.5 text-xs focus:bg-white/[0.08] focus:text-white",
+                    viewMode === "timeline" ? "bg-neutral-800 font-semibold text-white" : "text-neutral-400"
+                  )}
+                >
+                  <span>14-Day Matrix</span>
+                  {viewMode === "timeline" && <Icon icon={Tick02Icon} size={13} className="text-emerald-400" />}
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={() => setViewMode("curve")}
+                  className={cn(
+                    "flex cursor-pointer items-center justify-between rounded-sm px-2 py-1.5 text-xs focus:bg-white/[0.08] focus:text-white",
+                    viewMode === "curve" ? "bg-neutral-800 font-semibold text-white" : "text-neutral-400"
+                  )}
+                >
+                  <span>SLO Curve</span>
+                  {viewMode === "curve" && <Icon icon={Tick02Icon} size={13} className="text-emerald-400" />}
+                </DropdownMenuItem>
+                <DropdownMenuSeparator className="my-1 bg-neutral-800" />
+                <DropdownMenuLabel className="px-2 py-1 text-[10px] uppercase tracking-wider text-neutral-500 font-bold">
+                  Telemetry Actions
+                </DropdownMenuLabel>
+                <DropdownMenuItem
+                  onClick={handleCopyJson}
+                  className="flex cursor-pointer items-center justify-between rounded-sm px-2 py-1.5 text-xs focus:bg-white/[0.08] focus:text-white text-neutral-300"
+                >
+                  <span>{copied ? "Copied Telemetry JSON!" : "Copy Telemetry JSON"}</span>
+                  <Icon icon={copied ? Tick02Icon : Copy01Icon} size={13} className={copied ? "text-emerald-400" : "text-neutral-500"} />
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={() => setSelectedDayIndex(days.length - 1)}
+                  className="flex cursor-pointer items-center justify-between rounded-sm px-2 py-1.5 text-xs focus:bg-white/[0.08] focus:text-white text-neutral-300"
+                >
+                  <span>Focus Latest Day</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
 
         {/* Telemetry Metric Cards */}
         <div className="mt-4 grid grid-cols-4 gap-2 border-t border-neutral-900 pt-3 text-left">
-          <div className="rounded-md border border-neutral-900 bg-neutral-900/30 p-2">
-            <span className="block text-[9px] font-mono uppercase tracking-wider text-neutral-400">
+          <div className="rounded border border-neutral-800/80 bg-neutral-900/40 p-2.5">
+            <span className="block text-[9px] font-mono uppercase tracking-wider text-neutral-400 font-medium">
               14d Uptime
             </span>
-            <span className="font-mono text-sm font-semibold text-emerald-400">
+            <span className="font-mono text-sm font-bold text-emerald-400">
               {overallUptime}%
             </span>
           </div>
-          <div className="rounded-md border border-neutral-900 bg-neutral-900/30 p-2">
-            <span className="block text-[9px] font-mono uppercase tracking-wider text-neutral-400">
+          <div className="rounded border border-neutral-800/80 bg-neutral-900/40 p-2.5">
+            <span className="block text-[9px] font-mono uppercase tracking-wider text-neutral-400 font-medium">
               SLA Target
             </span>
-            <span className="font-mono text-sm font-semibold text-neutral-300">
+            <span className="font-mono text-sm font-bold text-neutral-200">
               99.90%
             </span>
           </div>
-          <div className="rounded-md border border-neutral-900 bg-neutral-900/30 p-2">
-            <span className="block text-[9px] font-mono uppercase tracking-wider text-neutral-400">
+          <div className="rounded border border-neutral-800/80 bg-neutral-900/40 p-2.5">
+            <span className="block text-[9px] font-mono uppercase tracking-wider text-neutral-400 font-medium">
               Error Budget
             </span>
-            <span className="font-mono text-sm font-semibold text-emerald-400">
+            <span className="font-mono text-sm font-bold text-emerald-400">
               100%
             </span>
           </div>
-          <div className="rounded-md border border-neutral-900 bg-neutral-900/30 p-2">
-            <span className="block text-[9px] font-mono uppercase tracking-wider text-neutral-400">
+          <div className="rounded border border-neutral-800/80 bg-neutral-900/40 p-2.5">
+            <span className="block text-[9px] font-mono uppercase tracking-wider text-neutral-400 font-medium">
               Recorded Probes
             </span>
-            <span className="font-mono text-sm font-semibold text-neutral-300">
+            <span className="font-mono text-sm font-bold text-neutral-200">
               {totalProbesCount > 0 ? `${totalProbesCount}` : "Active"}
             </span>
           </div>
@@ -194,22 +274,22 @@ export function AvailabilityChart({ rollups }: AvailabilityChartProps) {
       {/* Main Visualizer Area */}
       {viewMode === "timeline" ? (
         <div className="mt-4 flex flex-col justify-between">
-          {/* 14-Day Uptime Matrix Strip */}
+          {/* 14-Day Uptime Matrix Strip — Developer Telemetry Histogram */}
           <div className="grid grid-cols-[repeat(14,minmax(0,1fr))] gap-1 sm:gap-1.5 py-1">
             {days.map((day, idx) => {
               const isSelected = selectedDayIndex === idx;
-              let barBg = "bg-emerald-500/90";
-              let barBorder = "border-emerald-500/30";
+              let barBg = "bg-emerald-500";
+              let barBorder = "border-emerald-400/40";
 
               if (day.isPreMonitoring) {
-                barBg = "bg-emerald-500/15";
-                barBorder = "border-emerald-500/25 border-dashed";
+                barBg = "bg-neutral-800/60";
+                barBorder = "border-dashed border-neutral-700/60";
               } else if (day.uptime < 95) {
-                barBg = "bg-red-500/90";
-                barBorder = "border-red-500/30";
+                barBg = "bg-red-500";
+                barBorder = "border-red-400/50";
               } else if (day.uptime < 100) {
-                barBg = "bg-amber-500/90";
-                barBorder = "border-amber-500/30";
+                barBg = "bg-amber-500";
+                barBorder = "border-amber-400/50";
               }
 
               return (
@@ -217,29 +297,29 @@ export function AvailabilityChart({ rollups }: AvailabilityChartProps) {
                   key={day.date}
                   onClick={() => setSelectedDayIndex(idx)}
                   onMouseEnter={() => setSelectedDayIndex(idx)}
-                  className={`group relative flex flex-col items-center gap-1.5 cursor-pointer rounded-lg p-1 transition-all ${
+                  className={`group relative flex flex-col items-center gap-1.5 cursor-pointer rounded p-1 transition-all ${
                     isSelected
-                      ? "bg-neutral-900/80 ring-1 ring-white/30"
-                      : "hover:bg-neutral-900/40"
+                      ? "bg-neutral-900 border border-neutral-600/80 shadow-md"
+                      : "hover:bg-neutral-900/60 border border-transparent"
                   }`}
                 >
                   {/* Day Label */}
-                  <span className="text-[9px] font-mono text-neutral-400 uppercase tracking-tight">
+                  <span className={`text-[9px] font-mono uppercase tracking-tight ${isSelected ? "text-white font-bold" : "text-neutral-400"}`}>
                     {day.dayName.slice(0, 3)}
                   </span>
 
-                  {/* Vertical Uptime Pill Bar */}
-                  <div className="relative h-16 w-full max-w-[20px] rounded-[3px] bg-neutral-900/80 overflow-hidden flex flex-col justify-end p-[1px]">
+                  {/* Vertical Uptime Slot Bar — Precision Rectangular Telemetry */}
+                  <div className="relative h-16 w-full max-w-[18px] bg-neutral-950 border border-neutral-800 flex flex-col justify-end p-[1px]">
                     <div
-                      className={`w-full rounded-[2px] border transition-all ${barBg} ${barBorder}`}
+                      className={`w-full border-t transition-all ${barBg} ${barBorder}`}
                       style={{
-                        height: `${Math.max(15, Math.min(100, day.uptime))}%`,
+                        height: `${Math.max(12, Math.min(100, day.uptime))}%`,
                       }}
                     />
                   </div>
 
                   {/* Date Subtitle */}
-                  <span className="text-[8px] font-mono text-neutral-500">
+                  <span className={`text-[8px] font-mono ${isSelected ? "text-neutral-300 font-semibold" : "text-neutral-400"}`}>
                     {day.shortDate}
                   </span>
                 </div>
@@ -249,51 +329,61 @@ export function AvailabilityChart({ rollups }: AvailabilityChartProps) {
 
           {/* Interactive Day Telemetry Inspector */}
           {selectedDay && (
-            <div className="mt-3.5 rounded-lg border border-neutral-800/80 bg-neutral-900/40 p-3 text-xs font-mono">
-              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-neutral-800/50 pb-2">
+            <div className="mt-3.5 rounded border border-neutral-800/90 bg-[#080808] p-3 text-xs font-mono shadow-inner">
+              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-neutral-800/80 pb-2">
                 <div className="flex items-center gap-2">
-                  <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                  <span className="font-semibold text-white">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                  </span>
+                  <span className="font-bold text-white">
                     {selectedDay.date}
                   </span>
                   {selectedDay.dayName === "Today" && (
                     <span className="rounded bg-emerald-500/10 px-1.5 py-0.2 text-[9px] uppercase font-bold text-emerald-400 border border-emerald-500/20">
-                      CURRENT
+                      Current
+                    </span>
+                  )}
+                  {selectedDay.isPreMonitoring && (
+                    <span className="rounded bg-neutral-800 px-1.5 py-0.2 text-[9px] uppercase font-medium text-neutral-400 border border-neutral-700">
+                      Baseline Window
                     </span>
                   )}
                 </div>
-                <div className="text-emerald-400 font-medium">
-                  {selectedDay.uptime.toFixed(1)}% Uptime
+                <div className="text-right">
+                  <span className="font-bold text-emerald-400 text-sm">
+                    {selectedDay.uptime.toFixed(1)}% Uptime
+                  </span>
                 </div>
               </div>
 
-              <div className="mt-2 flex flex-wrap items-center justify-between gap-3 text-[11px] text-neutral-400">
+              <div className="mt-2 grid grid-cols-2 sm:grid-cols-3 gap-2 text-[11px] text-neutral-400">
                 {selectedDay.hasData ? (
                   <>
                     <div>
                       Checks:{" "}
-                      <strong className="text-neutral-200">
+                      <strong className="text-white">
                         {selectedDay.successfulChecks} / {selectedDay.checks}
                       </strong>{" "}
                       passed
                     </div>
                     <div>
                       RTT:{" "}
-                      <strong className="text-neutral-200">
+                      <strong className="text-white">
                         {selectedDay.avgLatency}ms
                       </strong>{" "}
-                      (P95: {selectedDay.p95Latency}ms)
+                      <span className="text-neutral-400">(P95: {selectedDay.p95Latency}ms)</span>
                     </div>
                     <div>
                       Status:{" "}
-                      <strong className="text-emerald-400 capitalize">
+                      <strong className="text-emerald-400 uppercase font-semibold">
                         {selectedDay.status.replace("_", " ")}
                       </strong>
                     </div>
                   </>
                 ) : (
-                  <div className="w-full text-center text-neutral-400 py-0.5">
-                    Pre-telemetry interval · Established 100% SLA baseline · Zero recorded incidents
+                  <div className="col-span-full text-center text-neutral-400 py-0.5">
+                    Pre-telemetry interval &middot; Established 100% SLA baseline &middot; Zero recorded incidents
                   </div>
                 )}
               </div>
@@ -355,7 +445,7 @@ export function AvailabilityChart({ rollups }: AvailabilityChartProps) {
                   if (active && payload && payload.length) {
                     const data = payload[0].payload;
                     return (
-                      <div className="rounded-lg border border-neutral-800 bg-[#080808]/95 p-3 shadow-2xl backdrop-blur-md font-mono">
+                      <div className="rounded border border-neutral-800 bg-[#080808]/95 p-3 shadow-2xl backdrop-blur-md font-mono">
                         <div className="text-[10px] text-neutral-400">
                           {data.date}
                         </div>

@@ -11,6 +11,17 @@ import {
   ResponsiveContainer,
   ReferenceLine,
 } from "recharts";
+import { MoreHorizontalIcon, Tick02Icon, Copy01Icon } from "@hugeicons/core-free-icons";
+import { Icon } from "@/components/ui/icon";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+} from "@/components/ui/dropdown-menu";
+import { cn } from "@/lib/utils";
 import type { HealthObservation } from "@/workers/prime-monitor/src/types/monitoring";
 
 interface LatencyChartProps {
@@ -19,6 +30,17 @@ interface LatencyChartProps {
 
 export function LatencyChart({ observations }: LatencyChartProps) {
   const [range, setRange] = useState<"recent" | "24h">("recent");
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyJson = () => {
+    try {
+      navigator.clipboard.writeText(JSON.stringify(observations, null, 2));
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (e) {
+      console.error("Failed to copy observations JSON:", e);
+    }
+  };
 
   const chartData = useMemo(() => {
     if (!observations || observations.length === 0) return [];
@@ -87,88 +109,140 @@ export function LatencyChart({ observations }: LatencyChartProps) {
   }, [stats]);
 
   return (
-    <div className="rounded-xl border border-neutral-800/80 bg-neutral-950/70 p-5 sm:p-6 backdrop-blur-md shadow-lg flex flex-col justify-between">
+    <div className="rounded-lg border border-neutral-800/80 bg-[#0A0A0A]/95 p-5 sm:p-6 backdrop-blur-md shadow-lg flex flex-col justify-between">
       {/* Header & Telemetry Metric Bar */}
       <div>
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <div className="flex flex-wrap items-center gap-2.5">
-              <h3 className="text-sm sm:text-base font-medium text-white">
+              <h3 className="text-sm sm:text-base font-semibold text-white">
                 Backend Probe Latency
               </h3>
               <div
-                className={`inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider ${statusConfig.badgeClass}`}
+                className={`inline-flex items-center gap-1.5 rounded border px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider ${statusConfig.badgeClass} font-semibold`}
               >
                 <span className={`h-1.5 w-1.5 rounded-full ${statusConfig.dotClass}`} />
                 {statusConfig.label}
               </div>
             </div>
-            <p className="mt-0.5 text-xs text-neutral-400">
+            <p className="mt-0.5 text-xs text-neutral-400 font-sans">
               Edge-to-database round-trip time across Cloudflare network
             </p>
           </div>
 
-          {/* Range Control */}
-          <div className="inline-flex rounded-lg border border-neutral-800 bg-neutral-900/60 p-0.5 text-xs self-start sm:self-auto font-mono">
-            <button
-              type="button"
-              onClick={() => setRange("recent")}
-              className={`rounded-md px-2.5 py-1 text-xs transition-colors ${
-                range === "recent"
-                  ? "bg-neutral-800 font-medium text-white shadow-sm"
-                  : "text-neutral-400 hover:text-white"
-              }`}
-            >
-              Last 30 Checks
-            </button>
-            <button
-              type="button"
-              onClick={() => setRange("24h")}
-              className={`rounded-md px-2.5 py-1 text-xs transition-colors ${
-                range === "24h"
-                  ? "bg-neutral-800 font-medium text-white shadow-sm"
-                  : "text-neutral-400 hover:text-white"
-              }`}
-            >
-              Full Window
-            </button>
+          {/* Precision Controls: Range Filter & Three Dots Menu */}
+          <div className="flex items-center gap-2 self-start sm:self-auto">
+            {/* Range Control - Decreased border radius */}
+            <div className="inline-flex rounded border border-neutral-800 bg-neutral-900/80 p-0.5 text-xs font-mono shadow-xs">
+              <button
+                type="button"
+                onClick={() => setRange("recent")}
+                className={`rounded-sm px-2.5 py-1 text-xs transition-colors ${
+                  range === "recent"
+                    ? "bg-neutral-800 font-semibold text-white shadow-xs"
+                    : "text-neutral-400 hover:text-white"
+                }`}
+              >
+                Last 30 Checks
+              </button>
+              <button
+                type="button"
+                onClick={() => setRange("24h")}
+                className={`rounded-sm px-2.5 py-1 text-xs transition-colors ${
+                  range === "24h"
+                    ? "bg-neutral-800 font-semibold text-white shadow-xs"
+                    : "text-neutral-400 hover:text-white"
+                }`}
+              >
+                Full Window
+              </button>
+            </div>
+
+            {/* Three Dots Dropdown Menu */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button
+                  type="button"
+                  className="inline-flex h-7 w-7 items-center justify-center rounded border border-neutral-800 bg-neutral-900/80 text-neutral-400 hover:border-neutral-700 hover:text-white transition-colors"
+                  aria-label="Chart display options"
+                >
+                  <Icon icon={MoreHorizontalIcon} size={15} />
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-52 rounded border border-neutral-800 bg-[#0C0C0C] p-1 text-xs font-mono text-neutral-200 shadow-2xl">
+                <DropdownMenuLabel className="px-2 py-1 text-[10px] uppercase tracking-wider text-neutral-500 font-bold">
+                  Inspection Range
+                </DropdownMenuLabel>
+                <DropdownMenuItem
+                  onClick={() => setRange("recent")}
+                  className={cn(
+                    "flex cursor-pointer items-center justify-between rounded-sm px-2 py-1.5 text-xs focus:bg-white/[0.08] focus:text-white",
+                    range === "recent" ? "bg-neutral-800 font-semibold text-white" : "text-neutral-400"
+                  )}
+                >
+                  <span>Last 30 Checks</span>
+                  {range === "recent" && <Icon icon={Tick02Icon} size={13} className="text-emerald-400" />}
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={() => setRange("24h")}
+                  className={cn(
+                    "flex cursor-pointer items-center justify-between rounded-sm px-2 py-1.5 text-xs focus:bg-white/[0.08] focus:text-white",
+                    range === "24h" ? "bg-neutral-800 font-semibold text-white" : "text-neutral-400"
+                  )}
+                >
+                  <span>Full Window (100)</span>
+                  {range === "24h" && <Icon icon={Tick02Icon} size={13} className="text-emerald-400" />}
+                </DropdownMenuItem>
+                <DropdownMenuSeparator className="my-1 bg-neutral-800" />
+                <DropdownMenuLabel className="px-2 py-1 text-[10px] uppercase tracking-wider text-neutral-500 font-bold">
+                  Telemetry Actions
+                </DropdownMenuLabel>
+                <DropdownMenuItem
+                  onClick={handleCopyJson}
+                  className="flex cursor-pointer items-center justify-between rounded-sm px-2 py-1.5 text-xs focus:bg-white/[0.08] focus:text-white text-neutral-300"
+                >
+                  <span>{copied ? "Copied Telemetry JSON!" : "Copy Telemetry JSON"}</span>
+                  <Icon icon={copied ? Tick02Icon : Copy01Icon} size={13} className={copied ? "text-emerald-400" : "text-neutral-500"} />
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
 
         {/* Telemetry Metric Cards */}
         <div className="mt-4 grid grid-cols-4 gap-2 border-t border-neutral-900 pt-3 text-left">
-          <div className="rounded-md border border-neutral-900 bg-neutral-900/30 p-2">
-            <span className="block text-[9px] font-mono uppercase tracking-wider text-neutral-400">
+          <div className="rounded border border-neutral-800/80 bg-neutral-900/40 p-2.5">
+            <span className="block text-[9px] font-mono uppercase tracking-wider text-neutral-400 font-medium">
               Current
             </span>
-            <span className="font-mono text-sm font-semibold text-white">
+            <span className="font-mono text-sm font-bold text-white">
               {stats.current}
               <span className="text-[10px] text-neutral-400 font-normal ml-0.5">ms</span>
             </span>
           </div>
-          <div className="rounded-md border border-neutral-900 bg-neutral-900/30 p-2">
-            <span className="block text-[9px] font-mono uppercase tracking-wider text-neutral-400">
+          <div className="rounded border border-neutral-800/80 bg-neutral-900/40 p-2.5">
+            <span className="block text-[9px] font-mono uppercase tracking-wider text-neutral-400 font-medium">
               Mean
             </span>
-            <span className="font-mono text-sm font-semibold text-neutral-200">
+            <span className="font-mono text-sm font-bold text-neutral-200">
               {stats.avg}
               <span className="text-[10px] text-neutral-400 font-normal ml-0.5">ms</span>
             </span>
           </div>
-          <div className="rounded-md border border-neutral-900 bg-neutral-900/30 p-2">
-            <span className="block text-[9px] font-mono uppercase tracking-wider text-neutral-400">
+          <div className="rounded border border-neutral-800/80 bg-neutral-900/40 p-2.5">
+            <span className="block text-[9px] font-mono uppercase tracking-wider text-neutral-400 font-medium">
               P95 Peak
             </span>
-            <span className="font-mono text-sm font-semibold text-neutral-200">
+            <span className="font-mono text-sm font-bold text-neutral-200">
               {stats.p95}
               <span className="text-[10px] text-neutral-400 font-normal ml-0.5">ms</span>
             </span>
           </div>
-          <div className="rounded-md border border-neutral-900 bg-neutral-900/30 p-2">
-            <span className="block text-[9px] font-mono uppercase tracking-wider text-neutral-400">
+          <div className="rounded border border-neutral-800/80 bg-neutral-900/40 p-2.5">
+            <span className="block text-[9px] font-mono uppercase tracking-wider text-neutral-400 font-medium">
               Max Peak
             </span>
-            <span className="font-mono text-sm font-semibold text-neutral-300">
+            <span className="font-mono text-sm font-bold text-neutral-300">
               {stats.max}
               <span className="text-[10px] text-neutral-400 font-normal ml-0.5">ms</span>
             </span>
@@ -231,13 +305,13 @@ export function LatencyChart({ observations }: LatencyChartProps) {
                     const data = payload[0].payload;
                     const isSpike = data.latency > 800;
                     return (
-                      <div className="rounded-lg border border-neutral-800 bg-[#080808]/95 p-3 shadow-2xl backdrop-blur-md">
+                      <div className="rounded border border-neutral-800 bg-[#080808]/95 p-3 shadow-2xl backdrop-blur-md font-mono">
                         <div className="flex items-center justify-between gap-4">
-                          <span className="font-mono text-[10px] text-neutral-400">
+                          <span className="text-[10px] text-neutral-400">
                             {data.time}
                           </span>
                           <span
-                            className={`inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[9px] font-mono uppercase tracking-wider ${
+                            className={`inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[9px] uppercase tracking-wider ${
                               data.status === "up" && !isSpike
                                 ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
                                 : "bg-amber-500/10 text-amber-400 border border-amber-500/20"
@@ -247,12 +321,12 @@ export function LatencyChart({ observations }: LatencyChartProps) {
                           </span>
                         </div>
                         <div className="mt-1.5 flex items-baseline gap-1.5">
-                          <span className="font-mono text-base font-bold text-white">
+                          <span className="text-base font-bold text-white">
                             {data.latency}
                           </span>
-                          <span className="font-mono text-xs text-neutral-400">ms RTT</span>
+                          <span className="text-xs text-neutral-400">ms RTT</span>
                         </div>
-                        <div className="mt-1 text-[10px] text-neutral-400 font-mono">
+                        <div className="mt-1 text-[10px] text-neutral-400">
                           {data.latency <= 300
                             ? "✓ Within 300ms target"
                             : `+${data.latency - 300}ms above target`}
@@ -280,7 +354,7 @@ export function LatencyChart({ observations }: LatencyChartProps) {
             </AreaChart>
           </ResponsiveContainer>
         ) : (
-          <div className="flex h-full items-center justify-center rounded-lg border border-dashed border-neutral-800/80 text-xs text-neutral-400 font-mono">
+          <div className="flex h-full items-center justify-center rounded border border-dashed border-neutral-800/80 text-xs text-neutral-400 font-mono">
             Awaiting telemetry observations from Cloudflare edge...
           </div>
         )}

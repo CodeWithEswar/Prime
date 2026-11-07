@@ -75,6 +75,17 @@ describe("Status Page Charts (Developer-Grade Architecture)", () => {
       fireEvent.click(fullWindowBtn);
       expect(fullWindowBtn).toHaveClass("bg-neutral-800");
     });
+
+    it("renders developer three-dots dropdown options menu with decreased border radius", () => {
+      render(<LatencyChart observations={mockObservations} />);
+      const optionsBtn = screen.getByRole("button", { name: /chart display options/i });
+      expect(optionsBtn).toBeInTheDocument();
+      expect(optionsBtn).toHaveAttribute("aria-haspopup", "menu");
+      expect(optionsBtn).toHaveClass("rounded");
+
+      const recentBtn = screen.getByRole("button", { name: "Last 30 Checks" });
+      expect(recentBtn).toHaveClass("rounded-sm");
+    });
   });
 
   describe("AvailabilityChart", () => {
@@ -100,6 +111,17 @@ describe("Status Page Charts (Developer-Grade Architecture)", () => {
       const matrixBtn = screen.getByRole("button", { name: "14-Day Matrix" });
       fireEvent.click(matrixBtn);
       expect(matrixBtn).toHaveClass("bg-neutral-800");
+    });
+
+    it("renders developer three-dots dropdown options menu with decreased border radius", () => {
+      render(<AvailabilityChart rollups={mockRollups} />);
+      const optionsBtn = screen.getByRole("button", { name: /chart display options/i });
+      expect(optionsBtn).toBeInTheDocument();
+      expect(optionsBtn).toHaveAttribute("aria-haspopup", "menu");
+      expect(optionsBtn).toHaveClass("rounded");
+
+      const matrixBtn = screen.getByRole("button", { name: "14-Day Matrix" });
+      expect(matrixBtn).toHaveClass("rounded-sm");
     });
   });
 });

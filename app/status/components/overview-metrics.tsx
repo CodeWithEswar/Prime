@@ -57,15 +57,15 @@ export function OverviewMetrics({ snapshot }: OverviewMetricsProps) {
       {metrics.map((metric) => (
         <div
           key={metric.label}
-          className="rounded-xl border border-neutral-800/80 bg-neutral-950/60 p-3.5 sm:p-4 transition-all hover:border-neutral-700/80 hover:bg-neutral-900/40 shadow-sm"
+          className="rounded-lg border border-neutral-800/80 bg-[#0A0A0A]/90 p-3.5 sm:p-4 transition-all hover:border-neutral-700 hover:bg-neutral-900/40 shadow-sm relative overflow-hidden"
         >
-          <div className="text-[10px] sm:text-[11px] font-medium uppercase tracking-wider text-neutral-400">
+          <div className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-neutral-400 font-medium">
             {metric.label}
           </div>
-          <div className={`mt-1.5 font-mono text-lg sm:text-xl tracking-tight ${metric.statusColor}`}>
+          <div className={`mt-2 font-mono text-lg sm:text-xl font-bold tracking-tight ${metric.statusColor}`}>
             {metric.value}
           </div>
-          <div className="mt-1 text-[10px] sm:text-[11px] text-neutral-500 truncate">
+          <div className="mt-1 text-[10px] sm:text-[11px] text-neutral-400 font-sans truncate">
             {metric.sub}
           </div>
         </div>

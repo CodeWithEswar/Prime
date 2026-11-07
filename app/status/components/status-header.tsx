@@ -83,24 +83,33 @@ export function StatusHeader({ snapshot, isLoading, onRefresh }: StatusHeaderPro
 
   return (
     <header className="w-full space-y-6 pt-2 sm:pt-4">
-      {/* Top Nav Bar — Fixed responsive height and clean mobile wrap */}
+      {/* Top Nav Bar — Precision architectural header with developer metadata */}
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-neutral-800/80 pb-4">
-        <Link
-          href="/"
-          className="group inline-flex items-center gap-2.5 transition-opacity hover:opacity-90 max-w-[200px] sm:max-w-none"
-        >
-          <PrimeLogo size="md" variant="white" />
-          <span className="text-[11px] font-mono tracking-widest text-neutral-400 border-l border-neutral-800 pl-2.5 uppercase">
-            Status
-          </span>
-        </Link>
-
         <div className="flex items-center gap-3">
+          <Link
+            href="/"
+            className="group inline-flex items-center gap-2.5 transition-opacity hover:opacity-90 max-w-[200px] sm:max-w-none"
+          >
+            <PrimeLogo size="md" variant="white" />
+          </Link>
+          <span className="hidden sm:inline-flex items-center gap-1.5 rounded border border-neutral-800 bg-neutral-900/60 px-2 py-0.5 text-[10px] font-mono tracking-widest text-neutral-300 uppercase">
+            Status &amp; Telemetry
+          </span>
+          <div className="hidden md:inline-flex items-center gap-1.5 rounded border border-emerald-500/20 bg-emerald-500/5 px-2 py-0.5 text-[10px] font-mono text-emerald-400">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
+            </span>
+            <span>EDGE TELEMETRY LIVE</span>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2.5">
           <button
             type="button"
             onClick={onRefresh}
             disabled={isLoading}
-            className="inline-flex items-center gap-1.5 rounded-md border border-neutral-800 bg-neutral-900/60 px-2.5 py-1 text-xs text-neutral-300 transition-colors hover:border-neutral-700 hover:text-white disabled:opacity-50"
+            className="inline-flex items-center gap-1.5 rounded border border-neutral-800 bg-neutral-900/80 px-2.5 py-1 text-xs font-mono text-neutral-300 transition-colors hover:border-neutral-700 hover:text-white disabled:opacity-50"
             title="Refresh status snapshot"
           >
             <Icon
@@ -113,7 +122,7 @@ export function StatusHeader({ snapshot, isLoading, onRefresh }: StatusHeaderPro
 
           <Link
             href="/"
-            className="inline-flex items-center gap-1 text-xs text-neutral-400 transition-colors hover:text-white"
+            className="inline-flex items-center gap-1.5 rounded border border-neutral-800/80 bg-neutral-900/40 px-2.5 py-1 text-xs text-neutral-400 transition-colors hover:border-neutral-700 hover:text-white"
           >
             <Icon icon={ArrowLeft01Icon} size={14} />
             <span className="hidden xs:inline">Back to PRIME</span>
@@ -121,29 +130,32 @@ export function StatusHeader({ snapshot, isLoading, onRefresh }: StatusHeaderPro
         </div>
       </div>
 
-      {/* Main Status Headline Banner */}
+      {/* Main Status Headline Banner — Architectural Obsidian Container */}
       <div
-        className={`relative overflow-hidden rounded-xl border bg-gradient-to-br p-5 sm:p-7 ${statusConfig.accentBorder} ${statusConfig.glowBg} backdrop-blur-xl shadow-2xl`}
+        className={`relative overflow-hidden rounded-lg border bg-gradient-to-br p-5 sm:p-6 ${statusConfig.accentBorder} ${statusConfig.glowBg} backdrop-blur-xl shadow-2xl`}
       >
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-1.5 min-w-0">
             <div className="flex items-center gap-2.5">
-              <span className={`h-2.5 w-2.5 shrink-0 rounded-full ${statusConfig.dotClass}`} />
-              <h1 className="text-lg sm:text-xl md:text-2xl font-semibold tracking-tight text-white truncate">
+              <span className="relative flex h-3 w-3 shrink-0 items-center justify-center">
+                <span className={`absolute inline-flex h-full w-full animate-ping rounded-full opacity-75 ${statusConfig.dotClass.replace("animate-pulse", "")}`} />
+                <span className={`relative inline-flex h-2 w-2 rounded-full ${statusConfig.dotClass.replace("animate-pulse", "")}`} />
+              </span>
+              <h1 className="text-lg sm:text-xl md:text-2xl font-bold tracking-tight text-white truncate">
                 {statusConfig.label}
               </h1>
             </div>
-            <p className="text-xs sm:text-sm text-neutral-400">
+            <p className="text-xs sm:text-sm text-neutral-400 font-sans">
               Automated 5-minute health probes &amp; live edge latency tracking.
             </p>
           </div>
 
-          <div className="flex shrink-0 items-center gap-2 rounded-lg border border-neutral-800/80 bg-black/60 px-3 py-2 text-xs">
-            <span className="text-neutral-500 uppercase tracking-wider text-[10px]">Verified:</span>
-            <span className="font-mono text-neutral-200">{formattedCheckedTime}</span>
+          <div className="flex shrink-0 items-center gap-2.5 rounded border border-neutral-800/90 bg-black/70 px-3 py-2 text-xs font-mono shadow-inner">
+            <span className="text-neutral-500 uppercase tracking-wider text-[10px] font-semibold">Verified:</span>
+            <span className="text-neutral-200 font-bold">{formattedCheckedTime}</span>
             {!isFresh && (
-              <span className="text-[10px] text-amber-400 font-medium ml-1">
-                (Delayed)
+              <span className="rounded bg-amber-500/10 border border-amber-500/20 px-1 py-0.2 text-[9px] text-amber-400 font-bold uppercase ml-1">
+                Delayed
               </span>
             )}
           </div>
