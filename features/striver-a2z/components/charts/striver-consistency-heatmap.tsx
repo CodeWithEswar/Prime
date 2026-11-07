@@ -201,7 +201,7 @@ export function StriverConsistencyHeatmap({ data }: StriverConsistencyHeatmapPro
         {/* Expanded Heatmap Calendar Grid with Month Headers */}
         <TooltipProvider delayDuration={100}>
           <div className="overflow-x-auto pb-2 pt-1 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
-            <div className="inline-flex flex-col gap-1.5 select-none min-w-max">
+            <div className="w-fit min-w-max flex flex-col gap-1.5 select-none md:mx-auto">
               {/* Month Labels Row */}
               <div className="flex items-center text-[10px] font-mono text-neutral-400 h-4 mb-0.5">
                 {/* Spacer matching day-of-week label width */}
