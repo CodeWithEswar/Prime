@@ -29,9 +29,9 @@
 .ai-message-actions .prime-response-secondary {
   gap: 8px;
 }
-.ai-latest-button[data-icon-only="true"] {
-  margin: 0 auto 10px;
-  border-radius: 6px !important;
+.ai-latest-button[data-icon-only="true"],
+.ai-latest-button {
+  border-radius: 9999px !important;
 }
 .prime-code-actions .ai-control[data-icon-only="true"] > svg {
   width: 15px;

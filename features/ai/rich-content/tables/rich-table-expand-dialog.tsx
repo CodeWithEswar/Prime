@@ -70,7 +70,7 @@ export function RichTableExpandDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-5xl w-[96vw] sm:w-[92vw] max-h-[90vh] sm:max-h-[85vh] p-0 bg-[#080808] border border-white/10 text-white flex flex-col overflow-hidden shadow-2xl rounded-xl sm:rounded-2xl">
         {/* Responsive Header: flex-col on mobile, flex-row on desktop, with generous right padding to never collide with the close button */}
-        <DialogHeader className="p-3.5 sm:p-4 border-b border-white/[0.08] bg-[#0A0A0A] flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 pr-12 sm:pr-16 text-left">
+        <DialogHeader className="p-3.5 sm:p-4 border-b border-white/[0.08] bg-[#0A0A0A] flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 pr-12 sm:pr-24 text-left">
           <div className="space-y-1 min-w-0 flex-1">
             <div className="flex items-center gap-2">
               <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded bg-[#FF0000]/10 border border-[#FF0000]/25 text-[#FF0000]">
@@ -85,8 +85,8 @@ export function RichTableExpandDialog({
             </DialogDescription>
           </div>
 
-          {/* Action Buttons: sits cleanly below title on mobile, on right on desktop */}
-          <div className="flex items-center gap-2 shrink-0 self-start sm:self-center">
+          {/* Action Buttons: sits cleanly below title on mobile, on right on desktop with dedicated clearance buffer */}
+          <div className="flex items-center gap-2 shrink-0 self-start sm:self-center mr-1 sm:mr-3">
             <Button
               variant="outline"
               size="sm"
