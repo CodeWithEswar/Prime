@@ -83,7 +83,7 @@ export const NAVIGATION_GROUPS: NavGroup[] = [
         href: "/practice/dsa",
         icon: SourceCodeIcon,
         group: "practice",
-        matchPrefixes: ["/practice"],
+        matchPrefixes: ["/practice/dsa", "/practice"],
       },
       {
         id: "dsa-playlists",
@@ -283,12 +283,28 @@ export function isRouteActive(
   ].some((kPath) => pathname === kPath || pathname.startsWith(`${kPath}/`));
   if (item.id === "dsa-playlists" && isKunalRoute) return false;
 
+  const isPlaylistRoute = [
+    "/practice/dsa/playlists",
+    "/dsa/playlists",
+  ].some((pPath) => pathname === pPath || pathname.startsWith(`${pPath}/`));
+
   const isStriverRoute = [
     "/practice/dsa/sheets/striver-a2z",
     "/dsa/sheets/striver-a2z",
     "/app/dsa/sheets/striver-a2z",
   ].some((sPath) => pathname === sPath || pathname.startsWith(`${sPath}/`));
-  if (item.id === "practice" && (isStriverRoute || isKunalRoute)) return false;
+
+  const isAptitudeRoute = [
+    "/aptitude",
+    "/practice/aptitude",
+  ].some((aPath) => pathname === aPath || pathname.startsWith(`${aPath}/`));
+
+  if (
+    item.id === "practice" &&
+    (isStriverRoute || isKunalRoute || isPlaylistRoute || isAptitudeRoute)
+  ) {
+    return false;
+  }
 
   if (item.exact) return pathname === item.href;
   return (item.matchPrefixes?.length ? item.matchPrefixes : [item.href]).some(
@@ -403,6 +419,24 @@ export function getShellRoute(pathname: string, query?: ShellSearchParams) {
       .map((word) => acronyms[word] ?? word.charAt(0).toUpperCase() + word.slice(1))
       .join(" ");
   };
+  if (
+    pathname === "/practice/dsa/playlists" ||
+    (pathname.startsWith("/practice/dsa/playlists/") &&
+      !pathname.startsWith("/practice/dsa/playlists/kunal-"))
+  ) {
+    const isAnalytics = pathname.endsWith("/analytics");
+    const isCatalog = pathname === "/practice/dsa/playlists";
+    return {
+      section: "Practice",
+      label: isCatalog
+        ? "DSA Playlists"
+        : isAnalytics
+          ? "Playlist Analytics"
+          : format(parts[3] ?? "Course"),
+      parent: isCatalog ? "/practice/dsa" : "/practice/dsa/playlists",
+      id: "dsa-playlists",
+    };
+  }
   if (parts[0] === "practice")
     return {
       section: "Practice",

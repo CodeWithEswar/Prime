@@ -170,6 +170,35 @@ describe("PRIME Command Frame — Shell Unit Tests", () => {
       expect(isRouteActive("/roadmap/dbms", dbmsItem)).toBe(true);
       expect(isRouteActive("/roadmap/os", osItem)).toBe(true);
     });
+
+    it("isolates DSA practice active state from playlists, sheets, and aptitude routes", () => {
+      const practiceItem = AVAILABLE_NAVIGATION_ITEMS.find((i) => i.id === "practice")!;
+      const playlistsItem = AVAILABLE_NAVIGATION_ITEMS.find((i) => i.id === "dsa-playlists")!;
+      const kunalItem = AVAILABLE_NAVIGATION_ITEMS.find((i) => i.id === "kunal-bootcamp")!;
+      const striverItem = AVAILABLE_NAVIGATION_ITEMS.find((i) => i.id === "striver-a2z")!;
+
+      // DSA Practice matches problems and catalog
+      expect(isRouteActive("/practice/dsa", practiceItem)).toBe(true);
+      expect(isRouteActive("/practice/dsa/two-sum", practiceItem)).toBe(true);
+
+      // Playlists isolate cleanly: ONLY playlistsItem is active, NOT practiceItem
+      expect(isRouteActive("/practice/dsa/playlists", practiceItem)).toBe(false);
+      expect(isRouteActive("/practice/dsa/playlists", playlistsItem)).toBe(true);
+      expect(isRouteActive("/practice/dsa/playlists/striver-a2z-dsa", practiceItem)).toBe(false);
+      expect(isRouteActive("/practice/dsa/playlists/striver-a2z-dsa", playlistsItem)).toBe(true);
+
+      // Kunal Bootcamp isolates cleanly: ONLY kunalItem is active, NOT practiceItem or playlistsItem
+      expect(isRouteActive("/practice/dsa/playlists/kunal-kushwaha", practiceItem)).toBe(false);
+      expect(isRouteActive("/practice/dsa/playlists/kunal-kushwaha", playlistsItem)).toBe(false);
+      expect(isRouteActive("/practice/dsa/playlists/kunal-kushwaha", kunalItem)).toBe(true);
+
+      // Striver sheet isolates cleanly: ONLY striverItem is active, NOT practiceItem
+      expect(isRouteActive("/practice/dsa/sheets/striver-a2z", practiceItem)).toBe(false);
+      expect(isRouteActive("/practice/dsa/sheets/striver-a2z", striverItem)).toBe(true);
+
+      // Aptitude isolates cleanly: NOT practiceItem
+      expect(isRouteActive("/practice/aptitude", practiceItem)).toBe(false);
+    });
   });
 
   describe("SidebarBrand", () => {
