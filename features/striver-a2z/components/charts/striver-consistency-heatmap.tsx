@@ -102,7 +102,7 @@ export function StriverConsistencyHeatmap({ data }: StriverConsistencyHeatmapPro
     <PrimeChartContainer
       title="Learning Activity & Momentum Heatmap"
       subtitle="Engineering contribution calendar tracking daily video lectures, problem solving, and practice velocity."
-      minHeight={280}
+      minHeight={200}
       controls={
         data.length > 84 ? (
           <div className="inline-flex items-center gap-0.5 border border-white/[0.08] rounded-lg p-0.5 bg-black/60 font-mono text-[10px]">
@@ -198,24 +198,24 @@ export function StriverConsistencyHeatmap({ data }: StriverConsistencyHeatmapPro
       }
     >
       <div className="space-y-4 pt-1">
-        {/* Expanded Heatmap Calendar Grid with Month Headers (Full Width) */}
+        {/* Expanded Heatmap Calendar Grid with Month Headers */}
         <TooltipProvider delayDuration={100}>
           <div className="overflow-x-auto pb-2 pt-1 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
-            <div className="flex flex-col gap-1.5 select-none min-w-[560px] md:min-w-full w-full">
+            <div className="inline-flex flex-col gap-1.5 select-none min-w-max">
               {/* Month Labels Row */}
-              <div className="flex items-center text-[10px] font-mono text-neutral-400 h-4">
+              <div className="flex items-center text-[10px] font-mono text-neutral-400 h-4 mb-0.5">
                 {/* Spacer matching day-of-week label width */}
                 <div className="w-7 sm:w-8 shrink-0" />
 
-                {/* Month labels aligned with week columns across full width */}
-                <div className="grid grid-flow-col auto-cols-fr gap-1 sm:gap-1.5 md:gap-2 flex-1 w-full">
+                {/* Month labels aligned with week columns */}
+                <div className="flex items-center gap-1 sm:gap-1.5">
                   {weeks.map((week, idx) => (
                     <div
                       key={idx}
-                      className="truncate text-left font-semibold"
+                      className="w-3.5 sm:w-4 shrink-0 text-left font-semibold relative"
                     >
                       {monthLabels[idx] && (
-                        <span className="text-neutral-300 text-[10px]">
+                        <span className="absolute left-0 top-0 text-neutral-300 text-[10px] whitespace-nowrap">
                           {monthLabels[idx]}
                         </span>
                       )}
@@ -225,31 +225,31 @@ export function StriverConsistencyHeatmap({ data }: StriverConsistencyHeatmapPro
               </div>
 
               {/* Day-of-week labels + Weekly Grid Columns */}
-              <div className="flex items-stretch w-full">
+              <div className="flex items-start">
                 {/* Day-of-week vertical labels synchronized with 7 rows */}
-                <div className="w-7 sm:w-8 shrink-0 grid grid-rows-7 gap-1 sm:gap-1.5 md:gap-2 text-[10px] font-mono text-neutral-500 pr-1 select-none">
-                  <div className="flex items-center leading-none">Mon</div>
-                  <div className="flex items-center leading-none opacity-0" aria-hidden="true">Tue</div>
-                  <div className="flex items-center leading-none">Wed</div>
-                  <div className="flex items-center leading-none opacity-0" aria-hidden="true">Thu</div>
-                  <div className="flex items-center leading-none">Fri</div>
-                  <div className="flex items-center leading-none opacity-0" aria-hidden="true">Sat</div>
-                  <div className="flex items-center leading-none">Sun</div>
+                <div className="w-7 sm:w-8 shrink-0 flex flex-col gap-1 sm:gap-1.5 text-[10px] font-mono text-neutral-500 pr-1 select-none">
+                  <span className="h-3.5 sm:h-4 leading-none flex items-center">Mon</span>
+                  <span className="h-3.5 sm:h-4 leading-none flex items-center opacity-0" aria-hidden="true">Tue</span>
+                  <span className="h-3.5 sm:h-4 leading-none flex items-center">Wed</span>
+                  <span className="h-3.5 sm:h-4 leading-none flex items-center opacity-0" aria-hidden="true">Thu</span>
+                  <span className="h-3.5 sm:h-4 leading-none flex items-center">Fri</span>
+                  <span className="h-3.5 sm:h-4 leading-none flex items-center opacity-0" aria-hidden="true">Sat</span>
+                  <span className="h-3.5 sm:h-4 leading-none flex items-center opacity-0" aria-hidden="true">Sun</span>
                 </div>
 
-                {/* Weekly Columns (Auto-expanding 100% full width) */}
-                <div className="grid grid-flow-col auto-cols-fr gap-1 sm:gap-1.5 md:gap-2 flex-1 w-full">
+                {/* Weekly Columns */}
+                <div className="flex items-start gap-1 sm:gap-1.5">
                   {weeks.map((week, wIndex) => (
-                    <div key={wIndex} className="grid grid-rows-7 gap-1 sm:gap-1.5 md:gap-2">
+                    <div key={wIndex} className="flex flex-col gap-1 sm:gap-1.5 shrink-0">
                       {week.map((day) => (
                         <Tooltip key={day.date}>
                           <TooltipTrigger asChild>
                             <div
                               tabIndex={0}
                               className={cn(
-                                "w-full aspect-square rounded-xs border transition-all duration-150 cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white",
+                                "w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-xs border transition-all duration-150 cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white",
                                 getIntensityColor(day.level),
-                                "hover:scale-115 hover:z-10 hover:border-white/60"
+                                "hover:scale-125 hover:z-10 hover:border-white/60"
                               )}
                               aria-label={`${day.date}: ${day.count} activities`}
                             />
