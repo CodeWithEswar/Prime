@@ -110,28 +110,23 @@ export function LatencyChart({ observations }: LatencyChartProps) {
 
   return (
     <div className="rounded-lg border border-neutral-800/80 bg-[#0A0A0A]/95 p-5 sm:p-6 backdrop-blur-md shadow-lg flex flex-col justify-between">
-      {/* Header & Telemetry Metric Bar — Aligned in one responsive row */}
+      {/* Header & Telemetry Metric Bar — Clean single row without subhead */}
       <div>
-        <div className="flex items-start justify-between gap-3">
-          <div className="space-y-1 min-w-0 flex-1">
-            <div className="flex flex-wrap items-center gap-2">
-              <h3 className="text-sm sm:text-base font-semibold text-white">
-                Backend Probe Latency
-              </h3>
-              <div
-                className={`inline-flex items-center gap-1.5 rounded border px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider ${statusConfig.badgeClass} font-semibold shrink-0`}
-              >
-                <span className={`h-1.5 w-1.5 rounded-full ${statusConfig.dotClass}`} />
-                {statusConfig.label}
-              </div>
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex flex-wrap items-center gap-2 min-w-0">
+            <h3 className="text-sm sm:text-base font-semibold text-white">
+              Backend Probe Latency
+            </h3>
+            <div
+              className={`inline-flex items-center gap-1.5 rounded border px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider ${statusConfig.badgeClass} font-semibold shrink-0`}
+            >
+              <span className={`h-1.5 w-1.5 rounded-full ${statusConfig.dotClass}`} />
+              {statusConfig.label}
             </div>
-            <p className="text-xs text-neutral-400 font-sans leading-tight">
-              Edge-to-database round-trip time across Cloudflare network
-            </p>
           </div>
 
-          {/* Three Dots Dropdown Menu Anchored Top-Right in Same Row */}
-          <div className="shrink-0 pt-0.5">
+          {/* Three Dots Dropdown Menu Anchored Top-Right */}
+          <div className="shrink-0">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <button
