@@ -32,13 +32,20 @@ export function PrimeChartContainer({
       )}
     >
       {/* Chart Header Bar - Clean heading & subtitle on left, controls on top-right */}
-      <div className="flex items-start justify-between gap-2.5 sm:gap-4 border-b border-white/[0.06] pb-3">
+      <div
+        className={cn(
+          "border-b border-white/[0.06] pb-3",
+          mobileControls
+            ? "flex items-start justify-between gap-2.5 sm:gap-4"
+            : "flex flex-col sm:flex-row sm:items-start justify-between gap-2.5 sm:gap-4"
+        )}
+      >
         <div className="space-y-1 min-w-0 flex-1">
-          <h3 className="font-mono text-xs sm:text-sm font-bold uppercase tracking-tight sm:tracking-wider text-white break-words leading-snug">
+          <h3 className="font-mono text-xs sm:text-sm font-bold uppercase tracking-tight sm:tracking-wider text-white leading-snug">
             {title}
           </h3>
           {subtitle && (
-            <p className="text-[10px] sm:text-[11px] text-neutral-400 font-sans leading-relaxed break-words">
+            <p className="text-[10px] sm:text-[11px] text-neutral-400 font-sans leading-relaxed">
               {subtitle}
             </p>
           )}
@@ -48,7 +55,7 @@ export function PrimeChartContainer({
         {(controls || mobileControls) && (
           <div className="shrink-0 flex items-center gap-1.5 self-start pt-0.5">
             {controls && (
-              <div className={cn("items-center gap-1.5", mobileControls ? "hidden sm:flex" : "flex")}>
+              <div className={cn("items-center gap-1.5", mobileControls ? "hidden sm:flex" : "flex flex-wrap")}>
                 {controls}
               </div>
             )}

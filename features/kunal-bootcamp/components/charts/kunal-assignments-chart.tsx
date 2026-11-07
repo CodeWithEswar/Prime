@@ -10,6 +10,16 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import { MoreHorizontalIcon, Tick02Icon } from "@hugeicons/core-free-icons";
+import { Icon } from "@/components/ui/icon";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+} from "@/components/ui/dropdown-menu";
 import { PrimeChartContainer } from "@/features/striver-a2z/components/charts/prime-chart-container";
 import { PrimeChartTooltip } from "@/features/striver-a2z/components/charts/prime-chart-tooltip";
 import { PrimeSlimBarCursor } from "@/features/striver-a2z/components/charts/prime-chart-cursor";
@@ -97,9 +107,69 @@ export function KunalAssignmentsChart({ data }: KunalAssignmentsChartProps) {
           </button>
         </div>
       }
+      mobileControls={
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button
+              variant="outline"
+              size="sm"
+              className="h-7 w-7 p-0 border-white/10 bg-white/[0.04] text-neutral-300 hover:text-white hover:bg-white/[0.08]"
+              aria-label="Assignment filter options"
+            >
+              <Icon icon={MoreHorizontalIcon} size={15} />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="w-44 bg-[#0C0C0C] border-white/10 text-neutral-200 font-mono text-xs shadow-xl">
+            <DropdownMenuLabel className="text-[10px] uppercase text-neutral-500 tracking-wider px-2 py-1">
+              Assignment Filter
+            </DropdownMenuLabel>
+            <DropdownMenuItem
+              onClick={() => setFilter("all")}
+              className={cn(
+                "cursor-pointer justify-between text-xs px-2 py-1.5 focus:bg-white/[0.08]",
+                filter === "all" ? "text-white font-bold bg-white/[0.06]" : "text-neutral-400"
+              )}
+            >
+              <span>All ({data.length})</span>
+              {filter === "all" && <Icon icon={Tick02Icon} size={13} className="text-[#FF0000]" />}
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => setFilter("completed")}
+              className={cn(
+                "cursor-pointer justify-between text-xs px-2 py-1.5 focus:bg-white/[0.08]",
+                filter === "completed" ? "text-white font-bold bg-white/[0.06]" : "text-neutral-400"
+              )}
+            >
+              <span>Completed</span>
+              {filter === "completed" && <Icon icon={Tick02Icon} size={13} className="text-[#FF0000]" />}
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => setFilter("in_progress")}
+              className={cn(
+                "cursor-pointer justify-between text-xs px-2 py-1.5 focus:bg-white/[0.08]",
+                filter === "in_progress" ? "text-white font-bold bg-white/[0.06]" : "text-neutral-400"
+              )}
+            >
+              <span>In Progress</span>
+              {filter === "in_progress" && <Icon icon={Tick02Icon} size={13} className="text-[#FF0000]" />}
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => setFilter("not_started")}
+              className={cn(
+                "cursor-pointer justify-between text-xs px-2 py-1.5 focus:bg-white/[0.08]",
+                filter === "not_started" ? "text-white font-bold bg-white/[0.06]" : "text-neutral-400"
+              )}
+            >
+              <span>Not Started</span>
+              {filter === "not_started" && <Icon icon={Tick02Icon} size={13} className="text-[#FF0000]" />}
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      }
     >
-      <div className="h-[280px] w-full pt-4">
-        <ResponsiveContainer width="100%" height="100%">
+      <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent pb-1 -mx-1 px-1">
+        <div className="h-[280px] min-w-[500px] sm:min-w-full w-full pt-4">
+          <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={chartData}
             margin={{ top: 10, right: 10, left: -10, bottom: 25 }}
@@ -150,6 +220,7 @@ export function KunalAssignmentsChart({ data }: KunalAssignmentsChartProps) {
           </BarChart>
         </ResponsiveContainer>
       </div>
+    </div>
     </PrimeChartContainer>
   );
 }
