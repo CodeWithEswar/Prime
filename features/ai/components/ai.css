@@ -271,6 +271,7 @@
   overscroll-behavior: contain;
   scrollbar-width: thin;
   scrollbar-color: #333 transparent;
+  scroll-behavior: smooth;
 }
 .ai-message-column {
   max-width: 800px;
