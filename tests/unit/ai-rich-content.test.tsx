@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor, within } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 import { RichContentRenderer } from "@/features/ai/rich-content/rich-content-renderer";
 import { RichComplexity } from "@/features/ai/rich-content/learning/rich-complexity";
@@ -124,8 +124,11 @@ describe("PRIME Rich Content Engine & MDX Presentation", () => {
       const expandBtn = screen.getByRole("button", { name: /expand table to modal/i });
       fireEvent.click(expandBtn);
 
-      expect(screen.getByRole("dialog")).toBeInTheDocument();
+      const dialog = screen.getByRole("dialog");
+      expect(dialog).toBeInTheDocument();
       expect(screen.getByText(/Table Analysis/i)).toBeInTheDocument();
+      expect(within(dialog).getByRole("button", { name: /^csv$/i })).toBeInTheDocument();
+      expect(within(dialog).getByPlaceholderText(/filter across all columns/i)).toBeInTheDocument();
     });
   });
 
