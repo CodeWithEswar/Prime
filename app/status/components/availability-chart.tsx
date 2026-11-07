@@ -365,7 +365,7 @@ export function AvailabilityChart({ rollups }: AvailabilityChartProps) {
         </div>
       ) : (
         /* SLO Area Curve View */
-        <div className="mt-4 h-52 w-full min-w-0">
+        <div className="mt-4 h-56 sm:h-64 w-full min-w-0">
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart
               data={days}

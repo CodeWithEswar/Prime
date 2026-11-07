@@ -88,8 +88,8 @@ export function StatusClient({ initialSnapshot }: StatusClientProps) {
           />
         </section>
 
-        {/* Charts Section */}
-        <section className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        {/* Charts Section — Full-width single column stack */}
+        <section className="space-y-6">
           <LatencyChart observations={snapshot?.recentObservations || []} />
           <AvailabilityChart rollups={snapshot?.dailyRollups || []} />
         </section>
