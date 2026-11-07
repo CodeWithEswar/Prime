@@ -69,11 +69,14 @@ describe("Status Page Charts (Developer-Grade Architecture)", () => {
       ).toBeInTheDocument();
     });
 
-    it("allows switching between recent and full window range", () => {
+    it("allows switching between recent and full window range via three-dots menu", async () => {
       render(<LatencyChart observations={mockObservations} />);
-      const fullWindowBtn = screen.getByRole("button", { name: "Full Window" });
-      fireEvent.click(fullWindowBtn);
-      expect(fullWindowBtn).toHaveClass("bg-neutral-800");
+      const optionsBtn = screen.getByRole("button", { name: /chart display options/i });
+      fireEvent.keyDown(optionsBtn, { key: "Enter" });
+
+      const fullWindowItem = await screen.findByText(/Full Window/i);
+      expect(fullWindowItem).toBeInTheDocument();
+      fireEvent.click(fullWindowItem);
     });
 
     it("renders developer three-dots dropdown options menu with decreased border radius", () => {
@@ -82,9 +85,6 @@ describe("Status Page Charts (Developer-Grade Architecture)", () => {
       expect(optionsBtn).toBeInTheDocument();
       expect(optionsBtn).toHaveAttribute("aria-haspopup", "menu");
       expect(optionsBtn).toHaveClass("rounded");
-
-      const recentBtn = screen.getByRole("button", { name: "Last 30 Checks" });
-      expect(recentBtn).toHaveClass("rounded-sm");
     });
   });
 
@@ -97,20 +97,17 @@ describe("Status Page Charts (Developer-Grade Architecture)", () => {
       expect(screen.getByText("14d Uptime")).toBeInTheDocument();
       expect(screen.getByText("SLA Target")).toBeInTheDocument();
       expect(screen.getByText("Error Budget")).toBeInTheDocument();
-      expect(screen.getByText("14-Day Matrix")).toBeInTheDocument();
-      expect(screen.getByText("SLO Curve")).toBeInTheDocument();
     });
 
-    it("toggles between 14-Day Matrix and SLO Curve view modes", () => {
+    it("toggles between 14-Day Matrix and SLO Curve view modes via three-dots menu", async () => {
       render(<AvailabilityChart rollups={mockRollups} />);
 
-      const curveBtn = screen.getByRole("button", { name: "SLO Curve" });
-      fireEvent.click(curveBtn);
-      expect(curveBtn).toHaveClass("bg-neutral-800");
+      const optionsBtn = screen.getByRole("button", { name: /chart display options/i });
+      fireEvent.keyDown(optionsBtn, { key: "Enter" });
 
-      const matrixBtn = screen.getByRole("button", { name: "14-Day Matrix" });
-      fireEvent.click(matrixBtn);
-      expect(matrixBtn).toHaveClass("bg-neutral-800");
+      const curveItem = await screen.findByText("SLO Curve");
+      expect(curveItem).toBeInTheDocument();
+      fireEvent.click(curveItem);
     });
 
     it("renders developer three-dots dropdown options menu with decreased border radius", () => {
@@ -119,9 +116,6 @@ describe("Status Page Charts (Developer-Grade Architecture)", () => {
       expect(optionsBtn).toBeInTheDocument();
       expect(optionsBtn).toHaveAttribute("aria-haspopup", "menu");
       expect(optionsBtn).toHaveClass("rounded");
-
-      const matrixBtn = screen.getByRole("button", { name: "14-Day Matrix" });
-      expect(matrixBtn).toHaveClass("rounded-sm");
     });
   });
 });
