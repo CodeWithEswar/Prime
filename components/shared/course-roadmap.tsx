@@ -72,12 +72,13 @@ export function CourseHero({
         <p className="max-w-prose text-sm leading-relaxed text-[var(--text-secondary)]">
           {description}
         </p>
-        <div className="grid grid-cols-1 gap-2 @min-[28rem]:flex @min-[28rem]:flex-wrap">
+        <div className="grid grid-cols-1 gap-2.5 sm:flex sm:flex-wrap @min-[28rem]:flex @min-[28rem]:flex-wrap">
           <Button
             type="button"
             size="lg"
             disabled={isPending}
             onClick={enrolled ? onResume : () => onEnroll(onStarted)}
+            className="w-full sm:w-auto @min-[28rem]:w-auto justify-center"
           >
             {enrolled && <Icon icon={PlayIcon} size={15} aria-hidden="true" />}
             {enrolled ? "Resume roadmap" : "Start roadmap"}
@@ -89,6 +90,7 @@ export function CourseHero({
               size="lg"
               disabled={isPending}
               onClick={onSchedule}
+              className="w-full sm:w-auto @min-[28rem]:w-auto justify-center"
             >
               <Icon
                 icon={Task01Icon}
@@ -99,7 +101,12 @@ export function CourseHero({
               Schedule in Planner
             </Button>
           ) : (
-            <Button asChild variant="outline" size="lg">
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="w-full sm:w-auto @min-[28rem]:w-auto justify-center"
+            >
               <Link href={`/plan?course=${course}`}>
                 <Icon
                   icon={Task01Icon}
