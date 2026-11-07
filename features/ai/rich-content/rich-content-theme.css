@@ -110,3 +110,25 @@
   padding: 0 !important;
 }
 
+/* Typing cursor animation during streaming */
+@keyframes primeStreamBlink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.15;
+  }
+}
+
+.prime-rich-content .prime-stream-terminal {
+  display: inline-block;
+  width: 3px;
+  height: 14px;
+  background: #ff0000;
+  margin-inline-start: 4px;
+  vertical-align: middle;
+  border-radius: 1px;
+  animation: primeStreamBlink 0.75s ease-in-out infinite;
+  box-shadow: 0 0 6px rgba(255, 0, 0, 0.4);
+}
+

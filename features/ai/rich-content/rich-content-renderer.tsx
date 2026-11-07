@@ -122,25 +122,69 @@ export class FormattingBoundary extends Component<
 
 function useStreamSource(content: string, streaming: boolean) {
   const [visible, setVisible] = useState(content);
-  const latest = useRef(content);
-  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const targetRef = useRef(content);
+  const visibleRef = useRef(visible);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  targetRef.current = content;
 
   useEffect(() => {
-    latest.current = content;
-    if (streaming && !timer.current) {
-      timer.current = setTimeout(() => {
-        timer.current = null;
-        setVisible(latest.current);
-      }, 50);
+    if (!streaming) {
+      // Stream completed or static message: catch up immediately
+      setVisible(content);
+      visibleRef.current = content;
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+        timerRef.current = null;
+      }
+      return;
     }
-  }, [content, streaming]);
 
-  useEffect(
-    () => () => {
-      if (timer.current) clearTimeout(timer.current);
-    },
-    []
-  );
+    // Actively streaming: reveal characters smoothly with typewriter typing cadence
+    const advance = () => {
+      const target = targetRef.current;
+      const current = visibleRef.current;
+
+      if (current.length < target.length) {
+        const backlog = target.length - current.length;
+
+        // Pacing curve:
+        // - 1-2 chars for small increments (authentic human typing feel)
+        // - 3-5 chars for moderate reading flow
+        // - dynamic catch-up if model streams an unusually large chunk
+        let step = 1;
+        if (backlog > 160) {
+          step = Math.ceil(backlog / 6);
+        } else if (backlog > 60) {
+          step = 4;
+        } else if (backlog > 20) {
+          step = 2;
+        }
+
+        const nextLength = Math.min(target.length, current.length + step);
+        const nextText = target.slice(0, nextLength);
+        visibleRef.current = nextText;
+        setVisible(nextText);
+      }
+
+      if (visibleRef.current.length < targetRef.current.length) {
+        timerRef.current = setTimeout(advance, 16);
+      } else {
+        timerRef.current = null;
+      }
+    };
+
+    if (visibleRef.current.length < targetRef.current.length && !timerRef.current) {
+      timerRef.current = setTimeout(advance, 16);
+    }
+
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+        timerRef.current = null;
+      }
+    };
+  }, [content, streaming]);
 
   return streaming ? visible : content;
 }

@@ -570,18 +570,37 @@ export function AISurface({ panel = false }: { panel?: boolean }) {
   ].includes(ai.state);
   const lastUser = [...ai.messages].reverse().find((m) => m.role === "user");
   useEffect(() => {
-    if (autoScroll.current && scroller.current)
-      scroller.current.scrollTop = scroller.current.scrollHeight;
+    if (autoScroll.current && scroller.current) {
+      scroller.current.scrollTo({
+        top: scroller.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
   }, [ai.messages]);
   useEffect(() => {
     const viewport = scroller.current,
       content = viewport?.firstElementChild;
     if (!viewport || !content || typeof ResizeObserver === "undefined") return;
+    let timer: ReturnType<typeof setTimeout> | null = null;
     const observer = new ResizeObserver(() => {
-      if (autoScroll.current) viewport.scrollTop = viewport.scrollHeight;
+      if (!autoScroll.current || !viewport) return;
+      if (!timer) {
+        timer = setTimeout(() => {
+          timer = null;
+          if (autoScroll.current && viewport) {
+            viewport.scrollTo({
+              top: viewport.scrollHeight,
+              behavior: "smooth",
+            });
+          }
+        }, 50);
+      }
     });
     observer.observe(content);
-    return () => observer.disconnect();
+    return () => {
+      if (timer) clearTimeout(timer);
+      observer.disconnect();
+    };
   }, []);
   const quick: AIIntent[] =
     ai.reference.type === "problem"
@@ -817,8 +836,12 @@ export function AISurface({ panel = false }: { panel?: boolean }) {
           onClick={() => {
             autoScroll.current = true;
             setFollowing(true);
-            if (scroller.current)
-              scroller.current.scrollTop = scroller.current.scrollHeight;
+            if (scroller.current) {
+              scroller.current.scrollTo({
+                top: scroller.current.scrollHeight,
+                behavior: "smooth",
+              });
+            }
           }}
         >
           Continue to latest
