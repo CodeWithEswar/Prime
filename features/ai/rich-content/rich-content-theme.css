@@ -93,3 +93,20 @@
   overflow-wrap: break-word;
 }
 
+/* Ensure headings inside data records, cards and tables do not inherit global prose margins */
+.prime-rich-content .prime-data-strip h1,
+.prime-rich-content .prime-data-strip h2,
+.prime-rich-content .prime-data-strip h3,
+.prime-rich-content .prime-data-strip h4,
+.prime-rich-content .prime-data-strip h5,
+.prime-rich-content .prime-data-strip h6,
+.prime-rich-content article h1,
+.prime-rich-content article h2,
+.prime-rich-content article h3,
+.prime-rich-content article h4,
+.prime-rich-content article h5,
+.prime-rich-content article h6 {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
