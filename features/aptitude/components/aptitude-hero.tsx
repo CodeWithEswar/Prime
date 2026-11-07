@@ -44,16 +44,22 @@ export function AptitudeHero({
           ability, and data interpretation. Learn one concept at a time, then review what
           you can solve.
         </p>
-        <div className="mt-5 flex flex-wrap gap-2">
+        <div className="mt-5 flex flex-col sm:flex-row @min-[28rem]:flex-row gap-2.5">
           <Button
             disabled={isPending}
             loading={isPending}
             onClick={enrolled ? onResume : onEnroll}
+            className="w-full sm:w-auto @min-[28rem]:w-auto justify-center"
           >
             <Icon icon={PlayIcon} size={15} />
             {enrolled ? "Continue learning" : "Start roadmap"}
           </Button>
-          <Button variant="outline" disabled={isPending} onClick={onSchedule}>
+          <Button
+            variant="outline"
+            disabled={isPending}
+            onClick={onSchedule}
+            className="w-full sm:w-auto @min-[28rem]:w-auto justify-center"
+          >
             <Icon icon={Calendar03Icon} size={15} />
             Schedule in Planner
           </Button>

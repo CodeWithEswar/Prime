@@ -1,4 +1,4 @@
-import { act, renderHook } from "@testing-library/react";
+import { act, render, renderHook, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 vi.mock("server-only", () => ({}));
 const save = vi.hoisted(() => vi.fn(async () => ({ ok: true })));
@@ -12,6 +12,7 @@ vi.mock("@/features/aptitude/server/actions", () => ({
 }));
 import { getAptitudeDashboardData } from "@/features/aptitude/server/service";
 import { useAptitude } from "@/features/aptitude/hooks/use-aptitude";
+import { AptitudeHero } from "@/features/aptitude/components/aptitude-hero";
 import { aptitudeVideoProgressKey } from "@/domain/aptitude/videos";
 
 describe("aptitude learning evidence", () => {
@@ -53,5 +54,30 @@ describe("aptitude learning evidence", () => {
     expect(
       result.current.metrics.trackProgress["logical-reasoning"].completedTopics
     ).toBe(0);
+  });
+
+  it("renders AptitudeHero with responsive button layout classes", async () => {
+    const data = await getAptitudeDashboardData(null, null);
+    render(
+      <AptitudeHero
+        metrics={data.metrics}
+        enrolled={false}
+        onEnroll={() => {}}
+        onResume={() => {}}
+        onSchedule={() => {}}
+      />
+    );
+
+    const startBtn = screen.getByRole("button", { name: /start roadmap/i });
+    const scheduleBtn = screen.getByRole("button", { name: /schedule in planner/i });
+
+    expect(startBtn).toBeDefined();
+    expect(scheduleBtn).toBeDefined();
+
+    // Verify responsive full-width and centered layout classes
+    expect(startBtn.className).toContain("w-full");
+    expect(startBtn.className).toContain("sm:w-auto");
+    expect(scheduleBtn.className).toContain("w-full");
+    expect(scheduleBtn.className).toContain("sm:w-auto");
   });
 });
