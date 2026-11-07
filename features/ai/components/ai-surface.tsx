@@ -50,6 +50,7 @@ import {
   RotateRight01Icon,
   Tick02Icon,
   ArrowLeft01Icon,
+  ArrowDown01Icon,
   Menu01Icon,
 } from "@hugeicons/core-free-icons";
 const intentIcons: Record<AIIntent, IconSvgElement> = {
@@ -812,7 +813,7 @@ export function AISurface({ panel = false }: { panel?: boolean }) {
         <AIControl
           className="ai-latest-button"
           iconOnly
-          icon={AiChat01Icon}
+          icon={ArrowDown01Icon}
           onClick={() => {
             autoScroll.current = true;
             setFollowing(true);
