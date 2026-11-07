@@ -62,7 +62,7 @@ export function RichTableRecords({ headers, rows, searchQuery = "" }: RichTableR
           >
             {/* Record Header */}
             <div className="flex items-start justify-between gap-2">
-              <div className="flex items-center gap-2 min-w-0">
+              <div className="flex items-center gap-2 min-w-0 flex-1">
                 <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-[#FF0000]/10 border border-[#FF0000]/25 text-[#FF0000]">
                   <Icon icon={CodeCircleIcon} size={11} />
                 </div>
@@ -71,11 +71,11 @@ export function RichTableRecords({ headers, rows, searchQuery = "" }: RichTableR
                 </h4>
               </div>
 
-              {/* Quick Copy Row Button */}
+              {/* Quick Copy Row Button (touch-friendly on mobile, hover-revealed on desktop) */}
               <button
                 type="button"
                 onClick={() => handleCopyRow(row)}
-                className="opacity-0 group-hover:opacity-100 transition-opacity p-1 text-neutral-500 hover:text-white rounded hover:bg-white/[0.08]"
+                className="opacity-75 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity p-1.5 sm:p-1 text-neutral-400 hover:text-white rounded hover:bg-white/[0.08] shrink-0"
                 title="Copy record text"
                 aria-label={`Copy record ${primaryText}`}
               >
@@ -83,8 +83,8 @@ export function RichTableRecords({ headers, rows, searchQuery = "" }: RichTableR
               </button>
             </div>
 
-            {/* Key-Value Attributes Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 font-mono text-xs pt-1">
+            {/* Key-Value Attributes Grid - Responsive container & viewport aware */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 @[420px]:grid-cols-2 @[640px]:grid-cols-3 gap-2 font-mono text-xs pt-1">
               {attributeHeaders.map((header, attrIdx) => {
                 const cellVal = row.cells[attrIdx + 1];
                 const cellText = row.textCells[attrIdx + 1] ?? "";
@@ -93,12 +93,12 @@ export function RichTableRecords({ headers, rows, searchQuery = "" }: RichTableR
                 return (
                   <div
                     key={header.id}
-                    className="flex flex-col gap-0.5 p-2 rounded-md bg-[#080808] border border-white/[0.04]"
+                    className="flex flex-col gap-1 p-2 sm:p-2.5 rounded-lg bg-[#080808] border border-white/[0.04] min-w-0"
                   >
-                    <span className="text-[10px] uppercase tracking-wider text-neutral-500 font-medium">
+                    <span className="text-[10px] uppercase tracking-wider text-neutral-400 font-semibold truncate">
                       {header.label}
                     </span>
-                    <div className="text-neutral-200 text-xs break-words">
+                    <div className="text-neutral-200 text-xs break-words font-mono leading-relaxed">
                       {tier ? (
                         <span
                           className={cn(
@@ -126,4 +126,3 @@ export function RichTableRecords({ headers, rows, searchQuery = "" }: RichTableR
     </div>
   );
 }
-

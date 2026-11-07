@@ -44,6 +44,32 @@ describe("PRIME Rich Content Engine & MDX Presentation", () => {
       expect(screen.getAllByText(/worst/i).length).toBeGreaterThanOrEqual(2);
     });
 
+    it("automatically defaults and switches to records view on mobile UI", () => {
+      const originalMatchMedia = window.matchMedia;
+      window.matchMedia = vi.fn().mockImplementation((query: string) => ({
+        matches: query.includes("max-width: 768px"),
+        media: query,
+        onchange: null,
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+        dispatchEvent: vi.fn(),
+      }));
+
+      try {
+        render(<RichContentRenderer content={tableMarkdown} mode="workspace" />);
+
+        // In mobile UI, records view must be active automatically even in workspace mode
+        const recordsBtn = screen.getByRole("button", { name: /^records$/i });
+        expect(recordsBtn).toHaveAttribute("aria-pressed", "true");
+        expect(screen.getByRole("heading", { name: "Binary Search" })).toBeInTheDocument();
+        expect(screen.getByRole("heading", { name: "Linear Search" })).toBeInTheDocument();
+      } finally {
+        window.matchMedia = originalMatchMedia;
+      }
+    });
+
     it("allows user to toggle between Records and Table views on demand", () => {
       render(<RichContentRenderer content={tableMarkdown} mode="workspace" />);
 

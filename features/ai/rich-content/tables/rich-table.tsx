@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { useRichContent } from "../rich-content-provider";
+import { useRichContent, useIsMobile } from "../rich-content-provider";
 import { parseTableChildren, copyTableToClipboard, exportTableToCSV } from "./rich-table-utils";
 import { RichTableToolbar } from "./rich-table-toolbar";
 import { RichTableRecords } from "./rich-table-records";
@@ -16,14 +16,21 @@ export interface RichTableProps {
 }
 
 export function RichTable({ children, className, defaultMode }: RichTableProps) {
-  const { isNarrow, mode } = useRichContent();
-  const parsed = React.useMemo(() => parseTableChildren(children), [children]);
+  const { isNarrow, mode, isMobile: ctxIsMobile } = useRichContent();
+  const hookIsMobile = useIsMobile();
+  const isMobile = ctxIsMobile || hookIsMobile;
+  const isMobileUI = isMobile || mode === "panel" || isNarrow;
 
-  // Determine initial view mode based on container or explicitly supplied prop
+  const parsed = React.useMemo(() => parseTableChildren(children), [children]);
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const [containerNarrow, setContainerNarrow] = React.useState(false);
+  const userExplicitToggleRef = React.useRef<"records" | "table" | null>(defaultMode ?? null);
+
+  // Determine initial view mode: auto-switch to records on mobile UI or narrow container
   const [viewMode, setViewMode] = React.useState<"records" | "table">(() => {
     if (defaultMode) return defaultMode;
-    // In narrow/side panel, default to records for compact readable cards
-    if (isNarrow || mode === "panel") return "records";
+    // In mobile UI or narrow/side panel, auto-switch to records for compact readable cards
+    if (isMobileUI) return "records";
     return "table";
   });
 
@@ -31,12 +38,54 @@ export function RichTable({ children, className, defaultMode }: RichTableProps) 
   const [copied, setCopied] = React.useState(false);
   const [expandOpen, setExpandOpen] = React.useState(false);
 
-  // Sync mode if container switches to narrow/side panel and user hasn't explicitly toggled
+  // ResizeObserver to detect narrow container dimensions dynamically
   React.useEffect(() => {
-    if (mode === "panel" && viewMode !== "records") {
+    if (typeof ResizeObserver === "undefined" || !containerRef.current) return;
+    const observer = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const width = entry.contentRect.width;
+        if (width > 0) {
+          const narrow = width < 580;
+          setContainerNarrow((prev) => {
+            if (prev !== narrow) {
+              if (narrow && userExplicitToggleRef.current === null) {
+                setViewMode("records");
+              }
+              return narrow;
+            }
+            return prev;
+          });
+        }
+      }
+    });
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  // Track transition into mobile UI to auto-switch to records
+  const prevMobileRef = React.useRef(isMobileUI);
+  React.useEffect(() => {
+    if (isMobileUI && !prevMobileRef.current) {
+      // Whenever resizing or transitioning into mobile UI, auto-switch to records
+      userExplicitToggleRef.current = null;
+      setViewMode("records");
+    } else if (isMobileUI && viewMode !== "records" && userExplicitToggleRef.current === null) {
       setViewMode("records");
     }
-  }, [mode]);
+    prevMobileRef.current = isMobileUI;
+  }, [isMobileUI, viewMode]);
+
+  // Sync mode if panel or narrow container switches
+  React.useEffect(() => {
+    if ((mode === "panel" || containerNarrow) && viewMode !== "records" && userExplicitToggleRef.current === null) {
+      setViewMode("records");
+    }
+  }, [mode, containerNarrow, viewMode]);
+
+  const handleViewModeChange = (newMode: "records" | "table") => {
+    userExplicitToggleRef.current = newMode;
+    setViewMode(newMode);
+  };
 
   const handleCopy = async () => {
     const ok = await copyTableToClipboard(parsed.headers, parsed.rows);
@@ -70,15 +119,16 @@ export function RichTable({ children, className, defaultMode }: RichTableProps) 
 
   return (
     <div
+      ref={containerRef}
       className={cn(
-        "prime-data-strip my-4 rounded-xl border border-white/[0.08] overflow-hidden bg-black shadow-md",
+        "prime-data-strip @container my-4 rounded-xl border border-white/[0.08] overflow-hidden bg-black shadow-md",
         className
       )}
     >
       {/* Table Toolbar */}
       <RichTableToolbar
         viewMode={viewMode}
-        onViewModeChange={setViewMode}
+        onViewModeChange={handleViewModeChange}
         rowCount={parsed.rows.length}
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
