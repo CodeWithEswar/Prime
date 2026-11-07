@@ -224,7 +224,7 @@ export function LatencyChart({ observations }: LatencyChartProps) {
       </div>
 
       {/* Telemetry Canvas */}
-      <div className="mt-4 h-52 w-full min-w-0">
+      <div className="mt-4 h-56 sm:h-64 w-full min-w-0">
         {chartData.length > 0 ? (
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart
