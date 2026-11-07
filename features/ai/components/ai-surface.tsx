@@ -337,7 +337,7 @@ export function ConversationRail({ onSelect }: { onSelect?: () => void }) {
     </div>
   );
 }
-function ActionCard({ action }: { action: AIAction }) {
+function ActionCard({ action, panel = false }: { action: AIAction; panel?: boolean }) {
   const ai = useAI()!;
   const decision = useMutation({
     mutationFn: (value: "confirm" | "cancel") => ai.decide(action.id, value),
@@ -362,7 +362,7 @@ function ActionCard({ action }: { action: AIAction }) {
       </p>
       <details>
         <summary>Review note content</summary>
-        <Markdown content={action.input.body} />
+        <Markdown content={action.input.body} mode={panel ? "panel" : "workspace"} />
       </details>
       {pending && (
         <div className="ai-action-row">
@@ -389,7 +389,15 @@ function ActionCard({ action }: { action: AIAction }) {
     </section>
   );
 }
-function Message({ message, lastUser }: { message: AIMessage; lastUser: boolean }) {
+function Message({
+  message,
+  lastUser,
+  panel = false,
+}: {
+  message: AIMessage;
+  lastUser: boolean;
+  panel?: boolean;
+}) {
   const ai = useAI()!;
   const [edit, setEdit] = useState(false),
     [value, setValue] = useState(message.content);
@@ -401,6 +409,7 @@ function Message({ message, lastUser }: { message: AIMessage; lastUser: boolean 
       content={message.content}
       streaming={message.status === "streaming"}
       references={refs.map((r) => ({ href: r.href, title: r.title }))}
+      mode={panel ? "panel" : "workspace"}
     />
   );
   const toolLabels: Record<string, string> = {
@@ -764,10 +773,11 @@ export function AISurface({ panel = false }: { panel?: boolean }) {
               key={m.id}
               message={m}
               lastUser={!running && m.id === lastUser?.id}
+              panel={panel}
             />
           ))}
           {ai.actions.map((a) => (
-            <ActionCard key={a.id} action={a} />
+            <ActionCard key={a.id} action={a} panel={panel} />
           ))}
           {running && (
             <div className="ai-stream-status" role="status">

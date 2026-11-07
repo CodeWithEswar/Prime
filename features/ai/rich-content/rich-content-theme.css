@@ -1,0 +1,95 @@
+/**
+ * PRIME Rich Content Theme — Semantic Learning Colors & Surface Tokens
+ * Pure black foundation, white typography, restrained red brand accent,
+ * with purposeful semantic accents for educational clarity.
+ */
+
+:root {
+  /* Surfaces & Foundation */
+  --prime-rich-bg: #000000;
+  --prime-rich-surface: #080808;
+  --prime-rich-surface-elevated: #0f0f0f;
+  --prime-rich-surface-active: #141414;
+  --prime-rich-border: rgba(255, 255, 255, 0.08);
+  --prime-rich-border-subtle: rgba(255, 255, 255, 0.04);
+  --prime-rich-border-hover: rgba(255, 255, 255, 0.16);
+
+  /* Typography */
+  --prime-rich-text: #ededed;
+  --prime-rich-text-heading: #ffffff;
+  --prime-rich-text-muted: #8e8e8e;
+  --prime-rich-text-dim: #606060;
+
+  /* Brand Accent */
+  --prime-rich-accent: #ff0000;
+  --prime-rich-accent-hover: #ff2e2e;
+  --prime-rich-accent-subtle: rgba(255, 0, 0, 0.12);
+  --prime-rich-accent-border: rgba(255, 0, 0, 0.28);
+
+  /* Content Semantic Learning Colors */
+  /* Important / Caution */
+  --prime-rich-danger: #ef4444;
+  --prime-rich-danger-bg: rgba(239, 68, 68, 0.08);
+  --prime-rich-danger-border: rgba(239, 68, 68, 0.25);
+  --prime-rich-danger-text: #fca5a5;
+
+  /* Informational / Notes / Azure */
+  --prime-rich-info: #3b82f6;
+  --prime-rich-info-bg: rgba(59, 130, 246, 0.08);
+  --prime-rich-info-border: rgba(59, 130, 246, 0.25);
+  --prime-rich-info-text: #93c5fd;
+
+  /* Tips / Success / Correct / Emerald */
+  --prime-rich-success: #10b981;
+  --prime-rich-success-bg: rgba(16, 185, 129, 0.08);
+  --prime-rich-success-border: rgba(16, 185, 129, 0.25);
+  --prime-rich-success-text: #6ee7b7;
+
+  /* Warnings / Edge-Cases / Amber */
+  --prime-rich-warning: #f59e0b;
+  --prime-rich-warning-bg: rgba(245, 158, 11, 0.08);
+  --prime-rich-warning-border: rgba(245, 158, 11, 0.25);
+  --prime-rich-warning-text: #fcd34d;
+
+  /* Definitions / Concepts / Violet */
+  --prime-rich-violet: #8b5cf6;
+  --prime-rich-violet-bg: rgba(139, 92, 246, 0.08);
+  --prime-rich-violet-border: rgba(139, 92, 246, 0.25);
+  --prime-rich-violet-text: #c4b5fd;
+
+  /* Examples / Cyan */
+  --prime-rich-cyan: #06b6d4;
+  --prime-rich-cyan-bg: rgba(6, 182, 212, 0.08);
+  --prime-rich-cyan-border: rgba(6, 182, 212, 0.25);
+  --prime-rich-cyan-text: #67e8f9;
+}
+
+/* Ensure KaTeX display equations scroll horizontally without parent blowout */
+.prime-rich-content .katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 10px 0;
+  margin: 14px 0;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+}
+
+.prime-rich-content .katex {
+  font-size: 1.05em;
+  color: #f3f3f3;
+}
+
+/* Container query support for rich content wrapper */
+.prime-rich-content {
+  container-type: inline-size;
+  container-name: prime-rich-content;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  color: var(--prime-rich-text);
+  font-family: var(--font-geist-sans), sans-serif;
+  line-height: 1.7;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
