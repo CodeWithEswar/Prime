@@ -149,35 +149,8 @@ export function AvailabilityChart({ rollups }: AvailabilityChartProps) {
             </p>
           </div>
 
-          {/* Precision Controls: Segmented Filter & Three-Dots Menu */}
-          <div className="flex items-center gap-2 self-start sm:self-auto">
-            {/* View Mode Toggle - Decreased border radius */}
-            <div className="inline-flex rounded border border-neutral-800 bg-neutral-900/80 p-0.5 text-xs font-mono shadow-xs">
-              <button
-                type="button"
-                onClick={() => setViewMode("timeline")}
-                className={`rounded-sm px-2.5 py-1 text-xs transition-colors ${
-                  viewMode === "timeline"
-                    ? "bg-neutral-800 font-semibold text-white shadow-xs"
-                    : "text-neutral-400 hover:text-white"
-                }`}
-              >
-                14-Day Matrix
-              </button>
-              <button
-                type="button"
-                onClick={() => setViewMode("curve")}
-                className={`rounded-sm px-2.5 py-1 text-xs transition-colors ${
-                  viewMode === "curve"
-                    ? "bg-neutral-800 font-semibold text-white shadow-xs"
-                    : "text-neutral-400 hover:text-white"
-                }`}
-              >
-                SLO Curve
-              </button>
-            </div>
-
-            {/* Three Dots Dropdown Menu */}
+          {/* Three Dots Dropdown Menu Only */}
+          <div className="self-start sm:self-auto">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <button

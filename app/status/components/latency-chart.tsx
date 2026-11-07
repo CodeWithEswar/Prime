@@ -130,35 +130,8 @@ export function LatencyChart({ observations }: LatencyChartProps) {
             </p>
           </div>
 
-          {/* Precision Controls: Range Filter & Three Dots Menu */}
-          <div className="flex items-center gap-2 self-start sm:self-auto">
-            {/* Range Control - Decreased border radius */}
-            <div className="inline-flex rounded border border-neutral-800 bg-neutral-900/80 p-0.5 text-xs font-mono shadow-xs">
-              <button
-                type="button"
-                onClick={() => setRange("recent")}
-                className={`rounded-sm px-2.5 py-1 text-xs transition-colors ${
-                  range === "recent"
-                    ? "bg-neutral-800 font-semibold text-white shadow-xs"
-                    : "text-neutral-400 hover:text-white"
-                }`}
-              >
-                Last 30 Checks
-              </button>
-              <button
-                type="button"
-                onClick={() => setRange("24h")}
-                className={`rounded-sm px-2.5 py-1 text-xs transition-colors ${
-                  range === "24h"
-                    ? "bg-neutral-800 font-semibold text-white shadow-xs"
-                    : "text-neutral-400 hover:text-white"
-                }`}
-              >
-                Full Window
-              </button>
-            </div>
-
-            {/* Three Dots Dropdown Menu */}
+          {/* Three Dots Dropdown Menu Only */}
+          <div className="self-start sm:self-auto">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <button
