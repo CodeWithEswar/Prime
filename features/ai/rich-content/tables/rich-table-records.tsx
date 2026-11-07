@@ -62,11 +62,11 @@ export function RichTableRecords({ headers, rows, searchQuery = "" }: RichTableR
           >
             {/* Record Header */}
             <div className="flex items-start justify-between gap-2">
-              <div className="flex items-center gap-2 min-w-0 flex-1">
+              <div className="flex items-center gap-2.5 min-w-0 flex-1">
                 <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-[#FF0000]/10 border border-[#FF0000]/25 text-[#FF0000]">
                   <Icon icon={CodeCircleIcon} size={11} />
                 </div>
-                <h4 className="font-mono text-xs sm:text-sm font-bold text-white tracking-tight break-words">
+                <h4 className="!m-0 !p-0 font-mono text-xs sm:text-sm font-bold text-white tracking-tight break-words leading-snug">
                   {primaryVal}
                 </h4>
               </div>
