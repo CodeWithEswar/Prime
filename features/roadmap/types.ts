@@ -28,7 +28,7 @@ export interface RoadmapStageData extends StageProgressSummary {
 }
 
 export interface FundamentalsCourseStatus {
-  course: "dbms" | "os" | "cn" | "oop";
+  course: "dbms" | "os" | "cn" | "oop" | "data-engineering";
   title: string;
   label: string;
   slug: string;

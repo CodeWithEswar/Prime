@@ -24,6 +24,12 @@ export const fundamentalsCourses = {
     description: "Object-oriented design, Java language concepts, and design practice.",
     difficulty: "Hard",
   },
+  "data-engineering": {
+    label: "Data Engineering",
+    title: "Data Engineering Mastery",
+    description: "Modern data engineering: Python, SQL, Kimball modeling, Iceberg, Spark, Kafka, dbt & DataOps.",
+    difficulty: "Hard",
+  },
 } as const;
 
 export type FundamentalsCourse = keyof typeof fundamentalsCourses;

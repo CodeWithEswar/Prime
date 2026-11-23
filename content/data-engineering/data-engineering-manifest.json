@@ -1,0 +1,2308 @@
+{
+  "course": "data-engineering",
+  "slug": "data-engineering",
+  "title": "Data Engineering Mastery Roadmap",
+  "subtitle": "Complete Zero-to-Hero Industry Curriculum from Fundamentals to Cloud, Streaming & DataOps",
+  "totalStages": 8,
+  "totalModules": 27,
+  "totalVideos": 54,
+  "totalEstimatedMinutes": 3898,
+  "stages": [
+    {
+      "stageNumber": 1,
+      "id": "stage-1-programming-linux",
+      "title": "Programming & Linux Fundamentals",
+      "subtitle": "Python, Advanced SQL, Bash/Linux, and Git for Data Engineers",
+      "description": "Establish software engineering rigor for data systems. Master modern Python for data engineering (typing, OOP, generators, pandas/polars), SQL mastery (window functions, CTEs, explain plans), Linux command-line data processing, and Git collaboration.",
+      "level": "Beginner to Intermediate",
+      "estimatedMinutes": 840,
+      "learningOutcomes": [
+        "Write production-grade, maintainable Python using type annotations, OOP, generators, and data handling libraries",
+        "Write complex SQL queries utilizing window functions (ROW_NUMBER, RANK, DENSE_RANK, LEAD, LAG) and Common Table Expressions (CTEs)",
+        "Operate comfortably inside Linux environments using pipes, grep, awk, sed, and schedule tasks via cron",
+        "Implement version control best practices, branch management, pull requests, and automated Git workflows for data repositories"
+      ],
+      "modules": [
+        {
+          "id": "module-1-1-python",
+          "title": "Python for Data Engineering",
+          "summary": "Core Python engineering principles, data structures, REST API data ingestion, schema evolution, and data loading.",
+          "videos": [
+            {
+              "position": 1,
+              "youtubeVideoId": "T23Bs75F7ZQ",
+              "title": "Data Engineering with Python and AI/LLMs – Data Loading Tutorial",
+              "channel": "freeCodeCamp.org",
+              "canonicalUrl": "https://www.youtube.com/watch?v=T23Bs75F7ZQ",
+              "difficulty": "Medium",
+              "importance": "Critical",
+              "topicSlug": "python-data-loading",
+              "estimatedMinutes": 210,
+              "keyTakeaways": [
+                "Stream and batch data extraction from REST APIs",
+                "Dynamic schema management and incremental data loading",
+                "Loading structured data into DuckDB and cloud data lakes"
+              ]
+            },
+            {
+              "position": 2,
+              "youtubeVideoId": "XMmfJFS_MFQ",
+              "title": "Python for Data Engineers Full Course 2026 | Basics to Advanced",
+              "channel": "Data with Jay",
+              "canonicalUrl": "https://www.youtube.com/watch?v=XMmfJFS_MFQ",
+              "difficulty": "Easy",
+              "importance": "High",
+              "topicSlug": "python-fundamentals-oop",
+              "estimatedMinutes": 180,
+              "keyTakeaways": [
+                "OOP principles for building scalable data pipelines",
+                "Memory-efficient data generators and iterators",
+                "Exception handling, logging, and virtual environment isolation"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "module-1-2-sql-mastery",
+          "title": "SQL Mastery & Analytical Querying",
+          "summary": "Deep dive into analytical SQL, window functions, CTEs, joins, query optimization, and execution plans.",
+          "videos": [
+            {
+              "position": 3,
+              "youtubeVideoId": "OT1RErkfLNQ",
+              "title": "Learn SQL Beginner to Advanced in Under 4 Hours",
+              "channel": "Alex The Analyst",
+              "canonicalUrl": "https://www.youtube.com/watch?v=OT1RErkfLNQ",
+              "difficulty": "Easy",
+              "importance": "High",
+              "topicSlug": "sql-fundamentals-joins",
+              "estimatedMinutes": 230,
+              "keyTakeaways": [
+                "Relational database foundations, schemas, and primary/foreign keys",
+                "Inner, Left, Right, Full Outer, and Cross Joins",
+                "Aggregations, Grouping, Having, and Subqueries"
+              ]
+            },
+            {
+              "position": 4,
+              "youtubeVideoId": "dqwhNcZoMOQ",
+              "title": "SQL Window Functions (LEAD/LAG and RANK) and Common Table Expressions in 60 minutes on DataExpert.io",
+              "channel": "DataExpert",
+              "canonicalUrl": "https://www.youtube.com/watch?v=dqwhNcZoMOQ",
+              "difficulty": "Hard",
+              "importance": "Critical",
+              "topicSlug": "sql-window-functions-ctes",
+              "estimatedMinutes": 60,
+              "keyTakeaways": [
+                "Window frame specifications: ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW",
+                "Partitioning and ordering with ROW_NUMBER, RANK, DENSE_RANK",
+                "Time-series analysis using LEAD and LAG with offsets and default fallbacks",
+                "Recursive CTEs and modular query factorization"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "module-1-3-linux-bash",
+          "title": "Linux, Shell & Bash Automation",
+          "summary": "Mastering the Linux terminal, bash scripting, cron automation, and command-line text processing.",
+          "videos": [
+            {
+              "position": 5,
+              "youtubeVideoId": "mABpAI-pCw0",
+              "title": "Command Line Basics for Beginners - Full Course",
+              "channel": "freeCodeCamp.org",
+              "canonicalUrl": "https://www.youtube.com/watch?v=mABpAI-pCw0",
+              "difficulty": "Easy",
+              "importance": "High",
+              "topicSlug": "linux-cli-fundamentals",
+              "estimatedMinutes": 60,
+              "keyTakeaways": [
+                "Navigating filesystems, permissions (chmod/chown), and standard streams (stdin, stdout, stderr)",
+                "Piping and redirection operators",
+                "Process management (ps, top, kill, nohup)"
+              ]
+            },
+            {
+              "position": 6,
+              "youtubeVideoId": "tK9Oc6AEnR4",
+              "title": "Bash Scripting Tutorial for Beginners",
+              "channel": "freeCodeCamp.org",
+              "canonicalUrl": "https://www.youtube.com/watch?v=tK9Oc6AEnR4",
+              "difficulty": "Medium",
+              "importance": "High",
+              "topicSlug": "bash-scripting-core",
+              "estimatedMinutes": 60,
+              "keyTakeaways": [
+                "Variables, environment exports, loops, and conditional branching",
+                "Functions, return codes, and error trapping (set -e, set -o pipefail)",
+                "Text wrangling with cut, sort, uniq, grep, sed, and awk"
+              ]
+            },
+            {
+              "position": 7,
+              "youtubeVideoId": "G2Y8qubwcI8",
+              "title": "Bash Scripting for Data Engineering: Full ETL Workflow and automation with Crontab",
+              "channel": "Banana Code",
+              "canonicalUrl": "https://www.youtube.com/watch?v=G2Y8qubwcI8",
+              "difficulty": "Medium",
+              "importance": "Critical",
+              "topicSlug": "bash-etl-crontab",
+              "estimatedMinutes": 45,
+              "keyTakeaways": [
+                "Building a complete end-to-end bash ETL pipeline",
+                "Automating scheduled data extraction with crontab syntax",
+                "Logging and error handling for production cron tasks"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "module-1-4-git",
+          "title": "Git & Version Control for Data Teams",
+          "summary": "Version control best practices, branch topologies, pull requests, merge conflicts, and collaboration.",
+          "videos": [
+            {
+              "position": 8,
+              "youtubeVideoId": "RGOj5yH7evk",
+              "title": "Git and GitHub for Beginners - Crash Course",
+              "channel": "freeCodeCamp.org",
+              "canonicalUrl": "https://www.youtube.com/watch?v=RGOj5yH7evk",
+              "difficulty": "Easy",
+              "importance": "High",
+              "topicSlug": "git-version-control",
+              "estimatedMinutes": 65,
+              "keyTakeaways": [
+                "Git staging, commit semantics, and tree history",
+                "Branching strategies: trunk-based vs Gitflow for data repos",
+                "Resolving merge conflicts and opening PRs with review checklists"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "stageNumber": 2,
+      "id": "stage-2-data-modeling-warehouses",
+      "title": "Data Modeling, Warehouses & Storage",
+      "subtitle": "Kimball Dimensional Modeling, Snowflake, Google BigQuery, and AWS Redshift",
+      "description": "Understand how analytical data is structured and stored at enterprise scale. Master dimensional modeling (Kimball facts, dimensions, SCDs), compare OLTP vs OLAP architectures, and explore modern cloud data warehouses: Snowflake, BigQuery, and Redshift.",
+      "level": "Intermediate",
+      "estimatedMinutes": 620,
+      "learningOutcomes": [
+        "Architect Kimball dimensional models using Star and Snowflake schemas with conformed dimensions",
+        "Implement Slowly Changing Dimensions (SCD Type 1, 2, 3, 4, 6) for historical tracking",
+        "Master Snowflake's unique multi-cluster shared data architecture, micro-partitioning, and virtual warehouses",
+        "Optimize BigQuery using partitioning, clustering, and slot management for petabyte-scale queries",
+        "Configure Amazon Redshift distribution styles (KEY, EVEN, ALL) and sort keys for MPP query execution"
+      ],
+      "modules": [
+        {
+          "id": "module-2-1-dimensional-modeling",
+          "title": "Dimensional Modeling & Kimball Methodology",
+          "summary": "Foundational dimensional data modeling, star vs snowflake schemas, facts, dimensions, and SCD handling.",
+          "videos": [
+            {
+              "position": 9,
+              "youtubeVideoId": "JeeqpK3o3LQ",
+              "title": "Dimensional data modeling and idempotent pipelines in 78 minutes with DataExpert.io",
+              "channel": "DataExpert",
+              "canonicalUrl": "https://www.youtube.com/watch?v=JeeqpK3o3LQ",
+              "difficulty": "Hard",
+              "importance": "Critical",
+              "topicSlug": "dimensional-modeling-idempotency",
+              "estimatedMinutes": 78,
+              "keyTakeaways": [
+                "Designing idempotent pipelines that produce identical state on retries",
+                "Fact tables vs Dimension tables: granularity and grain definition",
+                "Production implementations of Slowly Changing Dimensions (SCD Types 1, 2, and 3)"
+              ]
+            },
+            {
+              "position": 10,
+              "youtubeVideoId": "gG7upg6QaBI",
+              "title": "Data Modeling - Walking Through How To Data Model As A Data Engineer - Dimensional Modeling 101",
+              "channel": "Seattle Data Guy",
+              "canonicalUrl": "https://www.youtube.com/watch?v=gG7upg6QaBI",
+              "difficulty": "Medium",
+              "importance": "High",
+              "topicSlug": "dimensional-modeling-101",
+              "estimatedMinutes": 25,
+              "keyTakeaways": [
+                "Practical step-by-step walkthrough of translating business requirements to schema",
+                "Star schema vs Snowflake schema tradeoffs",
+                "Surrogate keys vs Natural keys"
+              ]
+            },
+            {
+              "position": 11,
+              "youtubeVideoId": "RmugzY84iL4",
+              "title": "Data Modeling Masterclass | Build Uber's Data Model from Scratch",
+              "channel": "Darshil Parmar",
+              "canonicalUrl": "https://www.youtube.com/watch?v=RmugzY84iL4",
+              "difficulty": "Medium",
+              "importance": "Critical",
+              "topicSlug": "uber-data-model-case-study",
+              "estimatedMinutes": 60,
+              "keyTakeaways": [
+                "End-to-end case study: ride-sharing domain data model",
+                "Driver, rider, trip, payment, and surge dimension/fact modeling",
+                "Normalizing 3NF source data into analytical dimensional models"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "module-2-2-snowflake",
+          "title": "Snowflake Cloud Data Warehouse",
+          "summary": "Snowflake architecture, separation of storage and compute, virtual warehouses, micro-partitions, time travel, and cloning.",
+          "videos": [
+            {
+              "position": 12,
+              "youtubeVideoId": "JsIK6Z3XPOk",
+              "title": "Masterclass on Snowflake 2026: Full Course for Beginners to Advanced",
+              "channel": "Data with Jay",
+              "canonicalUrl": "https://www.youtube.com/watch?v=JsIK6Z3XPOk",
+              "difficulty": "Medium",
+              "importance": "Critical",
+              "topicSlug": "snowflake-masterclass",
+              "estimatedMinutes": 180,
+              "keyTakeaways": [
+                "Snowflake 3-tier architecture: Cloud Services, Virtual Warehouses, Centralized Storage",
+                "Data loading techniques: COPY INTO, Snowpipe continuous ingestion",
+                "Zero-Copy Cloning, Time Travel, and Fail-safe recovery mechanisms"
+              ]
+            },
+            {
+              "position": 13,
+              "youtubeVideoId": "ZvIfCf7DRBY",
+              "title": "Master Snowflake Architecture in 20 Minutes | Complete Deep Dive (2026) | Snowflake Architecture",
+              "channel": "Data-2-Dollars",
+              "canonicalUrl": "https://www.youtube.com/watch?v=ZvIfCf7DRBY",
+              "difficulty": "Easy",
+              "importance": "High",
+              "topicSlug": "snowflake-architecture-deepdive",
+              "estimatedMinutes": 20,
+              "keyTakeaways": [
+                "Micro-partitioning internals and column pruning",
+                "Result cache, local disk cache, and remote storage cache hierarchy",
+                "Multi-cluster warehouse auto-scaling and credit management"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "module-2-3-bigquery",
+          "title": "Google BigQuery Architecture & Analytics",
+          "summary": "Serverless analytical processing, Dremel execution engine, Capacitor columnar format, partitioning, and clustering.",
+          "videos": [
+            {
+              "position": 14,
+              "youtubeVideoId": "eYBTdiwzJqQ",
+              "title": "Google BigQuery Tutorial (Beginner to Advanced) | Complete Guide in 14 Minutes",
+              "channel": "KumarAbhishek008",
+              "canonicalUrl": "https://www.youtube.com/watch?v=eYBTdiwzJqQ",
+              "difficulty": "Easy",
+              "importance": "Medium",
+              "topicSlug": "bigquery-guide-fundamentals",
+              "estimatedMinutes": 15,
+              "keyTakeaways": [
+                "Creating datasets, tables, and views in BigQuery",
+                "Ingesting CSV, JSON, and Parquet data from Google Cloud Storage",
+                "Query costs calculation, dry runs, and billing controls"
+              ]
+            },
+            {
+              "position": 15,
+              "youtubeVideoId": "QDz8be0L2PQ",
+              "title": "SQL Bootcamp - Learn SQL in 2 Hours | Beginners | GCP | BigQuery | [Full Course]",
+              "channel": "Pivotalstats",
+              "canonicalUrl": "https://www.youtube.com/watch?v=QDz8be0L2PQ",
+              "difficulty": "Medium",
+              "importance": "High",
+              "topicSlug": "bigquery-partitioning-clustering",
+              "estimatedMinutes": 120,
+              "keyTakeaways": [
+                "BigQuery Partitioning (ingestion time vs column-based)",
+                "Clustering strategies to minimize scanned byte volume",
+                "BigQuery BI Engine and nested & repeated fields (STRUCT / ARRAY)"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "module-2-4-redshift",
+          "title": "AWS Redshift & MPP Architecture",
+          "summary": "Massively Parallel Processing (MPP) architecture, leader and compute nodes, distribution styles, and sort keys.",
+          "videos": [
+            {
+              "position": 16,
+              "youtubeVideoId": "lj8oaSpCFTc",
+              "title": "AWS re:Invent 2019: Deep dive and best practices for Amazon Redshift (ANT418)",
+              "channel": "AWS Events",
+              "canonicalUrl": "https://www.youtube.com/watch?v=lj8oaSpCFTc",
+              "difficulty": "Hard",
+              "importance": "High",
+              "topicSlug": "aws-redshift-deepdive",
+              "estimatedMinutes": 60,
+              "keyTakeaways": [
+                "Redshift MPP architecture: Leader node and Compute node slices",
+                "Distribution styles: AUTO, EVEN, KEY, ALL to eliminate data broadcast overhead",
+                "Compound vs Interleaved Sort Keys and VACUUM/ANALYZE maintenance"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "stageNumber": 3,
+      "id": "stage-3-data-lakes-lakehouses",
+      "title": "Data Lakes, Lakehouses & Modern Table Formats",
+      "subtitle": "Object Storage, Parquet, Apache Iceberg, Delta Lake, and Apache Hudi",
+      "description": "Transition from traditional data warehouses to modern open lakehouse architectures. Learn columnar file formats, ACID transactions over object storage (S3/GCS/ADLS), and the battle of open table formats: Apache Iceberg, Delta Lake, and Apache Hudi.",
+      "level": "Intermediate to Advanced",
+      "estimatedMinutes": 480,
+      "learningOutcomes": [
+        "Explain the technical distinctions between Data Warehouses, Data Lakes, and Lakehouses",
+        "Understand columnar storage mechanics: Parquet row groups, columnar chunking, dictionary encoding, and Snappy compression",
+        "Architect Lakehouse systems with Apache Iceberg: metadata trees, manifest lists, hidden partitioning, and schema evolution",
+        "Deploy Delta Lake with ACID transaction logs (_delta_log), OPTIMIZE, Z-ORDER, and VACUUM operations",
+        "Differentiate Copy-on-Write (CoW) vs Merge-on-Read (MoR) in Apache Hudi for high-frequency mutation workloads"
+      ],
+      "modules": [
+        {
+          "id": "module-3-1-lakehouse-foundations",
+          "title": "Data Lake Fundamentals & Columnar Storage",
+          "summary": "The shift to Lakehouse, Medallion Architecture (Bronze/Silver/Gold), and file format comparisons.",
+          "videos": [
+            {
+              "position": 17,
+              "youtubeVideoId": "PHsC_t0j1dU",
+              "title": "Data Engineering Course for Beginners",
+              "channel": "freeCodeCamp.org",
+              "canonicalUrl": "https://www.youtube.com/watch?v=PHsC_t0j1dU",
+              "difficulty": "Easy",
+              "importance": "High",
+              "topicSlug": "data-engineering-pipeline-foundations",
+              "estimatedMinutes": 180,
+              "keyTakeaways": [
+                "End-to-end data pipeline lifecycle and modern data stack overview",
+                "Raw storage vs processed storage layers",
+                "Containerized data tooling and ingestion patterns"
+              ]
+            },
+            {
+              "position": 18,
+              "youtubeVideoId": "JoAvaQAlaOM",
+              "title": "Data Modeling Crash Course: The 3 Layered Model",
+              "channel": "Kahan Data Solutions",
+              "canonicalUrl": "https://www.youtube.com/watch?v=JoAvaQAlaOM",
+              "difficulty": "Medium",
+              "importance": "High",
+              "topicSlug": "medallion-three-layer-architecture",
+              "estimatedMinutes": 25,
+              "keyTakeaways": [
+                "Three-tier lakehouse data architecture: Staging, Intermediate, and Mart layers",
+                "Data lineage and transformation boundaries across layers",
+                "Maintaining idempotency across raw to clean layers"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "module-3-2-apache-iceberg",
+          "title": "Apache Iceberg Open Table Format",
+          "summary": "Iceberg architecture, hierarchical metadata structure, snapshot isolation, hidden partitioning, and time travel.",
+          "videos": [
+            {
+              "position": 19,
+              "youtubeVideoId": "p24GiqQaA1U",
+              "title": "Apache Iceberg 101: What It Is & Why It Matters | Dremio",
+              "channel": "Dremio",
+              "canonicalUrl": "https://www.youtube.com/watch?v=p24GiqQaA1U",
+              "difficulty": "Medium",
+              "importance": "Critical",
+              "topicSlug": "apache-iceberg-101",
+              "estimatedMinutes": 45,
+              "keyTakeaways": [
+                "Why Hive table formats failed at scale (O(N) file listing bottlenecks)",
+                "Iceberg metadata tree: Iceberg Catalog -> Table Metadata -> Manifest List -> Manifest Files -> Data Files",
+                "ACID transactions, atomic commits via catalog compare-and-swap (CAS)"
+              ]
+            },
+            {
+              "position": 20,
+              "youtubeVideoId": "lQ1bwjhFBTE",
+              "title": "Apache Iceberg 101 - 2026 Edition",
+              "channel": "Dremio",
+              "canonicalUrl": "https://www.youtube.com/watch?v=lQ1bwjhFBTE",
+              "difficulty": "Medium",
+              "importance": "High",
+              "topicSlug": "apache-iceberg-modern-features",
+              "estimatedMinutes": 50,
+              "keyTakeaways": [
+                "Hidden partitioning: partition evolution without rewriting data tables",
+                "Full schema evolution (add, drop, rename, reorder columns safely)",
+                "Time travel queries and rollback capabilities"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "module-3-3-delta-lake",
+          "title": "Delta Lake & UniForm",
+          "summary": "Delta transaction log, ACID semantics on S3/ADLS, compactions, Z-ordering, and Universal Format.",
+          "videos": [
+            {
+              "position": 21,
+              "youtubeVideoId": "de-6a6Bfw6E",
+              "title": "Deep-Dive into Delta Lake",
+              "channel": "Databricks",
+              "canonicalUrl": "https://www.youtube.com/watch?v=de-6a6Bfw6E",
+              "difficulty": "Hard",
+              "importance": "Critical",
+              "topicSlug": "delta-lake-internals",
+              "estimatedMinutes": 45,
+              "keyTakeaways": [
+                "The _delta_log JSON commit protocol and checkpointing (.checkpoint.parquet)",
+                "Concurrency control: Optimistic Concurrency Control (OCC) and conflict resolution",
+                "ACID guarantees for concurrent batch and streaming writes"
+              ]
+            },
+            {
+              "position": 22,
+              "youtubeVideoId": "Cz-8XtI_vbU",
+              "title": "Deep Dive into Delta Lake and UniForm on Databricks",
+              "channel": "Databricks",
+              "canonicalUrl": "https://www.youtube.com/watch?v=Cz-8XtI_vbU",
+              "difficulty": "Hard",
+              "importance": "High",
+              "topicSlug": "delta-lake-uniform",
+              "estimatedMinutes": 35,
+              "keyTakeaways": [
+                "Universal Format (UniForm): reading Delta tables as Iceberg or Hudi without copying data",
+                "Liquid clustering vs traditional Hive partitioning",
+                "Automated compaction and predictive optimization"
+              ]
+            },
+            {
+              "position": 23,
+              "youtubeVideoId": "znv4rM9wevc",
+              "title": "Lakehouse with Delta Lake Deep Dive Training",
+              "channel": "Databricks",
+              "canonicalUrl": "https://www.youtube.com/watch?v=znv4rM9wevc",
+              "difficulty": "Medium",
+              "importance": "High",
+              "topicSlug": "delta-lake-operations",
+              "estimatedMinutes": 60,
+              "keyTakeaways": [
+                "OPTIMIZE command and small file compaction",
+                "Multi-dimensional clustering with Z-ORDER BY",
+                "VACUUM retention limits and data safety thresholds"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "module-3-4-apache-hudi",
+          "title": "Apache Hudi Architecture & Mutations",
+          "summary": "Fast database-style record-level updates, Copy-on-Write vs Merge-on-Read, timeline service, and indexing.",
+          "videos": [
+            {
+              "position": 24,
+              "youtubeVideoId": "AYaw06_Xazo",
+              "title": "Apache Hudi: A Database Layer Over Cloud Storage for Fast Mutations & Queries (Vinoth Chandar)",
+              "channel": "CMU Database Group",
+              "canonicalUrl": "https://www.youtube.com/watch?v=AYaw06_Xazo",
+              "difficulty": "Hard",
+              "importance": "Critical",
+              "topicSlug": "apache-hudi-cmu-deepdive",
+              "estimatedMinutes": 60,
+              "keyTakeaways": [
+                "Handling CDC (Change Data Capture) updates and deletes at petabyte scale",
+                "Copy-on-Write (CoW) for read-heavy workloads vs Merge-on-Read (MoR) for write-heavy streaming",
+                "Record-level indexing (Bloom filters, Simple, HBase) for rapid upsert key location"
+              ]
+            },
+            {
+              "position": 25,
+              "youtubeVideoId": "6mZTz3C3TZo",
+              "title": "🔒 Apache Hudi Explained: How does it handle millions of updates?",
+              "channel": "DataMuscle",
+              "canonicalUrl": "https://www.youtube.com/watch?v=6mZTz3C3TZo",
+              "difficulty": "Medium",
+              "importance": "High",
+              "topicSlug": "apache-hudi-upsert-mechanics",
+              "estimatedMinutes": 20,
+              "keyTakeaways": [
+                "Hudi Timeline and instant states (Requested, Inflight, Completed)",
+                "Log file delta compaction in MoR tables",
+                "Incremental querying to ingest only changed rows since timestamp T"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "stageNumber": 4,
+      "id": "stage-4-distributed-computing-spark",
+      "title": "Distributed Computing & Batch Processing",
+      "subtitle": "Distributed Systems, Apache Spark, PySpark, and Performance Tuning",
+      "description": "Master big data computation across clusters. Learn the internal workings of distributed computing (MapReduce, DAG schedulers, shuffles), master Apache Spark & PySpark (Core, DataFrames, Spark SQL), and perform deep performance tuning (Catalyst, Tungsten, memory management, data skew resolution).",
+      "level": "Advanced",
+      "estimatedMinutes": 520,
+      "learningOutcomes": [
+        "Explain cluster architecture: Driver, Cluster Manager (YARN, K8s, Standalone), and Worker/Executor nodes",
+        "Write production PySpark data pipelines using DataFrame API, transformations vs actions, and Spark SQL",
+        "Understand Spark Catalyst Optimizer phases: Analysis, Logical Plan, Physical Plan, and Code Generation",
+        "Diagnose and eliminate Spark bottlenecks: shuffle spills (memory to disk), GC pauses, and unbalanced partitions",
+        "Resolve severe data skew using salting techniques, broadcast hash joins, and Adaptive Query Execution (AQE)"
+      ],
+      "modules": [
+        {
+          "id": "module-4-1-distributed-architecture",
+          "title": "Distributed Architecture & MapReduce Fundamentals",
+          "summary": "Core distributed system concepts, driver vs executor model, cluster managers, and fault tolerance.",
+          "videos": [
+            {
+              "position": 26,
+              "youtubeVideoId": "krgVaiR1reI",
+              "title": "Apache Spark Architecture with Spark Context Driver and Executor",
+              "channel": "Andreas Kretz",
+              "canonicalUrl": "https://www.youtube.com/watch?v=krgVaiR1reI",
+              "difficulty": "Medium",
+              "importance": "Critical",
+              "topicSlug": "spark-driver-executor-architecture",
+              "estimatedMinutes": 30,
+              "keyTakeaways": [
+                "Role of Driver program and SparkSession",
+                "Executor JVM processes, task slots, and core allocation",
+                "DAG generation: Stages separated by Shuffle boundaries (Narrow vs Wide dependencies)"
+              ]
+            },
+            {
+              "position": 27,
+              "youtubeVideoId": "iUOQPyHN9-0",
+              "title": "Lambda Architecture & Kappa Architecture | Data Engineering Course Part 4 | #077",
+              "channel": "Andreas Kretz",
+              "canonicalUrl": "https://www.youtube.com/watch?v=iUOQPyHN9-0",
+              "difficulty": "Medium",
+              "importance": "High",
+              "topicSlug": "lambda-kappa-architectures",
+              "estimatedMinutes": 25,
+              "keyTakeaways": [
+                "Lambda Architecture: Dual batch and speed layers with serving views",
+                "Kappa Architecture: Everything as a stream log",
+                "Architectural tradeoffs between complexity, latency, and correctness"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "module-4-2-pyspark-masterclass",
+          "title": "Apache Spark & PySpark Masterclass",
+          "summary": "Complete PySpark programming model: DataFrames, schemas, transformations, aggregations, and windowing.",
+          "videos": [
+            {
+              "position": 28,
+              "youtubeVideoId": "_C8kWso4ne4",
+              "title": "PySpark Tutorial",
+              "channel": "freeCodeCamp.org",
+              "canonicalUrl": "https://www.youtube.com/watch?v=_C8kWso4ne4",
+              "difficulty": "Medium",
+              "importance": "Critical",
+              "topicSlug": "pyspark-full-bootcamp",
+              "estimatedMinutes": 240,
+              "keyTakeaways": [
+                "Creating SparkSession and enforcing explicit StructType schemas",
+                "Transformations (map, filter, select, groupBy) vs Actions (count, collect, write)",
+                "Handling missing data, complex nested JSON, and PySpark UDFs"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "module-4-3-spark-tuning",
+          "title": "Spark Internals & Performance Optimization",
+          "summary": "Catalyst Optimizer, Tungsten off-heap memory, shuffle partitions, data skew, and Adaptive Query Execution.",
+          "videos": [
+            {
+              "position": 29,
+              "youtubeVideoId": "daXEp4HmS-E",
+              "title": "Apache Spark Core—Deep Dive—Proper Optimization Daniel Tomes Databricks",
+              "channel": "Databricks",
+              "canonicalUrl": "https://www.youtube.com/watch?v=daXEp4HmS-E",
+              "difficulty": "Hard",
+              "importance": "Critical",
+              "topicSlug": "spark-core-deepdive-optimization",
+              "estimatedMinutes": 60,
+              "keyTakeaways": [
+                "Tungsten binary memory format and cache-aware computation",
+                "Reading and deciphering the Spark UI: Event Timeline, SQL tab, and Stage DAGs",
+                "Right-sizing spark.sql.shuffle.partitions and avoiding shuffle file explosion",
+                "Memory management: Storage memory vs Execution memory unified boundary"
+              ]
+            },
+            {
+              "position": 30,
+              "youtubeVideoId": "wFDqBZROebk",
+              "title": "Boost Your Apache Spark Performance with These Optimization Techniques",
+              "channel": "NextGenLakehouse",
+              "canonicalUrl": "https://www.youtube.com/watch?v=wFDqBZROebk",
+              "difficulty": "Hard",
+              "importance": "High",
+              "topicSlug": "spark-skew-salting-aqe",
+              "estimatedMinutes": 35,
+              "keyTakeaways": [
+                "Broadcast Hash Join (BHJ) vs Sort-Merge Join (SMJ) mechanics",
+                "Handling severe data skew with artificial key salting and broadcast hints",
+                "Adaptive Query Execution (AQE): dynamic partition coalescing and skew join handling"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "stageNumber": 5,
+      "id": "stage-5-data-orchestration-pipelines",
+      "title": "Data Orchestration & Pipelines",
+      "subtitle": "Workflow Management, Apache Airflow, Dagster, and Prefect",
+      "description": "Design resilient, production-ready data pipelines. Master workflow orchestration fundamentals (DAGs, idempotency, backfilling, retries, SLAs), dive deep into Apache Airflow 2.x (TaskFlow API, sensors, executors), and discover modern orchestration tools: Dagster (Software-Defined Assets) and Prefect.",
+      "level": "Intermediate to Advanced",
+      "estimatedMinutes": 450,
+      "learningOutcomes": [
+        "Structure production workflows as Directed Acyclic Graphs (DAGs) upholding strict idempotency and atomic task design",
+        "Master Apache Airflow 2.x: TaskFlow API (@dag, @task), XComs, dynamic task mapping, and Sensors",
+        "Configure Airflow deployment architectures: CeleryExecutor vs KubernetesExecutor with Postgres metadata store",
+        "Build software-defined asset lineage and partition-aware data pipelines with Dagster",
+        "Orchestrate modern Python workflows using Prefect flows, tasks, deployments, and work pools"
+      ],
+      "modules": [
+        {
+          "id": "module-5-1-airflow-core",
+          "title": "Apache Airflow Masterclass",
+          "summary": "Core Airflow architecture (Webserver, Scheduler, Metadata Database, Triggerer), DAG definition, and operators.",
+          "videos": [
+            {
+              "position": 31,
+              "youtubeVideoId": "CGxxVj13sOs",
+              "title": "What is Apache Airflow? For beginners",
+              "channel": "Data with Marc",
+              "canonicalUrl": "https://www.youtube.com/watch?v=CGxxVj13sOs",
+              "difficulty": "Easy",
+              "importance": "High",
+              "topicSlug": "what-is-apache-airflow",
+              "estimatedMinutes": 15,
+              "keyTakeaways": [
+                "Why cron fails for complex pipelines and why orchestration is essential",
+                "Airflow components: Scheduler heartbeat, Executor worker, and Metadata DB",
+                "What a DAG is and how dependencies (>> / <<) define execution order"
+              ]
+            },
+            {
+              "position": 32,
+              "youtubeVideoId": "xUKIL7zsjos",
+              "title": "Getting Started with Airflow for Beginners",
+              "channel": "Data with Marc",
+              "canonicalUrl": "https://www.youtube.com/watch?v=xUKIL7zsjos",
+              "difficulty": "Medium",
+              "importance": "Critical",
+              "topicSlug": "airflow-taskflow-api",
+              "estimatedMinutes": 45,
+              "keyTakeaways": [
+                "Local development with Astro CLI and Docker",
+                "Airflow 2.0 TaskFlow API: writing Pythonic pipelines using @task decorator",
+                "Passing data between tasks using XComs and object storage backend",
+                "Task retries, exponential backoffs, and execution timeouts"
+              ]
+            },
+            {
+              "position": 33,
+              "youtubeVideoId": "7YCEydBUnjg",
+              "title": "Open-Source Spotlight - Apache Airflow - Marc Lamberti",
+              "channel": "DataTalksClub ⬛",
+              "canonicalUrl": "https://www.youtube.com/watch?v=7YCEydBUnjg",
+              "difficulty": "Hard",
+              "importance": "High",
+              "topicSlug": "airflow-production-patterns",
+              "estimatedMinutes": 60,
+              "keyTakeaways": [
+                "Data-aware scheduling using Airflow Datasets",
+                "Dynamic task mapping to parallelize processing over arbitrary collections",
+                "Best practices: keeping top-level DAG code fast to prevent scheduler lag"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "module-5-2-dagster",
+          "title": "Asset-Based Orchestration with Dagster",
+          "summary": "Software-Defined Assets, IO Managers, declarative data lineage, resources, and local testing.",
+          "videos": [
+            {
+              "position": 34,
+              "youtubeVideoId": "ZmUjf3gL1VU",
+              "title": "Dagster Crash Course: develop data assets in under ten minutes",
+              "channel": "Dagster",
+              "canonicalUrl": "https://www.youtube.com/watch?v=ZmUjf3gL1VU",
+              "difficulty": "Easy",
+              "importance": "High",
+              "topicSlug": "dagster-quickstart-assets",
+              "estimatedMinutes": 10,
+              "keyTakeaways": [
+                "Task-based orchestration (Airflow) vs Asset-based orchestration (Dagster)",
+                "Defining @asset functions that represent tables or datasets",
+                "Inspecting the global asset graph and automatic dependency resolution"
+              ]
+            },
+            {
+              "position": 35,
+              "youtubeVideoId": "k-iQNrtKhjo",
+              "title": "Dagster 101 — The Core Concepts Explained (In 4 Minutes)",
+              "channel": "Timnology",
+              "canonicalUrl": "https://www.youtube.com/watch?v=k-iQNrtKhjo",
+              "difficulty": "Easy",
+              "importance": "Medium",
+              "topicSlug": "dagster-core-concepts",
+              "estimatedMinutes": 5,
+              "keyTakeaways": [
+                "Assets, Resources, IO Managers, and Jobs breakdown",
+                "Decoupling business logic from storage systems",
+                "Partitioning assets by time or category"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "module-5-3-prefect",
+          "title": "Modern Flow Orchestration with Prefect",
+          "summary": "Prefect 2.x/3.x, Python decorators, hybrid execution model, work pools, and self-healing pipelines.",
+          "videos": [
+            {
+              "position": 36,
+              "youtubeVideoId": "4Lnzn4lw9ig",
+              "title": "Prefect Workflow Orchestration: A Beginner's Guide to Automation (Part 1: Intro)",
+              "channel": "Mukul Tripathi",
+              "canonicalUrl": "https://www.youtube.com/watch?v=4Lnzn4lw9ig",
+              "difficulty": "Medium",
+              "importance": "High",
+              "topicSlug": "prefect-flows-and-tasks",
+              "estimatedMinutes": 30,
+              "keyTakeaways": [
+                "Wrapping existing Python scripts with @flow and @task decorators",
+                "Setting up self-hosted Prefect server and dashboard",
+                "Deployments, schedules, and work pools for distributed execution"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "stageNumber": 6,
+      "id": "stage-6-streaming-message-queues",
+      "title": "Real-Time Streaming & Message Queues",
+      "subtitle": "Event Streaming, Apache Kafka, Kafka Streams, and Apache Flink",
+      "description": "Unlock real-time streaming data architectures. Understand the difference between batch and event-driven architectures, master Apache Kafka (brokers, partitions, consumer groups, Schema Registry, KRaft mode), and implement stateful stream processing with Apache Flink.",
+      "level": "Advanced to Expert",
+      "estimatedMinutes": 510,
+      "learningOutcomes": [
+        "Architect event-driven systems using distributed commit logs, pub/sub topologies, and consumer groups",
+        "Master Apache Kafka: topic partitioning, producer acks, consumer offset management, and KRaft consensus",
+        "Enforce strict schema compatibility (Avro/Protobuf) using Confluent Schema Registry",
+        "Build stateful stream processors with Apache Flink: watermarks, windowing (tumbling, sliding, session)",
+        "Guarantee Exactly-Once Processing (E2E EOS) using Flink's Chandy-Lamport checkpointing and 2-phase commit"
+      ],
+      "modules": [
+        {
+          "id": "module-6-1-kafka-fundamentals",
+          "title": "Apache Kafka Fundamentals & Architecture",
+          "summary": "Distributed log architecture, brokers, partitions, producer acks, consumer rebalancing, and KRaft.",
+          "videos": [
+            {
+              "position": 37,
+              "youtubeVideoId": "QkdkLdMBuL0",
+              "title": "Kafka Tutorial for Beginners | Everything you need to get started",
+              "channel": "TechWorld with Nana",
+              "canonicalUrl": "https://www.youtube.com/watch?v=QkdkLdMBuL0",
+              "difficulty": "Easy",
+              "importance": "Critical",
+              "topicSlug": "kafka-for-beginners-nana",
+              "estimatedMinutes": 60,
+              "keyTakeaways": [
+                "Why message brokers like Kafka are needed in microservices and data pipelines",
+                "Topics, Partitions, Offsets, and Replication Factor",
+                "Producer partitioning strategy and Consumer Groups scaling",
+                "ZooKeeper vs modern KRaft (Kafka Raft Metadata mode)"
+              ]
+            },
+            {
+              "position": 38,
+              "youtubeVideoId": "CU44hKLMg7k",
+              "title": "Apache Kafka for Beginners (3+ hours long)",
+              "channel": "Bogdan Stashchuk",
+              "canonicalUrl": "https://www.youtube.com/watch?v=CU44hKLMg7k",
+              "difficulty": "Medium",
+              "importance": "Critical",
+              "topicSlug": "apache-kafka-comprehensive",
+              "estimatedMinutes": 190,
+              "keyTakeaways": [
+                "Running multi-broker Kafka clusters with Docker Compose",
+                "CLI commands: kafka-topics, kafka-console-producer, kafka-console-consumer",
+                "Producer delivery semantics: at-most-once, at-least-once, idempotent delivery (acks=all)",
+                "Consumer group offsets, auto-commit vs manual commit, and rebalance protocols"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "module-6-2-flink-stream-processing",
+          "title": "Stateful Stream Processing with Apache Flink",
+          "summary": "Flink runtime architecture, DataStream API, event-time processing, watermarks, checkpointing, and Flink SQL.",
+          "videos": [
+            {
+              "position": 39,
+              "youtubeVideoId": "Bn9NJRKcdKA",
+              "title": "Apache Flink Full Course for Data Engineers | Beginner to Advanced",
+              "channel": "Data with Jay",
+              "canonicalUrl": "https://www.youtube.com/watch?v=Bn9NJRKcdKA",
+              "difficulty": "Hard",
+              "importance": "Critical",
+              "topicSlug": "apache-flink-full-course",
+              "estimatedMinutes": 180,
+              "keyTakeaways": [
+                "True streaming (record-by-record) vs Spark structured micro-batching",
+                "Event Time vs Processing Time vs Ingestion Time",
+                "Watermarks and handling late-arriving data with allowed lateness",
+                "Windowing operators: Tumbling, Sliding, and Session windows",
+                "State backends: Memory, FileSystem, and RocksDB state backend"
+              ]
+            },
+            {
+              "position": 40,
+              "youtubeVideoId": "GqNZoo-qPgg",
+              "title": "Apache Flink Architecture",
+              "channel": "Big Data Landscape",
+              "canonicalUrl": "https://www.youtube.com/watch?v=GqNZoo-qPgg",
+              "difficulty": "Hard",
+              "importance": "High",
+              "topicSlug": "apache-flink-architecture",
+              "estimatedMinutes": 20,
+              "keyTakeaways": [
+                "JobManager, TaskManager, and Task Slots architecture",
+                "Chandy-Lamport distributed snapshot algorithm for fault-tolerant checkpointing",
+                "Savepoints for zero-downtime upgrades and state migration"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "stageNumber": 7,
+      "id": "stage-7-transformation-data-quality",
+      "title": "Transformation & Data Quality",
+      "subtitle": "dbt (Data Build Tool), Great Expectations, Soda, and Data Testing",
+      "description": "Establish analytics engineering best practices and eliminate data debt. Master dbt (models, refs, sources, seeds, snapshots, incremental models, Jinja macros), data testing and schema validations, and enterprise data quality frameworks: Great Expectations and Soda Core.",
+      "level": "Intermediate to Advanced",
+      "estimatedMinutes": 360,
+      "learningOutcomes": [
+        "Build production transformation DAGs using dbt Core & dbt Cloud adhering to the Medallion pattern",
+        "Write modular Jinja templates, dynamic macros, packages, and custom schema tests in dbt",
+        "Implement high-performance incremental models using merge, delete+insert, and append strategies",
+        "Create automated data quality suites using Great Expectations (GX Checkpoints and Data Docs)",
+        "Integrate proactive data contract testing and monitoring within CI/CD and Airflow DAGs"
+      ],
+      "modules": [
+        {
+          "id": "module-7-1-dbt-mastery",
+          "title": "dbt (Data Build Tool) Masterclass",
+          "summary": "Building modern transformation layers with dbt: models, sources, refs, incremental strategies, and Jinja.",
+          "videos": [
+            {
+              "position": 41,
+              "youtubeVideoId": "at002hXhnuU",
+              "title": "Snowflake with dbt Full Course | End-to-End Data Engineering Demo | Real-Time Project",
+              "channel": "Eclasess EduTech",
+              "canonicalUrl": "https://www.youtube.com/watch?v=at002hXhnuU",
+              "difficulty": "Medium",
+              "importance": "Critical",
+              "topicSlug": "dbt-snowflake-full-course",
+              "estimatedMinutes": 180,
+              "keyTakeaways": [
+                "Setting up dbt project structure, dbt_project.yml, and profiles.yml",
+                "Materializations: view, table, ephemeral, incremental",
+                "Using {{ ref() }} and {{ source() }} for automated DAG lineage creation",
+                "Implementing dbt snapshots for automated SCD Type 2 tracking"
+              ]
+            },
+            {
+              "position": 42,
+              "youtubeVideoId": "-9RzZRkHay4",
+              "title": "How to Build Incremental Models | dbt tutorial",
+              "channel": "Kahan Data Solutions",
+              "canonicalUrl": "https://www.youtube.com/watch?v=-9RzZRkHay4",
+              "difficulty": "Hard",
+              "importance": "Critical",
+              "topicSlug": "dbt-incremental-models",
+              "estimatedMinutes": 25,
+              "keyTakeaways": [
+                "When and why to convert full refresh tables into incremental models",
+                "Configuring `is_incremental()` macro blocks in dbt SQL",
+                "Unique keys, incremental strategies (merge vs delete+insert), and backfill considerations"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "module-7-2-data-quality",
+          "title": "Data Quality & Observability with Great Expectations",
+          "summary": "Data testing frameworks, automated validation suites, data contracts, and pipeline monitoring.",
+          "videos": [
+            {
+              "position": 43,
+              "youtubeVideoId": "oxOj30rl_xs",
+              "title": "Great Expectation Tutorial | Mastering Data Quality",
+              "channel": "Anuj Syal",
+              "canonicalUrl": "https://www.youtube.com/watch?v=oxOj30rl_xs",
+              "difficulty": "Medium",
+              "importance": "Critical",
+              "topicSlug": "great-expectations-tutorial",
+              "estimatedMinutes": 40,
+              "keyTakeaways": [
+                "Core concepts of Great Expectations: Expectations, Expectation Suites, and Validation Results",
+                "Profiling datasets and auto-generating test assertions",
+                "Compiling automated HTML Data Docs for business and engineering visibility"
+              ]
+            },
+            {
+              "position": 44,
+              "youtubeVideoId": "yRWN_6bUEmA",
+              "title": "How to Build a Data Quality Monitoring System with Great Expectations & Airflow",
+              "channel": "The Data and AI Guy",
+              "canonicalUrl": "https://www.youtube.com/watch?v=yRWN_6bUEmA",
+              "difficulty": "Hard",
+              "importance": "High",
+              "topicSlug": "data-quality-airflow-integration",
+              "estimatedMinutes": 30,
+              "keyTakeaways": [
+                "Integrating Great Expectations checkpoints into Airflow DAG tasks",
+                "Failing pipeline runs gracefully before bad data reaches production data marts",
+                "Alerting on data drift and schema alterations via Slack/email webhooks"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "stageNumber": 8,
+      "id": "stage-8-cloud-iac-dataops",
+      "title": "Cloud, Infrastructure as Code & DataOps",
+      "subtitle": "AWS/GCP Stacks, Terraform, Docker, CI/CD, and Data Governance",
+      "description": "Graduate to production enterprise data engineering. Build end-to-end cloud data platforms (AWS S3, Glue, Athena; GCP BigQuery), provision immutable infrastructure using Terraform, containerize data systems with Docker, implement CI/CD for data pipelines, and enforce Data Governance with DataHub.",
+      "level": "Advanced to Expert",
+      "estimatedMinutes": 680,
+      "learningOutcomes": [
+        "Build complete cloud data architectures on AWS (S3, Glue, Athena, Lambda) and GCP (GCS, BigQuery, Looker Studio)",
+        "Declare data infrastructure as code with Terraform: managing S3 buckets, IAM roles, BigQuery datasets, and Snowflake databases",
+        "Containerize data applications with Docker: multi-stage builds, environment isolation, and multi-service Docker Compose",
+        "Implement CI/CD for data pipelines with GitHub Actions: automated unit tests (pytest), SQL linting (sqlfluff), and dbt slim CI",
+        "Establish enterprise Data Governance and Data Lineage using DataHub to trace column-level upstream/downstream impacts"
+      ],
+      "modules": [
+        {
+          "id": "module-8-1-cloud-data-projects",
+          "title": "End-to-End Cloud Data Engineering Projects",
+          "summary": "Real-world production projects on AWS and GCP incorporating streaming, storage, transformation, and BI.",
+          "videos": [
+            {
+              "position": 45,
+              "youtubeVideoId": "yvAWbbQa8eE",
+              "title": "AWS Masterclass for Data Engineers with Project",
+              "channel": "Darshil Parmar",
+              "canonicalUrl": "https://www.youtube.com/watch?v=yvAWbbQa8eE",
+              "difficulty": "Medium",
+              "importance": "Critical",
+              "topicSlug": "aws-data-engineering-masterclass-project",
+              "estimatedMinutes": 180,
+              "keyTakeaways": [
+                "Building production data pipelines with AWS services: S3, AWS Glue, Athena, and Lambda",
+                "Data cataloging with AWS Glue Data Catalog and automated crawler schemas",
+                "Serverless analytical querying with Athena and partitioning optimization"
+              ]
+            },
+            {
+              "position": 46,
+              "youtubeVideoId": "WpQECq5Hx9g",
+              "title": "🚕 Uber Data Analytics | End-To-End Data Engineering Project",
+              "channel": "Darshil Parmar",
+              "canonicalUrl": "https://www.youtube.com/watch?v=WpQECq5Hx9g",
+              "difficulty": "Medium",
+              "importance": "Critical",
+              "topicSlug": "uber-gcp-data-engineering-project",
+              "estimatedMinutes": 150,
+              "keyTakeaways": [
+                "End-to-end modern GCP data engineering project using Google Cloud Storage, Mage AI, and BigQuery",
+                "Data extraction and transformation using Python scripts",
+                "Building interactive executive dashboards in Looker Studio"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "module-8-2-terraform",
+          "title": "Infrastructure as Code (Terraform) for Data Platforms",
+          "summary": "Provisioning reproducible data infrastructure with Terraform: providers, state, variables, and modules.",
+          "videos": [
+            {
+              "position": 47,
+              "youtubeVideoId": "YFr_5NTjv0Q",
+              "title": "Terraform: Reshaping the Data Engineering Experience - Andrei Tserakhau",
+              "channel": "DataTalksClub ⬛",
+              "canonicalUrl": "https://www.youtube.com/watch?v=YFr_5NTjv0Q",
+              "difficulty": "Medium",
+              "importance": "Critical",
+              "topicSlug": "terraform-for-data-engineering",
+              "estimatedMinutes": 60,
+              "keyTakeaways": [
+                "Why manual cloud console clicking fails at scale",
+                "Terraform workflow: init, plan, apply, destroy",
+                "Provisioning data lake storage buckets (S3/GCS) and warehouse datasets with Terraform modules"
+              ]
+            },
+            {
+              "position": 48,
+              "youtubeVideoId": "L32T_ruZvFo",
+              "title": "Dev, Staging, and Production in Data Engineering with Terraform | PyData Global 2021",
+              "channel": "PyData",
+              "canonicalUrl": "https://www.youtube.com/watch?v=L32T_ruZvFo",
+              "difficulty": "Hard",
+              "importance": "High",
+              "topicSlug": "terraform-environments-staging-prod",
+              "estimatedMinutes": 35,
+              "keyTakeaways": [
+                "Structuring multi-environment data pipelines (Dev, Stage, Prod)",
+                "Managing remote Terraform state with S3 and DynamoDB state locking",
+                "Isolating data credentials and role-based permissions (IAM) via code"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "module-8-3-docker",
+          "title": "Docker & Containers for Data Engineering",
+          "summary": "Containerization fundamentals, Dockerfile authoring, multi-stage builds, and multi-container Docker Compose.",
+          "videos": [
+            {
+              "position": 49,
+              "youtubeVideoId": "lP8xXebHmuE",
+              "title": "Docker for Data Engineering: Postgres, Docker Compose, and Real-World Workflows - Alexey Grigorev",
+              "channel": "DataTalksClub ⬛",
+              "canonicalUrl": "https://www.youtube.com/watch?v=lP8xXebHmuE",
+              "difficulty": "Medium",
+              "importance": "Critical",
+              "topicSlug": "docker-for-data-engineering",
+              "estimatedMinutes": 60,
+              "keyTakeaways": [
+                "Containerizing Python data ingestion scripts into lightweight Docker images",
+                "Running PostgreSQL and pgAdmin locally with docker-compose.yml",
+                "Docker volumes for persisting database state across container restarts",
+                "Docker networks for inter-service communication (Airflow, Postgres, Kafka)"
+              ]
+            },
+            {
+              "position": 50,
+              "youtubeVideoId": "nAHx_uSBfTg",
+              "title": "Docker Tutorial for Beginners (DATA DOMAIN EDITION)",
+              "channel": "Ansh Lamba",
+              "canonicalUrl": "https://www.youtube.com/watch?v=nAHx_uSBfTg",
+              "difficulty": "Easy",
+              "importance": "High",
+              "topicSlug": "docker-data-domain-edition",
+              "estimatedMinutes": 45,
+              "keyTakeaways": [
+                "Docker CLI essentials: build, run, exec, stop, prune",
+                "Writing optimized Dockerfiles with caching layers",
+                "Environment variables and secrets management in data containers"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "module-8-4-cicd-dataops",
+          "title": "CI/CD & DataOps Automation",
+          "summary": "Automated pipeline testing, GitHub Actions workflows, SQLFluff code quality, and dbt Slim CI.",
+          "videos": [
+            {
+              "position": 51,
+              "youtubeVideoId": "SHGuqvnfBCQ",
+              "title": "DevOps for Data Engineering: Streamline CI/CD for AI & Data Pipelines",
+              "channel": "IBM Technology",
+              "canonicalUrl": "https://www.youtube.com/watch?v=SHGuqvnfBCQ",
+              "difficulty": "Medium",
+              "importance": "Critical",
+              "topicSlug": "devops-cicd-data-pipelines",
+              "estimatedMinutes": 20,
+              "keyTakeaways": [
+                "Core principles of DataOps: automated testing, continuous integration, and rapid feedback",
+                "Testing data logic with pytest before deployment",
+                "Automating schema validations and continuous deployment across environments"
+              ]
+            },
+            {
+              "position": 52,
+              "youtubeVideoId": "U2Xb5jCRtRc",
+              "title": "DataOps & CI/CD for Data Pipelines | Building Reliable Data Engineering Workflows | Uplatz",
+              "channel": "Uplatz",
+              "canonicalUrl": "https://www.youtube.com/watch?v=U2Xb5jCRtRc",
+              "difficulty": "Medium",
+              "importance": "High",
+              "topicSlug": "dataops-best-practices",
+              "estimatedMinutes": 40,
+              "keyTakeaways": [
+                "Automating code quality with SQLFluff linters in GitHub Actions",
+                "dbt Slim CI: running and testing only modified models and their first-order parents",
+                "Automating rollback procedures on failed pipeline runs"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "module-8-5-governance-lineage",
+          "title": "Data Governance, Cataloging & Lineage",
+          "summary": "Data discovery, metadata management, column-level lineage, and compliance with DataHub.",
+          "videos": [
+            {
+              "position": 53,
+              "youtubeVideoId": "5zvk-XFHk6c",
+              "title": "Datahub Demo: Ultimate Guide to Modern Data Governance with Acryl Data | Step-by-Step Tutorial",
+              "channel": "Fru Dev",
+              "canonicalUrl": "https://www.youtube.com/watch?v=5zvk-XFHk6c",
+              "difficulty": "Medium",
+              "importance": "Critical",
+              "topicSlug": "datahub-governance-demo",
+              "estimatedMinutes": 25,
+              "keyTakeaways": [
+                "Role of modern data catalogs in enterprise data governance",
+                "Connecting DataHub ingestion recipes to Snowflake, BigQuery, and Airflow",
+                "Data glossaries, domain tagging, and owner assignments"
+              ]
+            },
+            {
+              "position": 54,
+              "youtubeVideoId": "rONGpsndzRw",
+              "title": "DataHub Basics: Lineage 101",
+              "channel": "DataHub",
+              "canonicalUrl": "https://www.youtube.com/watch?v=rONGpsndzRw",
+              "difficulty": "Medium",
+              "importance": "High",
+              "topicSlug": "datahub-lineage-101",
+              "estimatedMinutes": 15,
+              "keyTakeaways": [
+                "Automated dataset and pipeline lineage tracking",
+                "Column-level lineage: tracing sensitive PII data upstream and downstream",
+                "Impact analysis: determining downstream breaking changes before schema modifications"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "position": 1,
+      "stageNumber": 1,
+      "moduleId": "module-1-1-python",
+      "youtubeVideoId": "T23Bs75F7ZQ",
+      "title": "Data Engineering with Python and AI/LLMs – Data Loading Tutorial",
+      "channel": "freeCodeCamp.org",
+      "canonicalUrl": "https://www.youtube.com/watch?v=T23Bs75F7ZQ",
+      "difficulty": "Medium",
+      "importance": "Critical",
+      "topicSlug": "python-data-loading",
+      "estimatedMinutes": 210,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "Stream and batch data extraction from REST APIs",
+        "Dynamic schema management and incremental data loading",
+        "Loading structured data into DuckDB and cloud data lakes"
+      ]
+    },
+    {
+      "position": 2,
+      "stageNumber": 1,
+      "moduleId": "module-1-1-python",
+      "youtubeVideoId": "XMmfJFS_MFQ",
+      "title": "Python for Data Engineers Full Course 2026 | Basics to Advanced",
+      "channel": "Data with Jay",
+      "canonicalUrl": "https://www.youtube.com/watch?v=XMmfJFS_MFQ",
+      "difficulty": "Easy",
+      "importance": "High",
+      "topicSlug": "python-fundamentals-oop",
+      "estimatedMinutes": 180,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "OOP principles for building scalable data pipelines",
+        "Memory-efficient data generators and iterators",
+        "Exception handling, logging, and virtual environment isolation"
+      ]
+    },
+    {
+      "position": 3,
+      "stageNumber": 1,
+      "moduleId": "module-1-2-sql-mastery",
+      "youtubeVideoId": "OT1RErkfLNQ",
+      "title": "Learn SQL Beginner to Advanced in Under 4 Hours",
+      "channel": "Alex The Analyst",
+      "canonicalUrl": "https://www.youtube.com/watch?v=OT1RErkfLNQ",
+      "difficulty": "Easy",
+      "importance": "High",
+      "topicSlug": "sql-fundamentals-joins",
+      "estimatedMinutes": 230,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "Relational database foundations, schemas, and primary/foreign keys",
+        "Inner, Left, Right, Full Outer, and Cross Joins",
+        "Aggregations, Grouping, Having, and Subqueries"
+      ]
+    },
+    {
+      "position": 4,
+      "stageNumber": 1,
+      "moduleId": "module-1-2-sql-mastery",
+      "youtubeVideoId": "dqwhNcZoMOQ",
+      "title": "SQL Window Functions (LEAD/LAG and RANK) and Common Table Expressions in 60 minutes on DataExpert.io",
+      "channel": "DataExpert",
+      "canonicalUrl": "https://www.youtube.com/watch?v=dqwhNcZoMOQ",
+      "difficulty": "Hard",
+      "importance": "Critical",
+      "topicSlug": "sql-window-functions-ctes",
+      "estimatedMinutes": 60,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "Window frame specifications: ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW",
+        "Partitioning and ordering with ROW_NUMBER, RANK, DENSE_RANK",
+        "Time-series analysis using LEAD and LAG with offsets and default fallbacks",
+        "Recursive CTEs and modular query factorization"
+      ]
+    },
+    {
+      "position": 5,
+      "stageNumber": 1,
+      "moduleId": "module-1-3-linux-bash",
+      "youtubeVideoId": "mABpAI-pCw0",
+      "title": "Command Line Basics for Beginners - Full Course",
+      "channel": "freeCodeCamp.org",
+      "canonicalUrl": "https://www.youtube.com/watch?v=mABpAI-pCw0",
+      "difficulty": "Easy",
+      "importance": "High",
+      "topicSlug": "linux-cli-fundamentals",
+      "estimatedMinutes": 60,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "Navigating filesystems, permissions (chmod/chown), and standard streams (stdin, stdout, stderr)",
+        "Piping and redirection operators",
+        "Process management (ps, top, kill, nohup)"
+      ]
+    },
+    {
+      "position": 6,
+      "stageNumber": 1,
+      "moduleId": "module-1-3-linux-bash",
+      "youtubeVideoId": "tK9Oc6AEnR4",
+      "title": "Bash Scripting Tutorial for Beginners",
+      "channel": "freeCodeCamp.org",
+      "canonicalUrl": "https://www.youtube.com/watch?v=tK9Oc6AEnR4",
+      "difficulty": "Medium",
+      "importance": "High",
+      "topicSlug": "bash-scripting-core",
+      "estimatedMinutes": 60,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "Variables, environment exports, loops, and conditional branching",
+        "Functions, return codes, and error trapping (set -e, set -o pipefail)",
+        "Text wrangling with cut, sort, uniq, grep, sed, and awk"
+      ]
+    },
+    {
+      "position": 7,
+      "stageNumber": 1,
+      "moduleId": "module-1-3-linux-bash",
+      "youtubeVideoId": "G2Y8qubwcI8",
+      "title": "Bash Scripting for Data Engineering: Full ETL Workflow and automation with Crontab",
+      "channel": "Banana Code",
+      "canonicalUrl": "https://www.youtube.com/watch?v=G2Y8qubwcI8",
+      "difficulty": "Medium",
+      "importance": "Critical",
+      "topicSlug": "bash-etl-crontab",
+      "estimatedMinutes": 45,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "Building a complete end-to-end bash ETL pipeline",
+        "Automating scheduled data extraction with crontab syntax",
+        "Logging and error handling for production cron tasks"
+      ]
+    },
+    {
+      "position": 8,
+      "stageNumber": 1,
+      "moduleId": "module-1-4-git",
+      "youtubeVideoId": "RGOj5yH7evk",
+      "title": "Git and GitHub for Beginners - Crash Course",
+      "channel": "freeCodeCamp.org",
+      "canonicalUrl": "https://www.youtube.com/watch?v=RGOj5yH7evk",
+      "difficulty": "Easy",
+      "importance": "High",
+      "topicSlug": "git-version-control",
+      "estimatedMinutes": 65,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "Git staging, commit semantics, and tree history",
+        "Branching strategies: trunk-based vs Gitflow for data repos",
+        "Resolving merge conflicts and opening PRs with review checklists"
+      ]
+    },
+    {
+      "position": 9,
+      "stageNumber": 2,
+      "moduleId": "module-2-1-dimensional-modeling",
+      "youtubeVideoId": "JeeqpK3o3LQ",
+      "title": "Dimensional data modeling and idempotent pipelines in 78 minutes with DataExpert.io",
+      "channel": "DataExpert",
+      "canonicalUrl": "https://www.youtube.com/watch?v=JeeqpK3o3LQ",
+      "difficulty": "Hard",
+      "importance": "Critical",
+      "topicSlug": "dimensional-modeling-idempotency",
+      "estimatedMinutes": 78,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "Designing idempotent pipelines that produce identical state on retries",
+        "Fact tables vs Dimension tables: granularity and grain definition",
+        "Production implementations of Slowly Changing Dimensions (SCD Types 1, 2, and 3)"
+      ]
+    },
+    {
+      "position": 10,
+      "stageNumber": 2,
+      "moduleId": "module-2-1-dimensional-modeling",
+      "youtubeVideoId": "gG7upg6QaBI",
+      "title": "Data Modeling - Walking Through How To Data Model As A Data Engineer - Dimensional Modeling 101",
+      "channel": "Seattle Data Guy",
+      "canonicalUrl": "https://www.youtube.com/watch?v=gG7upg6QaBI",
+      "difficulty": "Medium",
+      "importance": "High",
+      "topicSlug": "dimensional-modeling-101",
+      "estimatedMinutes": 25,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "Practical step-by-step walkthrough of translating business requirements to schema",
+        "Star schema vs Snowflake schema tradeoffs",
+        "Surrogate keys vs Natural keys"
+      ]
+    },
+    {
+      "position": 11,
+      "stageNumber": 2,
+      "moduleId": "module-2-1-dimensional-modeling",
+      "youtubeVideoId": "RmugzY84iL4",
+      "title": "Data Modeling Masterclass | Build Uber's Data Model from Scratch",
+      "channel": "Darshil Parmar",
+      "canonicalUrl": "https://www.youtube.com/watch?v=RmugzY84iL4",
+      "difficulty": "Medium",
+      "importance": "Critical",
+      "topicSlug": "uber-data-model-case-study",
+      "estimatedMinutes": 60,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "End-to-end case study: ride-sharing domain data model",
+        "Driver, rider, trip, payment, and surge dimension/fact modeling",
+        "Normalizing 3NF source data into analytical dimensional models"
+      ]
+    },
+    {
+      "position": 12,
+      "stageNumber": 2,
+      "moduleId": "module-2-2-snowflake",
+      "youtubeVideoId": "JsIK6Z3XPOk",
+      "title": "Masterclass on Snowflake 2026: Full Course for Beginners to Advanced",
+      "channel": "Data with Jay",
+      "canonicalUrl": "https://www.youtube.com/watch?v=JsIK6Z3XPOk",
+      "difficulty": "Medium",
+      "importance": "Critical",
+      "topicSlug": "snowflake-masterclass",
+      "estimatedMinutes": 180,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "Snowflake 3-tier architecture: Cloud Services, Virtual Warehouses, Centralized Storage",
+        "Data loading techniques: COPY INTO, Snowpipe continuous ingestion",
+        "Zero-Copy Cloning, Time Travel, and Fail-safe recovery mechanisms"
+      ]
+    },
+    {
+      "position": 13,
+      "stageNumber": 2,
+      "moduleId": "module-2-2-snowflake",
+      "youtubeVideoId": "ZvIfCf7DRBY",
+      "title": "Master Snowflake Architecture in 20 Minutes | Complete Deep Dive (2026) | Snowflake Architecture",
+      "channel": "Data-2-Dollars",
+      "canonicalUrl": "https://www.youtube.com/watch?v=ZvIfCf7DRBY",
+      "difficulty": "Easy",
+      "importance": "High",
+      "topicSlug": "snowflake-architecture-deepdive",
+      "estimatedMinutes": 20,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "Micro-partitioning internals and column pruning",
+        "Result cache, local disk cache, and remote storage cache hierarchy",
+        "Multi-cluster warehouse auto-scaling and credit management"
+      ]
+    },
+    {
+      "position": 14,
+      "stageNumber": 2,
+      "moduleId": "module-2-3-bigquery",
+      "youtubeVideoId": "eYBTdiwzJqQ",
+      "title": "Google BigQuery Tutorial (Beginner to Advanced) | Complete Guide in 14 Minutes",
+      "channel": "KumarAbhishek008",
+      "canonicalUrl": "https://www.youtube.com/watch?v=eYBTdiwzJqQ",
+      "difficulty": "Easy",
+      "importance": "Medium",
+      "topicSlug": "bigquery-guide-fundamentals",
+      "estimatedMinutes": 15,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "Creating datasets, tables, and views in BigQuery",
+        "Ingesting CSV, JSON, and Parquet data from Google Cloud Storage",
+        "Query costs calculation, dry runs, and billing controls"
+      ]
+    },
+    {
+      "position": 15,
+      "stageNumber": 2,
+      "moduleId": "module-2-3-bigquery",
+      "youtubeVideoId": "QDz8be0L2PQ",
+      "title": "SQL Bootcamp - Learn SQL in 2 Hours | Beginners | GCP | BigQuery | [Full Course]",
+      "channel": "Pivotalstats",
+      "canonicalUrl": "https://www.youtube.com/watch?v=QDz8be0L2PQ",
+      "difficulty": "Medium",
+      "importance": "High",
+      "topicSlug": "bigquery-partitioning-clustering",
+      "estimatedMinutes": 120,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "BigQuery Partitioning (ingestion time vs column-based)",
+        "Clustering strategies to minimize scanned byte volume",
+        "BigQuery BI Engine and nested & repeated fields (STRUCT / ARRAY)"
+      ]
+    },
+    {
+      "position": 16,
+      "stageNumber": 2,
+      "moduleId": "module-2-4-redshift",
+      "youtubeVideoId": "lj8oaSpCFTc",
+      "title": "AWS re:Invent 2019: Deep dive and best practices for Amazon Redshift (ANT418)",
+      "channel": "AWS Events",
+      "canonicalUrl": "https://www.youtube.com/watch?v=lj8oaSpCFTc",
+      "difficulty": "Hard",
+      "importance": "High",
+      "topicSlug": "aws-redshift-deepdive",
+      "estimatedMinutes": 60,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "Redshift MPP architecture: Leader node and Compute node slices",
+        "Distribution styles: AUTO, EVEN, KEY, ALL to eliminate data broadcast overhead",
+        "Compound vs Interleaved Sort Keys and VACUUM/ANALYZE maintenance"
+      ]
+    },
+    {
+      "position": 17,
+      "stageNumber": 3,
+      "moduleId": "module-3-1-lakehouse-foundations",
+      "youtubeVideoId": "PHsC_t0j1dU",
+      "title": "Data Engineering Course for Beginners",
+      "channel": "freeCodeCamp.org",
+      "canonicalUrl": "https://www.youtube.com/watch?v=PHsC_t0j1dU",
+      "difficulty": "Easy",
+      "importance": "High",
+      "topicSlug": "data-engineering-pipeline-foundations",
+      "estimatedMinutes": 180,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "End-to-end data pipeline lifecycle and modern data stack overview",
+        "Raw storage vs processed storage layers",
+        "Containerized data tooling and ingestion patterns"
+      ]
+    },
+    {
+      "position": 18,
+      "stageNumber": 3,
+      "moduleId": "module-3-1-lakehouse-foundations",
+      "youtubeVideoId": "JoAvaQAlaOM",
+      "title": "Data Modeling Crash Course: The 3 Layered Model",
+      "channel": "Kahan Data Solutions",
+      "canonicalUrl": "https://www.youtube.com/watch?v=JoAvaQAlaOM",
+      "difficulty": "Medium",
+      "importance": "High",
+      "topicSlug": "medallion-three-layer-architecture",
+      "estimatedMinutes": 25,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "Three-tier lakehouse data architecture: Staging, Intermediate, and Mart layers",
+        "Data lineage and transformation boundaries across layers",
+        "Maintaining idempotency across raw to clean layers"
+      ]
+    },
+    {
+      "position": 19,
+      "stageNumber": 3,
+      "moduleId": "module-3-2-apache-iceberg",
+      "youtubeVideoId": "p24GiqQaA1U",
+      "title": "Apache Iceberg 101: What It Is & Why It Matters | Dremio",
+      "channel": "Dremio",
+      "canonicalUrl": "https://www.youtube.com/watch?v=p24GiqQaA1U",
+      "difficulty": "Medium",
+      "importance": "Critical",
+      "topicSlug": "apache-iceberg-101",
+      "estimatedMinutes": 45,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "Why Hive table formats failed at scale (O(N) file listing bottlenecks)",
+        "Iceberg metadata tree: Iceberg Catalog -> Table Metadata -> Manifest List -> Manifest Files -> Data Files",
+        "ACID transactions, atomic commits via catalog compare-and-swap (CAS)"
+      ]
+    },
+    {
+      "position": 20,
+      "stageNumber": 3,
+      "moduleId": "module-3-2-apache-iceberg",
+      "youtubeVideoId": "lQ1bwjhFBTE",
+      "title": "Apache Iceberg 101 - 2026 Edition",
+      "channel": "Dremio",
+      "canonicalUrl": "https://www.youtube.com/watch?v=lQ1bwjhFBTE",
+      "difficulty": "Medium",
+      "importance": "High",
+      "topicSlug": "apache-iceberg-modern-features",
+      "estimatedMinutes": 50,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "Hidden partitioning: partition evolution without rewriting data tables",
+        "Full schema evolution (add, drop, rename, reorder columns safely)",
+        "Time travel queries and rollback capabilities"
+      ]
+    },
+    {
+      "position": 21,
+      "stageNumber": 3,
+      "moduleId": "module-3-3-delta-lake",
+      "youtubeVideoId": "de-6a6Bfw6E",
+      "title": "Deep-Dive into Delta Lake",
+      "channel": "Databricks",
+      "canonicalUrl": "https://www.youtube.com/watch?v=de-6a6Bfw6E",
+      "difficulty": "Hard",
+      "importance": "Critical",
+      "topicSlug": "delta-lake-internals",
+      "estimatedMinutes": 45,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "The _delta_log JSON commit protocol and checkpointing (.checkpoint.parquet)",
+        "Concurrency control: Optimistic Concurrency Control (OCC) and conflict resolution",
+        "ACID guarantees for concurrent batch and streaming writes"
+      ]
+    },
+    {
+      "position": 22,
+      "stageNumber": 3,
+      "moduleId": "module-3-3-delta-lake",
+      "youtubeVideoId": "Cz-8XtI_vbU",
+      "title": "Deep Dive into Delta Lake and UniForm on Databricks",
+      "channel": "Databricks",
+      "canonicalUrl": "https://www.youtube.com/watch?v=Cz-8XtI_vbU",
+      "difficulty": "Hard",
+      "importance": "High",
+      "topicSlug": "delta-lake-uniform",
+      "estimatedMinutes": 35,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "Universal Format (UniForm): reading Delta tables as Iceberg or Hudi without copying data",
+        "Liquid clustering vs traditional Hive partitioning",
+        "Automated compaction and predictive optimization"
+      ]
+    },
+    {
+      "position": 23,
+      "stageNumber": 3,
+      "moduleId": "module-3-3-delta-lake",
+      "youtubeVideoId": "znv4rM9wevc",
+      "title": "Lakehouse with Delta Lake Deep Dive Training",
+      "channel": "Databricks",
+      "canonicalUrl": "https://www.youtube.com/watch?v=znv4rM9wevc",
+      "difficulty": "Medium",
+      "importance": "High",
+      "topicSlug": "delta-lake-operations",
+      "estimatedMinutes": 60,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "OPTIMIZE command and small file compaction",
+        "Multi-dimensional clustering with Z-ORDER BY",
+        "VACUUM retention limits and data safety thresholds"
+      ]
+    },
+    {
+      "position": 24,
+      "stageNumber": 3,
+      "moduleId": "module-3-4-apache-hudi",
+      "youtubeVideoId": "AYaw06_Xazo",
+      "title": "Apache Hudi: A Database Layer Over Cloud Storage for Fast Mutations & Queries (Vinoth Chandar)",
+      "channel": "CMU Database Group",
+      "canonicalUrl": "https://www.youtube.com/watch?v=AYaw06_Xazo",
+      "difficulty": "Hard",
+      "importance": "Critical",
+      "topicSlug": "apache-hudi-cmu-deepdive",
+      "estimatedMinutes": 60,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "Handling CDC (Change Data Capture) updates and deletes at petabyte scale",
+        "Copy-on-Write (CoW) for read-heavy workloads vs Merge-on-Read (MoR) for write-heavy streaming",
+        "Record-level indexing (Bloom filters, Simple, HBase) for rapid upsert key location"
+      ]
+    },
+    {
+      "position": 25,
+      "stageNumber": 3,
+      "moduleId": "module-3-4-apache-hudi",
+      "youtubeVideoId": "6mZTz3C3TZo",
+      "title": "🔒 Apache Hudi Explained: How does it handle millions of updates?",
+      "channel": "DataMuscle",
+      "canonicalUrl": "https://www.youtube.com/watch?v=6mZTz3C3TZo",
+      "difficulty": "Medium",
+      "importance": "High",
+      "topicSlug": "apache-hudi-upsert-mechanics",
+      "estimatedMinutes": 20,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "Hudi Timeline and instant states (Requested, Inflight, Completed)",
+        "Log file delta compaction in MoR tables",
+        "Incremental querying to ingest only changed rows since timestamp T"
+      ]
+    },
+    {
+      "position": 26,
+      "stageNumber": 4,
+      "moduleId": "module-4-1-distributed-architecture",
+      "youtubeVideoId": "krgVaiR1reI",
+      "title": "Apache Spark Architecture with Spark Context Driver and Executor",
+      "channel": "Andreas Kretz",
+      "canonicalUrl": "https://www.youtube.com/watch?v=krgVaiR1reI",
+      "difficulty": "Medium",
+      "importance": "Critical",
+      "topicSlug": "spark-driver-executor-architecture",
+      "estimatedMinutes": 30,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "Role of Driver program and SparkSession",
+        "Executor JVM processes, task slots, and core allocation",
+        "DAG generation: Stages separated by Shuffle boundaries (Narrow vs Wide dependencies)"
+      ]
+    },
+    {
+      "position": 27,
+      "stageNumber": 4,
+      "moduleId": "module-4-1-distributed-architecture",
+      "youtubeVideoId": "iUOQPyHN9-0",
+      "title": "Lambda Architecture & Kappa Architecture | Data Engineering Course Part 4 | #077",
+      "channel": "Andreas Kretz",
+      "canonicalUrl": "https://www.youtube.com/watch?v=iUOQPyHN9-0",
+      "difficulty": "Medium",
+      "importance": "High",
+      "topicSlug": "lambda-kappa-architectures",
+      "estimatedMinutes": 25,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "Lambda Architecture: Dual batch and speed layers with serving views",
+        "Kappa Architecture: Everything as a stream log",
+        "Architectural tradeoffs between complexity, latency, and correctness"
+      ]
+    },
+    {
+      "position": 28,
+      "stageNumber": 4,
+      "moduleId": "module-4-2-pyspark-masterclass",
+      "youtubeVideoId": "_C8kWso4ne4",
+      "title": "PySpark Tutorial",
+      "channel": "freeCodeCamp.org",
+      "canonicalUrl": "https://www.youtube.com/watch?v=_C8kWso4ne4",
+      "difficulty": "Medium",
+      "importance": "Critical",
+      "topicSlug": "pyspark-full-bootcamp",
+      "estimatedMinutes": 240,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "Creating SparkSession and enforcing explicit StructType schemas",
+        "Transformations (map, filter, select, groupBy) vs Actions (count, collect, write)",
+        "Handling missing data, complex nested JSON, and PySpark UDFs"
+      ]
+    },
+    {
+      "position": 29,
+      "stageNumber": 4,
+      "moduleId": "module-4-3-spark-tuning",
+      "youtubeVideoId": "daXEp4HmS-E",
+      "title": "Apache Spark Core—Deep Dive—Proper Optimization Daniel Tomes Databricks",
+      "channel": "Databricks",
+      "canonicalUrl": "https://www.youtube.com/watch?v=daXEp4HmS-E",
+      "difficulty": "Hard",
+      "importance": "Critical",
+      "topicSlug": "spark-core-deepdive-optimization",
+      "estimatedMinutes": 60,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "Tungsten binary memory format and cache-aware computation",
+        "Reading and deciphering the Spark UI: Event Timeline, SQL tab, and Stage DAGs",
+        "Right-sizing spark.sql.shuffle.partitions and avoiding shuffle file explosion",
+        "Memory management: Storage memory vs Execution memory unified boundary"
+      ]
+    },
+    {
+      "position": 30,
+      "stageNumber": 4,
+      "moduleId": "module-4-3-spark-tuning",
+      "youtubeVideoId": "wFDqBZROebk",
+      "title": "Boost Your Apache Spark Performance with These Optimization Techniques",
+      "channel": "NextGenLakehouse",
+      "canonicalUrl": "https://www.youtube.com/watch?v=wFDqBZROebk",
+      "difficulty": "Hard",
+      "importance": "High",
+      "topicSlug": "spark-skew-salting-aqe",
+      "estimatedMinutes": 35,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "Broadcast Hash Join (BHJ) vs Sort-Merge Join (SMJ) mechanics",
+        "Handling severe data skew with artificial key salting and broadcast hints",
+        "Adaptive Query Execution (AQE): dynamic partition coalescing and skew join handling"
+      ]
+    },
+    {
+      "position": 31,
+      "stageNumber": 5,
+      "moduleId": "module-5-1-airflow-core",
+      "youtubeVideoId": "CGxxVj13sOs",
+      "title": "What is Apache Airflow? For beginners",
+      "channel": "Data with Marc",
+      "canonicalUrl": "https://www.youtube.com/watch?v=CGxxVj13sOs",
+      "difficulty": "Easy",
+      "importance": "High",
+      "topicSlug": "what-is-apache-airflow",
+      "estimatedMinutes": 15,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "Why cron fails for complex pipelines and why orchestration is essential",
+        "Airflow components: Scheduler heartbeat, Executor worker, and Metadata DB",
+        "What a DAG is and how dependencies (>> / <<) define execution order"
+      ]
+    },
+    {
+      "position": 32,
+      "stageNumber": 5,
+      "moduleId": "module-5-1-airflow-core",
+      "youtubeVideoId": "xUKIL7zsjos",
+      "title": "Getting Started with Airflow for Beginners",
+      "channel": "Data with Marc",
+      "canonicalUrl": "https://www.youtube.com/watch?v=xUKIL7zsjos",
+      "difficulty": "Medium",
+      "importance": "Critical",
+      "topicSlug": "airflow-taskflow-api",
+      "estimatedMinutes": 45,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "Local development with Astro CLI and Docker",
+        "Airflow 2.0 TaskFlow API: writing Pythonic pipelines using @task decorator",
+        "Passing data between tasks using XComs and object storage backend",
+        "Task retries, exponential backoffs, and execution timeouts"
+      ]
+    },
+    {
+      "position": 33,
+      "stageNumber": 5,
+      "moduleId": "module-5-1-airflow-core",
+      "youtubeVideoId": "7YCEydBUnjg",
+      "title": "Open-Source Spotlight - Apache Airflow - Marc Lamberti",
+      "channel": "DataTalksClub ⬛",
+      "canonicalUrl": "https://www.youtube.com/watch?v=7YCEydBUnjg",
+      "difficulty": "Hard",
+      "importance": "High",
+      "topicSlug": "airflow-production-patterns",
+      "estimatedMinutes": 60,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "Data-aware scheduling using Airflow Datasets",
+        "Dynamic task mapping to parallelize processing over arbitrary collections",
+        "Best practices: keeping top-level DAG code fast to prevent scheduler lag"
+      ]
+    },
+    {
+      "position": 34,
+      "stageNumber": 5,
+      "moduleId": "module-5-2-dagster",
+      "youtubeVideoId": "ZmUjf3gL1VU",
+      "title": "Dagster Crash Course: develop data assets in under ten minutes",
+      "channel": "Dagster",
+      "canonicalUrl": "https://www.youtube.com/watch?v=ZmUjf3gL1VU",
+      "difficulty": "Easy",
+      "importance": "High",
+      "topicSlug": "dagster-quickstart-assets",
+      "estimatedMinutes": 10,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "Task-based orchestration (Airflow) vs Asset-based orchestration (Dagster)",
+        "Defining @asset functions that represent tables or datasets",
+        "Inspecting the global asset graph and automatic dependency resolution"
+      ]
+    },
+    {
+      "position": 35,
+      "stageNumber": 5,
+      "moduleId": "module-5-2-dagster",
+      "youtubeVideoId": "k-iQNrtKhjo",
+      "title": "Dagster 101 — The Core Concepts Explained (In 4 Minutes)",
+      "channel": "Timnology",
+      "canonicalUrl": "https://www.youtube.com/watch?v=k-iQNrtKhjo",
+      "difficulty": "Easy",
+      "importance": "Medium",
+      "topicSlug": "dagster-core-concepts",
+      "estimatedMinutes": 5,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "Assets, Resources, IO Managers, and Jobs breakdown",
+        "Decoupling business logic from storage systems",
+        "Partitioning assets by time or category"
+      ]
+    },
+    {
+      "position": 36,
+      "stageNumber": 5,
+      "moduleId": "module-5-3-prefect",
+      "youtubeVideoId": "4Lnzn4lw9ig",
+      "title": "Prefect Workflow Orchestration: A Beginner's Guide to Automation (Part 1: Intro)",
+      "channel": "Mukul Tripathi",
+      "canonicalUrl": "https://www.youtube.com/watch?v=4Lnzn4lw9ig",
+      "difficulty": "Medium",
+      "importance": "High",
+      "topicSlug": "prefect-flows-and-tasks",
+      "estimatedMinutes": 30,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "Wrapping existing Python scripts with @flow and @task decorators",
+        "Setting up self-hosted Prefect server and dashboard",
+        "Deployments, schedules, and work pools for distributed execution"
+      ]
+    },
+    {
+      "position": 37,
+      "stageNumber": 6,
+      "moduleId": "module-6-1-kafka-fundamentals",
+      "youtubeVideoId": "QkdkLdMBuL0",
+      "title": "Kafka Tutorial for Beginners | Everything you need to get started",
+      "channel": "TechWorld with Nana",
+      "canonicalUrl": "https://www.youtube.com/watch?v=QkdkLdMBuL0",
+      "difficulty": "Easy",
+      "importance": "Critical",
+      "topicSlug": "kafka-for-beginners-nana",
+      "estimatedMinutes": 60,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "Why message brokers like Kafka are needed in microservices and data pipelines",
+        "Topics, Partitions, Offsets, and Replication Factor",
+        "Producer partitioning strategy and Consumer Groups scaling",
+        "ZooKeeper vs modern KRaft (Kafka Raft Metadata mode)"
+      ]
+    },
+    {
+      "position": 38,
+      "stageNumber": 6,
+      "moduleId": "module-6-1-kafka-fundamentals",
+      "youtubeVideoId": "CU44hKLMg7k",
+      "title": "Apache Kafka for Beginners (3+ hours long)",
+      "channel": "Bogdan Stashchuk",
+      "canonicalUrl": "https://www.youtube.com/watch?v=CU44hKLMg7k",
+      "difficulty": "Medium",
+      "importance": "Critical",
+      "topicSlug": "apache-kafka-comprehensive",
+      "estimatedMinutes": 190,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "Running multi-broker Kafka clusters with Docker Compose",
+        "CLI commands: kafka-topics, kafka-console-producer, kafka-console-consumer",
+        "Producer delivery semantics: at-most-once, at-least-once, idempotent delivery (acks=all)",
+        "Consumer group offsets, auto-commit vs manual commit, and rebalance protocols"
+      ]
+    },
+    {
+      "position": 39,
+      "stageNumber": 6,
+      "moduleId": "module-6-2-flink-stream-processing",
+      "youtubeVideoId": "Bn9NJRKcdKA",
+      "title": "Apache Flink Full Course for Data Engineers | Beginner to Advanced",
+      "channel": "Data with Jay",
+      "canonicalUrl": "https://www.youtube.com/watch?v=Bn9NJRKcdKA",
+      "difficulty": "Hard",
+      "importance": "Critical",
+      "topicSlug": "apache-flink-full-course",
+      "estimatedMinutes": 180,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "True streaming (record-by-record) vs Spark structured micro-batching",
+        "Event Time vs Processing Time vs Ingestion Time",
+        "Watermarks and handling late-arriving data with allowed lateness",
+        "Windowing operators: Tumbling, Sliding, and Session windows",
+        "State backends: Memory, FileSystem, and RocksDB state backend"
+      ]
+    },
+    {
+      "position": 40,
+      "stageNumber": 6,
+      "moduleId": "module-6-2-flink-stream-processing",
+      "youtubeVideoId": "GqNZoo-qPgg",
+      "title": "Apache Flink Architecture",
+      "channel": "Big Data Landscape",
+      "canonicalUrl": "https://www.youtube.com/watch?v=GqNZoo-qPgg",
+      "difficulty": "Hard",
+      "importance": "High",
+      "topicSlug": "apache-flink-architecture",
+      "estimatedMinutes": 20,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "JobManager, TaskManager, and Task Slots architecture",
+        "Chandy-Lamport distributed snapshot algorithm for fault-tolerant checkpointing",
+        "Savepoints for zero-downtime upgrades and state migration"
+      ]
+    },
+    {
+      "position": 41,
+      "stageNumber": 7,
+      "moduleId": "module-7-1-dbt-mastery",
+      "youtubeVideoId": "at002hXhnuU",
+      "title": "Snowflake with dbt Full Course | End-to-End Data Engineering Demo | Real-Time Project",
+      "channel": "Eclasess EduTech",
+      "canonicalUrl": "https://www.youtube.com/watch?v=at002hXhnuU",
+      "difficulty": "Medium",
+      "importance": "Critical",
+      "topicSlug": "dbt-snowflake-full-course",
+      "estimatedMinutes": 180,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "Setting up dbt project structure, dbt_project.yml, and profiles.yml",
+        "Materializations: view, table, ephemeral, incremental",
+        "Using {{ ref() }} and {{ source() }} for automated DAG lineage creation",
+        "Implementing dbt snapshots for automated SCD Type 2 tracking"
+      ]
+    },
+    {
+      "position": 42,
+      "stageNumber": 7,
+      "moduleId": "module-7-1-dbt-mastery",
+      "youtubeVideoId": "-9RzZRkHay4",
+      "title": "How to Build Incremental Models | dbt tutorial",
+      "channel": "Kahan Data Solutions",
+      "canonicalUrl": "https://www.youtube.com/watch?v=-9RzZRkHay4",
+      "difficulty": "Hard",
+      "importance": "Critical",
+      "topicSlug": "dbt-incremental-models",
+      "estimatedMinutes": 25,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "When and why to convert full refresh tables into incremental models",
+        "Configuring `is_incremental()` macro blocks in dbt SQL",
+        "Unique keys, incremental strategies (merge vs delete+insert), and backfill considerations"
+      ]
+    },
+    {
+      "position": 43,
+      "stageNumber": 7,
+      "moduleId": "module-7-2-data-quality",
+      "youtubeVideoId": "oxOj30rl_xs",
+      "title": "Great Expectation Tutorial | Mastering Data Quality",
+      "channel": "Anuj Syal",
+      "canonicalUrl": "https://www.youtube.com/watch?v=oxOj30rl_xs",
+      "difficulty": "Medium",
+      "importance": "Critical",
+      "topicSlug": "great-expectations-tutorial",
+      "estimatedMinutes": 40,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "Core concepts of Great Expectations: Expectations, Expectation Suites, and Validation Results",
+        "Profiling datasets and auto-generating test assertions",
+        "Compiling automated HTML Data Docs for business and engineering visibility"
+      ]
+    },
+    {
+      "position": 44,
+      "stageNumber": 7,
+      "moduleId": "module-7-2-data-quality",
+      "youtubeVideoId": "yRWN_6bUEmA",
+      "title": "How to Build a Data Quality Monitoring System with Great Expectations & Airflow",
+      "channel": "The Data and AI Guy",
+      "canonicalUrl": "https://www.youtube.com/watch?v=yRWN_6bUEmA",
+      "difficulty": "Hard",
+      "importance": "High",
+      "topicSlug": "data-quality-airflow-integration",
+      "estimatedMinutes": 30,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "Integrating Great Expectations checkpoints into Airflow DAG tasks",
+        "Failing pipeline runs gracefully before bad data reaches production data marts",
+        "Alerting on data drift and schema alterations via Slack/email webhooks"
+      ]
+    },
+    {
+      "position": 45,
+      "stageNumber": 8,
+      "moduleId": "module-8-1-cloud-data-projects",
+      "youtubeVideoId": "yvAWbbQa8eE",
+      "title": "AWS Masterclass for Data Engineers with Project",
+      "channel": "Darshil Parmar",
+      "canonicalUrl": "https://www.youtube.com/watch?v=yvAWbbQa8eE",
+      "difficulty": "Medium",
+      "importance": "Critical",
+      "topicSlug": "aws-data-engineering-masterclass-project",
+      "estimatedMinutes": 180,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "Building production data pipelines with AWS services: S3, AWS Glue, Athena, and Lambda",
+        "Data cataloging with AWS Glue Data Catalog and automated crawler schemas",
+        "Serverless analytical querying with Athena and partitioning optimization"
+      ]
+    },
+    {
+      "position": 46,
+      "stageNumber": 8,
+      "moduleId": "module-8-1-cloud-data-projects",
+      "youtubeVideoId": "WpQECq5Hx9g",
+      "title": "🚕 Uber Data Analytics | End-To-End Data Engineering Project",
+      "channel": "Darshil Parmar",
+      "canonicalUrl": "https://www.youtube.com/watch?v=WpQECq5Hx9g",
+      "difficulty": "Medium",
+      "importance": "Critical",
+      "topicSlug": "uber-gcp-data-engineering-project",
+      "estimatedMinutes": 150,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "End-to-end modern GCP data engineering project using Google Cloud Storage, Mage AI, and BigQuery",
+        "Data extraction and transformation using Python scripts",
+        "Building interactive executive dashboards in Looker Studio"
+      ]
+    },
+    {
+      "position": 47,
+      "stageNumber": 8,
+      "moduleId": "module-8-2-terraform",
+      "youtubeVideoId": "YFr_5NTjv0Q",
+      "title": "Terraform: Reshaping the Data Engineering Experience - Andrei Tserakhau",
+      "channel": "DataTalksClub ⬛",
+      "canonicalUrl": "https://www.youtube.com/watch?v=YFr_5NTjv0Q",
+      "difficulty": "Medium",
+      "importance": "Critical",
+      "topicSlug": "terraform-for-data-engineering",
+      "estimatedMinutes": 60,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "Why manual cloud console clicking fails at scale",
+        "Terraform workflow: init, plan, apply, destroy",
+        "Provisioning data lake storage buckets (S3/GCS) and warehouse datasets with Terraform modules"
+      ]
+    },
+    {
+      "position": 48,
+      "stageNumber": 8,
+      "moduleId": "module-8-2-terraform",
+      "youtubeVideoId": "L32T_ruZvFo",
+      "title": "Dev, Staging, and Production in Data Engineering with Terraform | PyData Global 2021",
+      "channel": "PyData",
+      "canonicalUrl": "https://www.youtube.com/watch?v=L32T_ruZvFo",
+      "difficulty": "Hard",
+      "importance": "High",
+      "topicSlug": "terraform-environments-staging-prod",
+      "estimatedMinutes": 35,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "Structuring multi-environment data pipelines (Dev, Stage, Prod)",
+        "Managing remote Terraform state with S3 and DynamoDB state locking",
+        "Isolating data credentials and role-based permissions (IAM) via code"
+      ]
+    },
+    {
+      "position": 49,
+      "stageNumber": 8,
+      "moduleId": "module-8-3-docker",
+      "youtubeVideoId": "lP8xXebHmuE",
+      "title": "Docker for Data Engineering: Postgres, Docker Compose, and Real-World Workflows - Alexey Grigorev",
+      "channel": "DataTalksClub ⬛",
+      "canonicalUrl": "https://www.youtube.com/watch?v=lP8xXebHmuE",
+      "difficulty": "Medium",
+      "importance": "Critical",
+      "topicSlug": "docker-for-data-engineering",
+      "estimatedMinutes": 60,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "Containerizing Python data ingestion scripts into lightweight Docker images",
+        "Running PostgreSQL and pgAdmin locally with docker-compose.yml",
+        "Docker volumes for persisting database state across container restarts",
+        "Docker networks for inter-service communication (Airflow, Postgres, Kafka)"
+      ]
+    },
+    {
+      "position": 50,
+      "stageNumber": 8,
+      "moduleId": "module-8-3-docker",
+      "youtubeVideoId": "nAHx_uSBfTg",
+      "title": "Docker Tutorial for Beginners (DATA DOMAIN EDITION)",
+      "channel": "Ansh Lamba",
+      "canonicalUrl": "https://www.youtube.com/watch?v=nAHx_uSBfTg",
+      "difficulty": "Easy",
+      "importance": "High",
+      "topicSlug": "docker-data-domain-edition",
+      "estimatedMinutes": 45,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "Docker CLI essentials: build, run, exec, stop, prune",
+        "Writing optimized Dockerfiles with caching layers",
+        "Environment variables and secrets management in data containers"
+      ]
+    },
+    {
+      "position": 51,
+      "stageNumber": 8,
+      "moduleId": "module-8-4-cicd-dataops",
+      "youtubeVideoId": "SHGuqvnfBCQ",
+      "title": "DevOps for Data Engineering: Streamline CI/CD for AI & Data Pipelines",
+      "channel": "IBM Technology",
+      "canonicalUrl": "https://www.youtube.com/watch?v=SHGuqvnfBCQ",
+      "difficulty": "Medium",
+      "importance": "Critical",
+      "topicSlug": "devops-cicd-data-pipelines",
+      "estimatedMinutes": 20,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "Core principles of DataOps: automated testing, continuous integration, and rapid feedback",
+        "Testing data logic with pytest before deployment",
+        "Automating schema validations and continuous deployment across environments"
+      ]
+    },
+    {
+      "position": 52,
+      "stageNumber": 8,
+      "moduleId": "module-8-4-cicd-dataops",
+      "youtubeVideoId": "U2Xb5jCRtRc",
+      "title": "DataOps & CI/CD for Data Pipelines | Building Reliable Data Engineering Workflows | Uplatz",
+      "channel": "Uplatz",
+      "canonicalUrl": "https://www.youtube.com/watch?v=U2Xb5jCRtRc",
+      "difficulty": "Medium",
+      "importance": "High",
+      "topicSlug": "dataops-best-practices",
+      "estimatedMinutes": 40,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "Automating code quality with SQLFluff linters in GitHub Actions",
+        "dbt Slim CI: running and testing only modified models and their first-order parents",
+        "Automating rollback procedures on failed pipeline runs"
+      ]
+    },
+    {
+      "position": 53,
+      "stageNumber": 8,
+      "moduleId": "module-8-5-governance-lineage",
+      "youtubeVideoId": "5zvk-XFHk6c",
+      "title": "Datahub Demo: Ultimate Guide to Modern Data Governance with Acryl Data | Step-by-Step Tutorial",
+      "channel": "Fru Dev",
+      "canonicalUrl": "https://www.youtube.com/watch?v=5zvk-XFHk6c",
+      "difficulty": "Medium",
+      "importance": "Critical",
+      "topicSlug": "datahub-governance-demo",
+      "estimatedMinutes": 25,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "Role of modern data catalogs in enterprise data governance",
+        "Connecting DataHub ingestion recipes to Snowflake, BigQuery, and Airflow",
+        "Data glossaries, domain tagging, and owner assignments"
+      ]
+    },
+    {
+      "position": 54,
+      "stageNumber": 8,
+      "moduleId": "module-8-5-governance-lineage",
+      "youtubeVideoId": "rONGpsndzRw",
+      "title": "DataHub Basics: Lineage 101",
+      "channel": "DataHub",
+      "canonicalUrl": "https://www.youtube.com/watch?v=rONGpsndzRw",
+      "difficulty": "Medium",
+      "importance": "High",
+      "topicSlug": "datahub-lineage-101",
+      "estimatedMinutes": 15,
+      "verificationStatus": "verified",
+      "verifiedAt": "2026-11-23T20:29:43.354496Z",
+      "keyTakeaways": [
+        "Automated dataset and pipeline lineage tracking",
+        "Column-level lineage: tracing sensitive PII data upstream and downstream",
+        "Impact analysis: determining downstream breaking changes before schema modifications"
+      ]
+    }
+  ]
+}

@@ -111,6 +111,19 @@ async function RoadmapContent() {
       totalVideos: 7,
       progressPercentage: 0,
     },
+    {
+      course: "data-engineering" as const,
+      title: "Data Engineering Mastery",
+      label: "Data Eng",
+      slug: "data-engineering-12-day",
+      href: "/roadmap/data-engineering",
+      enrolled: false,
+      completedDays: 0,
+      totalDays: 8,
+      watchedVideos: 0,
+      totalVideos: 54,
+      progressPercentage: 0,
+    },
   ];
 
   if (user) {

@@ -22,6 +22,7 @@ import {
   VideoReplayIcon,
   CourseIcon,
   Playlist01Icon,
+  PipelineIcon,
 } from "@hugeicons/core-free-icons";
 import type { NavGroup, PrimeNavItem } from "./types";
 // Future destinations stay defined but their placeholder screens are not advertised.
@@ -168,6 +169,14 @@ export const NAVIGATION_GROUPS: NavGroup[] = [
         icon: JavaIcon,
         group: "fundamentals",
         matchPrefixes: ["/roadmap/oop", "/fundamentals/oop"],
+      },
+      {
+        id: "data-engineering",
+        label: "Data Engineering",
+        href: "/roadmap/data-engineering",
+        icon: PipelineIcon,
+        group: "fundamentals",
+        matchPrefixes: ["/roadmap/data-engineering", "/fundamentals/data-engineering"],
       },
     ],
   },
