@@ -41,6 +41,21 @@ export interface VisPathEdge {
   curvature?: number;
 }
 
+export interface VisPathNodeData extends Record<string, unknown> {
+  node: VisPathNode;
+  isExpanded?: boolean;
+  isSelected?: boolean;
+  onExpandToggle?: (nodeId: string) => void;
+  onSelect?: (node: VisPathNode) => void;
+}
+
+export interface VisPathEdgeData extends Record<string, unknown> {
+  edge: VisPathEdge;
+  track: "data-engineering" | "cs-fundamentals" | "dsa";
+  isFlowing?: boolean;
+  color?: string;
+}
+
 export interface CameraState {
   x: number;
   y: number;

@@ -76,4 +76,14 @@ describe("VisPath Roadmap Canvas & Hive Integration Tests", () => {
 
     expect(crossTrackEdges.length).toBeGreaterThanOrEqual(5);
   });
+
+  it("exports React Flow Figma-style canvas, custom node, edge, toolbar, and inspector", async () => {
+    const vispathModule = await import("@/features/vispath");
+    expect(typeof vispathModule.VisPathWorkspace).toBe("function");
+    expect(typeof vispathModule.VisPathFlow).toBe("function");
+    expect(typeof vispathModule.FigmaNode).toBe("object"); // memoized component
+    expect(typeof vispathModule.FigmaEdge).toBe("object"); // memoized component
+    expect(typeof vispathModule.FigmaToolbar).toBe("function");
+    expect(typeof vispathModule.FigmaInspector).toBe("function");
+  });
 });
