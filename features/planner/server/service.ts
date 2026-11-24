@@ -5,6 +5,7 @@ import { OS_12_DAY_CURRICULUM } from "@/domain/os/curriculum";
 import { CN_12_DAY_CURRICULUM } from "@/domain/cn/curriculum";
 import { OOP_12_DAY_CURRICULUM } from "@/domain/oop/curriculum";
 import { DATA_ENGINEERING_STAGES_CURRICULUM } from "@/domain/data-engineering/curriculum";
+import { PYTHON_STAGES_CURRICULUM } from "@/domain/python/curriculum";
 import { createAdminClient } from "@/lib/supabase/admin";
 import type { Database, Json } from "@/lib/supabase/database.types";
 import { addDays, daysBetween, getDayOfWeekFromDate } from "@/domain/planning/capacity";
@@ -141,6 +142,7 @@ const courseDays = {
   cn: CN_12_DAY_CURRICULUM,
   oop: OOP_12_DAY_CURRICULUM,
   "data-engineering": DATA_ENGINEERING_STAGES_CURRICULUM,
+  python: PYTHON_STAGES_CURRICULUM,
 };
 const pendingProblemIds = (state: State) =>
   new Set(

@@ -107,6 +107,7 @@ describe("PRIME Command Frame — Shell Unit Tests", () => {
         "/roadmap/cn",
         "/roadmap/oop",
         "/roadmap/data-engineering",
+        "/roadmap/python",
         "/readiness",
         "/mastery",
         "/analytics",

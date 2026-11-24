@@ -187,6 +187,14 @@ export const NAVIGATION_GROUPS: NavGroup[] = [
         group: "fundamentals",
         matchPrefixes: ["/roadmap/data-engineering", "/fundamentals/data-engineering"],
       },
+      {
+        id: "python",
+        label: "Python & DSA",
+        href: "/roadmap/python",
+        icon: SourceCodeIcon,
+        group: "fundamentals",
+        matchPrefixes: ["/roadmap/python", "/fundamentals/python"],
+      },
     ],
   },
   {
@@ -285,10 +293,14 @@ export function isRouteActive(
     "/roadmap/os",
     "/roadmap/cn",
     "/roadmap/oop",
+    "/roadmap/data-engineering",
+    "/roadmap/python",
     "/fundamentals/dbms",
     "/fundamentals/os",
     "/fundamentals/cn",
     "/fundamentals/oop",
+    "/fundamentals/data-engineering",
+    "/fundamentals/python",
   ].some((fPath) => pathname === fPath || pathname.startsWith(`${fPath}/`));
   if (item.id === "roadmap" && isFundamentalsRoute) return false;
 

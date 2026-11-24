@@ -124,6 +124,19 @@ async function RoadmapContent() {
       totalVideos: 54,
       progressPercentage: 0,
     },
+    {
+      course: "python" as const,
+      title: "Python & DSA Mastery",
+      label: "Python DSA",
+      slug: "python-dsa",
+      href: "/roadmap/python",
+      enrolled: false,
+      completedDays: 0,
+      totalDays: 8,
+      watchedVideos: 0,
+      totalVideos: 43,
+      progressPercentage: 0,
+    },
   ];
 
   if (user) {

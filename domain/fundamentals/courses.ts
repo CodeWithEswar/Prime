@@ -30,6 +30,12 @@ export const fundamentalsCourses = {
     description: "Modern data engineering: Python, SQL, Kimball modeling, Iceberg, Spark, Kafka, dbt & DataOps.",
     difficulty: "Hard",
   },
+  python: {
+    label: "Python DSA",
+    title: "Python & DSA Mastery",
+    description: "Complete Python data structures & algorithms from internals to LeetCode patterns.",
+    difficulty: "Medium",
+  },
 } as const;
 
 export type FundamentalsCourse = keyof typeof fundamentalsCourses;
