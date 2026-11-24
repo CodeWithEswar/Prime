@@ -24,6 +24,7 @@ import {
   Playlist01Icon,
   PipelineIcon,
   NeuralNetworkIcon,
+  PythonIcon,
 } from "@hugeicons/core-free-icons";
 import type { NavGroup, PrimeNavItem } from "./types";
 // Future destinations stay defined but their placeholder screens are not advertised.
@@ -126,6 +127,19 @@ export const NAVIGATION_GROUPS: NavGroup[] = [
         matchPrefixes: ["/practice/dsa/sheets/striver-a2z", "/dsa/sheets/striver-a2z", "/app/dsa/sheets/striver-a2z"],
       },
       {
+        id: "python-dsa",
+        label: "Python DSA Mastery",
+        href: "/roadmap/python",
+        icon: PythonIcon,
+        group: "practice",
+        matchPrefixes: [
+          "/roadmap/python",
+          "/practice/dsa/playlists/python-dsa-mastery",
+          "/dsa/playlists/python-dsa-mastery",
+          "/fundamentals/python",
+        ],
+      },
+      {
         id: "aptitude",
         label: "Aptitude & Reasoning",
         href: "/aptitude",
@@ -186,14 +200,6 @@ export const NAVIGATION_GROUPS: NavGroup[] = [
         icon: PipelineIcon,
         group: "fundamentals",
         matchPrefixes: ["/roadmap/data-engineering", "/fundamentals/data-engineering"],
-      },
-      {
-        id: "python",
-        label: "Python & DSA",
-        href: "/roadmap/python",
-        icon: SourceCodeIcon,
-        group: "fundamentals",
-        matchPrefixes: ["/roadmap/python", "/fundamentals/python"],
       },
     ],
   },
@@ -313,6 +319,14 @@ export function isRouteActive(
   ].some((kPath) => pathname === kPath || pathname.startsWith(`${kPath}/`));
   if (item.id === "dsa-playlists" && isKunalRoute) return false;
 
+  const isPythonRoute = [
+    "/roadmap/python",
+    "/practice/dsa/playlists/python-dsa-mastery",
+    "/dsa/playlists/python-dsa-mastery",
+    "/fundamentals/python",
+  ].some((pyPath) => pathname === pyPath || pathname.startsWith(`${pyPath}/`));
+  if (item.id === "dsa-playlists" && isPythonRoute) return false;
+
   const isPlaylistRoute = [
     "/practice/dsa/playlists",
     "/dsa/playlists",
@@ -331,7 +345,7 @@ export function isRouteActive(
 
   if (
     item.id === "practice" &&
-    (isStriverRoute || isKunalRoute || isPlaylistRoute || isAptitudeRoute)
+    (isStriverRoute || isKunalRoute || isPythonRoute || isPlaylistRoute || isAptitudeRoute)
   ) {
     return false;
   }
@@ -354,6 +368,22 @@ export function getShellRoute(pathname: string, query?: ShellSearchParams) {
       label: isAnalytics ? "Kunal DSA Analytics" : "Kunal Java + DSA",
       parent: isAnalytics ? "/practice/dsa/playlists/kunal-kushwaha" : "/practice/dsa/playlists",
       id: "kunal-bootcamp",
+    };
+  }
+  if (
+    pathname === "/roadmap/python" ||
+    pathname.startsWith("/roadmap/python/") ||
+    pathname === "/practice/dsa/playlists/python-dsa-mastery" ||
+    pathname.startsWith("/practice/dsa/playlists/python-dsa-mastery/") ||
+    pathname === "/fundamentals/python" ||
+    pathname.startsWith("/fundamentals/python/")
+  ) {
+    const isAnalytics = pathname.endsWith("/analytics");
+    return {
+      section: "Practice",
+      label: isAnalytics ? "Python DSA Analytics" : "Python DSA Mastery",
+      parent: pathname.includes("playlists") ? "/practice/dsa/playlists" : "/roadmap",
+      id: "python-dsa",
     };
   }
   if (pathname === "/aptitude" || pathname.startsWith("/aptitude/"))

@@ -100,6 +100,7 @@ describe("PRIME Command Frame — Shell Unit Tests", () => {
         "/practice/dsa/playlists",
         "/practice/dsa/playlists/kunal-kushwaha",
         "/practice/dsa/sheets/striver-a2z",
+        "/roadmap/python",
         "/aptitude",
         "/lab",
         "/roadmap/dbms",
@@ -107,7 +108,6 @@ describe("PRIME Command Frame — Shell Unit Tests", () => {
         "/roadmap/cn",
         "/roadmap/oop",
         "/roadmap/data-engineering",
-        "/roadmap/python",
         "/readiness",
         "/mastery",
         "/analytics",
@@ -179,6 +179,7 @@ describe("PRIME Command Frame — Shell Unit Tests", () => {
       const playlistsItem = AVAILABLE_NAVIGATION_ITEMS.find((i) => i.id === "dsa-playlists")!;
       const kunalItem = AVAILABLE_NAVIGATION_ITEMS.find((i) => i.id === "kunal-bootcamp")!;
       const striverItem = AVAILABLE_NAVIGATION_ITEMS.find((i) => i.id === "striver-a2z")!;
+      const pythonItem = AVAILABLE_NAVIGATION_ITEMS.find((i) => i.id === "python-dsa")!;
 
       // DSA Practice matches problems and catalog
       expect(isRouteActive("/practice/dsa", practiceItem)).toBe(true);
@@ -194,6 +195,13 @@ describe("PRIME Command Frame — Shell Unit Tests", () => {
       expect(isRouteActive("/practice/dsa/playlists/kunal-kushwaha", practiceItem)).toBe(false);
       expect(isRouteActive("/practice/dsa/playlists/kunal-kushwaha", playlistsItem)).toBe(false);
       expect(isRouteActive("/practice/dsa/playlists/kunal-kushwaha", kunalItem)).toBe(true);
+
+      // Python DSA Mastery isolates cleanly: ONLY pythonItem is active, NOT practiceItem or playlistsItem
+      expect(isRouteActive("/roadmap/python", practiceItem)).toBe(false);
+      expect(isRouteActive("/roadmap/python", pythonItem)).toBe(true);
+      expect(isRouteActive("/practice/dsa/playlists/python-dsa-mastery", practiceItem)).toBe(false);
+      expect(isRouteActive("/practice/dsa/playlists/python-dsa-mastery", playlistsItem)).toBe(false);
+      expect(isRouteActive("/practice/dsa/playlists/python-dsa-mastery", pythonItem)).toBe(true);
 
       // Striver sheet isolates cleanly: ONLY striverItem is active, NOT practiceItem
       expect(isRouteActive("/practice/dsa/sheets/striver-a2z", practiceItem)).toBe(false);

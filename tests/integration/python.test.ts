@@ -77,10 +77,13 @@ describe("Python & DSA Curriculum & Playlist Integration Tests", () => {
     }
   });
 
-  it("registers /roadmap/python in navigation under fundamentals", () => {
-    const pythonNav = AVAILABLE_NAVIGATION_ITEMS.find((item) => item.id === "python");
+  it("registers Python DSA Mastery in sidebar navigation under practice", () => {
+    const pythonNav = AVAILABLE_NAVIGATION_ITEMS.find((item) => item.id === "python-dsa");
     expect(pythonNav).toBeDefined();
+    expect(pythonNav?.label).toBe("Python DSA Mastery");
     expect(pythonNav?.href).toBe("/roadmap/python");
-    expect(pythonNav?.group).toBe("fundamentals");
+    expect(pythonNav?.group).toBe("practice");
+    expect(pythonNav?.matchPrefixes).toContain("/practice/dsa/playlists/python-dsa-mastery");
+    expect(pythonNav?.matchPrefixes).toContain("/roadmap/python");
   });
 });
