@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 function DataEngineeringSkeleton() {
   return (
-    <div className="w-full max-w-[1440px] mx-auto p-4 sm:p-6 lg:p-8 space-y-6 animate-pulse">
+    <div className="w-full max-w-[1440px] mx-auto p-3 sm:p-5 lg:p-8 space-y-6 animate-pulse">
       {/* Hero skeleton */}
       <div className="h-64 rounded-xl border border-[#1A1A1A] bg-[#0A0A0A]" />
 
@@ -61,7 +61,7 @@ async function DataEngineeringContent() {
   );
 
   return (
-    <div className="w-full max-w-[1440px] mx-auto p-4 sm:p-6 lg:p-8">
+    <div className="w-full max-w-[1440px] mx-auto p-3 sm:p-5 lg:p-8">
       <DataEngineeringWorkspace initialData={initialData} />
     </div>
   );

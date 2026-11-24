@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -60,6 +61,8 @@ export function DataEngineeringVideoLibrary({
   onToggleBookmark,
   onToggleRevision,
 }: VideoLibraryProps) {
+  const [showMobileFilters, setShowMobileFilters] = useState(false);
+
   const hasActiveFilters =
     filterStage !== "all" ||
     filterDifficulty !== "all" ||
@@ -75,73 +78,102 @@ export function DataEngineeringVideoLibrary({
     onSearchQueryChange("");
   };
 
+  const STAGE_QUICK_TABS: { id: number | "all"; label: string }[] = [
+    { id: "all", label: "All (54)" },
+    { id: 1, label: "S1: Python/SQL" },
+    { id: 2, label: "S2: Modeling" },
+    { id: 3, label: "S3: Iceberg" },
+    { id: 4, label: "S4: Spark" },
+    { id: 5, label: "S5: Airflow" },
+    { id: 6, label: "S6: Kafka/Flink" },
+    { id: 7, label: "S7: dbt" },
+    { id: 8, label: "S8: DataOps" },
+  ];
+
   return (
     <div className="space-y-5">
       {/* Search and Filters Header */}
-      <div className="rounded-xl border border-[#222222] bg-[#0E0E0E] p-4 sm:p-5 space-y-4">
+      <div className="rounded-xl border border-[var(--border-default)] bg-[#0C0C0F] p-4 sm:p-5 space-y-4 shadow-elevation-1">
+        {/* Search Bar Row */}
         <div className="flex flex-col sm:flex-row gap-3">
           <div className="relative flex-1">
             <Icon
               icon={Search01Icon}
               size={16}
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-[#71717A]"
+              className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#71717A]"
             />
             <Input
               value={searchQuery}
               onChange={(e) => onSearchQueryChange(e.target.value)}
               placeholder="Search 54 canonical lectures by topic, tool, or channel (e.g. Spark, Iceberg, dbt)..."
-              className="pl-9 h-10 bg-[#0A0A0A] border-[#222222] text-xs sm:text-sm text-white placeholder:text-[#555555]"
+              className="pl-10 h-10 bg-[#070709] border-[#222226] text-xs sm:text-sm text-white placeholder:text-[#52525B] focus:border-white transition-colors"
             />
             {searchQuery && (
               <button
                 type="button"
                 onClick={() => onSearchQueryChange("")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-[#71717A] hover:text-white"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-[#71717A] hover:text-white p-1"
+                aria-label="Clear search"
               >
                 <Icon icon={Cancel01Icon} size={14} />
               </button>
             )}
           </div>
 
-          {hasActiveFilters && (
+          <div className="flex items-center gap-2">
             <Button
               variant="outline"
               size="sm"
-              onClick={handleResetFilters}
-              className="h-10 text-xs text-[#888888] border-[#262626] hover:text-white shrink-0"
+              onClick={() => setShowMobileFilters((prev) => !prev)}
+              className="sm:hidden h-10 px-3 text-xs border-[#26262B] bg-[#121216] text-[#D4D4D8]"
             >
-              Reset Filters
+              <Icon icon={FilterIcon} size={14} className="mr-1.5" />
+              {showMobileFilters ? "Hide Filters" : "Filters"}
             </Button>
-          )}
+
+            {hasActiveFilters && (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleResetFilters}
+                className="h-10 text-xs text-[#A1A1AA] border-[#26262B] hover:text-white shrink-0"
+              >
+                Reset
+              </Button>
+            )}
+          </div>
         </div>
 
-        {/* Filter Controls Strip */}
-        <div className="flex flex-wrap items-center gap-2 pt-1 border-t border-[#1A1A1A]">
-          <span className="text-xs text-[#71717A] flex items-center gap-1 mr-1">
-            <Icon icon={FilterIcon} size={13} />
-            Filters:
-          </span>
+        {/* Quick Stage Slider Strip (Mobile & Tablet) */}
+        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none -mx-1 px-1">
+          {STAGE_QUICK_TABS.map((tab) => (
+            <button
+              key={String(tab.id)}
+              type="button"
+              onClick={() => onFilterStageChange(tab.id)}
+              className={cn(
+                "rounded-full px-3 py-1 text-[11px] font-medium whitespace-nowrap transition-all border shrink-0",
+                filterStage === tab.id
+                  ? "bg-white text-black border-white shadow-sm font-semibold"
+                  : "bg-[#131317] text-[#A1A1AA] border-[#222226] hover:border-[#38383E] hover:text-white"
+              )}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
 
-          {/* Stage Filter */}
-          <select
-            value={filterStage}
-            onChange={(e) =>
-              onFilterStageChange(
-                e.target.value === "all" ? "all" : Number(e.target.value)
-              )
-            }
-            className="h-8 rounded-md border border-[#242424] bg-[#0A0A0A] px-2.5 text-xs text-white outline-none focus:border-white"
-          >
-            <option value="all">All Stages (1-8)</option>
-            <option value="1">Stage 1: Python & Linux</option>
-            <option value="2">Stage 2: Modeling & Warehouses</option>
-            <option value="3">Stage 3: Lakes & Iceberg</option>
-            <option value="4">Stage 4: Distributed Spark</option>
-            <option value="5">Stage 5: Airflow & Dagster</option>
-            <option value="6">Stage 6: Kafka & Flink</option>
-            <option value="7">Stage 7: dbt & Data Quality</option>
-            <option value="8">Stage 8: Cloud & DataOps</option>
-          </select>
+        {/* Dropdown Filters Strip (Visible on Desktop, toggleable on Mobile) */}
+        <div
+          className={cn(
+            "pt-3 border-t border-[#1C1C20] flex-wrap items-center gap-2",
+            showMobileFilters ? "flex" : "hidden sm:flex"
+          )}
+        >
+          <span className="text-xs text-[#71717A] flex items-center gap-1 mr-1 hidden lg:flex">
+            <Icon icon={FilterIcon} size={13} />
+            Refine:
+          </span>
 
           {/* Difficulty Filter */}
           <select
@@ -151,7 +183,7 @@ export function DataEngineeringVideoLibrary({
                 e.target.value as DataEngineeringDifficulty | "all"
               )
             }
-            className="h-8 rounded-md border border-[#242424] bg-[#0A0A0A] px-2.5 text-xs text-white outline-none focus:border-white"
+            className="h-8 rounded-lg border border-[#24242A] bg-[#08080A] px-2.5 text-xs text-white outline-none focus:border-white transition-colors"
           >
             <option value="all">All Difficulties</option>
             <option value="Easy">Easy</option>
@@ -167,7 +199,7 @@ export function DataEngineeringVideoLibrary({
                 e.target.value as DataEngineeringImportance | "all"
               )
             }
-            className="h-8 rounded-md border border-[#242424] bg-[#0A0A0A] px-2.5 text-xs text-white outline-none focus:border-white"
+            className="h-8 rounded-lg border border-[#24242A] bg-[#08080A] px-2.5 text-xs text-white outline-none focus:border-white transition-colors"
           >
             <option value="all">All Importance</option>
             <option value="Critical">Critical Priority</option>
@@ -188,7 +220,7 @@ export function DataEngineeringVideoLibrary({
                   | "revision_due"
               )
             }
-            className="h-8 rounded-md border border-[#242424] bg-[#0A0A0A] px-2.5 text-xs text-white outline-none focus:border-white"
+            className="h-8 rounded-lg border border-[#24242A] bg-[#08080A] px-2.5 text-xs text-white outline-none focus:border-white transition-colors"
           >
             <option value="all">All Progress Statuses</option>
             <option value="unwatched">Unwatched Only</option>
@@ -198,14 +230,14 @@ export function DataEngineeringVideoLibrary({
           </select>
 
           <span className="ml-auto text-xs font-mono text-[#71717A]">
-            Showing {videos.length} videos
+            Showing {videos.length} of 54 lectures
           </span>
         </div>
       </div>
 
-      {/* Video Cards Grid */}
+      {/* Video Cards Responsive Grid */}
       {videos.length === 0 ? (
-        <div className="rounded-xl border border-[#222222] bg-[#0A0A0A] p-12 text-center space-y-3">
+        <div className="rounded-xl border border-[#222226] bg-[#0A0A0C] p-12 text-center space-y-3">
           <p className="text-sm font-semibold text-white">
             No video lessons match your filter criteria.
           </p>
@@ -222,7 +254,7 @@ export function DataEngineeringVideoLibrary({
           </Button>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
           {videos.map((video) => {
             const prog = videoProgress[video.youtubeVideoId];
             const isWatched = !!prog?.watched;
@@ -233,7 +265,7 @@ export function DataEngineeringVideoLibrary({
               <div
                 key={video.youtubeVideoId}
                 className={cn(
-                  "flex flex-col justify-between rounded-xl border border-[#1C1C1C] bg-[#0A0A0A] overflow-hidden transition-all hover:border-[#2C2C2C]",
+                  "flex flex-col justify-between rounded-xl border border-[#1E1E22] bg-[#09090C] overflow-hidden transition-all duration-200 hover:border-[#2F2F36] shadow-sm",
                   isWatched && "opacity-85 hover:opacity-100"
                 )}
               >
@@ -241,7 +273,7 @@ export function DataEngineeringVideoLibrary({
                   {/* Thumbnail */}
                   <div
                     onClick={() => onWatchVideo(video.youtubeVideoId)}
-                    className="relative aspect-video w-full cursor-pointer overflow-hidden bg-[#121212] group"
+                    className="relative aspect-video w-full cursor-pointer overflow-hidden bg-[#121216] group select-none"
                   >
                     <img
                       src={`https://img.youtube.com/vi/${video.youtubeVideoId}/mqdefault.jpg`}
@@ -255,16 +287,16 @@ export function DataEngineeringVideoLibrary({
                       </span>
                     </div>
 
-                    <span className="absolute bottom-2 right-2 rounded bg-black/80 px-1.5 py-0.5 font-mono text-[10px] text-white">
+                    <span className="absolute bottom-2 right-2 rounded bg-black/85 px-1.5 py-0.5 font-mono text-[10px] font-semibold text-white">
                       {video.estimatedMinutes} min
                     </span>
 
-                    <span className="absolute top-2 left-2 rounded bg-black/80 px-2 py-0.5 font-mono text-[10px] text-[#A1A1AA]">
+                    <span className="absolute top-2 left-2 rounded bg-black/85 px-2 py-0.5 font-mono text-[10px] text-[#D4D4D8]">
                       Stage {video.stageNumber} • #{video.position}
                     </span>
                   </div>
 
-                  {/* Body */}
+                  {/* Body Content */}
                   <div className="p-4 space-y-2.5">
                     <div className="flex flex-wrap items-center gap-1.5">
                       <Badge
@@ -284,13 +316,13 @@ export function DataEngineeringVideoLibrary({
                       {video.importance === "Critical" && (
                         <Badge
                           variant="outline"
-                          className="border-rose-900/60 bg-rose-950/30 text-[10px] text-rose-300 px-1.5 py-0"
+                          className="border-rose-900/60 bg-rose-950/30 text-[10px] text-rose-300 px-1.5 py-0 font-semibold"
                         >
                           Critical Core
                         </Badge>
                       )}
 
-                      <span className="text-[11px] text-[#71717A] ml-auto">
+                      <span className="text-[11px] text-[#71717A] ml-auto truncate max-w-[120px]">
                         {video.channel}
                       </span>
                     </div>
@@ -298,15 +330,15 @@ export function DataEngineeringVideoLibrary({
                     <h4
                       onClick={() => onWatchVideo(video.youtubeVideoId)}
                       className={cn(
-                        "text-xs sm:text-sm font-semibold cursor-pointer transition-colors hover:text-white line-clamp-2",
-                        isWatched ? "text-[#999999]" : "text-white"
+                        "text-xs sm:text-sm font-semibold cursor-pointer transition-colors hover:text-white line-clamp-2 leading-snug",
+                        isWatched ? "text-[#A1A1AA]" : "text-white"
                       )}
                     >
                       {video.title}
                     </h4>
 
                     {video.keyTakeaways && video.keyTakeaways.length > 0 && (
-                      <ul className="space-y-1 pt-1 border-t border-[#161616]">
+                      <ul className="space-y-1 pt-1.5 border-t border-[#18181D]">
                         {video.keyTakeaways.slice(0, 2).map((takeaway, kIdx) => (
                           <li
                             key={kIdx}
@@ -322,21 +354,21 @@ export function DataEngineeringVideoLibrary({
                 </div>
 
                 {/* Footer Controls */}
-                <div className="flex items-center justify-between p-3 border-t border-[#161616] bg-[#0E0E0E]">
+                <div className="flex items-center justify-between p-3 border-t border-[#18181D] bg-[#0E0E12]">
                   <div className="flex items-center gap-1">
                     <Button
                       variant="ghost"
                       size="icon"
                       onClick={() => onToggleBookmark(video.youtubeVideoId)}
                       className={cn(
-                        "size-7 rounded border border-transparent hover:border-[#262626]",
+                        "size-7 rounded border border-transparent hover:border-[#28282E]",
                         isBookmarked
                           ? "text-amber-400 hover:text-amber-300"
                           : "text-[#71717A] hover:text-white"
                       )}
                       title={isBookmarked ? "Bookmarked" : "Bookmark"}
                     >
-                      <Icon icon={Bookmark01Icon} size={13} />
+                      <Icon icon={Bookmark01Icon} size={14} />
                     </Button>
 
                     <Button
@@ -344,14 +376,14 @@ export function DataEngineeringVideoLibrary({
                       size="icon"
                       onClick={() => onToggleRevision(video.youtubeVideoId)}
                       className={cn(
-                        "size-7 rounded border border-transparent hover:border-[#262626]",
+                        "size-7 rounded border border-transparent hover:border-[#28282E]",
                         isRevision
                           ? "text-sky-400 hover:text-sky-300"
                           : "text-[#71717A] hover:text-white"
                       )}
                       title={isRevision ? "Needs Revision" : "Flag for Revision"}
                     >
-                      <Icon icon={RotateRight01Icon} size={13} />
+                      <Icon icon={RotateRight01Icon} size={14} />
                     </Button>
                   </div>
 
@@ -363,7 +395,7 @@ export function DataEngineeringVideoLibrary({
                       "h-7 text-xs font-medium px-2.5",
                       isWatched
                         ? "bg-white text-black hover:bg-neutral-200"
-                        : "border-[#262626] bg-[#141414] text-white hover:bg-[#1E1E1E]"
+                        : "border-[#27272A] bg-[#121214] text-white hover:bg-[#1C1C20]"
                     )}
                   >
                     <Icon
@@ -374,7 +406,7 @@ export function DataEngineeringVideoLibrary({
                         isWatched ? "text-black" : "text-[#71717A]"
                       )}
                     />
-                    {isWatched ? "Watched" : "Mark Watched"}
+                    {isWatched ? "Watched" : "Complete"}
                   </Button>
                 </div>
               </div>
