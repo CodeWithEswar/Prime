@@ -207,7 +207,7 @@ function VisPathFlowCanvas() {
   }, [reactFlow]);
 
   return (
-    <div className="relative w-full h-full select-none bg-[#030305]">
+    <div className="relative w-full h-full select-none bg-black">
       {/* 1. Figma Floating Control Toolbar */}
       <FigmaToolbar
         nodes={VISPATH_NODES}
@@ -259,7 +259,7 @@ function VisPathFlowCanvas() {
           <MiniMap
             zoomable
             pannable
-            className="!bottom-5 !right-5 !m-0 !hidden md:!block"
+            className="!bottom-5 !right-5 !m-0 !hidden md:!block !rounded-md !border !border-zinc-800 !bg-zinc-950/90 !shadow-2xl overflow-hidden"
             nodeColor={(n) => {
               const nodeData = n.data as VisPathNodeData | undefined;
               if (nodeData?.node?.color) {
@@ -268,7 +268,7 @@ function VisPathFlowCanvas() {
               return "#3B82F6";
             }}
             nodeStrokeWidth={3}
-            maskColor="rgba(3, 3, 5, 0.8)"
+            maskColor="rgba(0, 0, 0, 0.85)"
           />
         )}
       </ReactFlow>

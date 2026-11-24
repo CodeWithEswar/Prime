@@ -86,4 +86,42 @@ describe("VisPath Roadmap Canvas & Hive Integration Tests", () => {
     expect(typeof vispathModule.FigmaToolbar).toBe("function");
     expect(typeof vispathModule.FigmaInspector).toBe("function");
   });
+
+  it("renders responsive Figma toolbar with three-dot dropdown menu and rounded-md design system", async () => {
+    const React = await import("react");
+    const { render, screen } = await import("@testing-library/react");
+    const { FigmaToolbar } = await import("@/features/vispath/components/figma-toolbar");
+
+    const noop = () => {};
+    const { container } = render(
+      React.createElement(FigmaToolbar, {
+        nodes: VISPATH_NODES,
+        selectedTrack: "all",
+        onSelectTrack: noop,
+        onFocusNode: noop,
+        isFlowing: true,
+        onToggleFlow: noop,
+        showMinimap: true,
+        onToggleMinimap: noop,
+        panMode: false,
+        onTogglePanMode: noop,
+        zoomLevel: 0.85,
+        onZoomIn: noop,
+        onZoomOut: noop,
+        onFitView: noop,
+        onResetView: noop,
+      })
+    );
+
+    // Verify Three-Dot Dropdown button exists
+    const moreButton = screen.getByTitle("More Actions & Controls");
+    expect(moreButton).toBeDefined();
+
+    // Verify rounded-md is used across elements
+    const roundedMdElements = container.querySelectorAll(".rounded-md");
+    expect(roundedMdElements.length).toBeGreaterThanOrEqual(5);
+
+    // Verify zoom percentage button is present
+    expect(screen.getByText("85%")).toBeDefined();
+  });
 });

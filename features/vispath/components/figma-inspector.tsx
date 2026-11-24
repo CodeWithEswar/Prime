@@ -41,48 +41,48 @@ export function FigmaInspector({
   const prerequisiteNodes = allNodes.filter((n) => node.prerequisites.includes(n.id));
 
   return (
-    <div className="absolute right-3 top-3 bottom-3 w-80 sm:w-96 z-40 flex flex-col rounded-2xl border border-[#27272A] bg-[#0A0A0E]/95 backdrop-blur-2xl shadow-[0_16px_50px_rgba(0,0,0,0.8)] animate-in fade-in slide-in-from-right-4 duration-200 overflow-hidden">
+    <div className="absolute right-2 sm:right-3 top-2 sm:top-3 bottom-2 sm:bottom-3 w-[calc(100%-1rem)] sm:w-88 md:w-96 z-40 flex flex-col rounded-md border border-zinc-800 bg-zinc-950/95 backdrop-blur-2xl shadow-[0_16px_50px_rgba(0,0,0,0.85)] animate-in fade-in slide-in-from-right-4 duration-200 overflow-hidden">
       {/* 1. Figma Header: Frame & Inspect Properties */}
-      <div className="p-3.5 border-b border-[#1F1F26] bg-[#0E0E14] flex items-center justify-between gap-2 shrink-0">
+      <div className="p-3.5 border-b border-zinc-800 bg-black/60 flex items-center justify-between gap-2 shrink-0">
         <div className="flex items-center gap-2 min-w-0">
           <span
             className="size-2.5 rounded-full shrink-0"
             style={{ backgroundColor: node.color }}
           />
           <div className="min-w-0">
-            <span className="font-mono text-[10px] uppercase tracking-wider text-[#71717A] block truncate">
+            <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-500 block truncate">
               FRAME #{node.id} · {node.track}
             </span>
-            <h3 className="text-sm font-bold text-white truncate">{node.title}</h3>
+            <h3 className="text-sm font-bold text-zinc-100 truncate">{node.title}</h3>
           </div>
         </div>
 
         <button
           type="button"
           onClick={onClose}
-          className="size-7 flex items-center justify-center rounded-lg text-[#71717A] hover:text-white hover:bg-[#1A1A22] transition-colors shrink-0"
+          className="size-7 flex items-center justify-center rounded-md text-zinc-400 hover:text-zinc-100 hover:bg-zinc-900 transition-colors shrink-0"
         >
           <Icon icon={Cancel01Icon} size={15} />
         </button>
       </div>
 
       {/* 2. Figma Coordinate & Dimension Box */}
-      <div className="px-4 py-2.5 border-b border-[#1A1A22] bg-[#0B0B10] grid grid-cols-4 gap-2 text-center text-xs font-mono shrink-0">
-        <div className="bg-[#121218] py-1 px-1.5 rounded border border-[#1E1E26]">
-          <span className="text-[9px] text-[#71717A] block">STAGE</span>
-          <span className="font-semibold text-white">#{node.stage}</span>
+      <div className="px-4 py-2.5 border-b border-zinc-800 bg-zinc-950/60 grid grid-cols-4 gap-2 text-center text-xs font-mono shrink-0">
+        <div className="bg-zinc-900/60 py-1.5 px-1.5 rounded-md border border-zinc-800">
+          <span className="text-[9px] text-zinc-500 block">STAGE</span>
+          <span className="font-semibold text-zinc-100">#{node.stage}</span>
         </div>
-        <div className="bg-[#121218] py-1 px-1.5 rounded border border-[#1E1E26]">
-          <span className="text-[9px] text-[#71717A] block">HOURS</span>
-          <span className="font-semibold text-[#E4E4E7]">{node.estimatedHours}h</span>
+        <div className="bg-zinc-900/60 py-1.5 px-1.5 rounded-md border border-zinc-800">
+          <span className="text-[9px] text-zinc-500 block">HOURS</span>
+          <span className="font-semibold text-zinc-300">{node.estimatedHours}h</span>
         </div>
-        <div className="bg-[#121218] py-1 px-1.5 rounded border border-[#1E1E26]">
-          <span className="text-[9px] text-[#71717A] block">LABS</span>
-          <span className="font-semibold text-white">{node.labsCount ?? 0}</span>
+        <div className="bg-zinc-900/60 py-1.5 px-1.5 rounded-md border border-zinc-800">
+          <span className="text-[9px] text-zinc-500 block">LABS</span>
+          <span className="font-semibold text-zinc-100">{node.labsCount ?? 0}</span>
         </div>
-        <div className="bg-[#121218] py-1 px-1.5 rounded border border-[#1E1E26]">
-          <span className="text-[9px] text-[#71717A] block">VIDEOS</span>
-          <span className="font-semibold text-white">{node.videosCount ?? 0}</span>
+        <div className="bg-zinc-900/60 py-1.5 px-1.5 rounded-md border border-zinc-800">
+          <span className="text-[9px] text-zinc-500 block">VIDEOS</span>
+          <span className="font-semibold text-zinc-100">{node.videosCount ?? 0}</span>
         </div>
       </div>
 
@@ -92,42 +92,42 @@ export function FigmaInspector({
         <div className="flex items-center justify-between gap-2">
           <div className="flex items-center gap-1.5">
             {node.status === "completed" && (
-              <span className="flex items-center gap-1 text-[11px] font-medium text-emerald-400 bg-emerald-950/60 border border-emerald-800/60 px-2.5 py-1 rounded-full">
+              <span className="flex items-center gap-1 text-[11px] font-medium text-emerald-400 bg-emerald-950/40 border border-emerald-800/40 px-2.5 py-1 rounded-md">
                 <Icon icon={CheckmarkCircle02Icon} size={12} />
                 Mastered
               </span>
             )}
             {node.status === "in_progress" && (
-              <span className="flex items-center gap-1 text-[11px] font-medium text-amber-400 bg-amber-950/60 border border-amber-800/60 px-2.5 py-1 rounded-full">
+              <span className="flex items-center gap-1 text-[11px] font-medium text-amber-400 bg-amber-950/40 border border-amber-800/40 px-2.5 py-1 rounded-md">
                 <span className="size-1.5 rounded-full bg-amber-400 animate-pulse" />
                 In Progress
               </span>
             )}
             {node.status === "available" && (
-              <span className="flex items-center gap-1 text-[11px] font-medium text-blue-400 bg-blue-950/60 border border-blue-800/60 px-2.5 py-1 rounded-full">
-                <span className="size-1.5 rounded-full bg-blue-400" />
+              <span className="flex items-center gap-1 text-[11px] font-medium text-zinc-200 bg-zinc-800 border border-zinc-700 px-2.5 py-1 rounded-md">
+                <span className="size-1.5 rounded-full bg-zinc-400" />
                 Ready to Start
               </span>
             )}
             {node.status === "locked" && (
-              <span className="flex items-center gap-1 text-[11px] font-medium text-[#71717A] bg-[#16161C] border border-[#27272A] px-2.5 py-1 rounded-full">
+              <span className="flex items-center gap-1 text-[11px] font-medium text-zinc-400 bg-zinc-900 border border-zinc-800 px-2.5 py-1 rounded-md">
                 <Icon icon={LockIcon} size={12} />
                 Prerequisites Required
               </span>
             )}
           </div>
 
-          <span className="font-mono text-[10px] text-[#A1A1AA] bg-[#141418] px-2 py-0.5 rounded border border-[#222228]">
+          <span className="font-mono text-[10px] text-zinc-400 bg-zinc-900 px-2 py-0.5 rounded-md border border-zinc-800">
             {node.difficulty} Tier
           </span>
         </div>
 
         {/* Architectural Overview */}
         <div className="space-y-1.5">
-          <h4 className="text-[10px] font-mono uppercase tracking-wider text-[#71717A]">
+          <h4 className="text-[10px] font-mono uppercase tracking-wider text-zinc-500">
             Architectural Synopsis
           </h4>
-          <p className="text-xs text-[#D4D4D8] leading-relaxed bg-[#111116] p-3 rounded-xl border border-[#1E1E26]">
+          <p className="text-xs text-zinc-300 leading-relaxed bg-zinc-900/40 p-3 rounded-md border border-zinc-800/80">
             {node.description}
           </p>
         </div>
@@ -135,7 +135,7 @@ export function FigmaInspector({
         {/* Prerequisites Jump Links */}
         {prerequisiteNodes.length > 0 && (
           <div className="space-y-2">
-            <h4 className="text-[10px] font-mono uppercase tracking-wider text-[#71717A]">
+            <h4 className="text-[10px] font-mono uppercase tracking-wider text-zinc-500">
               Prerequisite Dependencies
             </h4>
             <div className="space-y-1.5">
@@ -144,18 +144,18 @@ export function FigmaInspector({
                   key={pre.id}
                   type="button"
                   onClick={() => onFocusNode(pre)}
-                  className="w-full flex items-center justify-between p-2 rounded-lg bg-[#111116] border border-[#1E1E26] hover:border-[#32323E] hover:bg-[#181822] text-left transition-all group"
+                  className="w-full flex items-center justify-between p-2 rounded-md bg-zinc-900/40 border border-zinc-800 hover:border-zinc-700 hover:bg-zinc-900 text-left transition-all group"
                 >
                   <div className="flex items-center gap-2 min-w-0">
                     <span
                       className="size-2 rounded-full shrink-0"
                       style={{ backgroundColor: pre.color }}
                     />
-                    <span className="text-xs text-[#E4E4E7] group-hover:text-white truncate">
+                    <span className="text-xs text-zinc-200 group-hover:text-white truncate">
                       {pre.title}
                     </span>
                   </div>
-                  <span className="text-[10px] font-mono text-[#0D99FF] flex items-center gap-0.5 shrink-0">
+                  <span className="text-[10px] font-mono text-zinc-400 group-hover:text-zinc-200 flex items-center gap-0.5 shrink-0">
                     Inspect
                     <Icon icon={ArrowRight01Icon} size={11} />
                   </span>
@@ -168,10 +168,10 @@ export function FigmaInspector({
         {/* Interactive Competency Checklist */}
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <h4 className="text-[10px] font-mono uppercase tracking-wider text-[#71717A]">
+            <h4 className="text-[10px] font-mono uppercase tracking-wider text-zinc-500">
               Curriculum Checklist ({node.subtopics.length})
             </h4>
-            <span className="text-[10px] font-mono text-[#71717A]">
+            <span className="text-[10px] font-mono text-zinc-500">
               Click to track
             </span>
           </div>
@@ -184,20 +184,20 @@ export function FigmaInspector({
                   key={idx}
                   type="button"
                   onClick={() => toggleTopic(sub)}
-                  className="w-full flex items-center gap-2.5 p-2 rounded-lg bg-[#111116] border border-[#1E1E26] hover:bg-[#16161E] text-left transition-all"
+                  className="w-full flex items-center gap-2.5 p-2 rounded-md bg-zinc-900/40 border border-zinc-800 hover:bg-zinc-900 text-left transition-all"
                 >
                   <span
-                    className={`size-3.5 rounded flex items-center justify-center border transition-all ${
+                    className={`size-3.5 rounded-sm flex items-center justify-center border transition-all ${
                       isDone
-                        ? "bg-[#0D99FF] border-[#0D99FF] text-white"
-                        : "border-[#3F3F46] bg-[#18181F]"
+                        ? "bg-zinc-100 border-zinc-100 text-zinc-950 font-bold"
+                        : "border-zinc-700 bg-zinc-900"
                     }`}
                   >
                     {isDone && <Icon icon={CheckmarkCircle02Icon} size={11} />}
                   </span>
                   <span
                     className={`text-xs flex-1 truncate transition-all ${
-                      isDone ? "line-through text-[#71717A]" : "text-[#E4E4E7]"
+                      isDone ? "line-through text-zinc-500" : "text-zinc-200"
                     }`}
                   >
                     {sub}
@@ -211,14 +211,14 @@ export function FigmaInspector({
         {/* Technology Ecosystem */}
         {node.tools.length > 0 && (
           <div className="space-y-2">
-            <h4 className="text-[10px] font-mono uppercase tracking-wider text-[#71717A]">
+            <h4 className="text-[10px] font-mono uppercase tracking-wider text-zinc-500">
               Technology & Platform Ecosystem
             </h4>
             <div className="flex flex-wrap gap-1.5">
               {node.tools.map((tool, idx) => (
                 <span
                   key={idx}
-                  className="font-mono text-[10px] px-2 py-0.5 rounded-md bg-[#13131A] text-[#D4D4D8] border border-[#22222A]"
+                  className="font-mono text-[10px] px-2 py-0.5 rounded-md bg-zinc-900 text-zinc-300 border border-zinc-800"
                 >
                   {tool}
                 </span>
@@ -229,14 +229,14 @@ export function FigmaInspector({
       </div>
 
       {/* 4. Figma Inspector Footer Actions */}
-      <div className="p-3.5 border-t border-[#1F1F26] bg-[#0E0E14] flex items-center gap-2 shrink-0">
+      <div className="p-3 border-t border-zinc-800 bg-black/60 flex items-center gap-2 shrink-0">
         <Button
           variant="outline"
           size="sm"
           onClick={() => onFocusNode(node)}
-          className="h-9 px-3 text-xs border-[#27272A] bg-[#141418] text-[#D4D4D8] hover:text-white"
+          className="h-9 px-3 text-xs rounded-md border-zinc-800 bg-zinc-900 text-zinc-300 hover:text-white hover:bg-zinc-850"
         >
-          <Icon icon={NeuralNetworkIcon} size={14} className="mr-1.5 text-[#A1A1AA]" />
+          <Icon icon={NeuralNetworkIcon} size={14} className="mr-1.5 text-zinc-400" />
           Center
         </Button>
 
@@ -244,7 +244,7 @@ export function FigmaInspector({
           <Button
             variant="primary"
             size="sm"
-            className="w-full h-9 text-xs bg-red-600 hover:bg-red-500 text-white font-medium shadow-[0_0_15px_rgba(239,68,68,0.3)]"
+            className="w-full h-9 text-xs rounded-md bg-zinc-100 hover:bg-white text-zinc-950 font-semibold shadow-sm transition-colors"
           >
             <span>Launch Roadmap</span>
             <Icon icon={LinkSquare01Icon} size={13} className="ml-1.5" />
