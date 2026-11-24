@@ -92,6 +92,7 @@ describe("PRIME Command Frame — Shell Unit Tests", () => {
     it("only advertises implemented destinations and formats deep context", () => {
       expect(AVAILABLE_NAVIGATION_ITEMS.map((i) => i.href)).toEqual([
         "/roadmap",
+        "/vispath",
         "/plan",
         "/calendar",
         "/revision",

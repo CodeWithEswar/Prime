@@ -23,6 +23,7 @@ import {
   CourseIcon,
   Playlist01Icon,
   PipelineIcon,
+  NeuralNetworkIcon,
 } from "@hugeicons/core-free-icons";
 import type { NavGroup, PrimeNavItem } from "./types";
 // Future destinations stay defined but their placeholder screens are not advertised.
@@ -47,6 +48,14 @@ export const NAVIGATION_GROUPS: NavGroup[] = [
         icon: Route01Icon,
         group: "prepare",
         matchPrefixes: ["/roadmap"],
+      },
+      {
+        id: "vispath",
+        label: "VisPath",
+        href: "/vispath",
+        icon: NeuralNetworkIcon,
+        group: "prepare",
+        matchPrefixes: ["/vispath"],
       },
       {
         id: "plan",
