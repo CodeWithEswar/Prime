@@ -6,7 +6,6 @@ import {
   ReactFlowProvider,
   Background,
   BackgroundVariant,
-  Controls,
   MiniMap,
   useNodesState,
   useEdgesState,
@@ -255,18 +254,12 @@ function VisPathFlowCanvas() {
           color="rgba(255, 255, 255, 0.08)"
         />
 
-        {/* Minimal Controls */}
-        <Controls
-          showInteractive={false}
-          className="!bottom-4 !left-4"
-        />
-
         {/* Figma Dark MiniMap */}
         {showMinimap && (
           <MiniMap
             zoomable
             pannable
-            className="!bottom-4 !right-4 !m-0 !hidden md:!block"
+            className="!bottom-5 !right-5 !m-0 !hidden md:!block"
             nodeColor={(n) => {
               const nodeData = n.data as VisPathNodeData | undefined;
               if (nodeData?.node?.color) {

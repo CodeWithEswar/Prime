@@ -10,10 +10,10 @@ export const metadata: Metadata = {
 
 function VisPathSkeleton() {
   return (
-    <div className="w-full h-[calc(100dvh-4rem)] rounded-2xl border border-[#222228] bg-[#030305] animate-pulse flex flex-col items-center justify-center gap-3">
+    <div className="w-full h-full bg-[#030305] animate-pulse flex flex-col items-center justify-center gap-3">
       <div className="size-10 rounded-full border-2 border-[var(--accent)] border-t-transparent animate-spin" />
       <span className="font-mono text-xs text-[#71717A] tracking-wider">
-        INITIALIZING CANVAS HIVE...
+        INITIALIZING FIGMA CANVAS WORKSPACE...
       </span>
     </div>
   );
@@ -21,7 +21,7 @@ function VisPathSkeleton() {
 
 export default function VisPathPage() {
   return (
-    <div className="w-full max-w-[1680px] mx-auto p-2 sm:p-4 lg:p-5">
+    <div className="relative w-full h-[calc(100dvh-var(--shell-topbar-height,64px))] -mb-8 overflow-hidden bg-[#030305]">
       <Suspense fallback={<VisPathSkeleton />}>
         <VisPathWorkspace />
       </Suspense>
