@@ -76,7 +76,7 @@ export function PythonWorkspace({ initialData }: PythonWorkspaceProps) {
   }, [selectedVideo, unifiedVideos]);
 
   return (
-    <div className="w-full max-w-[1440px] mx-auto p-4 sm:p-6 lg:p-8 space-y-6">
+    <div className="w-full max-w-[1440px] mx-auto p-3.5 sm:p-5 lg:p-8 space-y-6">
       {/* 1. Hero Header */}
       <PythonHero
         metrics={initialData.metrics}
@@ -119,31 +119,31 @@ export function PythonWorkspace({ initialData }: PythonWorkspaceProps) {
         }
         className="w-full space-y-5"
       >
-        <TabsList className="h-10 bg-[#0E0E12] border border-[#222228] p-1 rounded-xl">
+        <TabsList className="h-auto flex-wrap sm:h-10 bg-zinc-950 border border-zinc-800 p-1 rounded-md overflow-x-auto w-full justify-start gap-1">
           <TabsTrigger
             value="stage"
-            className="flex items-center gap-1.5 text-xs data-[state=active]:bg-[#1C1C24] data-[state=active]:text-white rounded-lg px-3"
+            className="flex items-center gap-1.5 text-xs data-[state=active]:bg-zinc-800 data-[state=active]:text-zinc-100 rounded-md px-3 py-1.5 text-zinc-400"
           >
             <Icon icon={Route01Icon} size={14} />
             <span>Stage {activeStage} Workspace</span>
           </TabsTrigger>
           <TabsTrigger
             value="library"
-            className="flex items-center gap-1.5 text-xs data-[state=active]:bg-[#1C1C24] data-[state=active]:text-white rounded-lg px-3"
+            className="flex items-center gap-1.5 text-xs data-[state=active]:bg-zinc-800 data-[state=active]:text-zinc-100 rounded-md px-3 py-1.5 text-zinc-400"
           >
             <Icon icon={PlayIcon} size={14} />
             <span>Video Library ({initialData.videos.length})</span>
           </TabsTrigger>
           <TabsTrigger
             value="labs"
-            className="flex items-center gap-1.5 text-xs data-[state=active]:bg-[#1C1C24] data-[state=active]:text-white rounded-lg px-3"
+            className="flex items-center gap-1.5 text-xs data-[state=active]:bg-zinc-800 data-[state=active]:text-zinc-100 rounded-md px-3 py-1.5 text-zinc-400"
           >
             <Icon icon={SourceCodeIcon} size={14} />
             <span>Practical Labs ({initialData.exercises.length})</span>
           </TabsTrigger>
           <TabsTrigger
             value="analytics"
-            className="flex items-center gap-1.5 text-xs data-[state=active]:bg-[#1C1C24] data-[state=active]:text-white rounded-lg px-3"
+            className="flex items-center gap-1.5 text-xs data-[state=active]:bg-zinc-800 data-[state=active]:text-zinc-100 rounded-md px-3 py-1.5 text-zinc-400"
           >
             <Icon icon={Award01Icon} size={14} />
             <span>Mastery & Analytics</span>

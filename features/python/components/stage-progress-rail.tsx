@@ -52,24 +52,24 @@ export function StageProgressRail({
         onClick={() => onSelectStage(stage.stageNumber)}
         aria-pressed={isCurrent}
         className={cn(
-          "group relative flex min-w-0 flex-col justify-between rounded-xl border p-3 sm:p-3.5 text-left transition-all duration-200 outline-none select-none",
+          "group relative flex min-w-0 flex-col justify-between rounded-md border p-3 sm:p-3.5 text-left transition-all duration-200 outline-none select-none",
           isMobileScroll && "w-[175px] shrink-0 snap-start",
           isCurrent
-            ? "border-[var(--accent-border)] bg-gradient-to-b from-[#180C0C] via-[#0E0707] to-[#0A0A0A] shadow-md shadow-[var(--accent)]/10 ring-1 ring-[var(--accent)]/30"
+            ? "border-zinc-600 bg-zinc-900 shadow-lg ring-1 ring-zinc-500/50"
             : isComplete
-              ? "border-[#27272A] bg-[#0E0E0E] hover:border-[#3F3F46] hover:bg-[#121212]"
-              : "border-[#1F1F24] bg-[#0A0A0C] hover:border-[#2D2D35] hover:bg-[#0E0E12]"
+              ? "border-zinc-800 bg-zinc-950 hover:border-zinc-700 hover:bg-zinc-900/60"
+              : "border-zinc-800/80 bg-zinc-950/80 hover:border-zinc-700 hover:bg-zinc-900/40"
         )}
       >
         <div className="flex items-center justify-between gap-1.5 mb-2">
           <span
             className={cn(
-              "font-mono text-[10px] font-semibold tracking-wider uppercase px-1.5 py-0.5 rounded",
+              "font-mono text-[10px] font-semibold tracking-wider uppercase px-1.5 py-0.5 rounded-sm",
               isCurrent
-                ? "bg-[var(--accent)]/20 text-[var(--foreground)]"
+                ? "bg-zinc-800 text-zinc-100 border border-zinc-700"
                 : isComplete
-                  ? "bg-emerald-950/60 text-emerald-400"
-                  : "bg-[#18181F] text-[#71717A]"
+                  ? "bg-emerald-950/60 text-emerald-400 border border-emerald-800/50"
+                  : "bg-zinc-900 text-zinc-500 border border-zinc-800"
             )}
           >
             STAGE {stage.stageNumber}
@@ -80,7 +80,7 @@ export function StageProgressRail({
               <Icon icon={Tick02Icon} size={11} />
             </span>
           ) : (
-            <span className="font-mono text-[10px] text-[#A1A1AA]">
+            <span className="font-mono text-[10px] text-zinc-400">
               {progressPercent}%
             </span>
           )}
@@ -93,18 +93,18 @@ export function StageProgressRail({
               isCurrent
                 ? "text-white"
                 : isComplete
-                  ? "text-[#E4E4E7]"
-                  : "text-[#A1A1AA] group-hover:text-white"
+                  ? "text-zinc-200"
+                  : "text-zinc-300 group-hover:text-white"
             )}
           >
             {stage.title}
           </h4>
-          <p className="text-[11px] text-[#71717A] line-clamp-1">
+          <p className="text-[11px] text-zinc-500 line-clamp-1">
             {stage.subtitle}
           </p>
         </div>
 
-        <div className="flex items-center justify-between text-[10px] font-mono text-[#71717A] pt-2 border-t border-[#1C1C22]">
+        <div className="flex items-center justify-between text-[10px] font-mono text-zinc-500 pt-2 border-t border-zinc-800/80">
           <div className="flex items-center gap-1">
             <Icon icon={PlayIcon} size={11} />
             <span>
@@ -123,7 +123,7 @@ export function StageProgressRail({
   return (
     <div className="w-full space-y-2">
       {/* Mobile Horizontal Snap Rail */}
-      <div className="flex md:hidden gap-2.5 overflow-x-auto pb-2 prime-scrollbar-thin snap-x snap-mandatory">
+      <div className="flex md:hidden gap-2.5 overflow-x-auto pb-2 prime-scrollbar-none snap-x snap-mandatory">
         {stages.map((stage) => renderStageCard(stage, true))}
       </div>
 

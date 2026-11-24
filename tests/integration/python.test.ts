@@ -86,4 +86,44 @@ describe("Python & DSA Curriculum & Playlist Integration Tests", () => {
     expect(pythonNav?.matchPrefixes).toContain("/practice/dsa/playlists/python-dsa-mastery");
     expect(pythonNav?.matchPrefixes).toContain("/roadmap/python");
   });
+
+  it("renders Python video workspace with YouTube thumbnails and responsive cards", async () => {
+    const React = await import("react");
+    const { render } = await import("@testing-library/react");
+    const { StageWorkspace } = await import("@/features/python/components/stage-workspace");
+    const { PythonVideoLibrary } = await import("@/features/python/components/python-video-library");
+    const data = await getPythonDashboardData(null, null);
+
+    const noop = () => {};
+    const { container: stageContainer } = render(
+      React.createElement(StageWorkspace, {
+        stage: data.stages[0],
+        videos: data.videos,
+        exercises: data.exercises,
+        videoProgress: {},
+        stageProgress: {},
+        exerciseAttempts: {},
+        onWatchVideo: noop,
+        onToggleWatched: noop,
+        onToggleAssignment: noop,
+        onSolveExercise: noop,
+      })
+    );
+
+    // Verify video thumbnails are rendered for each video in the stage
+    const stageThumbnails = stageContainer.querySelectorAll("img[src*='i.ytimg.com']");
+    expect(stageThumbnails.length).toBe(data.stages[0].modules.flatMap((m) => m.videos).length);
+
+    // Verify video library renders thumbnails for all videos
+    const { container: libContainer } = render(
+      React.createElement(PythonVideoLibrary, {
+        videos: data.videos,
+        videoProgress: {},
+        onWatchVideo: noop,
+        onToggleWatched: noop,
+      })
+    );
+    const libThumbnails = libContainer.querySelectorAll("img[src*='i.ytimg.com']");
+    expect(libThumbnails.length).toBe(data.videos.length);
+  });
 });

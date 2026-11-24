@@ -14,26 +14,26 @@ function PythonSkeleton() {
   return (
     <div className="w-full max-w-[1440px] mx-auto p-3 sm:p-5 lg:p-8 space-y-6 animate-pulse">
       {/* Hero skeleton */}
-      <div className="h-64 rounded-xl border border-[#1A1A1A] bg-[#0A0A0A]" />
+      <div className="h-64 rounded-md border border-zinc-800 bg-zinc-950" />
 
       {/* Tabs strip skeleton */}
-      <div className="h-12 border-b border-[#1A1A1A] bg-[#0E0E0E]" />
+      <div className="h-10 rounded-md border border-zinc-800 bg-zinc-950" />
 
       {/* 8-Stage rail skeleton */}
       <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2">
         {Array.from({ length: 8 }).map((_, i) => (
           <div
             key={i}
-            className="h-28 rounded-lg border border-[#161616] bg-[#0A0A0A]"
+            className="h-28 rounded-md border border-zinc-800 bg-zinc-950"
           />
         ))}
       </div>
 
       {/* Focus card skeleton */}
-      <div className="h-32 rounded-xl border border-[#1A1A1A] bg-[#0D0D0D]" />
+      <div className="h-32 rounded-md border border-zinc-800 bg-zinc-950" />
 
       {/* Workspace skeleton */}
-      <div className="h-96 rounded-xl border border-[#1A1A1A] bg-[#0A0A0A]" />
+      <div className="h-96 rounded-md border border-zinc-800 bg-zinc-950" />
     </div>
   );
 }
